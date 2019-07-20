@@ -1,0 +1,3 @@
+The main benefit of using a weakly-typed language is the ability to do rapid prototyping. The number of lines of code required to declare and use a dynamically allocated array in C (and properly clean up after its use) are much greater than the number of lines required for the same process in MATLAB.
+
+Weak typing is also good for code-reuse. You can code a scalar algorithm in MATLAB and with relatively little effort modify it to work on arrays as well as scalars. The fact that MATLAB is a scripted instead of a compiled language also contributes to rapid prototyping.

@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="This note aims at introducing the variables and the basic variable types in MATLAB.">
+<meta name="keywords" content="variabletypematlab,  variable, type, matlab">
+<title>Variables in MATLAB | Scientific Computing with MATLAB</title>
+<link rel="stylesheet" href="/matlab/css/prismOkaidia.css">
+<script src="/matlab/js/prismOkaidia.js"></script>
+<!--
+<link rel="stylesheet" href="/matlab/css/syntax.css">
+-->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/matlab/css/bootstrap.min.css">
+
+
+
+<link rel="stylesheet" href="/matlab/css/customstyles.css">
+<link rel="stylesheet" href="/matlab/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="/matlab/css/theme-cdslab.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/matlab/js/jquery.navgoco.min.js"></script>
+<!-- make sidebar non-accordion -->
+<script src="/matlab/js/lockScrollbarPosition.js"></script>
+<!-- make sidebar non-accordion -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.sidenav').navgoco({
+              accordion: false,
+              caret: '<span class="caret"></span>',
+              openClass: 'open',
+              save: true,
+              cookie: {
+                  name: 'navgoco',
+                  expires: false,
+                  path: '/'
+              },
+              slide: {
+                  duration: 400,
+                  easing: 'swing'
+              }
+          });
+    });
+</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+<!--
+-->
+<script src="/matlab/js/toc.js"></script>
+<script src="/matlab/js/customscripts.js"></script>
+<link rel="shortcut icon" href="/matlab/images/favicon.ico">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+    </head>
+    <body>
+        <!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div id="sticky" class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-book fa-lg navbar-brand" href="/matlab/index.html">&nbsp;<span class="projectTitle"> Scientific Computing with MATLAB</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CDSLab<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/#about" target="_blank" rel="noopener">About</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/people" target="_blank" rel="noopener">People</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/matlab/" target="_blank" rel="noopener">Scientific Computing with MATLAB</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/python/" target="_blank" rel="noopener">Scientific Computing with Python</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">UTA<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">College of Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">Data Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/physics/" target="_blank" rel="noopener">Physics</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="keyword search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="/matlab/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: "/matlab/search.json",
+                                searchResultTemplate: '<li><a href="https://www.cdslab.org{url}" title="Variables in MATLAB">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div id="main">
+                <!-- Content Row -->
+                <div class="row">
+                    
+                    
+                        <!-- Sidebar Column -->
+                        <div class="col-md-3" id="tg-sb-sidebar">
+                            
+<ul id="mysidebar" class="sidenav">
+    <!--
+    -->
+    <li class="sidebarTitle">Table of Pages </li>
+    
+        
+            
+                <li>
+                    <a title="Overview" href="#"><b>Overview</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Preface" href="/matlab/notes/overview/preface/index.html">Preface</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 1" href="/matlab/notes/overview/release-note-1/index.html">Release note 1</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 2" href="/matlab/notes/overview/release-note-2/index.html">Release note 2</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Preliminary foundations" href="#"><b>Preliminary foundations</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Version control system" href="/matlab/notes/preliminary-foundations/version-control-system/index.html">Version control system</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Programming history" href="/matlab/notes/preliminary-foundations/programming-history/index.html">Programming history</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Computer program structure" href="/matlab/notes/preliminary-foundations/computer-program-structure/index.html">Computer program structure</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="MATLAB for beginners" href="/matlab/notes/preliminary-foundations/matlab-for-beginners/index.html">MATLAB for beginners</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Values, variables, and types" href="#"><b>Values, variables, and types</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="First program" href="/matlab/notes/values-variables-types/first-program/index.html">First program</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Values" href="/matlab/notes/values-variables-types/values/index.html">Values</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li class="active"><a title="Variables" href="/matlab/notes/values-variables-types/variables/index.html">Variables</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Operators" href="/matlab/notes/values-variables-types/operators/index.html">Operators</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Control constructs" href="#"><b>Control constructs</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Branching" href="/matlab/notes/control-constructs/branching/index.html">Branching</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Looping" href="/matlab/notes/control-constructs/looping/index.html">Looping</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Program units" href="#"><b>Program units</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Functions" href="/matlab/notes/program-units/functions/index.html">Functions</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variable scope" href="/matlab/notes/program-units/variable-scope/index.html">Variable scope</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Data transfer (I/O)" href="#"><b>Data transfer (I/O)</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Data input/ouput methods" href="/matlab/notes/data-transfer/io/index.html">Data input/ouput methods</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Errors and exceptions" href="#"><b>Errors and exceptions</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Exception handling" href="/matlab/notes/exceptions-errors/exception-handling/index.html">Exception handling</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Unit testing" href="/matlab/notes/exceptions-errors/unit-testing/index.html">Unit testing</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Scientific Computing" href="#"><b>Scientific Computing</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Vectorization and array computing" href="/matlab/notes/scientific-computing/vectorization/index.html">Vectorization and array computing</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Visualization and plotting" href="/matlab/notes/scientific-computing/visualization/index.html">Visualization and plotting</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Random numbers" href="/matlab/notes/scientific-computing/random-numbers/index.html">Random numbers</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Object-oriented programming" href="#"><b>Object-oriented programming</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Instantiation" href="/matlab/notes/object-oriented-programming/instantiation/index.html">Instantiation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Encapsulation" href="/matlab/notes/object-oriented-programming/encapsulation/index.html">Encapsulation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Inheritance" href="/matlab/notes/object-oriented-programming/inheritance/index.html">Inheritance</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Polymorphism" href="/matlab/notes/object-oriented-programming/polymorphism/index.html">Polymorphism</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Abstraction" href="/matlab/notes/object-oriented-programming/abstraction/index.html">Abstraction</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+    
+    <!-- if you aren't using the accordion, uncomment this block:
+    -->
+    <p class="external">
+        <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+    </p>
+</ul>
+<!--
+This highlights the active parent class in the navgoco sidebar. 
+This is critical so that the parent expands when you're viewing a page.
+This must appear below the sidebar code above.
+Otherwise, if placed inside customscripts.js,
+the script runs before the sidebar code runs and the class never gets inserted.
+-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+                        </div>
+                        
+                    
+                    <!-- Content Column -->
+                    <div class="col-md-9" id="tg-sb-content">
+                        <div class="post-header">
+   <h1 class="post-title-main">Variables in MATLAB</h1>
+</div>
+
+<div class="post-content">
+    
+        <div class="summary">This note aims at introducing the variables and the basic variable types in MATLAB.</div>
+    
+    
+        <br>
+        
+<script>
+    $( document ).ready(function() {
+        // Handler for .ready() called.
+        $('#toc').toc({ minimumHeaders: 0 
+                      , listType: 'ol'
+                      , showSpeed: 0
+                      , headers: 'h2,h3,h4,h5,h6'
+        });
+        /* the following offset helps account for the space taken up by the floating toolbar. */
+        $('#toc').on('click', 'a', function() {
+            var target = $(this.getAttribute('href')), scroll_target = target.offset().top$(window).scrollTop(scroll_target - 10);
+            return false
+        })
+    });
+</script>
+
+<div id="toc"></div>
+
+    
+    
+    <h2 id="variables-in-matlab">Variables in MATLAB</h2>
+
+<p>A variable is simply a name that we assign to a specific value, in order to avoid repeating the same value frequently in the code, thus writing a cleaner, less error-prone script/code. We discussed above the main value types (classes) in MATLAB. The same also holds for variables, because they are simply names assigned to each value or a set of values. In order to define a variable, the variable name must always appear on the left of equality, like the following,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">format</span> <span class="n">compact</span>
+<span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">% assign value 1 to a</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
+     1
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+double
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">=</span> <span class="n">b</span> <span class="c1">% this is wrong</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1 = b
+   ↑
+Error: The expression to the left of the equals sign is not a valid target for an assignment.
+</code></pre></div></div>
+
+<p>We will get to each of these below. But before that, here are some official and unofficial tips on the variable naming conventions in MATLAB.</p>
+
+<h2 id="variable-naming-convention-in-matlab">Variable naming convention in MATLAB</h2>
+
+<p>A MATLAB variable can only begin with a letter followed by underscore <code class="highlighter-rouge">_</code> and numbers inside or at the end of the variable name. MATLAB is case sensitive, so <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">a</code> are not the same variable. Other symbols are syntactically invalid anywhere in a variable name. Examples of valid names are,</p>
+<ul>
+  <li><code class="highlighter-rouge">x6</code></li>
+  <li><code class="highlighter-rouge">lastValue</code></li>
+  <li><code class="highlighter-rouge">n_factorial</code></li>
+</ul>
+
+<p>Examples of invalid names are,</p>
+<ul>
+  <li><code class="highlighter-rouge">6x</code></li>
+  <li><code class="highlighter-rouge">n!</code></li>
+  <li><code class="highlighter-rouge">end</code> (see below for the reason)</li>
+</ul>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">new_var</span><span class="err">$</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> new_var$
+        ↑
+Error: The input character is not valid in MATLAB statements or expressions.
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">amir</span> <span class="o">=</span> <span class="s1">'teacher'</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="nb">disp</span><span class="p">([</span><span class="s1">'Amir is a '</span><span class="p">,</span> <span class="n">amir</span><span class="p">])</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Amir is a teacher
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">life_expectancy</span> <span class="o">=</span> <span class="mi">120</span><span class="p">;</span> <span class="nb">disp</span><span class="p">(</span> <span class="p">[</span><span class="s1">'The life expectancy for the millennials is projected to be '</span><span class="p">,</span><span class="n">life_expectancy</span><span class="p">,</span><span class="s1">' years! (But don</span><span class="se">''</span><span class="s1">t believe it...)'</span><span class="p">]</span> <span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The life expectancy for the millennials is projected to be x years! (But don't believe it...)
+</code></pre></div></div>
+
+<h3 id="matlab-reserved-names-keywords">MATLAB reserved names (keywords)</h3>
+
+<p>There are some limitation as to what names you can choose for your variables, even if they completely obey MATLAB syntax standard. Variable names in MATLAB cannot be the same as <strong>MATLAB keywords</strong>, which are simply names that reserved for a specific purpose in MATLAB programming.  They are used to define the syntax and structure of the MATLAB language. Note that <strong>MATLAB keywords are case-sensitive</strong>.  You <strong>cannot</strong> define variables with the exact same names as <strong>MATLAB keywords</strong>, such as <code class="highlighter-rouge">if</code> or <code class="highlighter-rouge">end</code>. For a complete list of MATLAB keyword, run the <code class="highlighter-rouge">iskeyword</code> command,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">iskeyword</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
+    'break'
+    'case'
+    'catch'
+    'classdef'
+    'continue'
+    'else'
+    'elseif'
+    'end'
+    'for'
+    'function'
+    'global'
+    'if'
+    'otherwise'
+    'parfor'
+    'persistent'
+    'return'
+    'spmd'
+    'switch'
+    'try'
+    'while'
+</code></pre></div></div>
+
+<h3 id="predefined-variables-in-matlab">Predefined variables in MATLAB</h3>
+
+<p>Note that there are some predefined variables in MATLAB, that are not considered as keywords. Therefore you can change their values and use them for your own purposes. But, <strong>be very careful with predefined variables and in general</strong>, it is better to not mess with them, as they can lead to confusion and catastrophe. For example,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">true</span> <span class="c1">% true is a predefined MATLAB logical variable</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     1
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+logical
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">true</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">%  true is now redefined as double</span>
+<span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+    'double'
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">nan</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+   NaN
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">nan</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+double
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">nan</span> <span class="o">=</span> <span class="nb">true</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nan =
+     0
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">nan</span> <span class="o">=</span> <span class="nb">false</span> <span class="c1">% redefine nan</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nan =
+     0
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">nan</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+logical
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">who</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Your variables are:
+
+life_expectancy  nan              true             
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">whos</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name                 Size            Bytes  Class      Attributes
+
+  life_expectancy      1x1                 8  double               
+  nan                  1x1                 1  logical              
+  true                 1x1                 8  double               
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">clear</span> <span class="nb">nan</span>
+<span class="o">&gt;&gt;</span> <span class="nb">who</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Your variables are:
+
+life_expectancy  true             
+</code></pre></div></div>
+
+<p>Notice that when all the MATLAB’s workspace is cleared using <code class="highlighter-rouge">clear all</code>, <code class="highlighter-rouge">whos</code> and <code class="highlighter-rouge">who</code> do not return anything,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">clear</span> <span class="nb">all</span>
+<span class="o">&gt;&gt;</span> <span class="nb">whos</span>
+<span class="o">&gt;&gt;</span> <span class="nb">who</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">pi</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+    3.1416
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">nan</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+   NaN
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">inf</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+   Inf
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">i</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+   0.0000 + 1.0000i
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">j</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+   0.0000 + 1.0000i
+</code></pre></div></div>
+
+<p>Here is a list of some of the most important predefined variables in MATLAB,</p>
+
+<table class="center">
+    <caption class="title" style="padding-bottom:10px;text-align:center;">
+        Table 1. A list of predefined values and variables in MATLAB.
+    </caption>
+    <thead>
+        <tr>
+            <th><font>Expression</font></th>
+            <th><font>Description</font></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><b><code>pi   </code></b></td><td>The number $\pi$ up to 15 significant digits.</td></tr>
+        <tr><td><b><code>i, j </code></b></td><td>The complex number $\sqrt{-1}$.</td></tr>
+        <tr><td><b><code>inf  </code></b></td><td>Represents the mathematical Infinity concept, for example, a result of division by zero.</td></tr>
+        <tr><td><b><code>NaN  </code></b></td><td>Stands for Not-A-Number. Represents the result of a meaningless mathematical function, like $0/0$.</td></tr>
+        <tr><td><b><code>clock</code></b></td><td>Contains the current date and time in the form of a 6-element row vector: year,month,day,hour,minute,second.</td></tr>
+        <tr><td><b><code>date </code></b></td><td>Contains a string representing today's date.</td></tr>
+        <tr><td><b><code>eps  </code></b></td><td>Stands for <b>epsilon</b>. It represents the smallest number that can be represented by your MATLAB software.</td></tr>
+        <tr><td><b><code>ans  </code></b></td><td>A special variable that MATLAB uses to store the result of MATLAB's command line.</td></tr>
+    </tbody>
+</table>
+
+<h2 id="numeric-variables">Numeric variables</h2>
+
+<p>We have already extensively discussed number values. Basically, everything that we have said about number values, holds also for variables of type number.</p>
+
+<h3 id="vector-and-matrix-variables">Vector and matrix variables</h3>
+
+<p>Again, similar to vector and matrix values, everything holds for the same type variables.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
+     1     2     3     4
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+double
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">;</span><span class="mi">4</span><span class="p">]</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
+     1
+     2
+     3
+     4
+</code></pre></div></div>
+
+<h3 id="the-colon-operator-">The colon operator <code class="highlighter-rouge">:</code></h3>
+
+<p>MATLAB has a special character shortcut notation for occasions when you want to create a numeric vector of a specific range with a predefined fixed spacing between the values of the vector. This shortcut has the following form,</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>begin:increment:end
+</code></pre></div></div>
+
+<p>For example,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">100</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x =
+     0    10    20    30    40    50    60    70    80    90   100
+</code></pre></div></div>
+
+<h3 id="the-transpose-operator-">The transpose operator <code class="highlighter-rouge">'</code></h3>
+
+<p>Now as you may have noticed, MATLAB by default creates row-wise vectors, just as <code class="highlighter-rouge">x</code> was generated above. If you want to initialize <code class="highlighter-rouge">x</code> as a column-wise vector, all you need to do is to add the transpose operator <code class="highlighter-rouge">'</code> at the end of the vector or the variable name (but now, you would also need the vector constructor <code class="highlighter-rouge">[]</code>),</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span><span class="o">'</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x =
+     0
+    10
+    20
+    30
+    40
+    50
+    60
+    70
+    80
+    90
+   100
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">whos</span> <span class="n">x</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name       Size            Bytes  Class     Attributes
+
+  x         11x1                88  double
+</code></pre></div></div>
+
+<p>Now, pay attention to the size of the vector <code class="highlighter-rouge">x</code>. What does it mean when it says <code class="highlighter-rouge">88 Bytes</code>?</p>
+
+<h3 id="creating-matrices">Creating matrices</h3>
+
+<p>There are a number of functions in MATLAB that can help you build predefined matrices or vectors:</p>
+
+<h4 id="zeros">zeros</h4>
+
+<p>Creates array of all zeros (with optionally given <a href="https://en.wikipedia.org/wiki/Fixed-point_arithmetic" target="_blank">fixed-point</a> properties. For more information, see <a href="https://www.mathworks.com/help/fixedpoint/ref/zeros.html#inputarg_p" target="_blank">MATLAB’s manual</a>.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     0     0
+     0     0
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
+     0     0     0
+</code></pre></div></div>
+
+<h4 id="ones">ones</h4>
+
+<p>Creates an array of all ones with fixed-point properties.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="nb">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
+     1     1     1
+</code></pre></div></div>
+
+<h4 id="eye">eye</h4>
+
+<p>Creates an identity matrix with fixed-point properties.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">I</span> <span class="o">=</span> <span class="nb">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I =
+     1     0     0
+     0     1     0
+     0     0     1
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">I</span> <span class="o">=</span> <span class="nb">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I =
+     1     0     0     0
+     0     1     0     0
+     0     0     1     0
+</code></pre></div></div>
+
+<h4 id="diag">diag</h4>
+
+<p>Creates a diagonal matrix from a given input vector.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="mi">1</span> <span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="mi">2</span> <span class="o">-</span><span class="mi">5</span><span class="p">];</span>
+<span class="o">&gt;&gt;</span> <span class="n">D</span> <span class="o">=</span> <span class="nb">diag</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D =
+     2     0     0     0     0
+     0     1     0     0     0
+     0     0    -1     0     0
+     0     0     0    -2     0
+     0     0     0     0    -5
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">D</span> <span class="o">=</span> <span class="nb">diag</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D =
+     0     0     2     0     0     0     0
+     0     0     0     1     0     0     0
+     0     0     0     0    -1     0     0
+     0     0     0     0     0    -2     0
+     0     0     0     0     0     0    -5
+     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">D</span> <span class="o">=</span> <span class="nb">diag</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D =
+     0     0     0     0     0     0     0
+     0     0     0     0     0     0     0
+     2     0     0     0     0     0     0
+     0     1     0     0     0     0     0
+     0     0    -1     0     0     0     0
+     0     0     0    -2     0     0     0
+     0     0     0     0    -5     0     0
+</code></pre></div></div>
+
+<p>Note that <code class="highlighter-rouge">diag</code> can also get diagonal elements of an input matrix, if it already exists.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="nb">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
+     1     0     0     0     0
+     0     1     0     0     0
+     0     0     1     0     0
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">diag</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     1
+     1
+     1
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">diag</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     0
+     0
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">diag</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     0
+     0
+     0
+</code></pre></div></div>
+
+<h4 id="ndgrid">ndgrid</h4>
+
+<p>Creates rectangular grid in N-D space.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">ndgrid</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">19</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">12</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X =
+     1     1     1     1     1     1
+     3     3     3     3     3     3
+     5     5     5     5     5     5
+     7     7     7     7     7     7
+     9     9     9     9     9     9
+    11    11    11    11    11    11
+    13    13    13    13    13    13
+    15    15    15    15    15    15
+    17    17    17    17    17    17
+    19    19    19    19    19    19
+Y =
+     2     4     6     8    10    12
+     2     4     6     8    10    12
+     2     4     6     8    10    12
+     2     4     6     8    10    12
+     2     4     6     8    10    12
+     2     4     6     8    10    12
+     2     4     6     8    10    12
+     2     4     6     8    10    12
+     2     4     6     8    10    12
+     2     4     6     8    10    12
+</code></pre></div></div>
+
+<p>Later on, we will see how this function can be used to generate fancy looking graphs like the following,</p>
+
+<figure>
+    <img src="2dgrid.png" />
+</figure>
+
+<h3 id="matrix-concatenation-functions">Matrix concatenation functions</h3>
+
+<p>The following functions combine existing matrices to form a new matrix.</p>
+<ul>
+  <li><strong>cat</strong>: Concatenate matrices along the specified dimension</li>
+  <li><strong>horzcat</strong>: Horizontally concatenate matrices</li>
+  <li><strong>vertcat</strong>: Vertically concatenate matrices</li>
+  <li><strong>repmat</strong>: Create a new matrix by replicating and tiling existing matrices</li>
+  <li><strong>blkdiag</strong>: Create a block diagonal matrix from existing matrices</li>
+</ul>
+
+<h2 id="cell-variables">Cell variables</h2>
+
+<p>When we want to define a variable whose elements are not all of the same types, we need an entity that goes beyond the capabilities of matrices, which can only contain numeric values. Just as with cell values, a cell array is a data type with indexed data containers called cells. Each cell can contain any type of data. Cell arrays commonly contain <strong>pieces of text (string)</strong>, <strong>combinations of text and numbers</strong> from spreadsheets or text files, or they can contain arrays of numeric arrays of different sizes.</p>
+
+<p>There are two ways to refer to the elements of a cell array. Enclose indices in smooth parentheses, (), to refer to sets of cells — for example, to define a subset of the array. Enclose indices in curly braces, {}, to refer to the text, numbers, or other data within individual cells.</p>
+
+<h3 id="creating-cell-arrays">Creating cell arrays</h3>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">C</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">% empty cell array</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C = 
+     {}
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+cell
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">size</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     0     0
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">length</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     0
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">emptyCell</span> <span class="o">=</span> <span class="nb">cell</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emptyCell = 
+    []    []    []    []
+    []    []    []    []
+    []    []    []    []
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">emptyCell</span> <span class="o">=</span> <span class="nb">cell</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emptyCell(:,:,1) = 
+    []    []    []    []
+    []    []    []    []
+    []    []    []    []
+emptyCell(:,:,2) = 
+    []    []    []    []
+    []    []    []    []
+    []    []    []    []
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Hi'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">,</span> <span class="s1">'World!'</span><span class="p">}</span> <span class="c1">% a cell array of strings</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = 
+    'Hi'    ' '    'World!'
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+cell
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">size</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">% the length of a, in all directions (dimension)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     1     3
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">% the length of a, along the longest dimension</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     3
+</code></pre></div></div>
+
+<p>To call a specific element, use <code class="highlighter-rouge">()</code>. For example,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Bloggs'</span><span class="p">,</span> <span class="s1">'San'</span><span class="p">,</span> <span class="s1">'Andersen'</span><span class="p">};</span>
+<span class="o">&gt;&gt;</span> <span class="n">first_cell</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">rest_of_cells</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">third_string</span> <span class="o">=</span> <span class="n">names</span><span class="p">{</span><span class="mi">3</span><span class="p">};</span>
+</code></pre></div></div>
+
+<p>You can see what the type of each element is by using <code class="highlighter-rouge">who</code> and <code class="highlighter-rouge">whos</code>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">whos</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name               Size            Bytes  Class     Attributes
+
+  a                  1x3               354  cell                
+  ans                1x1                 8  double              
+  chr                1x12               24  char                
+  first_cell         1x1               124  cell                
+  names              1x3               370  cell                
+  rest_of_cells      1x2               246  cell                
+  third_string       1x8                16  char     
+</code></pre></div></div>
+
+<p>Note that <code class="highlighter-rouge">who</code> only gives you the names of the variables,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">who</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Your variables are:
+
+a              ans            chr            first_cell     names          rest_of_cells  third_string  
+</code></pre></div></div>
+
+<h3 id="cell-array-concatenation-functions">Cell array concatenation functions</h3>
+
+<p>There are a wide range of MATLAB functions that act on cells, which can be found <a href="https://www.mathworks.com/help/matlab/cell-arrays.html" target="_blank">here</a>.</p>
+
+<h2 id="string-char-variables">String (char) variables</h2>
+
+<p>Just as for string values in MATLAB,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">newChr</span> <span class="o">=</span> <span class="s1">'You</span><span class="se">''</span><span class="s1">re right'</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>newChr =
+You're right
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">newChr</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+char
+</code></pre></div></div>
+
+<h3 id="creating-string-arrays">Creating string arrays</h3>
+
+<p>Creating string arrays can be rather confusing in MATLAB. Here is <a href="https://www.mathworks.com/help/matlab/matlab_prog/creating-character-arrays.html" target="_blank">MATLAB’s own manual for creating string arrays</a>. Note that a string is a vector by itself. So you can fetch its characters as elements,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">newChr</span> <span class="o">=</span> <span class="s1">'You</span><span class="se">''</span><span class="s1">re right'</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>newChr =
+You're right
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">newChr</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+Y
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">newChr</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+You'
+</code></pre></div></div>
+
+<h2 id="structure-variables">Structure variables</h2>
+
+<p>Let’s first review the meanings of Arrays and Cells:</p>
+
+<ul>
+  <li>An <strong>array</strong> is a MATLAB data type in which there is a name for the whole data object, and the individual elements in the array can be accessed only through their indices, which are integer numbers. For example,</li>
+</ul>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arr =
+     1     2     3     4
+</code></pre></div></div>
+
+<p>However, notice that <strong>all the elements in a MATLAB array must be of the same data type</strong>. For example, you cannot combine numeric and string data types,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s1">'Amir'</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arr =
+Amir
+</code></pre></div></div>
+
+<ul>
+  <li>By contrast, a <strong>cell array</strong> is a MATLAB data type in which again, there is a name for the whole data object, and the individual elements in the array can be accessed only via their indices, but unlike regular arrays <strong>cell elements do not need to be all of the same type</strong>,
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">arr</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="s1">'Amir'</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">}</span>
+</code></pre></div>    </div>
+    <p>arr = 
+      [1]    ‘Amir’    [3]    [4]</p>
+  </li>
+  <li>There is yet another data type in MATLAB called <strong>structure</strong>, which has also counterparts in most other programming languages such as Fortran, C, C++. This is the topic of this section below.</li>
+</ul>
+
+<p>A <strong>structure</strong> is a MATLAB data type in which the whole object has a name, just like regular and cell arrays. However, unlike cells and regular arrays, the elements of a structure object can be accessed by their assigned <strong>field names</strong> instead of a numerical index, as in numeric arrays and cells.</p>
+
+<p>Like cell arrays, structures can contain data of varying types and sizes. A <strong>structure</strong> object is a MATLAB data type that groups related data using data containers called <strong>fields</strong> (instead of cells as in cell arrays). <strong>Each field can contain any type of data</strong>. You can access data in a structure using <strong>dot notation</strong> of the form <code class="highlighter-rouge">structName.fieldName</code>. Here is <a href="https://www.mathworks.com/videos/introducing-structures-and-cell-arrays-101508.html" target="_blank">MATLAB video</a> about cell and structure arrays.</p>
+
+<h3 id="creating-structures">Creating structures</h3>
+
+<p>To create a structure, you can use function <code class="highlighter-rouge">struct</code>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">field</span> <span class="o">=</span> <span class="s1">'f'</span><span class="p">;</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>value = {'some text';
+         [10, 20, 30];
+         magic(5)};
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="nb">struct</span><span class="p">(</span><span class="n">field</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s = 
+3x1 struct array with fields:
+    f
+</code></pre></div></div>
+
+<p>You can also create empty structure (which can be manipulated later),</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="nb">struct</span><span class="p">()</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s = 
+struct with no fields.
+</code></pre></div></div>
+
+<p>One can also create structure objects by simply using the dot notation,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">amir</span><span class="o">.</span><span class="n">univ</span> <span class="o">=</span> <span class="s1">'UTA'</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>amir = 
+    univ: 'UTA'
+</code></pre></div></div>
+
+<p>Structure objects described above are examples of <strong>scalar objects</strong> meaning that there is only one single structure object with a set of fields. However, MATLAB also provides ways of creating <strong>structure arrays</strong>. You might think of structure array, as a cell array, whose columns are indexed by character names (field names) instead of integer indices, and whose rows represent the elements of the structure array. For example,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">student</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Marshall'</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
+    name: 'Marshall'
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">student</span><span class="o">.</span><span class="n">grade</span> <span class="o">=</span> <span class="mf">4.0</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
+     name: 'Marshall'
+    grade: 4
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">student</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
+     name: 'Marshall'
+    grade: 4
+</code></pre></div></div>
+
+<p>would create a scalar structure <code class="highlighter-rouge">student</code> with two fields. However, as soon as you add another name to this structure, using array notation like the following,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">student</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Vivek'</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
+1x2 struct array with fields:
+    name
+    grade
+</code></pre></div></div>
+
+<p>the scalar structure <code class="highlighter-rouge">student</code> is automatically converted to a <strong>structure array</strong>, that has two rows indexed by integer numbers, and each row has two fields <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">grade</code>. Note that, even though we added only the <code class="highlighter-rouge">name</code> field for the second structure element, the other field name is also automatically created for the second structure element, although with no content (the content of the field <code class="highlighter-rouge">grade</code> for the second element of the structure is empty). There is even no need to add the elements in increasing order. For example,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">student</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Travis'</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
+1x4 struct array with fields:
+    name
+    grade
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">whos</span> <span class="n">student</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name         Size            Bytes  Class     Attributes
+
+  student      1x4               654  struct          
+</code></pre></div></div>
+
+<p>will automatically add (initialize) the third structure element, even though we did not ask for it.</p>
+
+<figure>
+    <img src="structure.png" />
+    <figcaption style="text-align:center">
+        The content of the structure array <code>student</code> in MATLAB workspace. Note that the rows correspond to the structure elements, and the columns correspond to the structure fields, which are the same for all structure elements. 
+    </figcaption>
+</figure>
+
+<p>So, if there is so much similarity between MATLAB <strong>cell arrays</strong> and <strong>structure arrays</strong>, then what the advantage of defining or using structure arrays instead of cell arrays? The main advantage is that, in the case of structures, the content of the structure element is identified by a set of tags (labels) called <strong>field names</strong>. This becomes very helpful in understanding the content of complex data when they are written as structures instead of cell arrays.</p>
+
+<p>There is a long list of functions that can manipulate structures. A list of them is available on MATLAB website <a href="https://www.mathworks.com/help/matlab/structures.html" target="_blank">here</a>.</p>
+
+<h2 id="matlab-tables">MATLAB tables</h2>
+
+<p>Tables are arrays in a tabular form whose named columns can have different types. A table is a data type suitable for column-oriented or tabular data that is often stored as columns in a text file or in a spreadsheet. Tables consist of rows and column-oriented variables. Each variable in a table can have a different data type and a different size <strong>with the one restriction</strong> that <strong>each variable must have the same number of rows</strong>. For more information, see <a href="https://www.mathworks.com/videos/tables-and-categorical-arrays-in-release-2013b-101607.html" target="_blank">MATLAB’s educational video on Tables</a>.</p>
+
+<p>To create a table, you can use the function <code class="highlighter-rouge">table</code>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">LastName</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Smith'</span><span class="p">;</span><span class="s1">'Johnson'</span><span class="p">;</span><span class="s1">'Williams'</span><span class="p">;</span><span class="s1">'Jones'</span><span class="p">;</span><span class="s1">'Brown'</span><span class="p">};</span>
+<span class="o">&gt;&gt;</span> <span class="n">Age</span> <span class="o">=</span> <span class="p">[</span><span class="mi">38</span><span class="p">;</span><span class="mi">43</span><span class="p">;</span><span class="mi">38</span><span class="p">;</span><span class="mi">40</span><span class="p">;</span><span class="mi">49</span><span class="p">];</span>
+<span class="o">&gt;&gt;</span> <span class="n">Height</span> <span class="o">=</span> <span class="p">[</span><span class="mi">71</span><span class="p">;</span><span class="mi">69</span><span class="p">;</span><span class="mi">64</span><span class="p">;</span><span class="mi">67</span><span class="p">;</span><span class="mi">64</span><span class="p">];</span>
+<span class="o">&gt;&gt;</span> <span class="n">Weight</span> <span class="o">=</span> <span class="p">[</span><span class="mi">176</span><span class="p">;</span><span class="mi">163</span><span class="p">;</span><span class="mi">131</span><span class="p">;</span><span class="mi">133</span><span class="p">;</span><span class="mi">119</span><span class="p">];</span>
+<span class="o">&gt;&gt;</span> <span class="n">BloodPressure</span> <span class="o">=</span> <span class="p">[</span><span class="mi">124</span> <span class="mi">93</span><span class="p">;</span> <span class="mi">109</span> <span class="mi">77</span><span class="p">;</span> <span class="mi">125</span> <span class="mi">83</span><span class="p">;</span> <span class="mi">117</span> <span class="mi">75</span><span class="p">;</span> <span class="mi">122</span> <span class="mi">80</span><span class="p">];</span>
+<span class="o">&gt;&gt;</span> <span class="n">T</span> <span class="o">=</span> <span class="nb">table</span><span class="p">(</span><span class="n">Age</span><span class="p">,</span><span class="n">Height</span><span class="p">,</span><span class="n">Weight</span><span class="p">,</span><span class="n">BloodPressure</span><span class="p">,</span><span class="s1">'RowNames'</span><span class="p">,</span><span class="n">LastName</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>T = 
+                Age    Height    Weight    BloodPressure
+                ___    ______    ______    _____________
+    Smith       38     71        176       124     93   
+    Johnson     43     69        163       109     77   
+    Williams    38     64        131       125     83   
+    Jones       40     67        133       117     75   
+    Brown       49     64        119       122     80   
+</code></pre></div></div>
+
+<p>There is also a long list of functions that act on tables, a summary of which is available <a href="https://www.mathworks.com/help/matlab/tables.html" target="_blank">here</a>.</p>
+
+<h2 id="the-different-kinds-of-brackets-recap">The Different Kinds of Brackets: Recap</h2>
+
+<p>To recap, perhaps the two most two basic operations relating to arrays are,</p>
+<ul>
+  <li>Creating the array.</li>
+  <li>Accessing elements in the array.</li>
+</ul>
+
+<p>Depending on whether we have a cell array or a standard array of a basic data type (e.g. char), we can distinguish the different behavior of each of the types of brackets: <code class="highlighter-rouge">[]</code>, <code class="highlighter-rouge">{}</code> and <code class="highlighter-rouge">()</code>.</p>
+
+<h3 id="creating-an-array">Creating an Array</h3>
+
+<ul>
+  <li><strong>Square brackets <code class="highlighter-rouge">[ ]</code></strong>: Creates an array where all entries have the same type, e.g. double or char. For example,
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numArray</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mf">62.7</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
+<span class="n">charArray</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">];</span>
+</code></pre></div>    </div>
+  </li>
+  <li><strong>Curly brackets <code class="highlighter-rouge">{ }</code></strong>: Creates a cell array. Its cells can contain any type. They can contain items of the same type or a mixture of types. For example,
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sameTypeCells</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Once'</span><span class="p">,</span> <span class="s1">'upon'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">,</span> <span class="s1">'time'</span><span class="p">}</span>
+<span class="n">diffTypeCells</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Number'</span><span class="p">,</span> <span class="mi">17</span><span class="p">}</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>Note that in order to create a vector, you don’t necessarily need ‘,’ between the elements. For example,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">4</span><span class="p">]</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ans =
+     1     4
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">whos</span> <span class="nb">ans</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name      Size            Bytes  Class     Attributes
+
+  ans       1x2                16  double              
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     1     4
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">whos</span> <span class="nb">ans</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name      Size            Bytes  Class     Attributes
+
+  ans       1x2                16  double              
+</code></pre></div></div>
+
+<p>The same is also true for cell arrays,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">sameTypeCells</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Once'</span>  <span class="s1">'upon'</span>  <span class="s1">'a'</span>  <span class="s1">'time'</span><span class="p">}</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sameTypeCells = 
+    'Once'    'upon'    'a'    'time'
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">whos</span> <span class="n">sameTypeCells</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name               Size            Bytes  Class    Attributes
+
+  sameTypeCells      1x4               474  cell               
+</code></pre></div></div>
+
+<h3 id="accessing-elements">Accessing Elements</h3>
+
+<p>There are two primary ways of creating arrays in MATLAB, each of which has its own usage,<br />
+<br /></p>
+<ul>
+  <li><strong>Round brackets <code class="highlighter-rouge">( )</code></strong>: These can be used to access one or more elements from any type of array. The elements returned always have the same type as the array, i.e. for an array of doubles the round bracket will return doubles, for an array of cells they will return cells. For example, using the arrays created above:
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">numArray</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span> <span class="c1">% Second and third elements.</span>
+</code></pre></div>    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ans =
+     62.7000    3.0000
+</code></pre></div>    </div>
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sameTypeCells</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="c1">% first and third</span>
+</code></pre></div>    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  y = 
+      'Once'    'a'
+</code></pre></div>    </div>
+    <p><br /></p>
+  </li>
+  <li><strong>Curly brackets <code class="highlighter-rouge">{ }</code></strong>: When used for accessing elements, curly brackets are specific to cell arrays. They can be used to obtain the content of a cell in its native data type, i.e. not in the form of a cell. For example,
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">sameTypeCells</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span>
+</code></pre></div>    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+  upon
+</code></pre></div>    </div>
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">sameTypeCells</span><span class="p">{</span><span class="mi">2</span><span class="p">})</span>
+</code></pre></div>    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+  char
+</code></pre></div>    </div>
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">sameTypeCells</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
+  'upon'
+</code></pre></div>    </div>
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">sameTypeCells</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</code></pre></div>    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+  cell
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<h3 id="array-slicing-indexing">Array slicing (indexing)</h3>
+
+<p>Like Fortran and R, MATLAB has powerful built-in array manipulation capabilities. For example,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span> <span class="p">;</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span> <span class="p">;</span> <span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span> <span class="p">]</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test =
+     1     2     3     4
+     1     2     4     5
+     3     5     6     7
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span><span class="p">(:,:)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     1     2     3     4
+     1     2     4     5
+     3     5     6     7
+</code></pre></div></div>
+
+<p>The symbol <code class="highlighter-rouge">:</code> means all the elements. But, you could also specify a range to only get a slice of the array,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     2     3
+     2     4
+</code></pre></div></div>
+
+<p>Now, suppose you only wanted to get the first and the last column of the array, and the rows two and three. You could do,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">4</span><span class="p">])</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     1     5
+     3     7
+</code></pre></div></div>
+
+<p>Amazing, isn’t it? You can also slice cell arrays in a similar way. However, note that you can only slice the elements of a cell array in this way, <strong>not the contents of the elements of a cell array</strong>. To explain this further, consider the following cell array,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span> <span class="p">;</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span> <span class="p">;</span> <span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span> <span class="p">}</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test = 
+    [1]    [2]    [3]    [4]
+    [1]    [2]    [4]    [5]
+    [3]    [5]    [6]    [7]
+</code></pre></div></div>
+
+<p>Now, note that slicing this cell, would give you a cell slice, not a matrix of the values, and note that to do this, you have to access the elements using <code class="highlighter-rouge">()</code> instead of <code class="highlighter-rouge">{}</code>.</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span><span class="p">(:,:)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
+    [1]    [2]    [3]    [4]
+    [1]    [2]    [4]    [5]
+    [3]    [5]    [6]    [7]
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">4</span><span class="p">])</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
+    [1]    [5]
+    [3]    [7]
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">test</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">4</span><span class="p">]))</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+cell
+</code></pre></div></div>
+
+<p>If you try slicing the cell  array using <code class="highlighter-rouge">{}</code>, you won’t get a slice anymore, but a MATLAB <a href="https://www.mathworks.com/help/matlab/matlab_prog/comma-separated-lists.html" target="_blank">comma-separated list</a>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span><span class="p">{</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">4</span><span class="p">]}</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     1
+ans =
+     3
+ans =
+     5
+ans =
+     7
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">test</span><span class="p">{</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">4</span><span class="p">]})</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error using class
+The CLASS function must be called from a class constructor. 
+</code></pre></div></div>
+
+<p>Since slicing the cell array by <code class="highlighter-rouge">{}</code> returns a comma-separated list, MATLAB’s <code class="highlighter-rouge">class()</code> function gives an error, since it cannot take as input, a list of values.</p>
+
+
+    
+    
+    <div style="margin-top:3rem">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'shahmoradi'; // required: replace example with your forum shortname
+    
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+</div>
+<hr class="shaded"/>
+<footer>
+    <div class="row">
+        <div class="col-lg-12 footer">
+            &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: July 20, 2019 <br />
+            
+                <span>Page last updated:</span>July 9, 2019<br/>
+            
+        <p>
+            <img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" />
+            <!-- Start of statc -->
+<div style="color: #ffffff; float: none; width: 100%;">
+    <span style="font-size:0.8em">visitor count: 
+        <script type="text/javascript">
+            var sc_project=12047472; 
+            var sc_invisible=0; 
+            var sc_security="fe09cd78"; 
+            var sc_text=3; 
+            var scJsHost = "https://";
+            document.write("<sc"+"ript type='text/javascript' src='" +
+            scJsHost+
+            "statcounter.com/counter/counter.js'></"+"script>");
+        </script>
+    </span>
+</div>
+<!-- End of statc -->
+        </p>
+        </div>
+    </div>
+    <!--Mathjax LaTeX engine-->
+    
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+        MathJax.Hub.Config({
+            config: ["MMLorHTML.js"],
+            extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+            jax: ["input/TeX"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+            TeX: {
+                TagSide: "right",
+                TagIndent: ".8em",
+                MultLineWidth: "85%",
+                equationNumbers: {
+                autoNumber: "AMS",
+                },
+                unicode: {
+                fonts: "STIXGeneral,'Arial Unicode MS'" 
+                }
+            },
+            showProcessingMessages: false
+        });
+    </script>
+    <style TYPE="text/css">
+        code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+    </style>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+            }
+        });
+        MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</footer>
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /#main -->
+        </div>
+        
+    </body>
+    
+</html>

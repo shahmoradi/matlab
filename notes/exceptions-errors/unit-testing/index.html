@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="This note aims at providing a brief introduction to the concept of Unit Testing in computer programming and the unit testing frameworks in MATLAB.">
+<meta name="keywords" content="unit_testingerror_handlingmatlab,  unit_testing, error_handling, matlab">
+<title>Unit testing | Scientific Computing with MATLAB</title>
+<link rel="stylesheet" href="/matlab/css/prismOkaidia.css">
+<script src="/matlab/js/prismOkaidia.js"></script>
+<!--
+<link rel="stylesheet" href="/matlab/css/syntax.css">
+-->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/matlab/css/bootstrap.min.css">
+
+
+
+<link rel="stylesheet" href="/matlab/css/customstyles.css">
+<link rel="stylesheet" href="/matlab/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="/matlab/css/theme-cdslab.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/matlab/js/jquery.navgoco.min.js"></script>
+<!-- make sidebar non-accordion -->
+<script src="/matlab/js/lockScrollbarPosition.js"></script>
+<!-- make sidebar non-accordion -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.sidenav').navgoco({
+              accordion: false,
+              caret: '<span class="caret"></span>',
+              openClass: 'open',
+              save: true,
+              cookie: {
+                  name: 'navgoco',
+                  expires: false,
+                  path: '/'
+              },
+              slide: {
+                  duration: 400,
+                  easing: 'swing'
+              }
+          });
+    });
+</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+<!--
+-->
+<script src="/matlab/js/toc.js"></script>
+<script src="/matlab/js/customscripts.js"></script>
+<link rel="shortcut icon" href="/matlab/images/favicon.ico">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+    </head>
+    <body>
+        <!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div id="sticky" class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-book fa-lg navbar-brand" href="/matlab/index.html">&nbsp;<span class="projectTitle"> Scientific Computing with MATLAB</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CDSLab<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/#about" target="_blank" rel="noopener">About</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/people" target="_blank" rel="noopener">People</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/matlab/" target="_blank" rel="noopener">Scientific Computing with MATLAB</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/python/" target="_blank" rel="noopener">Scientific Computing with Python</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">UTA<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">College of Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">Data Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/physics/" target="_blank" rel="noopener">Physics</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="keyword search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="/matlab/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: "/matlab/search.json",
+                                searchResultTemplate: '<li><a href="https://www.cdslab.org{url}" title="Unit testing">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div id="main">
+                <!-- Content Row -->
+                <div class="row">
+                    
+                    
+                        <!-- Sidebar Column -->
+                        <div class="col-md-3" id="tg-sb-sidebar">
+                            
+<ul id="mysidebar" class="sidenav">
+    <!--
+    -->
+    <li class="sidebarTitle">Table of Pages </li>
+    
+        
+            
+                <li>
+                    <a title="Overview" href="#"><b>Overview</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Preface" href="/matlab/notes/overview/preface/index.html">Preface</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 1" href="/matlab/notes/overview/release-note-1/index.html">Release note 1</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 2" href="/matlab/notes/overview/release-note-2/index.html">Release note 2</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Preliminary foundations" href="#"><b>Preliminary foundations</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Version control system" href="/matlab/notes/preliminary-foundations/version-control-system/index.html">Version control system</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Programming history" href="/matlab/notes/preliminary-foundations/programming-history/index.html">Programming history</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Computer program structure" href="/matlab/notes/preliminary-foundations/computer-program-structure/index.html">Computer program structure</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="MATLAB for beginners" href="/matlab/notes/preliminary-foundations/matlab-for-beginners/index.html">MATLAB for beginners</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Values, variables, and types" href="#"><b>Values, variables, and types</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="First program" href="/matlab/notes/values-variables-types/first-program/index.html">First program</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Values" href="/matlab/notes/values-variables-types/values/index.html">Values</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variables" href="/matlab/notes/values-variables-types/variables/index.html">Variables</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Operators" href="/matlab/notes/values-variables-types/operators/index.html">Operators</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Control constructs" href="#"><b>Control constructs</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Branching" href="/matlab/notes/control-constructs/branching/index.html">Branching</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Looping" href="/matlab/notes/control-constructs/looping/index.html">Looping</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Program units" href="#"><b>Program units</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Functions" href="/matlab/notes/program-units/functions/index.html">Functions</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variable scope" href="/matlab/notes/program-units/variable-scope/index.html">Variable scope</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Data transfer (I/O)" href="#"><b>Data transfer (I/O)</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Data input/ouput methods" href="/matlab/notes/data-transfer/io/index.html">Data input/ouput methods</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Errors and exceptions" href="#"><b>Errors and exceptions</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Exception handling" href="/matlab/notes/exceptions-errors/exception-handling/index.html">Exception handling</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li class="active"><a title="Unit testing" href="/matlab/notes/exceptions-errors/unit-testing/index.html">Unit testing</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Scientific Computing" href="#"><b>Scientific Computing</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Vectorization and array computing" href="/matlab/notes/scientific-computing/vectorization/index.html">Vectorization and array computing</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Visualization and plotting" href="/matlab/notes/scientific-computing/visualization/index.html">Visualization and plotting</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Random numbers" href="/matlab/notes/scientific-computing/random-numbers/index.html">Random numbers</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Object-oriented programming" href="#"><b>Object-oriented programming</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Instantiation" href="/matlab/notes/object-oriented-programming/instantiation/index.html">Instantiation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Encapsulation" href="/matlab/notes/object-oriented-programming/encapsulation/index.html">Encapsulation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Inheritance" href="/matlab/notes/object-oriented-programming/inheritance/index.html">Inheritance</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Polymorphism" href="/matlab/notes/object-oriented-programming/polymorphism/index.html">Polymorphism</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Abstraction" href="/matlab/notes/object-oriented-programming/abstraction/index.html">Abstraction</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+    
+    <!-- if you aren't using the accordion, uncomment this block:
+    -->
+    <p class="external">
+        <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+    </p>
+</ul>
+<!--
+This highlights the active parent class in the navgoco sidebar. 
+This is critical so that the parent expands when you're viewing a page.
+This must appear below the sidebar code above.
+Otherwise, if placed inside customscripts.js,
+the script runs before the sidebar code runs and the class never gets inserted.
+-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+                        </div>
+                        
+                    
+                    <!-- Content Column -->
+                    <div class="col-md-9" id="tg-sb-content">
+                        <div class="post-header">
+   <h1 class="post-title-main">Unit testing</h1>
+</div>
+
+<div class="post-content">
+    
+        <div class="summary">This note aims at providing a brief introduction to the concept of Unit Testing in computer programming and the unit testing frameworks in MATLAB.</div>
+    
+    
+        <br>
+        
+<script>
+    $( document ).ready(function() {
+        // Handler for .ready() called.
+        $('#toc').toc({ minimumHeaders: 0 
+                      , listType: 'ol'
+                      , showSpeed: 0
+                      , headers: 'h2,h3,h4,h5,h6'
+        });
+        /* the following offset helps account for the space taken up by the floating toolbar. */
+        $('#toc').on('click', 'a', function() {
+            var target = $(this.getAttribute('href')), scroll_target = target.offset().top$(window).scrollTop(scroll_target - 10);
+            return false
+        })
+    });
+</script>
+
+<div id="toc"></div>
+
+    
+    
+    <h2 id="code-verification-and-unit-testing">Code verification and unit testing</h2>
+
+<p>As soon as the list of codes and functions that you write grows, you will need to have <strong>a unified way of ensuring all your functions work appropriately, regardless of the potential future internal changes that are made to the functions</strong>. This is called <strong>unit testing</strong>: <em>a software development process in which the smallest testable parts of an application, called <strong>units</strong>, are individually and independently scrutinized for proper operation</em>. Unit testing can be done manually, but if you have a long list of functions (which you most often have), you’d want to automate the testing process.</p>
+
+<p>The grand goal in unit testing is to reduce the risk of encountering potential problems when running the code in the smallest possible units of the code. This means,</p>
+<ol>
+  <li>ensuring the code has the <strong>correct behavior</strong> when given the proper input data.</li>
+  <li>ensuring the <strong>code robustness</strong> to exceptions and invalid input data, meaning that it does not crash when it reaches unexpected situations during the code execution and gracefully handles the error, without interruption.</li>
+</ol>
+
+<p>Because of the goals for which the unit tests are designed, they are mostly written and used by the developers of the code.</p>
+
+<h2 id="unit-testing-approaches-in-matlab">Unit testing approaches in MATLAB</h2>
+
+<p>There are many ways to write tests for codes. Now, if you asked each software developer to write a unit-test for specific software, each would likely come up with their own set of rules and tests of the software. You will end up with many tests, that will generally only be usable by the developer that wrote the tests.</p>
+
+<p>A more reasonable approach would be to have a unified method of unit-testing, i.e., a unit-test framework, available to all programmers for the purpose of verifying their codes. A unit-test framework provides consistency for how the unit tests for your project are written. There are many test frameworks to choose from for just about any language you want to program with, including MATLAB.</p>
+
+<p>Just like the case for the choice of programming language, almost every programmer has a strong opinion their own as to which test-framework is the best. Research what’s out there and use the one that meets the needs of your organization.</p>
+
+<p>The framework will provide a consistent testing structure to create maintainable tests with reproducible results. From a product-quality and business point of view, those are the most valuable reasons to use a unit-test framework. When you write software, you should also think of a quick and simple way to develop and verify your logic in isolation. Once you make sure you have it working solidly by itself, then you can proceed to integrate it into the larger project solutions with great confidence.</p>
+
+<p>Since MATLAB is a organizational effort (as opposed to Python, for example), it has its own unified set of rules and conventions for unit testing. For more information, see <a href="https://www.mathworks.com/help/matlab/matlab-unit-test-framework.html" target="_blank">this page</a>.</p>
+
+<h3 id="script-based-unit-tests">Script-based unit-tests</h3>
+
+<p>The simplest method of unit-testing in MATLAB is to write tests in scripts that verify the accuracy of the output or the expected behavior of MATLAB scripts, functions, or classes that you write. For example, you can use the <code class="highlighter-rouge">assert</code> function to test whether actual output values match the expected values. Or you can test whether the output variables have the correct size and type. To run your test scripts you will have to use MATLAB’s built-in function <code class="highlighter-rouge">runtests</code>.</p>
+
+<h4 id="example">Example</h4>
+
+<p>To see how it works, let’s look at an example from <a href="https://www.mathworks.com/help/matlab/matlab_prog/write-script-based-unit-tests.html" target="_blank">MATLAB manual</a>. Suppose you want to write a MATLAB function, <code class="highlighter-rouge">rightTri.m</code>, in your current MATLAB® folde that takes lengths of two sides of a triangle as input and returns the three angles of the corresponding right triangle. The input sides are the two shorter edges of the triangle, not the hypotenuse.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">sides</span><span class="p">)</span>
+    <span class="n">A</span> <span class="o">=</span> <span class="nb">atand</span><span class="p">(</span><span class="n">sides</span><span class="p">(</span><span class="mi">1</span><span class="p">)/</span><span class="n">sides</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+    <span class="n">B</span> <span class="o">=</span> <span class="nb">atand</span><span class="p">(</span><span class="n">sides</span><span class="p">(</span><span class="mi">2</span><span class="p">)/</span><span class="n">sides</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+    <span class="n">hypotenuse</span> <span class="o">=</span> <span class="n">sides</span><span class="p">(</span><span class="mi">1</span><span class="p">)/</span><span class="nb">sind</span><span class="p">(</span><span class="n">A</span><span class="p">);</span>
+    <span class="n">C</span> <span class="o">=</span> <span class="nb">asind</span><span class="p">(</span><span class="n">hypotenuse</span><span class="o">*</span><span class="nb">sind</span><span class="p">(</span><span class="n">A</span><span class="p">)/</span><span class="n">sides</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+    <span class="n">angles</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span> <span class="n">B</span> <span class="n">C</span><span class="p">];</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h5 id="create-test-script">Create test-script</h5>
+
+<p>Now, in your working folder, create a new script, <code class="highlighter-rouge">rightTriTest.m</code>. Each unit test checks a different output of the rightTri function. <strong>A test-script must adhere to the following conventions</strong>,</p>
+
+<ul>
+  <li>The name of the script file must start or end with the word ‘test’, which is case-insensitive.</li>
+  <li>Place each unit test into a separate section of the script file. Each section begins with two percent signs (%%), and the text that follows on the same line becomes the name of the test element. If no text follows the %%, MATLAB assigns a name to the test. If MATLAB encounters a test failure, it still runs remaining tests.</li>
+  <li>In a test script, the shared variable section consists of any code that appears before the first explicit code section (the first line beginning with %%). Tests share the variables that you define in this section. Within a test, you can modify the values of these variables. However, in subsequent tests, the value is reset to the value defined in the shared variables section.</li>
+  <li>In the shared variables section (first code section), define any preconditions necessary for your tests. If the inputs or outputs do not meet this precondition, MATLAB does not run any of the tests. MATLAB marks the tests as failed and incomplete.</li>
+  <li>When a script is run as a test, variables defined in one test are not accessible within other tests unless they are defined in the shared variables section (first code section). Similarly, variables defined in other workspaces are not accessible to the tests.</li>
+  <li>If the script file does not include any code sections, MATLAB generates a single test element from the full contents of the script file. The name of the test element is the same as the script file name. In this case, if MATLAB encounters a failed test, it halts execution of the entire script.</li>
+</ul>
+
+<p>Now, in <code class="highlighter-rouge">rightTriTest.m</code>, write four tests to test the output of <code class="highlighter-rouge">rightTri.m</code>. Use the <code class="highlighter-rouge">assert</code> function to test the different conditions. In the shared variables section, define four triangle geometries and define a precondition that the rightTri function returns a right triangle.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% test triangles</span>
+<span class="n">tri</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span> <span class="mi">9</span><span class="p">];</span>
+<span class="n">triIso</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">4</span><span class="p">];</span>
+<span class="n">tri306090</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="mi">2</span><span class="o">*</span><span class="nb">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)];</span>
+<span class="n">triSkewed</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">1500</span><span class="p">];</span>
+
+<span class="c1">% preconditions</span>
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">tri</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="n">angles</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">90</span><span class="p">,</span><span class="s1">'Fundamental problem: rightTri not producing right triangle'</span><span class="p">)</span>
+
+<span class="c1">%% Test 1: sum of angles</span>
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">tri</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">180</span><span class="p">)</span>
+ 
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">triIso</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">180</span><span class="p">)</span>
+ 
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">tri306090</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">180</span><span class="p">)</span>
+ 
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">triSkewed</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">180</span><span class="p">)</span>
+
+<span class="c1">%% Test 2: isosceles triangles</span>
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">triIso</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="n">angles</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">45</span><span class="p">)</span>
+<span class="nb">assert</span><span class="p">(</span><span class="n">angles</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">angles</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+ 
+<span class="c1">%% Test 3: 30-60-90 triangle</span>
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">tri306090</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="n">angles</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">30</span><span class="p">)</span>
+<span class="nb">assert</span><span class="p">(</span><span class="n">angles</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">60</span><span class="p">)</span>
+<span class="nb">assert</span><span class="p">(</span><span class="n">angles</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">90</span><span class="p">)</span>
+
+<span class="c1">%% Test 4: Small angle approximation</span>
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">triSkewed</span><span class="p">);</span>
+<span class="n">smallAngle</span> <span class="o">=</span> <span class="p">(</span><span class="nb">pi</span><span class="p">/</span><span class="mi">180</span><span class="p">)</span><span class="o">*</span><span class="n">angles</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">% radians</span>
+<span class="n">approx</span> <span class="o">=</span> <span class="nb">sin</span><span class="p">(</span><span class="n">smallAngle</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="n">approx</span> <span class="o">==</span> <span class="n">smallAngle</span><span class="p">,</span> <span class="s1">'Problem with small angle approximation'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>In the above,</p>
+<ul>
+  <li>Test 1 tests the summation of the triangle angles. If the summation is not equal to 180 degrees, assert throws an error.</li>
+  <li>Test 2 tests that if two sides are equal, the corresponding angles are equal. If the non-right angles are not both equal to 45 degrees, the assert function throws an error.</li>
+  <li>Test 3 tests that if the triangle sides are 1 and sqrt(3), the angles are 30, 60, and 90 degrees. If this condition is not true, assert throws an error.</li>
+  <li>Test 4 tests the small-angle approximation. The small-angle approximation states that for small angles the sine of the angle in radians is approximately equal to the angle. If it is not true, assert throws an error.</li>
+</ul>
+
+<h5 id="run-tests">Run tests</h5>
+
+<p>Execute the <code class="highlighter-rouge">runtests</code> function to run the four tests in <code class="highlighter-rouge">rightTriTest.m</code>. The runtests function executes each test in each code section individually. If Test 1 fails, MATLAB still runs the remaining tests. If you execute rightTriTest as a script instead of by using runtests, MATLAB halts execution of the entire script if it encounters a failed assertion. Additionally, when you run tests using the runtests function, MATLAB provides informative test diagnostics.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="nb">runtests</span><span class="p">(</span><span class="s1">'rightTriTest'</span><span class="p">);</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running rightTriTest
+..
+================================================================================
+Error occurred in rightTriTest/Test3_30_60_90Triangle and it did not run to completion.
+    ---------
+    Error ID:
+    ---------
+    'MATLAB:assertion:failed'
+    --------------
+    Error Details:
+    --------------
+    Error using rightTriTest (line 31)
+    Assertion failed.
+================================================================================
+.
+================================================================================
+Error occurred in rightTriTest/Test4_SmallAngleApproximation and it did not run to completion.
+    ---------
+    Error ID:
+    ---------
+    ''
+    --------------
+    Error Details:
+    --------------
+    Error using rightTriTest (line 39)
+    Problem with small angle approximation
+================================================================================
+.
+Done rightTriTest
+__________
+
+Failure Summary:
+
+     Name                                        Failed  Incomplete  Reason(s)
+    ===========================================================================
+     rightTriTest/Test3_30_60_90Triangle           X         X       Errored.
+    ---------------------------------------------------------------------------
+     rightTriTest/Test4_SmallAngleApproximation    X         X       Errored.
+</code></pre></div></div>
+
+<p>The test for the 30-60-90 triangle and the test for the small-angle approximation fail in the comparison of floating-point numbers. Typically, when you compare floating-point values, you specify a tolerance for the comparison. In Test 3 and Test 4, MATLAB throws an error at the failed assertion and does not complete the test. Therefore, the test is marked as both Failed and Incomplete.</p>
+
+<p>To provide diagnostic information (Error Details) that is more informative than ‘Assertion failed’ (Test 3), you can  pass a message to the assert function (as in Test 4), or you can also consider using the more-advanced <a href="#function-based unit-tests">function-based unit tests</a>.</p>
+
+<h5 id="revise-test-to-use-tolerance">Revise test to use tolerance</h5>
+
+<p>Save <code class="highlighter-rouge">rightTriTest.m</code> as <code class="highlighter-rouge">rightTriTolTest.m</code>, and revise Test 3 and Test 4 to use a tolerance. In Test 3 and Test 4, instead of asserting that the angles are equal to an expected value, assert that the difference between the actual and expected values is less than or equal to a specified tolerance. Define the tolerance in the shared variables section of the test script so it is accessible to both tests.</p>
+
+<p>For script-based unit tests, manually verify that the difference between two values is less than a specified tolerance. If instead you write a function-based unit test, you can access built-in constraints to specify a tolerance when comparing floating-point values.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% test triangles</span>
+<span class="n">tri</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span> <span class="mi">9</span><span class="p">];</span>
+<span class="n">triIso</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span> <span class="mi">4</span><span class="p">];</span>
+<span class="n">tri306090</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="mi">2</span><span class="o">*</span><span class="nb">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)];</span>
+<span class="n">triSkewed</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">1500</span><span class="p">];</span>
+
+<span class="c1">% Define an absolute tolerance</span>
+<span class="n">tol</span> <span class="o">=</span> <span class="mf">1e-10</span><span class="p">;</span> 
+ 
+<span class="c1">% preconditions</span>
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">tri</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="n">angles</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">90</span><span class="p">,</span><span class="s1">'Fundamental problem: rightTri not producing right triangle'</span><span class="p">)</span>
+
+<span class="c1">%% Test 1: sum of angles</span>
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">tri</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">180</span><span class="p">)</span>
+ 
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">triIso</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">180</span><span class="p">)</span>
+ 
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">tri306090</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">180</span><span class="p">)</span>
+ 
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">triSkewed</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">angles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">180</span><span class="p">)</span>
+
+<span class="c1">%% Test 2: isosceles triangles</span>
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">triIso</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="n">angles</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">45</span><span class="p">)</span>
+<span class="nb">assert</span><span class="p">(</span><span class="n">angles</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="n">angles</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+ 
+<span class="c1">%% Test 3: 30-60-90 triangle</span>
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">tri306090</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">angles</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-</span><span class="mi">30</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tol</span><span class="p">)</span>
+<span class="nb">assert</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">angles</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="mi">60</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tol</span><span class="p">)</span>
+<span class="nb">assert</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">angles</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">-</span><span class="mi">90</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tol</span><span class="p">)</span>
+
+<span class="c1">%% Test 4: Small angle approximation</span>
+<span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">triSkewed</span><span class="p">);</span>
+<span class="n">smallAngle</span> <span class="o">=</span> <span class="p">(</span><span class="nb">pi</span><span class="p">/</span><span class="mi">180</span><span class="p">)</span><span class="o">*</span><span class="n">angles</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> <span class="c1">% radians</span>
+<span class="n">approx</span> <span class="o">=</span> <span class="nb">sin</span><span class="p">(</span><span class="n">smallAngle</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">approx</span><span class="o">-</span><span class="n">smallAngle</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">tol</span><span class="p">,</span> <span class="s1">'Problem with small angle approximation'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now, rerun the tests,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="nb">runtests</span><span class="p">(</span><span class="s1">'rightTriTolTest'</span><span class="p">);</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running rightTriTolTest
+....
+Done rightTriTolTest
+__________
+
+All the tests pass.
+
+Create a table of test results.
+
+rt = table(result)
+
+rt =
+
+  4x6 table
+
+                         Name                          Passed    Failed    Incomplete    Duration      Details   
+    _______________________________________________    ______    ______    __________    ________    ____________
+
+    'rightTriTolTest/Test1_SumOfAngles'                true      false       false       0.051194    [1x1 struct]
+    'rightTriTolTest/Test2_IsoscelesTriangles'         true      false       false       0.010316    [1x1 struct]
+    'rightTriTolTest/Test3_30_60_90Triangle'           true      false       false       0.011041    [1x1 struct]
+    'rightTriTolTest/Test4_SmallAngleApproximation'    true      false       false       0.010778    [1x1 struct]
+</code></pre></div></div>
+
+<h3 id="function-based-unit-tests">Function-based unit-tests</h3>
+
+<p>There is another method of unit-testing in MATLAB based on functions (rather than scripts). In this case, your test function is a single MATLAB file that contains a main function and your individual local test-functions. The discussion of function-based unit-tests goes beyond the scope of our goal here, but you can learn more about it <a href="https://www.mathworks.com/help/matlab/function-based-unit-tests.html" target="_blank">here</a></p>
+
+<h3 id="class-based-unit-tests">Class-based unit-tests</h3>
+
+<p>There is yet another method of unit-testing in MATLAB based on the concept of classes and objects (rather than function or scripts). As with the case for function-based unit-tests, the discussion of class-based unit-tests goes beyond the scope of our goal here, but you can learn more about it <a href="https://www.mathworks.com/help/matlab/class-based-unit-tests.html" target="_blank">here</a></p>
+
+<h2 id="summary-unit-testing">Summary: unit testing</h2>
+
+<p>Unit testing is a component of <a href="https://en.wikipedia.org/wiki/Test-driven_development" target="_blank">test-driven development (TDD)</a>, a pragmatic methodology that takes a meticulous approach to build a product by means of <em>continual testing and revision</em>.</p>
+
+<p>Unit testing has a steep learning curve. The programmer or the development-team needs to learn what unit testing is, how to unit-test, what to unit-test and how to use automated software tools to facilitate the process on an on-going basis.  The great benefit to unit testing is that the earlier a problem is identified, the fewer compound errors occur. A compound error is one that doesn’t seem to break anything at first but eventually conflicts with something down the line and results in a problem.</p>
+
+<p>There is a lot more to unit testing and the existing MATLAB frameworks for it than what we discussed here. However, covering all those topics would require a dedicated course for unit testing, which is certainly beyond the capacity of this course.</p>
+
+    
+    
+    <div style="margin-top:3rem">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'shahmoradi'; // required: replace example with your forum shortname
+    
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+</div>
+<hr class="shaded"/>
+<footer>
+    <div class="row">
+        <div class="col-lg-12 footer">
+            &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: July 20, 2019 <br />
+            
+                <span>Page last updated:</span>July 9, 2019<br/>
+            
+        <p>
+            <img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" />
+            <!-- Start of statc -->
+<div style="color: #ffffff; float: none; width: 100%;">
+    <span style="font-size:0.8em">visitor count: 
+        <script type="text/javascript">
+            var sc_project=12047472; 
+            var sc_invisible=0; 
+            var sc_security="fe09cd78"; 
+            var sc_text=3; 
+            var scJsHost = "https://";
+            document.write("<sc"+"ript type='text/javascript' src='" +
+            scJsHost+
+            "statcounter.com/counter/counter.js'></"+"script>");
+        </script>
+    </span>
+</div>
+<!-- End of statc -->
+        </p>
+        </div>
+    </div>
+    <!--Mathjax LaTeX engine-->
+    
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+        MathJax.Hub.Config({
+            config: ["MMLorHTML.js"],
+            extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+            jax: ["input/TeX"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+            TeX: {
+                TagSide: "right",
+                TagIndent: ".8em",
+                MultLineWidth: "85%",
+                equationNumbers: {
+                autoNumber: "AMS",
+                },
+                unicode: {
+                fonts: "STIXGeneral,'Arial Unicode MS'" 
+                }
+            },
+            showProcessingMessages: false
+        });
+    </script>
+    <style TYPE="text/css">
+        code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+    </style>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+            }
+        });
+        MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</footer>
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /#main -->
+        </div>
+        
+    </body>
+    
+</html>

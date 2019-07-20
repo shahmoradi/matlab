@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="This note aims at explaining the concepts of functions as program units.">
+<meta name="keywords" content="functionmatlab,  function, program_unit, matlab">
+<title>Functions in MATLAB | Scientific Computing with MATLAB</title>
+<link rel="stylesheet" href="/matlab/css/prismOkaidia.css">
+<script src="/matlab/js/prismOkaidia.js"></script>
+<!--
+<link rel="stylesheet" href="/matlab/css/syntax.css">
+-->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/matlab/css/bootstrap.min.css">
+
+
+
+<link rel="stylesheet" href="/matlab/css/customstyles.css">
+<link rel="stylesheet" href="/matlab/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="/matlab/css/theme-cdslab.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/matlab/js/jquery.navgoco.min.js"></script>
+<!-- make sidebar non-accordion -->
+<script src="/matlab/js/lockScrollbarPosition.js"></script>
+<!-- make sidebar non-accordion -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.sidenav').navgoco({
+              accordion: false,
+              caret: '<span class="caret"></span>',
+              openClass: 'open',
+              save: true,
+              cookie: {
+                  name: 'navgoco',
+                  expires: false,
+                  path: '/'
+              },
+              slide: {
+                  duration: 400,
+                  easing: 'swing'
+              }
+          });
+    });
+</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+<!--
+-->
+<script src="/matlab/js/toc.js"></script>
+<script src="/matlab/js/customscripts.js"></script>
+<link rel="shortcut icon" href="/matlab/images/favicon.ico">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+    </head>
+    <body>
+        <!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div id="sticky" class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-book fa-lg navbar-brand" href="/matlab/index.html">&nbsp;<span class="projectTitle"> Scientific Computing with MATLAB</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CDSLab<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/#about" target="_blank" rel="noopener">About</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/people" target="_blank" rel="noopener">People</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/matlab/" target="_blank" rel="noopener">Scientific Computing with MATLAB</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/python/" target="_blank" rel="noopener">Scientific Computing with Python</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">UTA<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">College of Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">Data Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/physics/" target="_blank" rel="noopener">Physics</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="keyword search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="/matlab/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: "/matlab/search.json",
+                                searchResultTemplate: '<li><a href="https://www.cdslab.org{url}" title="Functions in MATLAB">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div id="main">
+                <!-- Content Row -->
+                <div class="row">
+                    
+                    
+                        <!-- Sidebar Column -->
+                        <div class="col-md-3" id="tg-sb-sidebar">
+                            
+<ul id="mysidebar" class="sidenav">
+    <!--
+    -->
+    <li class="sidebarTitle">Table of Pages </li>
+    
+        
+            
+                <li>
+                    <a title="Overview" href="#"><b>Overview</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Preface" href="/matlab/notes/overview/preface/index.html">Preface</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 1" href="/matlab/notes/overview/release-note-1/index.html">Release note 1</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 2" href="/matlab/notes/overview/release-note-2/index.html">Release note 2</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Preliminary foundations" href="#"><b>Preliminary foundations</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Version control system" href="/matlab/notes/preliminary-foundations/version-control-system/index.html">Version control system</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Programming history" href="/matlab/notes/preliminary-foundations/programming-history/index.html">Programming history</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Computer program structure" href="/matlab/notes/preliminary-foundations/computer-program-structure/index.html">Computer program structure</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="MATLAB for beginners" href="/matlab/notes/preliminary-foundations/matlab-for-beginners/index.html">MATLAB for beginners</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Values, variables, and types" href="#"><b>Values, variables, and types</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="First program" href="/matlab/notes/values-variables-types/first-program/index.html">First program</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Values" href="/matlab/notes/values-variables-types/values/index.html">Values</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variables" href="/matlab/notes/values-variables-types/variables/index.html">Variables</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Operators" href="/matlab/notes/values-variables-types/operators/index.html">Operators</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Control constructs" href="#"><b>Control constructs</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Branching" href="/matlab/notes/control-constructs/branching/index.html">Branching</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Looping" href="/matlab/notes/control-constructs/looping/index.html">Looping</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Program units" href="#"><b>Program units</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li class="active"><a title="Functions" href="/matlab/notes/program-units/functions/index.html">Functions</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variable scope" href="/matlab/notes/program-units/variable-scope/index.html">Variable scope</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Data transfer (I/O)" href="#"><b>Data transfer (I/O)</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Data input/ouput methods" href="/matlab/notes/data-transfer/io/index.html">Data input/ouput methods</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Errors and exceptions" href="#"><b>Errors and exceptions</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Exception handling" href="/matlab/notes/exceptions-errors/exception-handling/index.html">Exception handling</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Unit testing" href="/matlab/notes/exceptions-errors/unit-testing/index.html">Unit testing</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Scientific Computing" href="#"><b>Scientific Computing</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Vectorization and array computing" href="/matlab/notes/scientific-computing/vectorization/index.html">Vectorization and array computing</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Visualization and plotting" href="/matlab/notes/scientific-computing/visualization/index.html">Visualization and plotting</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Random numbers" href="/matlab/notes/scientific-computing/random-numbers/index.html">Random numbers</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Object-oriented programming" href="#"><b>Object-oriented programming</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Instantiation" href="/matlab/notes/object-oriented-programming/instantiation/index.html">Instantiation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Encapsulation" href="/matlab/notes/object-oriented-programming/encapsulation/index.html">Encapsulation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Inheritance" href="/matlab/notes/object-oriented-programming/inheritance/index.html">Inheritance</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Polymorphism" href="/matlab/notes/object-oriented-programming/polymorphism/index.html">Polymorphism</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Abstraction" href="/matlab/notes/object-oriented-programming/abstraction/index.html">Abstraction</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+    
+    <!-- if you aren't using the accordion, uncomment this block:
+    -->
+    <p class="external">
+        <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+    </p>
+</ul>
+<!--
+This highlights the active parent class in the navgoco sidebar. 
+This is critical so that the parent expands when you're viewing a page.
+This must appear below the sidebar code above.
+Otherwise, if placed inside customscripts.js,
+the script runs before the sidebar code runs and the class never gets inserted.
+-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+                        </div>
+                        
+                    
+                    <!-- Content Column -->
+                    <div class="col-md-9" id="tg-sb-content">
+                        <div class="post-header">
+   <h1 class="post-title-main">Functions in MATLAB</h1>
+</div>
+
+<div class="post-content">
+    
+        <div class="summary">This note aims at explaining the concepts of functions as program units.</div>
+    
+    
+        <br>
+        
+<script>
+    $( document ).ready(function() {
+        // Handler for .ready() called.
+        $('#toc').toc({ minimumHeaders: 0 
+                      , listType: 'ol'
+                      , showSpeed: 0
+                      , headers: 'h2,h3,h4,h5,h6'
+        });
+        /* the following offset helps account for the space taken up by the floating toolbar. */
+        $('#toc').on('click', 'a', function() {
+            var target = $(this.getAttribute('href')), scroll_target = target.offset().top$(window).scrollTop(scroll_target - 10);
+            return false
+        })
+    });
+</script>
+
+<div id="toc"></div>
+
+    
+    
+    <h2 id="what-is-a-function">What is a Function?</h2>
+
+<p>Functions in programming languages are self-contained modules of code that accomplish a specific task. They <em>usually</em> (but not always) take some data as <strong>input</strong>, <strong>process</strong> the input data, and <strong>return</strong> a result. Therefore, the definition of function in programming goes far beyond the mathematical definition of a function. For example, programming functions can have no input or output.</p>
+
+<p>The main reason for writing functions is to reduce coding redundancy and increase code reuse. Once a function is written, it can be used over and over and over again. Whenever a function is needed, it can be <strong>called</strong> from the inside of the main program or from inside of other functions.</p>
+
+<p>In MATLAB, like most other programming languages, <strong>function</strong> is a collection of programming statements that can be executed whenever and wherever requested. Both MATLAB scripts and functions allow you to reuse sequences of commands by storing them in program files. <strong>Scripts</strong> are the simplest type of program since they store commands exactly as you would type them at the command line. <strong>Functions</strong> provide more flexibility, primarily because you can pass input values and return output values. The general syntax for a MATLAB function is the following,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">[</span><span class="n">y1</span><span class="p">,</span><span class="k">...</span><span class="c">,yN] = myfunc(x1,...,xM)</span>
+    <span class="c1">% here is the body of the function</span>
+</code></pre></div></div>
+
+<p>The above declares a function named <code class="highlighter-rouge">myfunc</code> that accepts inputs <code class="highlighter-rouge">x1,...,xM</code> and returns outputs <code class="highlighter-rouge">y1,...,yN</code>. This declaration statement must be the first executable line of the function. Just like MATLAB variables, valid function names begin with an alphabetic character and can contain letters, numbers, or underscores.</p>
+
+<p>You can save your function in,</p>
+<ul>
+  <li>a function file which contains only function definitions. The name of the file should match the name of the first function in the file.</li>
+  <li>a script file which contains commands and function definitions. Functions must be at the end of the file. This may seem a bit odd to you, if you already know other programming languages, for example, Python. Script files cannot have the same name as a function in the file. <strong>Functions in scripts</strong> are supported only in <strong>MATLAB R2016b or later</strong>.</li>
+</ul>
+
+<p>Files can include multiple local functions or nested functions. For readability, use the optional <code class="highlighter-rouge">end</code> keyword to indicate the end of each function in a file. The <strong>end keyword is required when</strong>,</p>
+<ul>
+  <li>Any function in the file contains a nested function.</li>
+  <li>The function is a local function within a function file, and any local function in the file uses the end keyword.</li>
+  <li>The function is a local function within a script file.</li>
+</ul>
+
+<p>In general, it is always good to add the <code class="highlighter-rouge">end</code> keyword to all functions, for better readability.</p>
+
+<h3 id="example">Example</h3>
+<p>Let’s write a MATLAB function that takes in a temperature value in Centigrade and converts it to Fahrenheit.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">[</span><span class="n">F</span><span class="p">]</span> <span class="o">=</span> <span class="n">c2f</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
+    <span class="n">F</span> <span class="o">=</span> <span class="p">(</span><span class="mf">9.0</span><span class="p">/</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="n">C</span> <span class="o">+</span> <span class="mi">32</span><span class="p">;</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p><strong>Answer</strong></p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c_temp</span> <span class="o">=</span> <span class="mf">70.7</span><span class="p">;</span> <span class="c1">% The hottest place on Earth, Lut Desert in Iran </span>
+<span class="n">f_temp</span> <span class="o">=</span> <span class="n">c2f</span><span class="p">(</span><span class="n">c_temp</span><span class="p">);</span>
+<span class="nb">disp</span><span class="p">([</span><span class="s1">'Temperature in Fahrenheit: '</span><span class="p">,</span><span class="nb">num2str</span><span class="p">(</span><span class="n">f_temp</span><span class="p">)])</span>
+<span class="nb">disp</span><span class="p">(</span> <span class="p">[</span><span class="s1">'The hottest place on Earth as of 2005 is in the Lut Desert in Iran at '</span> <span class="k">...</span>
+      <span class="p">,</span> <span class="nb">num2str</span><span class="p">(</span><span class="mf">70.7</span><span class="p">)</span> <span class="k">...</span>
+      <span class="p">,</span> <span class="s1">' degrees Celsius.'</span><span class="p">,</span><span class="nb">char</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">...</span>
+      <span class="p">,</span> <span class="s1">'This corresponds to a temperature of '</span><span class="p">,</span> <span class="nb">num2str</span><span class="p">(</span><span class="mf">159.26</span><span class="p">),</span> <span class="s1">' degrees Fahrenheits!'</span> <span class="k">...</span>
+      <span class="p">]</span> <span class="p">);</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The temperature in Fahrenheit: 159.26
+The hottest place on Earth as of 2005 is in the Lut Desert in Iran at 70.7 degrees Celsius.
+This corresponds to a temperature of 159.26 degrees Fahrenheit!
+</code></pre></div></div>
+
+<h2 id="functions-with-no-input-arguments">Functions with no input arguments</h2>
+
+<p>We can define functions that take no input argument, yet do something predefined for us. Consider the following function which outputs information about the field of Data Science when called.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">info</span> <span class="o">=</span> <span class="n">get_info</span><span class="p">()</span>
+    <span class="n">info</span> <span class="o">=</span> <span class="s1">'Data science is a multi-disciplinary field that uses scientific methods, processes, algorithms, and systems to extract knowledge and insights from structured and unstructured data.'</span><span class="p">;</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">out</span> <span class="o">=</span> <span class="n">get_info</span><span class="p">()</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Data science is a multi-disciplinary field that uses scientific methods, processes, algorithms, and systems to extract knowledge and insights from structured and unstructured data.
+</code></pre></div></div>
+
+<h2 id="functions-with-no-output-return-value">Functions with no output (return value)</h2>
+
+<p>We can also modify the above function such that it does not return anything specifically.</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">get_info</span><span class="p">()</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'Data science is a multi-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from structured and unstructured data.'</span><span class="p">);</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">get_info</span><span class="p">()</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Data science is a multi-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from structured and unstructured data.
+</code></pre></div></div>
+
+<p>This is almost equivalent to the word <strong>void</strong> in languages like Java, C, and C++. If you set a variable equal to this function, you will get an error message, because the function does not return anything as output.</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">out</span> <span class="o">=</span> <span class="n">get_info</span><span class="p">()</span>
+<span class="n">Error</span> <span class="n">using</span> <span class="n">get_info</span>
+<span class="n">Too</span> <span class="n">many</span> <span class="n">output</span> <span class="n">arguments</span><span class="o">.</span>
+</code></pre></div></div>
+
+<h2 id="functions-with-multiple-input-arguments">Functions with multiple input arguments</h2>
+
+<p>Functions can take almost as many input arguments as we wish. Consider the following that takes two arguments,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mypower</span><span class="p">(</span><span class="n">base</span><span class="p">,</span><span class="n">exponent</span><span class="p">)</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">base</span><span class="o">^</span><span class="n">exponent</span><span class="p">;</span>
+    <span class="k">return</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">mypower</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+   100
+</code></pre></div></div>
+
+<h3 id="variable-number-of-input-arguments">Variable number of input arguments</h3>
+
+<p>The functions that we have written thus far have contained a fixed number of input arguments and a fixed number of output arguments. But you can also define a MATLAB function that accepts a <strong>variable number of inputs</strong>. In this case, you use MATLAB’s builtin input argument cell <code class="highlighter-rouge">varargin</code> in place of the arbitrary number of input arguments. The function nargin returns the number of input arguments that were passed to the function. For example, consider the following function that displays the values of each input to the function,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">varlist</span><span class="p">(</span><span class="nb">year</span><span class="p">,</span><span class="nb">varargin</span><span class="p">)</span>
+   <span class="nb">fprintf</span><span class="p">(</span><span class="s1">'Number of arguments: %d\n'</span><span class="p">,</span><span class="nb">nargin</span><span class="p">)</span>
+   <span class="nb">celldisp</span><span class="p">(</span><span class="nb">varargin</span><span class="p">)</span>
+   <span class="nb">fprintf</span><span class="p">(</span><span class="s1">'The year is %d\n'</span><span class="p">,</span><span class="nb">year</span><span class="p">)</span>
+   <span class="nb">fprintf</span><span class="p">(</span><span class="s1">'type of varargin is %s\n'</span><span class="p">,</span><span class="nb">class</span><span class="p">(</span><span class="nb">varargin</span><span class="p">))</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">varlist</span><span class="p">(</span><span class="mi">2017</span><span class="p">,</span><span class="s1">'what'</span><span class="p">,</span><span class="s1">'a '</span><span class="p">,</span><span class="s1">'nice'</span><span class="p">,</span> <span class="s1">'weather'</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Number of arguments: 5
+varargin{1} =
+what 
+varargin{2} =
+a 
+varargin{3} =
+nice 
+varargin{4} =
+weather 
+The year is 2017
+type of varargin is cell
+</code></pre></div></div>
+
+<p>You can find more information about input/ouput function arguments <a href="https://www.mathworks.com/help/matlab/input-and-output-arguments.html" target="_blank">here</a>.</p>
+
+<h4 id="optional-arguments-using-inputparser">Optional arguments using <code class="highlighter-rouge">inputParser</code></h4>
+
+<p>Unlike other languages such as Python, Fortran, and C++, there is no simple direct way of having optional arguments in MATLAB functions, other than the one described above, using <code class="highlighter-rouge">varargin</code>. However, MATLAB has a powerful set of built-in capabilities known as <code class="highlighter-rouge">inputParser</code> for parsing the input arguments of a given function. The usage and details of this method go beyond the scope of this class. However, you can learn more about it <a href="https://www.mathworks.com/help/matlab/ref/inputparser-class.html" target="_blank">here</a>.</p>
+
+<h3 id="functions-with-multiple-output-return-values">Functions with multiple output (return values)</h3>
+
+<p>MATLAB functions can also return more than one output value. The output could be of any type: vector, matrix, cell, structure, etc. For example, consider a function that takes an input vector of double and calculates its mean and standard deviation.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">[</span><span class="n">m</span><span class="p">,</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">stat</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1">% a function that returns the result as vector of length two</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)/</span><span class="n">n</span><span class="p">;</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="nb">sum</span><span class="p">((</span><span class="n">x</span><span class="o">-</span><span class="n">m</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span><span class="p">/</span><span class="n">n</span><span class="p">));</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">12.7</span><span class="p">,</span> <span class="mf">45.4</span><span class="p">,</span> <span class="mf">98.9</span><span class="p">,</span> <span class="mf">26.6</span><span class="p">,</span> <span class="mf">53.1</span><span class="p">];</span>
+<span class="o">&gt;&gt;</span> <span class="n">stat</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+   47.3400
+</code></pre></div></div>
+
+<p>Notice that if you don’t provide two output arguments, then basically only one is reported.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">valuesMean</span> <span class="o">=</span> <span class="n">stat</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>valuesMean =
+   47.3400
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">valuesMean</span><span class="p">,</span> <span class="n">valuesStd</span><span class="p">]</span> <span class="o">=</span> <span class="n">stat</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>valuesMean =
+   47.3400
+valuesStd =
+   29.4124
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">valuesMean</span><span class="p">,</span> <span class="n">valuesStd</span><span class="p">,</span> <span class="n">dummy</span><span class="p">]</span> <span class="o">=</span> <span class="n">stat</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>   <span class="c1">% too many output arguments is meaningless</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error using stat
+Too many output arguments. 
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="n">result</span><span class="p">]</span> <span class="o">=</span> <span class="n">stat</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1">% the same function as above, but now returning the result as a structure, together with input x</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="nb">struct</span><span class="p">();</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">result</span><span class="o">.</span><span class="nb">mean</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">/</span> <span class="n">result</span><span class="o">.</span><span class="n">n</span><span class="p">;</span>
+    <span class="n">result</span><span class="o">.</span><span class="nb">std</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span> <span class="nb">sum</span><span class="p">(</span> <span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">result</span><span class="o">.</span><span class="nb">mean</span><span class="p">)</span><span class="o">.^</span><span class="mi">2</span> <span class="p">/</span> <span class="n">result</span><span class="o">.</span><span class="n">n</span> <span class="p">)</span> <span class="p">);</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">12.7</span><span class="p">,</span> <span class="mf">45.4</span><span class="p">,</span> <span class="mf">98.9</span><span class="p">,</span> <span class="mf">26.6</span><span class="p">,</span> <span class="mf">53.1</span><span class="p">];</span>
+<span class="o">&gt;&gt;</span> <span class="n">stat</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+   12.7000   45.4000   98.9000   26.6000   53.1000
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="nb">input</span><span class="p">,</span><span class="n">ouput</span><span class="p">]</span> <span class="o">=</span> <span class="n">stat</span><span class="p">(</span><span class="n">values</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>input =
+   12.7000   45.4000   98.9000   26.6000   53.1000
+ouput = 
+       n: 5
+    mean: 47.3400
+     std: 29.4124
+</code></pre></div></div>
+
+<h4 id="exercise">Exercise</h4>
+
+<p>Write a function that takes in three coefficients $(a,b,c)$ of a quadratic equation $ax^2+bx+c$ and finds the roots of this equation.</p>
+
+<p><strong>Answer</strong></p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">[</span><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="p">]</span> <span class="o">=</span> <span class="n">quadform</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="n">b</span><span class="o">^</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">);</span>
+    <span class="n">x1</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">+</span> <span class="n">d</span><span class="p">)</span> <span class="p">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">);</span>
+    <span class="n">x2</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">b</span> <span class="o">-</span> <span class="n">d</span><span class="p">)</span> <span class="p">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">a</span><span class="p">);</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">r1</span><span class="p">,</span><span class="n">r2</span><span class="p">]</span> <span class="o">=</span> <span class="n">quadform</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>r1 =
+  -0.5000 + 0.8660i
+r2 =
+  -0.5000 - 0.8660i
+</code></pre></div></div>
+
+<h4 id="variable-number-of-output-arguments">Variable number of output arguments</h4>
+
+<p>A variable number of output arguments can also be specified. For example, consider the following function <code class="highlighter-rouge">typesize()</code> which takes one input argument <code class="highlighter-rouge">inputval</code>. The function will always return a character specifying whether the input argument was a scalar (‘s’), vector (‘v’), or matrix (‘m’). This character is returned through the output argument <code class="highlighter-rouge">arrtype</code>. Additionally, if the input argument was a vector, the function also returns the length of the vector, and if the input argument was a matrix, the function returns the number of rows and the number of columns of the matrix. The <strong>MATLAB’s builtin</strong> output argument <code class="highlighter-rouge">varargout</code> is used, which is a cell array. So, for a vector, the length is returned through varargout and for a matrix, both the number of rows and columns are returned through <code class="highlighter-rouge">varargout</code>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">[</span><span class="n">arrtype</span><span class="p">,</span> <span class="nb">varargout</span><span class="p">]</span> <span class="o">=</span> <span class="n">typesize</span><span class="p">(</span><span class="n">inputval</span><span class="p">)</span>
+    <span class="c1">% typesize returns a character 'scalar' for scalar, 'vector'</span>
+    <span class="c1">% for vector, or 'matrix' for matrix input argument</span>
+    <span class="c1">% also returns length of a vector or dimensions of matrix</span>
+    <span class="c1">% Format: typesize(inputArgument)</span>
+    <span class="p">[</span><span class="n">nrow</span><span class="p">,</span> <span class="n">ncol</span> <span class="p">]</span> <span class="o">=</span> <span class="nb">size</span><span class="p">(</span><span class="n">inputval</span><span class="p">);</span>
+    <span class="k">if</span> <span class="n">nrow</span><span class="o">==</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">ncol</span><span class="o">==</span><span class="mi">1</span>
+    <span class="n">arrtype</span> <span class="o">=</span> <span class="s1">'scalar'</span><span class="p">;</span>
+    <span class="k">elseif</span> <span class="n">nrow</span><span class="o">==</span><span class="mi">1</span> <span class="o">||</span> <span class="n">ncol</span><span class="o">==</span><span class="mi">1</span>
+    <span class="n">arrtype</span> <span class="o">=</span> <span class="s1">'vector'</span><span class="p">;</span>
+    <span class="nb">varargout</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span> <span class="o">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">inputval</span><span class="p">);</span>
+    <span class="k">else</span>
+    <span class="n">arrtype</span> <span class="o">=</span> <span class="s1">'matrix'</span><span class="p">;</span>
+    <span class="nb">varargout</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span> <span class="o">=</span> <span class="n">nrow</span><span class="p">;</span>
+    <span class="nb">varargout</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span> <span class="o">=</span> <span class="n">ncol</span><span class="p">;</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">typesize</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+scalar
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">typesize</span><span class="p">(</span><span class="mi">10</span><span class="p">:</span><span class="mi">12</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+vector
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">inputType</span><span class="p">,</span><span class="n">inputLength</span><span class="p">]</span> <span class="o">=</span> <span class="n">typesize</span><span class="p">(</span><span class="mi">10</span><span class="p">:</span><span class="mi">12</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inputType =
+vector
+inputLength =
+     3
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">inputType</span><span class="p">,</span><span class="n">nrow</span><span class="p">,</span><span class="n">ncol</span><span class="p">]</span> <span class="o">=</span> <span class="n">typesize</span><span class="p">([</span><span class="mi">10</span><span class="p">:</span><span class="mi">12</span><span class="p">;</span><span class="mi">13</span><span class="p">:</span><span class="mi">15</span><span class="p">])</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>inputType =
+matrix
+nrow =
+     2
+ncol =
+     3
+</code></pre></div></div>
+
+<h2 id="function-handles-in-matlab">Function handles in MATLAB</h2>
+
+<p>Function Handles are variables that allow you to invoke a function indirectly. A <strong>function handle</strong> is a <strong>data type</strong> that <strong>stores an association to a function</strong>. For example, you can use a function handle to construct <a href="#anonymous-functions">anonymous functions</a> or specify <a href="https://www.mathworks.com/help/matlab/creating_plots/callback-definition.html" target="_blank">call-back functions</a>. Also, you can use a function handle to <strong>pass a function to another function</strong>, or call local functions from outside the main function (see below).</p>
+
+<p>Indirectly calling a function enables you to invoke the function regardless of where you call it from. Typical uses of function handles include:</p>
+
+<ul>
+  <li>Pass a function to another function (often called <a href="#function-functions">function functions</a>). For example, passing a function to integration or optimization functions as we will see later in this course, such as <code class="highlighter-rouge">integral</code> and <code class="highlighter-rouge">fzero</code>.</li>
+  <li>Construct handles to functions defined inline instead of stored in a program file (anonymous functions).</li>
+  <li>Call <a href="#local-functions">local functions</a> from outside the main function.</li>
+</ul>
+
+<p>You can see if a variable, say <code class="highlighter-rouge">h</code>, is a function handle using <code class="highlighter-rouge">isa(h,'function_handle')</code>.</p>
+
+<h3 id="creating-function-handle">Creating function handle</h3>
+
+<p>The general method for creating a function handle is to precede the function name with an <code class="highlighter-rouge">@</code> sign. For example, if you have a function called <code class="highlighter-rouge">myfunc</code>, you can create a handle named <code class="highlighter-rouge">f</code> for it as follows,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span> <span class="o">=</span> <span class="o">@</span><span class="n">myfunc</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>For example,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">out</span> <span class="o">=</span> <span class="n">getSq</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">x</span><span class="o">.^</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Then you can create a function handle on MATLAB command line like the following,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="o">@</span><span class="n">getSq</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>b =
+    16
+</code></pre></div></div>
+
+<p>If the function does not require any inputs, then you can call the function with empty parentheses. For example,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">h</span> <span class="o">=</span> <span class="o">@</span><span class="nb">ones</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">h</span><span class="p">()</span>
+<span class="n">a</span> <span class="o">=</span>
+     <span class="mi">1</span>
+</code></pre></div></div>
+
+<p>If you don’t add <code class="highlighter-rouge">()</code> at the time of call, then simply another function handle will be created, now assigned to <code class="highlighter-rouge">a</code>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">h</span> <span class="o">=</span> <span class="o">@</span><span class="nb">ones</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">h</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = 
+    @ones
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+function_handle
+</code></pre></div></div>
+
+<p>Function handles can be passed as variables to other functions. For example, to calculate the integral of $f(x)=x^2$, as implemented in <code class="highlighter-rouge">getSq()</code> above, on the range $[0,1]$ define,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">f</span> <span class="o">=</span> <span class="o">@</span><span class="n">getSq</span><span class="p">;</span> 
+<span class="o">&gt;&gt;</span> <span class="n">q</span> <span class="o">=</span> <span class="nb">integral</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>q =
+    0.3333
+</code></pre></div></div>
+
+<h3 id="arrays-of-function-handles">Arrays of function handles</h3>
+
+<p>You can also create an array of function handles by collecting them into a cell or structure array. For example,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">fset</span> <span class="o">=</span> <span class="p">{</span><span class="o">@</span><span class="nb">sin</span><span class="p">,</span> <span class="o">@</span><span class="nb">cos</span><span class="p">,</span> <span class="o">@</span><span class="nb">tan</span><span class="p">,</span> <span class="o">@</span><span class="nb">cot</span><span class="p">};</span>
+<span class="o">&gt;&gt;</span> <span class="n">fset</span><span class="p">{</span><span class="mi">1</span><span class="p">}(</span><span class="nb">pi</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+   1.2246e-16
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">fset</span><span class="p">{</span><span class="mi">2</span><span class="p">}(</span><span class="nb">pi</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+    -1
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">fset</span><span class="p">{</span><span class="mi">3</span><span class="p">}(</span><span class="nb">pi</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+  -1.2246e-16
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">fset</span><span class="p">{</span><span class="mi">4</span><span class="p">}(</span><span class="nb">pi</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+  -8.1656e+15
+</code></pre></div></div>
+
+<p>To get general information about a function handle on MATLAB command line, use,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">functions</span><span class="p">(</span><span class="n">fset</span><span class="p">{</span><span class="mi">4</span><span class="p">})</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
+    function: 'cot'
+        type: 'simple'
+        file: ''
+</code></pre></div></div>
+
+<h2 id="function-types-in-matlab">Function types in MATLAB</h2>
+
+<p>There are several types of functions in MATLAB. These include,</p>
+
+<ul>
+  <li>local functions,</li>
+  <li>nested functions,</li>
+  <li>private functions,</li>
+  <li>function functions,</li>
+  <li>anonymous functions</li>
+  <li>…</li>
+</ul>
+
+<h3 id="anonymous-functions">Anonymous functions</h3>
+
+<p>Anonymous functions allow you to create a MATLAB file without the need to put the function in a separate <code class="highlighter-rouge">.m</code> file dedicated to the function. This function is associated with a variable whose data type is <strong>function_handle</strong>. Anonymous functions can accept inputs and return outputs, just as standard functions do. However, they can <strong>contain only a single executable statement</strong>. The concept of the anonymous function is similar to <a href="https://www.programiz.com/python-programming/anonymous-function" target="_blank">lambda functions in Python</a>, if you are already familiar with this language. For example, consider the following handle to an anonymous function that finds the square of a number,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">sq</span> <span class="o">=</span> <span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">x</span><span class="o">.^</span><span class="mi">2</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">sq</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     4
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">sq</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     4     9    16
+</code></pre></div></div>
+
+<h4 id="variables-in-anonymous-function-expressions">Variables in anonymous function expressions</h4>
+
+<p>Function handles can store not only an expression but also variables that the expression requires for evaluation. For example, you can create a function handle to an anonymous function that requires coefficients <code class="highlighter-rouge">a</code>, <code class="highlighter-rouge">b</code>, and <code class="highlighter-rouge">c</code>.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mf">1.3</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="o">.</span><span class="mi">2</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">30</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">parabola</span> <span class="o">=</span> <span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">;</span>
+</code></pre></div></div>
+
+<p>Since <code class="highlighter-rouge">a</code>, <code class="highlighter-rouge">b</code>, and <code class="highlighter-rouge">c</code> are available at the time you create parabola, the function handle includes those values. The values persist within the function handle even if you clear the variables,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">clear</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span>
+<span class="o">&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">parabola</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>y =
+   31.5000
+</code></pre></div></div>
+
+<p>But note that in order to supply different values for the coefficients, you must create a new (e.g., redefine the) function handle,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="o">-</span><span class="mf">3.9</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">52</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">parabola</span> <span class="o">=</span> <span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="n">c</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">parabola</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>y =
+   48.1000
+</code></pre></div></div>
+
+<h4 id="multiple-nested-anonymous-functions">Multiple (nested) anonymous functions</h4>
+
+<p>The expression in an anonymous function can include another anonymous function. This is useful for passing different parameters to a function that you are evaluating over a range of values. For example, suppose you want to solve the following equation for varying values of the variable <code class="highlighter-rouge">c</code>,</p>
+
+<script type="math/tex; mode=display">g(c) = \int^1_0 \big( x^2 + cx + 1 \big) \operatorname{d}x</script>
+
+<p>You can do so by combining two anonymous functions,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g</span> <span class="o">=</span> <span class="o">@</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">(</span><span class="nb">integral</span><span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>
+</code></pre></div></div>
+<p>Here are the steps to derive the above nested anonymous functions,</p>
+<ul>
+  <li>Write the integrand as an anonymous function,
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Evaluate the function from zero to one by passing the function handle to integral,
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">integral</span><span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>    </div>
+  </li>
+  <li>Supply the value for c by constructing an anonymous function for the entire equation,
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">g</span> <span class="o">=</span> <span class="o">@</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="p">(</span><span class="nb">integral</span><span class="p">(</span><span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">c</span><span class="o">*</span><span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">));</span>
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>The final function allows you to solve the equation for any value of <code class="highlighter-rouge">c</code>. For example,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">g</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+    6.3333
+</code></pre></div></div>
+
+<h4 id="anonymous-functions-with-no-input">Anonymous functions with no input</h4>
+
+<p>If your function does not require any inputs, use empty parentheses when you define and call the anonymous function. Otherwise, as stated above in <a href="#function-handles">function handles</a>, you will simply create a new function handle. For example,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="o">@</span><span class="p">()</span> <span class="nb">datestr</span><span class="p">(</span><span class="nb">now</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">t</span><span class="p">()</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>d =
+23-May-2017 19:54:07
+</code></pre></div></div>
+
+<p>and omitting the parentheses in the assignment statement creates another function handle, and does not execute the function,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">t</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>d = 
+    @()datestr(now)
+</code></pre></div></div>
+
+<h4 id="anonymous-functions-with-multiple-inputs-or-outputs">Anonymous functions with multiple inputs or outputs</h4>
+
+<p>Anonymous functions require that you explicitly specify the input arguments, as many as it may be, just the way you would for a standard function, separating multiple inputs with commas. For example, the following function accepts two inputs, <code class="highlighter-rouge">x</code> and <code class="highlighter-rouge">y</code>,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">myfunc</span> <span class="o">=</span> <span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">z</span> <span class="o">=</span> <span class="n">myfunc</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>z =
+   111
+</code></pre></div></div>
+
+<p>However, you do not explicitly define output arguments when you create an anonymous function. If the expression in the function returns multiple outputs, then you can request them when you call the function. In that case, you should enclose multiple output variables in square brackets <code class="highlighter-rouge">[]</code>. For example, MATLAB’s <code class="highlighter-rouge">ndgrid</code> function can return as many outputs as the number of input vectors. This anonymous function that calls <code class="highlighter-rouge">ndgrid</code> can also return multiple outputs,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mygrid</span> <span class="o">=</span> <span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">c</span><span class="p">)</span> <span class="nb">ndgrid</span><span class="p">((</span><span class="o">-</span><span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">/</span><span class="n">c</span><span class="p">:</span><span class="n">x</span><span class="p">),(</span><span class="o">-</span><span class="n">y</span><span class="p">:</span><span class="n">y</span><span class="p">/</span><span class="n">c</span><span class="p">:</span><span class="n">y</span><span class="p">));</span>
+<span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">]</span> <span class="o">=</span> <span class="n">mygrid</span><span class="p">(</span><span class="nb">pi</span><span class="p">,</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>You can use the output from <code class="highlighter-rouge">mygrid</code> to create a mesh or surface plot, like the following, as we will further discuss in the future notes on plotting in MATLAB,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Z</span> <span class="o">=</span> <span class="nb">sin</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">+</span> <span class="nb">cos</span><span class="p">(</span><span class="n">Y</span><span class="p">);</span>
+<span class="nb">mesh</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">Z</span><span class="p">)</span>
+</code></pre></div></div>
+
+<figure>
+    <img src="mesh.png" />
+</figure>
+
+<h4 id="arrays-of-anonymous-functions">Arrays of anonymous functions</h4>
+
+<p>As we did above for MATLAB <a href="#arrays-of-function-handles">function handles</a>, you can also store multiple anonymous functions in a cell array or structure array. The most common approach is to use a cell array, like the following,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span> <span class="o">=</span> <span class="p">{</span><span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span><span class="p">;</span>
+     <span class="o">@</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="n">y</span><span class="o">+</span><span class="mi">10</span><span class="p">;</span>
+     <span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span><span class="o">+</span><span class="n">y</span><span class="o">+</span><span class="mi">10</span>
+     <span class="p">};</span>
+</code></pre></div></div>
+
+<p>When you create the cell array, <strong>keep in mind</strong> that <strong>MATLAB interprets spaces as column separators for the cell array</strong>. Either omit spaces from expressions, as shown in the previous code or enclose expressions in parentheses such as,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">f</span> <span class="o">=</span> <span class="p">{</span><span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span><span class="p">);</span>
+     <span class="o">@</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mi">10</span><span class="p">);</span>
+     <span class="o">@</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="p">(</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>
+     <span class="p">};</span>
+</code></pre></div></div>
+
+<p>Access the contents of a cell using curly braces. For example, f{1} returns the first function handle. To execute the function, pass input values in parentheses after the curly braces,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">f</span><span class="p">{</span><span class="mi">1</span><span class="p">}(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     1
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">f</span><span class="p">{</span><span class="mi">2</span><span class="p">}(</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+    20
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">f</span><span class="p">{</span><span class="mi">3</span><span class="p">}(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+    21
+</code></pre></div></div>
+
+<h3 id="local-functions">Local functions</h3>
+
+<p>MATLAB program files can contain code for more than one function. In a function file, the first function in the file is called the <strong>main function</strong>. This function is <strong>visible to functions in other files</strong>, or you can call it from the command line. Additional functions within the file are called <strong>local functions</strong>, and they can occur in any order after the main function. Local functions are <strong>only visible to other functions in the same file</strong>. They are equivalent to subroutines in other programming languages and are <strong>sometimes called subfunctions</strong>.</p>
+
+<p>As of R2016b, you can also create local functions in a script file, as long as they all appear after the last line of script code. For more information, see <a href="https://www.mathworks.com/help/matlab/matlab_prog/local-functions-in-scripts.html" target="_blank">here</a>.</p>
+
+<h4 id="exercise-1">Exercise</h4>
+
+<p>Create a function file named <code class="highlighter-rouge">mystats.m</code> that takes as input a given vector of real numbers and outputs the mean and median of the vector. The <code class="highlighter-rouge">.m</code> file for this function should contain contains a main function <code class="highlighter-rouge">mystats()</code>, and two local functions, <code class="highlighter-rouge">mymean</code> and <code class="highlighter-rouge">mymedian</code>. Test your main function using an input vector-like,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">myvec</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">100</span><span class="p">];</span>
+<span class="o">&gt;&gt;</span> <span class="n">mystats</span><span class="p">(</span><span class="n">myvec</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+    55
+</code></pre></div></div>
+
+<p><strong>Answer</strong></p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="p">[</span><span class="n">avg</span><span class="p">,</span> <span class="n">med</span><span class="p">]</span> <span class="o">=</span> <span class="n">mystats</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">length</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">avg</span> <span class="o">=</span> <span class="n">mymean</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+    <span class="n">med</span> <span class="o">=</span> <span class="n">mymedian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">a</span> <span class="o">=</span> <span class="n">mymean</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="c1">% MYMEAN Example of a local function.</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">v</span><span class="p">)/</span><span class="n">n</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">m</span> <span class="o">=</span> <span class="n">mymedian</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+    <span class="c1">% MYMEDIAN Another example of a local function.</span>
+    
+    <span class="n">w</span> <span class="o">=</span> <span class="nb">sort</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+    <span class="k">if</span> <span class="nb">rem</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">w</span><span class="p">((</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)/</span><span class="mi">2</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span><span class="p">(</span><span class="n">n</span><span class="p">/</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">w</span><span class="p">(</span><span class="n">n</span><span class="p">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))/</span><span class="mi">2</span><span class="p">;</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Note that you cannot call the local functions, because local functions are not visible to any other place or function in MATLAB other than <code class="highlighter-rouge">mystats()</code>.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">mymean</span><span class="p">(</span><span class="n">myvec</span><span class="p">,</span><span class="nb">length</span><span class="p">(</span><span class="n">myvec</span><span class="p">))</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Undefined function or variable 'mymean'. 
+Did you mean:
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">mean</span><span class="p">(</span><span class="n">myvec</span><span class="p">,</span><span class="nb">length</span><span class="p">(</span><span class="n">myvec</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h4 id="collective-function-handle-for-all-local-functions">Collective function handle for all local functions</h4>
+
+<p>MATLAB has a built-in function <code class="highlighter-rouge">localfunctions</code> that returns a cell array of all local functions in the scope of the current function or script (i.e., in the current MATLAB file). This is very useful when you want to write a function that returns to the main program, a list of functions local to this function. For example,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">fh</span> <span class="o">=</span> <span class="n">computeEllipseVals</span>
+    <span class="n">fh</span> <span class="o">=</span> <span class="nb">localfunctions</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">f</span> <span class="o">=</span> <span class="n">computeFocus</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="n">a</span><span class="o">^</span><span class="mi">2</span><span class="o">-</span><span class="n">b</span><span class="o">^</span><span class="mi">2</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">e</span> <span class="o">=</span> <span class="n">computeEccentricity</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">computeFocus</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+    <span class="n">e</span> <span class="o">=</span> <span class="n">f</span><span class="p">/</span><span class="n">a</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="n">ae</span> <span class="o">=</span> <span class="n">computeArea</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+    <span class="n">ae</span> <span class="o">=</span> <span class="nb">pi</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">;</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Now, if you call <code class="highlighter-rouge">computeEllipseVals</code> on the command prompt, you will get a cell array to all functions local to <code class="highlighter-rouge">computeEllipseVals</code>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">fhcell</span> <span class="o">=</span> <span class="n">computeEllipseVals</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
+    @computeFocus       
+    @computeEccentricity
+    @computeArea
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">fhcell</span><span class="p">{</span><span class="mi">3</span><span class="p">}(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">% get the area of an ellipse with semi-axes (1,1).</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+    3.1416
+</code></pre></div></div>
+
+<h3 id="function-functions">Function functions</h3>
+
+<p>Function-functions are functions that operate on other functions that are passed to it as input arguments. The function that is passed to the function-function is usually referred to as <em>passed function</em>. A simple example is MATLAB’s built-in function <code class="highlighter-rouge">fplot(func,lim)</code>, which plots the given input function <code class="highlighter-rouge">func</code> to it within the limit <code class="highlighter-rouge">lim</code>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">fplot</span><span class="p">(</span><span class="o">@</span><span class="nb">sin</span><span class="p">,[</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="nb">pi</span> <span class="mi">2</span><span class="o">*</span><span class="nb">pi</span><span class="p">])</span>
+</code></pre></div></div>
+
+<figure>
+    <img src="sin.png" />
+</figure>
+
+<h3 id="nested-functions">Nested functions</h3>
+
+<p>Nested functions, as implicitly described by their names, are completely contained within a parent function. Any function in a program file can include a nested function. For example, consider the following simple function <code class="highlighter-rouge">nestedfunc()</code> inside of its parent function <code class="highlighter-rouge">parent()</code>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">parent</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'This is the parent function'</span><span class="p">)</span>
+    <span class="n">nestedfunc</span>
+    <span class="k">function</span> <span class="n">nestedfunc</span>
+       <span class="nb">disp</span><span class="p">(</span><span class="s1">'This is the nested function'</span><span class="p">)</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">parent</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>This is the parent function
+This is the nested function
+</code></pre></div></div>
+
+<p>The primary difference between nested functions and other types of functions is that they can <strong>access and modify variables that are defined in their parent functions</strong>. Therefore, nested functions can use variables that are not explicitly passed as input arguments. In a parent function, you can create a handle to a nested function that contains the data necessary to run the nested function.</p>
+
+<h4 id="requirements-for-nested-functions">Requirements for Nested Functions</h4>
+
+<ul>
+  <li>Although MATLAB functions do not typically require an <code class="highlighter-rouge">end</code> statement, to nest any function in a program file, all functions in that file <strong>must use an <code class="highlighter-rouge">end</code> statement</strong>.<br />
+<br /></li>
+  <li>You cannot define a nested function inside any of the MATLAB program control statements, such as <code class="highlighter-rouge">if/elseif/else</code>, <code class="highlighter-rouge">switch/case</code>, <code class="highlighter-rouge">for</code>, <code class="highlighter-rouge">while</code>, or <code class="highlighter-rouge">try/catch</code>.<br />
+<br /></li>
+  <li>You must call a nested function either directly by name (without using <code class="highlighter-rouge">feval</code>), or using a function handle that you created using the <code class="highlighter-rouge">@</code> operator (and not <code class="highlighter-rouge">str2func</code>).<br />
+<br /></li>
+  <li>All of the variables in nested functions or the functions that contain them must be explicitly defined. That is, you cannot call a function or script that assigns values to variables unless those variables already exist in the function workspace.<br />
+<br /></li>
+  <li>In general, variables in one function workspace are not available to other functions. However, <strong>nested functions can access and modify variables in the workspaces of the functions that contain them</strong>. This means that both a nested function and the parent function that contains it can modify the same variable without passing that variable as an argument. For example, in each of these functions, <code class="highlighter-rouge">main1()</code> and <code class="highlighter-rouge">main2</code>, both parent functions and the nested functions can access variable <code class="highlighter-rouge">x</code>,<br />
+<br />
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">main1</span>
+  <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="n">nestfun1</span>
+  <span class="k">function</span> <span class="n">nestfun1</span> 
+      <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="k">end</span>
+  <span class="nb">disp</span><span class="p">([</span><span class="s1">'x = '</span><span class="p">,</span><span class="nb">num2str</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
+<span class="k">end</span>
+</code></pre></div>    </div>
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">main2</span>
+  <span class="n">nestfun2</span>
+  <span class="k">function</span> <span class="n">nestfun2</span>
+      <span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="k">end</span> 
+  <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+  <span class="nb">disp</span><span class="p">([</span><span class="s1">'x = '</span><span class="p">,</span><span class="nb">num2str</span><span class="p">(</span><span class="n">x</span><span class="p">)])</span>
+<span class="k">end</span>
+</code></pre></div>    </div>
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">main1</span>
+</code></pre></div>    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x = 5
+</code></pre></div>    </div>
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">main1</span><span class="p">()</span>
+</code></pre></div>    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x = 6
+</code></pre></div>    </div>
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">main2</span><span class="p">()</span>
+</code></pre></div>    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x = 6
+</code></pre></div>    </div>
+  </li>
+</ul>
+
+<p>When the parent function does not use a given variable, the variable remains local to the nested function. This is rather subtle and complicated. So pay attention. For example, in this function named main, the two nested functions have their own versions of <code class="highlighter-rouge">externFunc</code> that cannot interact with each other and, calling <code class="highlighter-rouge">main</code> gives a syntax error in <code class="highlighter-rouge">nestedfun2</code>, since <code class="highlighter-rouge">myvar</code> is undefined,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">main</span>
+    <span class="n">nestedfun1</span>
+    <span class="n">nestedfun2</span>
+    <span class="k">function</span> <span class="n">nestedfun1</span>
+        <span class="n">myvar</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="n">xyz</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="k">end</span>
+    <span class="k">function</span> <span class="n">nestedfun2</span>
+        <span class="n">myvar</span> <span class="o">=</span> <span class="n">myvar</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">main</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Undefined function or variable 'myvar'.
+Error in main/nestedfun2 (line 10)
+        myvar = myvar + 2;
+Error in main (line 3)
+    nestedfun2
+</code></pre></div></div>
+
+<p>However, even the slightest mention of the variable <code class="highlighter-rouge">myvar</code>, like the following, makes it accessible in the scope of both main and nested functions.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">main</span>
+    <span class="n">nestedfun1</span>
+    <span class="n">nestedfun2</span>
+    
+    <span class="k">function</span> <span class="n">nestedfun1</span>
+        <span class="n">myvar</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+    <span class="k">end</span>
+
+    <span class="k">function</span> <span class="n">nestedfun2</span>
+        <span class="n">myvar</span> <span class="o">=</span> <span class="n">myvar</span> <span class="o">+</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="k">end</span>
+    <span class="nb">disp</span><span class="p">([</span><span class="s1">'myvar = '</span><span class="p">,</span><span class="nb">num2str</span><span class="p">(</span><span class="n">myvar</span><span class="p">)]);</span>
+    <span class="nb">disp</span><span class="p">([</span><span class="s1">'class(myvar) = '</span><span class="p">,</span><span class="nb">class</span><span class="p">(</span><span class="n">myvar</span><span class="p">)]);</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">main</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>myvar = 12
+class(myvar) = double
+</code></pre></div></div>
+
+<p>However, if there is any other function in MATLAB path that has the same name as this variable <code class="highlighter-rouge">myvar</code>, then MATLAB by default will call the function, instead of invoking the value for this variable given by the nested functions. For example, if the following function is in the MATLAB path,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">result</span> <span class="o">=</span> <span class="n">myvar</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="o">-</span><span class="mi">13</span><span class="p">;</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>then calling the same function <code class="highlighter-rouge">main</code> as above would give,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">main</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>myvar = -13
+class(myvar) = double
+</code></pre></div></div>
+
+<p>The scope of variables in MATLAB functions, especially nested functions, can become a significant source of error and confusion in your MATLAB code if you are not careful. As a result, MATLAB’s code editor has special syntax-highlighting features for variables that are shared between nested functions and is very smart in automatically detecting syntax or semantic errors in your codes. So, I always recommend you to use MATLAB’s own editor and debugger. You can find more information about this issue <a href="https://www.mathworks.com/help/matlab/matlab_prog/check-variable-scope-in-editor.html" target="_blank">here</a>.</p>
+
+<h3 id="private-functions">Private Functions</h3>
+
+<p>A typical modern MATLAB contains thousands of M-files on the user’s path, all accessible just by typing the name of the M-file. While this ease of accessing M-files is an advantage, it can lead to clutter and clashes of names, not least due to the presence of <strong>helper functions</strong> that are used by other functions but not intended to be called directly by the user. Private functions provide an elegant way to avoid these problems. Any functions residing in a directory called private are visible only to functions in the parent directory. They can, therefore, have the same names as functions in other directories. When MATLAB looks for a function it searches subfunctions, then private functions (relative to the directory in which the function making the call is located), then the current directory and the path. Hence if a private function has the same name as a nonprivate function (even a built-in function), the private function will be found first.</p>
+
+<h3 id="recursive-functions">Recursive functions</h3>
+
+<p>In programming, a recursive function is a function that calls itself. Recursion is needed frequently in programming, although there might be better, more efficient ways of implementing many of the simple explanatory recursion examples that you find in programming books. A prominent and sometimes more efficient alternative to <strong>recursive programming</strong> is <strong>iterative methods</strong>. Nontrivial examples that require recursive programming are abundant but go beyond the scope of this course.</p>
+
+<p>To begin, let’s write a simple function that takes in one positive integer $n$, and calculates its factorial,</p>
+
+<script type="math/tex; mode=display">n! = n \times (n-1) \times \cdots \times 1 ~.</script>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">result</span><span class="o">=</span><span class="n">getFactorial</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">&lt;=</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">result</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">result</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="n">getFactorial</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">getFactorial</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     6
+</code></pre></div></div>
+
+<h4 id="exercise-2">Exercise</h4>
+
+<p>Consider the MATLAB intrinsic function <a href=""><code class="highlighter-rouge"> strtok</code></a>, which returns the first token (word) in a given string (sentence). Now, write a recursive MATLAB function that reverses the input sentence given by the user like the following,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">reverseSentence</span><span class="p">(</span><span class="s1">'MATLAB is a rather strange but very powerful programming language'</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>language programming powerful very but strange rather a is MATLAB 
+</code></pre></div></div>
+
+<p><strong>Answer</strong></p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">reverseSentence</span><span class="p">(</span><span class="nb">string</span><span class="p">)</span>
+    <span class="c1">% reverseSentence recursively prints the words in a string in reverse order    </span>
+    <span class="n">getToken</span><span class="p">(</span><span class="nb">string</span><span class="p">)</span>
+    <span class="k">function</span> <span class="n">getToken</span><span class="p">(</span><span class="nb">string</span><span class="p">)</span>
+        <span class="p">[</span><span class="n">word</span><span class="p">,</span> <span class="n">rest</span><span class="p">]</span> <span class="o">=</span> <span class="nb">strtok</span><span class="p">(</span><span class="nb">string</span><span class="p">);</span>
+        <span class="k">if</span> <span class="o">~</span><span class="nb">isempty</span><span class="p">(</span><span class="n">rest</span><span class="p">)</span>
+            <span class="n">getToken</span><span class="p">(</span><span class="n">rest</span><span class="p">);</span>
+        <span class="k">end</span>
+        <span class="nb">fprintf</span><span class="p">([</span><span class="n">word</span><span class="p">,</span><span class="s1">' '</span><span class="p">])</span>
+    <span class="k">end</span>
+    <span class="nb">fprintf</span><span class="p">(</span><span class="s1">'\n'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<h2 id="matlabs-intrinsic-functions">MATLAB’s intrinsic functions</h2>
+
+<p>You may have already noticed that functions are among the most useful concepts in programming. MATLAB owes its popularity to more 10000 built-in functions that it contains,  and the number is growing every year. That means we don’t need to write programs for more than 10000 important general tasks that we may need to do every day, for example, integration, differentiation, various types of plotting, root finding and many more.</p>
+
+<p>A comprehensive list of MATLAB’s built-in functions is available in <a href="https://www.mathworks.com/help/matlab/functionlist.html" target="_blank">MATLAB manual</a>. I recommend you to bookmark this link on your personal computer, to get help from it whenever you need. As a reminder, the following list contains some useful MATLAB functions, some of which we also discussed in the previous sections. Search for their cool functionalities in MATLAB manual!</p>
+<ul>
+  <li><code class="highlighter-rouge">doc</code></li>
+  <li><code class="highlighter-rouge">func2str</code></li>
+  <li><code class="highlighter-rouge">str2func</code></li>
+  <li><code class="highlighter-rouge">fplot</code></li>
+  <li><code class="highlighter-rouge">feval</code></li>
+  <li><code class="highlighter-rouge">fzero</code></li>
+  <li><code class="highlighter-rouge">which</code></li>
+  <li><code class="highlighter-rouge">edit</code></li>
+  <li><code class="highlighter-rouge">type</code></li>
+</ul>
+
+<p>Note that you can use the first one (<code class="highlighter-rouge">doc</code>) to view the information all the rest, even itself!</p>
+
+    
+    
+    <div style="margin-top:3rem">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'shahmoradi'; // required: replace example with your forum shortname
+    
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+</div>
+<hr class="shaded"/>
+<footer>
+    <div class="row">
+        <div class="col-lg-12 footer">
+            &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: July 20, 2019 <br />
+            
+                <span>Page last updated:</span>July 9, 2019<br/>
+            
+        <p>
+            <img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" />
+            <!-- Start of statc -->
+<div style="color: #ffffff; float: none; width: 100%;">
+    <span style="font-size:0.8em">visitor count: 
+        <script type="text/javascript">
+            var sc_project=12047472; 
+            var sc_invisible=0; 
+            var sc_security="fe09cd78"; 
+            var sc_text=3; 
+            var scJsHost = "https://";
+            document.write("<sc"+"ript type='text/javascript' src='" +
+            scJsHost+
+            "statcounter.com/counter/counter.js'></"+"script>");
+        </script>
+    </span>
+</div>
+<!-- End of statc -->
+        </p>
+        </div>
+    </div>
+    <!--Mathjax LaTeX engine-->
+    
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+        MathJax.Hub.Config({
+            config: ["MMLorHTML.js"],
+            extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+            jax: ["input/TeX"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+            TeX: {
+                TagSide: "right",
+                TagIndent: ".8em",
+                MultLineWidth: "85%",
+                equationNumbers: {
+                autoNumber: "AMS",
+                },
+                unicode: {
+                fonts: "STIXGeneral,'Arial Unicode MS'" 
+                }
+            },
+            showProcessingMessages: false
+        });
+    </script>
+    <style TYPE="text/css">
+        code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+    </style>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+            }
+        });
+        MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</footer>
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /#main -->
+        </div>
+        
+    </body>
+    
+</html>

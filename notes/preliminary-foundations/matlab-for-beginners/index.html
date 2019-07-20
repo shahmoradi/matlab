@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="This note aims at providing an introduction to MATLAB programming for beginners, how to install it, different components of the Graphical Unit Interface of M...">
+<meta name="keywords" content="MATLABbeginner,  MATLAB, beginner">
+<title>MATLAB for beginners | Scientific Computing with MATLAB</title>
+<link rel="stylesheet" href="/matlab/css/prismOkaidia.css">
+<script src="/matlab/js/prismOkaidia.js"></script>
+<!--
+<link rel="stylesheet" href="/matlab/css/syntax.css">
+-->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/matlab/css/bootstrap.min.css">
+
+
+
+<link rel="stylesheet" href="/matlab/css/customstyles.css">
+<link rel="stylesheet" href="/matlab/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="/matlab/css/theme-cdslab.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/matlab/js/jquery.navgoco.min.js"></script>
+<!-- make sidebar non-accordion -->
+<script src="/matlab/js/lockScrollbarPosition.js"></script>
+<!-- make sidebar non-accordion -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.sidenav').navgoco({
+              accordion: false,
+              caret: '<span class="caret"></span>',
+              openClass: 'open',
+              save: true,
+              cookie: {
+                  name: 'navgoco',
+                  expires: false,
+                  path: '/'
+              },
+              slide: {
+                  duration: 400,
+                  easing: 'swing'
+              }
+          });
+    });
+</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+<!--
+-->
+<script src="/matlab/js/toc.js"></script>
+<script src="/matlab/js/customscripts.js"></script>
+<link rel="shortcut icon" href="/matlab/images/favicon.ico">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+    </head>
+    <body>
+        <!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div id="sticky" class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-book fa-lg navbar-brand" href="/matlab/index.html">&nbsp;<span class="projectTitle"> Scientific Computing with MATLAB</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CDSLab<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/#about" target="_blank" rel="noopener">About</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/people" target="_blank" rel="noopener">People</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/matlab/" target="_blank" rel="noopener">Scientific Computing with MATLAB</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/python/" target="_blank" rel="noopener">Scientific Computing with Python</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">UTA<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">College of Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">Data Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/physics/" target="_blank" rel="noopener">Physics</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="keyword search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="/matlab/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: "/matlab/search.json",
+                                searchResultTemplate: '<li><a href="https://www.cdslab.org{url}" title="MATLAB for beginners">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div id="main">
+                <!-- Content Row -->
+                <div class="row">
+                    
+                    
+                        <!-- Sidebar Column -->
+                        <div class="col-md-3" id="tg-sb-sidebar">
+                            
+<ul id="mysidebar" class="sidenav">
+    <!--
+    -->
+    <li class="sidebarTitle">Table of Pages </li>
+    
+        
+            
+                <li>
+                    <a title="Overview" href="#"><b>Overview</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Preface" href="/matlab/notes/overview/preface/index.html">Preface</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 1" href="/matlab/notes/overview/release-note-1/index.html">Release note 1</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 2" href="/matlab/notes/overview/release-note-2/index.html">Release note 2</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Preliminary foundations" href="#"><b>Preliminary foundations</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Version control system" href="/matlab/notes/preliminary-foundations/version-control-system/index.html">Version control system</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Programming history" href="/matlab/notes/preliminary-foundations/programming-history/index.html">Programming history</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Computer program structure" href="/matlab/notes/preliminary-foundations/computer-program-structure/index.html">Computer program structure</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li class="active"><a title="MATLAB for beginners" href="/matlab/notes/preliminary-foundations/matlab-for-beginners/index.html">MATLAB for beginners</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Values, variables, and types" href="#"><b>Values, variables, and types</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="First program" href="/matlab/notes/values-variables-types/first-program/index.html">First program</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Values" href="/matlab/notes/values-variables-types/values/index.html">Values</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variables" href="/matlab/notes/values-variables-types/variables/index.html">Variables</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Operators" href="/matlab/notes/values-variables-types/operators/index.html">Operators</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Control constructs" href="#"><b>Control constructs</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Branching" href="/matlab/notes/control-constructs/branching/index.html">Branching</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Looping" href="/matlab/notes/control-constructs/looping/index.html">Looping</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Program units" href="#"><b>Program units</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Functions" href="/matlab/notes/program-units/functions/index.html">Functions</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variable scope" href="/matlab/notes/program-units/variable-scope/index.html">Variable scope</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Data transfer (I/O)" href="#"><b>Data transfer (I/O)</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Data input/ouput methods" href="/matlab/notes/data-transfer/io/index.html">Data input/ouput methods</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Errors and exceptions" href="#"><b>Errors and exceptions</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Exception handling" href="/matlab/notes/exceptions-errors/exception-handling/index.html">Exception handling</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Unit testing" href="/matlab/notes/exceptions-errors/unit-testing/index.html">Unit testing</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Scientific Computing" href="#"><b>Scientific Computing</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Vectorization and array computing" href="/matlab/notes/scientific-computing/vectorization/index.html">Vectorization and array computing</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Visualization and plotting" href="/matlab/notes/scientific-computing/visualization/index.html">Visualization and plotting</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Random numbers" href="/matlab/notes/scientific-computing/random-numbers/index.html">Random numbers</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Object-oriented programming" href="#"><b>Object-oriented programming</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Instantiation" href="/matlab/notes/object-oriented-programming/instantiation/index.html">Instantiation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Encapsulation" href="/matlab/notes/object-oriented-programming/encapsulation/index.html">Encapsulation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Inheritance" href="/matlab/notes/object-oriented-programming/inheritance/index.html">Inheritance</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Polymorphism" href="/matlab/notes/object-oriented-programming/polymorphism/index.html">Polymorphism</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Abstraction" href="/matlab/notes/object-oriented-programming/abstraction/index.html">Abstraction</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+    
+    <!-- if you aren't using the accordion, uncomment this block:
+    -->
+    <p class="external">
+        <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+    </p>
+</ul>
+<!--
+This highlights the active parent class in the navgoco sidebar. 
+This is critical so that the parent expands when you're viewing a page.
+This must appear below the sidebar code above.
+Otherwise, if placed inside customscripts.js,
+the script runs before the sidebar code runs and the class never gets inserted.
+-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+                        </div>
+                        
+                    
+                    <!-- Content Column -->
+                    <div class="col-md-9" id="tg-sb-content">
+                        <div class="post-header">
+   <h1 class="post-title-main">MATLAB for beginners</h1>
+</div>
+
+<div class="post-content">
+    
+        <div class="summary">This note aims at providing an introduction to MATLAB programming for beginners, how to install it, different components of the Graphical Unit Interface of MATLAB, as well as how to perform simple arithmetic operations in MATLAB.</div>
+    
+    
+        <br>
+        
+<script>
+    $( document ).ready(function() {
+        // Handler for .ready() called.
+        $('#toc').toc({ minimumHeaders: 0 
+                      , listType: 'ol'
+                      , showSpeed: 0
+                      , headers: 'h2,h3,h4,h5,h6'
+        });
+        /* the following offset helps account for the space taken up by the floating toolbar. */
+        $('#toc').on('click', 'a', function() {
+            var target = $(this.getAttribute('href')), scroll_target = target.offset().top$(window).scrollTop(scroll_target - 10);
+            return false
+        })
+    });
+</script>
+
+<div id="toc"></div>
+
+    
+    
+    <h2 id="matlab-a-brief-history">MATLAB: a brief history</h2>
+
+<p>MATLAB was developed in the mid 1980’, by the collaborative works of <a href="https://en.wikipedia.org/wiki/Cleve_Moler" target="_blank">Cleve Moler</a>, a PhD graduate of Stanford University, and <a href="https://en.wikipedia.org/wiki/John_N._Little" target="_blank">John Little</a>, a graudate of MIT. Together they co-founded a private company named <a href="https://en.wikipedia.org/wiki/MathWorks" target="_blank">MathWorks</a>.</p>
+
+<p>The name of the language and software they developed, <a href="https://en.wikipedia.org/wiki/MATLAB" target="_blank">MATLAB</a> is an attribution to the original purpose of the software, that is, to serve as a <strong>mat</strong>rix <strong>lab</strong>oratory. Cleve Moler was among the developers of the popular Fortran libraries <a href="https://en.wikipedia.org/wiki/EISPACK" target="_blank">EISPACK</a> and <a href="https://en.wikipedia.org/wiki/LINPACK" target="_blank">LINPACK</a>. He wanted to provide his students with a higher-level environment so that they could use these high-performance Fortran libraries without the need to learn Fortran.</p>
+
+<p>Since MATLAB was developed by a scientist for scientists, its structure and syntax have more resemblance to the popular programming language of scientists, Fortran, than to any other language. You will soon notice this similarity when we get to learn modern Fortran later on in this course.</p>
+
+<p>An informative historical review of MATLAB by its own inventor is <a href="https://www.mathworks.com/videos/evolution-of-matlab-93125.html" target="_blank">available to watch on MathWorks website</a>. Lower quality of the same video can be accessed on youtube, which I embed here for you:</p>
+
+<div class="center">
+    <div class="video-wrapper">
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/fa-sUaKv56A" frameborder="0" allowfullscreen=""></iframe>
+        </div>
+    </div>
+</div>
+
+<h2 id="matlab-why-do-you-need-to-learn-it">MATLAB: Why do you need to learn it?</h2>
+
+<p>For the following reasons:</p>
+
+<ul>
+  <li>It targets engineers as well as natural and medical scientists as its main audience, just like Fortran.</li>
+  <li>It has an excellent <em>native</em> array/matrix representation and manipulation tools, just like Fortran.</li>
+  <li>It has extensive sets of high-level commands for numerical computing, like Fortran.</li>
+  <li>It is an interpreted language that makes it easy to use anytime, unlike Fortran, C, C++, which are compiled languages.</li>
+  <li>It has an excellent set of graphical tools for 2D and 3D plotting (in fact other languages like Python have tried to copy from and reverse-engineer the graphical tools and commands available in MATLAB).</li>
+  <li>It has one of the largest user-base (over 2,000,000 users) in all scientific communities.</li>
+  <li>There is an extensive list of numerical libraries written in MATLAB over the past decades by all those science/engineering-oriented users.</li>
+  <li>It has an excellent manual and user guide, with extensive illustrative examples. You might not even need to take a MATLAB class if you could closely and carefully follow MATLAB’s user guide.</li>
+</ul>
+
+<h2 id="matlab-caveats">MATLAB caveats</h2>
+
+<p>Here is a personal list of MATLAB caveats that I can think of, at the moment:</p>
+
+<ul>
+  <li>It is not free.</li>
+  <li>It is slow compared to compiled programming languages. See for example, the following performance comparisons and tests in <a href="https://modelingguru.nasa.gov/docs/DOC-1762" target="_blank">NASA modeling guru web page</a>. As you can see there, the <strong>performance of MATLAB script can be significantly lower than compiled languages such as Fortran and C</strong>.</li>
+  <li>If you have already coded in fully object-oriented programming (OOP) language, in particular, Python, you will find some oddities in MATLAB’s OOP implementation. You may feel this when, for example, you are working with <a href="https://www.mathworks.com/help/matlab/cell-arrays.html" target="_blank">cell arrays</a> in MATLAB. We will see later on, what cell arrays are.</li>
+</ul>
+
+<h2 id="matlab-features">MATLAB features</h2>
+
+<p>MATLAB has the following features and attributes.<br />
+<br /></p>
+<ul>
+  <li><strong>MATLAB is a fourth-generation, high-level programming language.</strong><br />
+Remember from the earlier discussion of the computer-programming history, that a high-level programming language provides a high level of programming abstraction from details of computer and machine code. For comparison, Fortran, C++, and C are considered high, medium, and low -level programming languages respectively.<br />
+<br /></li>
+  <li><strong>MATLAB is an array-based programming language.</strong><br />
+MATLAB is designed to facilitate array-manipulation for scientists and engineers.<br />
+<br /></li>
+  <li><strong>MATLAB is a multi-paradigm programming language.</strong><br />
+MATLAB allows the programmer to use the following major programming paradigms in their codes:
+    <ul>
+      <li><a href="https://en.wikipedia.org/wiki/Functional_programming" target="_blank">functional programming</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Imperative_programming" target="_blank">imperative programming</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Procedural_programming" target="_blank">procedural programming</a></li>
+      <li><a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank">object-oriented programming (OOP)</a><br />
+<br /></li>
+    </ul>
+  </li>
+  <li><strong>MATLAB is an interpreted language.</strong><br />
+A programming-language implementation is a system for executing computer programs. There are two general approaches to programming language implementation:<br />
+<br />
+    <ul>
+      <li><strong>Interpretation</strong>: An interpreter takes as input a program in some language, and performs the actions written in that language on some machine.<br />
+<br /></li>
+      <li><strong>Compilation</strong>: A compiler takes as input a program in some language, and translates that program into some other language, which may serve as input to another interpreter or another compiler.<br />
+<br />MATLAB is an interpreted language, meaning that, as soon as you type a MATLAB command on the MATLAB’s command-line and press enter, the MATLAB interpreter executes the statement.  MATLAB programs can also be compiled using <a href="https://www.mathworks.com/products/compiler.html" target="_blank">MATLAB Compiler</a>, to create standalone applications to be executed later when desired.<br />
+<br /></li>
+    </ul>
+  </li>
+  <li><strong>The file extension for human-readable MATLAB source code is <code class="highlighter-rouge">.m</code></strong>.</li>
+</ul>
+
+<h2 id="some-useful-resources-for-matlab">Some useful resources for MATLAB</h2>
+
+<ul>
+  <li><a href="https://www.mathworks.com/matlabcentral/" target="_blank">MATLAB Central</a>: An extensive MATLAB code repository and MATLAB-related questions with answers.</li>
+  <li><a href="https://www.mathworks.com/matlabcentral/newsreader/" target="_blank">comp.soft-sys.matlab</a>: MATLAB’s newsletter.</li>
+  <li><a href="https://www.mathworks.com/moler" target="_blank">https://www.mathworks.com/moler</a>: The original MATLAB developer’s page.</li>
+  <li><a href="https://www.mathworks.com/videos/search.html?q=&amp;page=1" target="_blank">MATLAB educational videos</a>: A long search-able list of educational MATLAB videos.</li>
+</ul>
+
+<h2 id="matlab-installation">MATLAB installation</h2>
+<p>Depending on your operating system, you can download and install a specific version of MATLAB for your personal computer. MATLAB is available to all students enrolled at UT Austin for free. It can be downloaded from <a href="https://www.engr.utexas.edu/itg/products/8017-matlab" target="_blank">here</a>.</p>
+
+<h3 id="alternative-replicas-of-matlab">Alternative replicas of MATLAB</h3>
+
+<p>Since MATLAB is not free, the GNU organization has started a project called <a href="https://en.wikipedia.org/wiki/GNU_Octave" target="_blank">GNU Octave</a> which is a reverse-engineering of MATLAB language and environment, hence mostly compatible with it, but <strong>at no cost</strong>!. You can download it from <a href="https://www.gnu.org/software/octave/" target="_blank">here</a>. GNU Octave is a free open source software (FOSS) package which is <em>mostly compatible</em> with MATLAB. It provides a very similar command line interpreter interface and implements most of the functionality as the commercial MATLAB product. Nevertheless, there are subtle differences which anyone attempting to switch to GNU Octave or to write MATLAB/GNU Octave-compatible scripts must appreciate. Octave was conceived in 1988 and has been under development since 1992, and over the years has made a great deal of progress, especially in the area of graphics and plotting.</p>
+
+<h3 id="matlab-script-editors">MATLAB script editors</h3>
+
+<p>I highly recommend you to use MATLAB’s built-in IDE for MATLAB scripting since it has fantastic features such as automatic debugging, indentation and syntax highlight. However, once you become proficient in MATLAB scripting, you may realize that the text-editing capabilities of MATLAB IDE are not that great compared to highly popular general-purpose text editors. In that case, I recommend you to use,</p>
+
+<ul>
+  <li>
+    <p><a href="https://www.sublimetext.com/" target="_blank">Sublime</a>  (available Windows, OS X, Linux)<br />
+Sublime is a sophisticated text editor for codes in many different languages, including MATLAB, Fortran, C, C++, etc. It has many advanced tools for code editing and syntax highlighting.</p>
+  </li>
+  <li>
+    <p><a href="https://notepad-plus-plus.org/" target="_blank">Notepad++</a>  (available only on Windows)<br />
+Notepad++ is a highly versatile text and source code editor for use with Microsoft Windows. It is likely – and in my opinion, arguably – the most powerful general-purpose text editor that is currently available on the web. Notepad++ automatically identifies the type of code the file contains based on the file extension and highlights the code syntax accordingly. However, you should keep in mind that it is not specifically designed for MATLAB. If you are a professional multi-language programmer, you will soon find the hidden gems in Notepad++, that are not available in any other editor, including MATLAB’s built-in editor.</p>
+  </li>
+</ul>
+
+<h3 id="which-matlab-version-should-i-use">Which MATLAB version should I use?</h3>
+
+<p>Always try to use the latest version if possible, since new features are added to MATLAB every year.</p>
+
+<h3 id="using-matlab-online-in-your-web-browser">Using MATLAB online, in your web browser</h3>
+
+<p>Since as a UT student, you have a campus-wide MATLAB license, you can log in to your account to use MATLAB in your browser, on a remote server. For instructions on how to use MATLAB online, click <a href="https://www.mathworks.com/products/matlab-online.html" target="_blank">here</a>.</p>
+
+<h2 id="matlab-environment">MATLAB environment</h2>
+
+<p>As soon as you open MATLAB, you will likely encounter an environment like the following figure.</p>
+
+<figure>
+    <img src="matlab.png" />
+    <figcaption>
+        A snapshot of MATLAB environment.
+    </figcaption>
+</figure>
+
+<p>The main compartments in the MATLAB environment are:</p>
+<ul>
+  <li><strong>command window</strong>: where you can type single or multiple line commands.</li>
+  <li><strong>script editor</strong>: which is where you can create new or open/edit existing MATLAB files.</li>
+  <li><strong>address bar</strong>: indicating the <strong>current working directory</strong>.</li>
+  <li><strong>folder tree window</strong>: showing all files in the current working directory.</li>
+  <li><strong>workspace window</strong>: which shows all the global variables currently defined in MATLAB.</li>
+</ul>
+
+<h2 id="useful-matlab-commands">Useful MATLAB commands</h2>
+
+<p>The following are some useful MATLAB commands  that allow you to get help on the command-line:</p>
+
+<ul>
+  <li>
+    <p><code class="highlighter-rouge">demo</code> will load MATLAB examples in the Help Browser, illustrating some features of MATLAB.</p>
+  </li>
+  <li><code class="highlighter-rouge">help &lt;keyword&gt;</code> will explain any function. For example,
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">help</span> <span class="nb">sin</span>
+<span class="nb">sin</span>    <span class="n">Sine</span> <span class="n">of</span> <span class="n">argument</span> <span class="n">in</span> <span class="n">radians</span><span class="o">.</span>
+ <span class="nb">sin</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="nb">is</span> <span class="n">the</span> <span class="n">sine</span> <span class="n">of</span> <span class="n">the</span> <span class="n">elements</span> <span class="n">of</span> <span class="n">X</span><span class="o">.</span>
+
+ <span class="n">See</span> <span class="n">also</span> <span class="nb">asin</span><span class="p">,</span> <span class="nb">sind</span><span class="o">.</span>
+
+ <span class="n">Reference</span> <span class="n">page</span> <span class="k">for</span> <span class="nb">sin</span>
+ <span class="n">Other</span> <span class="nb">functions</span> <span class="n">named</span> <span class="nb">sin</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">help help</code>  will explain how MATLAB help works.</p>
+  </li>
+  <li><code class="highlighter-rouge">lookfor &lt;keyword&gt;</code> searches through MATLAB help for a specific word or phrase. For example,
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">lookfor</span> <span class="n">gaussian</span>
+<span class="n">hwv</span>                            <span class="o">-</span> <span class="n">Create</span> <span class="n">a</span> <span class="n">Hull</span><span class="o">-</span><span class="n">White</span><span class="p">/</span><span class="n">Vasicek</span> <span class="nb">mean</span><span class="o">-</span><span class="n">reverting</span> <span class="n">Gaussian</span> <span class="n">diffusion</span> <span class="n">model</span>
+<span class="n">xreggpr</span>                        <span class="o">-</span> <span class="n">xreggpm</span> <span class="n">Gaussian</span> <span class="n">Process</span> <span class="n">model</span> <span class="n">constructor</span>
+<span class="n">gmdistribution</span>                 <span class="o">-</span> <span class="n">Gaussian</span> <span class="n">mixture</span> <span class="n">distribution</span> <span class="nb">class</span><span class="o">.</span>
+<span class="n">awgn</span>                           <span class="o">-</span> <span class="n">Add</span> <span class="n">white</span> <span class="n">Gaussian</span> <span class="n">noise</span> <span class="n">to</span> <span class="n">a</span> <span class="n">signal</span><span class="o">.</span>
+<span class="n">bigaussianir</span>                   <span class="o">-</span> <span class="n">Bi</span><span class="o">-</span><span class="n">Gaussian</span> <span class="n">Doppler</span> <span class="nb">filter</span> <span class="n">impulse</span> <span class="n">response</span><span class="o">.</span>
+<span class="n">gaussianir</span>                     <span class="o">-</span> <span class="n">Gaussian</span> <span class="n">Doppler</span> <span class="nb">filter</span> <span class="n">impulse</span> <span class="n">response</span><span class="o">.</span>
+<span class="n">intfiltgaussian_intfactor</span>      <span class="o">-</span> <span class="n">Support</span> <span class="k">function</span> <span class="n">used</span> <span class="n">by</span> <span class="o">@</span><span class="n">channel</span> <span class="n">package</span> <span class="k">for</span>
+<span class="n">wgn</span>                            <span class="o">-</span> <span class="n">Generate</span> <span class="n">white</span> <span class="n">Gaussian</span> <span class="n">noise</span><span class="o">.</span>
+<span class="n">commblkgaussfilt</span>               <span class="o">-</span> <span class="n">Gaussian</span> <span class="nb">filter</span> <span class="n">block</span> <span class="n">helper</span> <span class="k">function</span><span class="o">.</span>
+<span class="n">commblkgaussiansrc2</span>            <span class="o">-</span> <span class="n">Mask</span> <span class="k">function</span> <span class="k">for</span> <span class="n">Gaussian</span> <span class="n">Noise</span> <span class="n">Generator</span> <span class="n">block</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">doc &lt;keyword&gt;</code> will bring up a documentation page in the Help Browser for the given keyword.</p>
+  </li>
+  <li><code class="highlighter-rouge">dir &lt;path&gt;</code> lists the contents of the given path.
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">dir</span>
+<span class="o">.</span>                <span class="n">lcdata</span><span class="o">.</span><span class="n">xml</span>       <span class="n">m3iregistry</span>      <span class="n">mcc</span><span class="o">.</span><span class="n">bat</span>          <span class="nb">mexext</span><span class="o">.</span><span class="n">bat</span>       <span class="n">mw_mpiexec</span><span class="o">.</span><span class="n">bat</span>   <span class="n">win64</span>            
+<span class="o">..</span>               <span class="n">lcdata</span><span class="o">.</span><span class="n">xsd</span>       <span class="n">matlab</span><span class="o">.</span><span class="n">exe</span>       <span class="nb">mex</span><span class="o">.</span><span class="n">bat</span>          <span class="n">mexsetup</span><span class="o">.</span><span class="n">pm</span>      <span class="n">registry</span>         <span class="n">worker</span><span class="o">.</span><span class="n">bat</span>       
+<span class="n">deploytool</span><span class="o">.</span><span class="n">bat</span>   <span class="n">lcdata_utf8</span><span class="o">.</span><span class="n">xml</span>  <span class="n">mbuild</span><span class="o">.</span><span class="n">bat</span>       <span class="nb">mex</span><span class="o">.</span><span class="n">pl</span>           <span class="n">mexutils</span><span class="o">.</span><span class="n">pm</span>      <span class="n">util</span>             
+</code></pre></div>    </div>
+  </li>
+  <li><code class="highlighter-rouge">pwd</code> outputs the current working directory.
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">pwd</span>
+<span class="nb">ans</span> <span class="o">=</span>
+<span class="n">C</span><span class="p">:\</span><span class="n">Program</span> <span class="n">Files</span><span class="p">\</span><span class="n">MATLAB</span><span class="p">\</span><span class="n">R2016a</span><span class="p">\</span><span class="n">bin</span>
+</code></pre></div>    </div>
+  </li>
+  <li>
+    <p><code class="highlighter-rouge">quit</code> quits MATLAB by closing the application.</p>
+  </li>
+  <li><code class="highlighter-rouge">diary('filename')</code> (or <code class="highlighter-rouge">diary filename</code>) saves  all subsequent keyboard interactions with MATLAB Command Window to the file <code class="highlighter-rouge">filename</code>. <code class="highlighter-rouge">diary off</code> suspends the diary. <code class="highlighter-rouge">diary on</code> resumes diary mode using the current filename, or the default filename diary if none has yet been specified.</li>
+</ul>
+
+<h2 id="comments-in-matlab-scripts">Comments in MATLAB scripts</h2>
+
+<p>Comment lines in MATLAB begin with percent character <code class="highlighter-rouge">%</code>. Anything after <code class="highlighter-rouge">%</code> is ignored by MATLAB interpreter. The <code class="highlighter-rouge">%</code> character itself only tells the interpreter to ignore the remainder of the same line. In the MATLAB Editor, <font color="green"><b>commented lines and sections of code are highlighted in green by default</b></font>. There are two useful keyboard shortcuts for adding and removing chunks of comments. Select the code you wish to comment or uncomment, and then press <code class="highlighter-rouge">Ctrl-R</code> to place one <code class="highlighter-rouge">%</code> symbol at the beginning of each line and `Ctrl-T to do the opposite.</p>
+
+<p>MATLAB also supports multi-line comments, akin to <code class="highlighter-rouge">/* ... */</code> in languages like C or C++, via the <code class="highlighter-rouge">%{ %}</code> delimiters. But there is a small and important difference. In MATLAB, the <strong>lines containing <code class="highlighter-rouge">%{</code> or <code class="highlighter-rouge">%}</code> should not contain any other text (except white spaces)</strong>. Otherwise, the multi-line comment would not work as you wish. For example,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">%{ x = 1;</span>
+<span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span><span class="c1">%}</span>
+</code></pre></div></div>
+
+<p>You notice that in the above, <code class="highlighter-rouge">y=2;</code> is not commented. The correct syntax is,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">%{</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span>
+<span class="c1">%}</span>
+</code></pre></div></div>
+
+<p>Comments are useful for explaining what function a certain piece of code performs especially if the code relies on implicit or subtle assumptions or otherwise perform subtle actions. Doing this is a good idea both for yourself and for others who try to read your code. It is highly recommended to include a block of comments at the beginning of your codes explaining what your MATLAB script or function does and how to use it. MATLAB will output the leading comments that appear at the beginning of a <code class="highlighter-rouge">.m</code> file, when you type,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">help</span> <span class="o">&lt;</span><span class="n">my</span> <span class="k">function</span> <span class="n">name</span><span class="o">&gt;</span>
+</code></pre></div></div>
+
+<p>All of MATLAB’s built-in functions written in MATLAB are documented this way.</p>
+
+<h2 id="matlabs-search-path">MATLAB’s search path</h2>
+
+<p>MATLAB has a search path and strategy that is used to find variables and MATLAB scripts. MATLAB’s current <strong>working directory</strong> is always displayed in the MATLAB address bar. When you enter a name in MATLAB’s command prompt, the MATLAB interpreter attempts to find an entity with that name in the following order:</p>
+<ol>
+  <li>First, it looks for a variable of the same name in MATLAB’s workspace and if it exists, MATLAB displays the value of the variable.</li>
+  <li>If not, then MATLAB looks for an M-file (a MATLAB script) in the working directory of MATLAB.</li>
+  <li>If not, then MATLAB looks for an M-file in MATLAB’s list of directories (the search path) to find the file. If no entity exists with the given name, then MATLAB gives an error.</li>
+</ol>
+
+    
+    
+    <div style="margin-top:3rem">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'shahmoradi'; // required: replace example with your forum shortname
+    
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+</div>
+<hr class="shaded"/>
+<footer>
+    <div class="row">
+        <div class="col-lg-12 footer">
+            &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: July 20, 2019 <br />
+            
+                <span>Page last updated:</span>July 9, 2019<br/>
+            
+        <p>
+            <img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" />
+            <!-- Start of statc -->
+<div style="color: #ffffff; float: none; width: 100%;">
+    <span style="font-size:0.8em">visitor count: 
+        <script type="text/javascript">
+            var sc_project=12047472; 
+            var sc_invisible=0; 
+            var sc_security="fe09cd78"; 
+            var sc_text=3; 
+            var scJsHost = "https://";
+            document.write("<sc"+"ript type='text/javascript' src='" +
+            scJsHost+
+            "statcounter.com/counter/counter.js'></"+"script>");
+        </script>
+    </span>
+</div>
+<!-- End of statc -->
+        </p>
+        </div>
+    </div>
+    <!--Mathjax LaTeX engine-->
+    
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+        MathJax.Hub.Config({
+            config: ["MMLorHTML.js"],
+            extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+            jax: ["input/TeX"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+            TeX: {
+                TagSide: "right",
+                TagIndent: ".8em",
+                MultLineWidth: "85%",
+                equationNumbers: {
+                autoNumber: "AMS",
+                },
+                unicode: {
+                fonts: "STIXGeneral,'Arial Unicode MS'" 
+                }
+            },
+            showProcessingMessages: false
+        });
+    </script>
+    <style TYPE="text/css">
+        code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+    </style>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+            }
+        });
+        MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</footer>
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /#main -->
+        </div>
+        
+    </body>
+    
+</html>

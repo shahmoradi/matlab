@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="This note provides a brief review of the notion of encapsulation and data hiding in Object-Oriented Programming (OOP) paradigm via MATLAB.">
+<meta name="keywords" content="objectclassencapsulationdata_hidingobject_oriented_programmingmatlab,  object, class, encapsulation, data hiding, object_oriented_programming, matlab">
+<title>Encapsulation | Scientific Computing with MATLAB</title>
+<link rel="stylesheet" href="/matlab/css/prismOkaidia.css">
+<script src="/matlab/js/prismOkaidia.js"></script>
+<!--
+<link rel="stylesheet" href="/matlab/css/syntax.css">
+-->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/matlab/css/bootstrap.min.css">
+
+
+
+<link rel="stylesheet" href="/matlab/css/customstyles.css">
+<link rel="stylesheet" href="/matlab/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="/matlab/css/theme-cdslab.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/matlab/js/jquery.navgoco.min.js"></script>
+<!-- make sidebar non-accordion -->
+<script src="/matlab/js/lockScrollbarPosition.js"></script>
+<!-- make sidebar non-accordion -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.sidenav').navgoco({
+              accordion: false,
+              caret: '<span class="caret"></span>',
+              openClass: 'open',
+              save: true,
+              cookie: {
+                  name: 'navgoco',
+                  expires: false,
+                  path: '/'
+              },
+              slide: {
+                  duration: 400,
+                  easing: 'swing'
+              }
+          });
+    });
+</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+<!--
+-->
+<script src="/matlab/js/toc.js"></script>
+<script src="/matlab/js/customscripts.js"></script>
+<link rel="shortcut icon" href="/matlab/images/favicon.ico">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+    </head>
+    <body>
+        <!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div id="sticky" class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-book fa-lg navbar-brand" href="/matlab/index.html">&nbsp;<span class="projectTitle"> Scientific Computing with MATLAB</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CDSLab<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/#about" target="_blank" rel="noopener">About</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/people" target="_blank" rel="noopener">People</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/matlab/" target="_blank" rel="noopener">Scientific Computing with MATLAB</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/python/" target="_blank" rel="noopener">Scientific Computing with Python</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">UTA<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">College of Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">Data Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/physics/" target="_blank" rel="noopener">Physics</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="keyword search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="/matlab/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: "/matlab/search.json",
+                                searchResultTemplate: '<li><a href="https://www.cdslab.org{url}" title="Encapsulation">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div id="main">
+                <!-- Content Row -->
+                <div class="row">
+                    
+                    
+                        <!-- Sidebar Column -->
+                        <div class="col-md-3" id="tg-sb-sidebar">
+                            
+<ul id="mysidebar" class="sidenav">
+    <!--
+    -->
+    <li class="sidebarTitle">Table of Pages </li>
+    
+        
+            
+                <li>
+                    <a title="Overview" href="#"><b>Overview</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Preface" href="/matlab/notes/overview/preface/index.html">Preface</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 1" href="/matlab/notes/overview/release-note-1/index.html">Release note 1</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 2" href="/matlab/notes/overview/release-note-2/index.html">Release note 2</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Preliminary foundations" href="#"><b>Preliminary foundations</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Version control system" href="/matlab/notes/preliminary-foundations/version-control-system/index.html">Version control system</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Programming history" href="/matlab/notes/preliminary-foundations/programming-history/index.html">Programming history</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Computer program structure" href="/matlab/notes/preliminary-foundations/computer-program-structure/index.html">Computer program structure</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="MATLAB for beginners" href="/matlab/notes/preliminary-foundations/matlab-for-beginners/index.html">MATLAB for beginners</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Values, variables, and types" href="#"><b>Values, variables, and types</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="First program" href="/matlab/notes/values-variables-types/first-program/index.html">First program</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Values" href="/matlab/notes/values-variables-types/values/index.html">Values</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variables" href="/matlab/notes/values-variables-types/variables/index.html">Variables</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Operators" href="/matlab/notes/values-variables-types/operators/index.html">Operators</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Control constructs" href="#"><b>Control constructs</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Branching" href="/matlab/notes/control-constructs/branching/index.html">Branching</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Looping" href="/matlab/notes/control-constructs/looping/index.html">Looping</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Program units" href="#"><b>Program units</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Functions" href="/matlab/notes/program-units/functions/index.html">Functions</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variable scope" href="/matlab/notes/program-units/variable-scope/index.html">Variable scope</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Data transfer (I/O)" href="#"><b>Data transfer (I/O)</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Data input/ouput methods" href="/matlab/notes/data-transfer/io/index.html">Data input/ouput methods</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Errors and exceptions" href="#"><b>Errors and exceptions</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Exception handling" href="/matlab/notes/exceptions-errors/exception-handling/index.html">Exception handling</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Unit testing" href="/matlab/notes/exceptions-errors/unit-testing/index.html">Unit testing</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Scientific Computing" href="#"><b>Scientific Computing</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Vectorization and array computing" href="/matlab/notes/scientific-computing/vectorization/index.html">Vectorization and array computing</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Visualization and plotting" href="/matlab/notes/scientific-computing/visualization/index.html">Visualization and plotting</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Random numbers" href="/matlab/notes/scientific-computing/random-numbers/index.html">Random numbers</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Object-oriented programming" href="#"><b>Object-oriented programming</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Instantiation" href="/matlab/notes/object-oriented-programming/instantiation/index.html">Instantiation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li class="active"><a title="Encapsulation" href="/matlab/notes/object-oriented-programming/encapsulation/index.html">Encapsulation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Inheritance" href="/matlab/notes/object-oriented-programming/inheritance/index.html">Inheritance</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Polymorphism" href="/matlab/notes/object-oriented-programming/polymorphism/index.html">Polymorphism</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Abstraction" href="/matlab/notes/object-oriented-programming/abstraction/index.html">Abstraction</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+    
+    <!-- if you aren't using the accordion, uncomment this block:
+    -->
+    <p class="external">
+        <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+    </p>
+</ul>
+<!--
+This highlights the active parent class in the navgoco sidebar. 
+This is critical so that the parent expands when you're viewing a page.
+This must appear below the sidebar code above.
+Otherwise, if placed inside customscripts.js,
+the script runs before the sidebar code runs and the class never gets inserted.
+-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+                        </div>
+                        
+                    
+                    <!-- Content Column -->
+                    <div class="col-md-9" id="tg-sb-content">
+                        <div class="post-header">
+   <h1 class="post-title-main">Encapsulation</h1>
+</div>
+
+<div class="post-content">
+    
+        <div class="summary">This note provides a brief review of the notion of encapsulation and data hiding in Object-Oriented Programming (OOP) paradigm via MATLAB.</div>
+    
+    
+        <br>
+        
+<script>
+    $( document ).ready(function() {
+        // Handler for .ready() called.
+        $('#toc').toc({ minimumHeaders: 0 
+                      , listType: 'ol'
+                      , showSpeed: 0
+                      , headers: 'h2,h3,h4,h5,h6'
+        });
+        /* the following offset helps account for the space taken up by the floating toolbar. */
+        $('#toc').on('click', 'a', function() {
+            var target = $(this.getAttribute('href')), scroll_target = target.offset().top$(window).scrollTop(scroll_target - 10);
+            return false
+        })
+    });
+</script>
+
+<div id="toc"></div>
+
+    
+    
+    <h2 id="encapsulation-and-data-hiding">Encapsulation and data hiding</h2>
+
+<p>Classes can be used for many purposes in scientific programming and computation. One of the most frequently encountered tasks is to represent mathematical functions that have a set of parameters in addition to one or more independent variables. These functions, together with all of their essential and auxiliary variables have to be frequently passed to other functions to perform some tasks. Implementing such problems using purely procedural programming tools that we have learned so far can lead to the development of an unsafe, unclean, and undesired codebase, which is not easy to work with either. To understand why and how this happens, consider the following scientific problem.</p>
+
+<h2 id="a-common-programming-challenge-in-numerical-computing">A common programming challenge in numerical computing</h2>
+
+<p>Consider a function that takes in some parameters as input, for example, the equation of motion a stone when it is thrown upward in the air. The physics equation describing this motion is $y(t) = v_0t-\frac{1}{2}gt^2$. Physically speaking, this equation gives the position $y$ from the ground of the physical object stone, as a function of time. Therefore, in physics, $y$ is viewed as a function of $t$.</p>
+
+<p>However, mathematically speaking, $y$ also depends on two other parameters, $v_0$ and $g$, although it is unnatural to view $y$ as a function of these parameters. One can therefore write $f(t;v_0g)$ to emphasize that $t$ is the independent variable, while $v_0$ and $g$ are parameters. Strictly speaking, $g$ is a fixed parameter (as long as the experiment is run on the surface of the earth), so only $v_0$ and $t$ can be arbitrarily chosen in the formula.</p>
+
+<p>It would then be better to write $y(t;v_0)$. Here is an implementation of this function,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nb">height</span> <span class="o">=</span> <span class="n">getHeight</span><span class="p">(</span><span class="nb">time</span><span class="p">,</span><span class="n">iniVel</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span><span class="p">;</span>
+    <span class="nb">height</span> <span class="o">=</span> <span class="n">iniVel</span><span class="o">*</span><span class="nb">time</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="nb">time</span><span class="o">^</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>This function gives the height of the projectile as a function of time. Now suppose you wanted to differentiate $y$ with respect to $t$ to obtain the velocity. You could write the following code to do so,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">derivative</span> <span class="o">=</span> <span class="n">getDerivative</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">1E-5</span><span class="p">;</span>
+    <span class="n">derivative</span> <span class="o">=</span> <span class="p">(</span><span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">func</span><span class="p">(</span><span class="n">x</span><span class="p">))/</span><span class="n">h</span><span class="p">;</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>But, here is the catch with this problem of differentiation. The <code class="highlighter-rouge">getDerivative</code> function works with any function <code class="highlighter-rouge">func</code> that takes <strong>only</strong> one argument. In other words, if we want to input <code class="highlighter-rouge">getHeight</code> to <code class="highlighter-rouge">getDerivative</code>, then we will have to redefine <code class="highlighter-rouge">getHeight</code> to take only one argument.  You may wonder why not change <code class="highlighter-rouge">getDerivative</code>. For this simple problem, this could be a solution. But, with larger problems, you are more likely to use sophisticated routines and modules that have been already developed and many of these routines take a function as input that only has one input variable. This is quite often the case with high-performance integration routines.</p>
+
+<p>One perhaps-bad solution to the above problem is to use <strong>global variables</strong>. The requirement is thus to define MATLAB implementations of mathematical functions of one variable with one argument, the independent variable,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nb">height</span> <span class="o">=</span> <span class="n">getHeightGlobal</span><span class="p">(</span><span class="nb">time</span><span class="p">)</span>
+    <span class="k">global</span> <span class="n">iniVel</span><span class="p">;</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span><span class="p">;</span>
+    <span class="nb">height</span> <span class="o">=</span> <span class="n">iniVel</span><span class="o">*</span><span class="nb">time</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="nb">time</span><span class="o">^</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>This function will work only if <code class="highlighter-rouge">iniVel</code> is a global variable, initialized before one attempts to call the function. Here is an example call where <code class="highlighter-rouge">getDerivative</code> differentiates y,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iniVel</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="n">derivative</span> <span class="o">=</span> <span class="n">getDerivative</span><span class="p">(</span><span class="o">@</span><span class="n">getHeightGlobal</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>The use of global variables is in general considered bad programming. Why global variables are problematic in the present case can be illustrated when there is a need to work with several versions of a function. Suppose we want to work with two versions of $y(t;v_0)$, one with $v_0=1$ and one with $v_0=5$. Every time we call <code class="highlighter-rouge">y</code>, we must remember which version of the function we work with, and set <code class="highlighter-rouge">iniVel</code> accordingly before the call,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">global</span> <span class="n">iniVel</span><span class="p">;</span> <span class="n">iniVel</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">getHeightGlobal</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="k">global</span> <span class="n">iniVel</span><span class="p">;</span> <span class="n">iniVel</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">getHeightGlobal</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p><em>Another problem</em> is that variables with simple names like <code class="highlighter-rouge">iniVel</code>, may easily be used as global variables in other parts of the program. These parts may change our <code class="highlighter-rouge">iniVel</code> in a context different from the <code class="highlighter-rouge">getHeightGlobal</code> function, but the change affects the correctness of the <code class="highlighter-rouge">getHeightGlobal</code> function. In such a case, we say that changing <code class="highlighter-rouge">iniVel</code> has <strong>side effects</strong>, i.e., <strong>the change affects other parts of the program in an unintentional way</strong>. This is one reason why a golden rule of programming tells us to <strong>limit the use of global variables as much as possible</strong>.</p>
+
+<p>An alternative solution to the problem of needing two <code class="highlighter-rouge">iniVel</code> parameters could be to introduce two <code class="highlighter-rouge">getHeight</code> functions, each with a distinct <code class="highlighter-rouge">iniVel</code> parameter,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nb">height</span> <span class="o">=</span> <span class="n">getHeightGlobal_1</span><span class="p">(</span><span class="nb">time</span><span class="p">)</span>
+    <span class="k">global</span> <span class="n">iniVel_1</span><span class="p">;</span> <span class="c1">% initial velocity</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span><span class="p">;</span>
+    <span class="nb">height</span> <span class="o">=</span> <span class="n">iniVel_1</span><span class="o">*</span><span class="nb">time</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="nb">time</span><span class="o">^</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">end</span>
+
+<span class="k">function</span> <span class="nb">height</span> <span class="o">=</span> <span class="n">getHeightGlobal_2</span><span class="p">(</span><span class="nb">time</span><span class="p">)</span>
+    <span class="k">global</span> <span class="n">iniVel_2</span><span class="p">;</span> <span class="c1">% initial velocity</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span><span class="p">;</span>
+    <span class="nb">height</span> <span class="o">=</span> <span class="n">iniVel_2</span><span class="o">*</span><span class="nb">time</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">g</span><span class="o">*</span><span class="nb">time</span><span class="o">^</span><span class="mi">2</span><span class="p">;</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Now we need to initialize <code class="highlighter-rouge">iniVel_1</code> and <code class="highlighter-rouge">iniVel_2</code> once, and then we can work with <code class="highlighter-rouge">getHeightGlobal_1()</code> and <code class="highlighter-rouge">getHeightGlobal_2()</code>. However, if we need $100$ <code class="highlighter-rouge">iniVel</code> parameters, we need $100$ functions. This is tedious to code, error-prone, difficult to administer, and simply a really bad solution to a programming problem.</p>
+
+<p><strong>So, is there a good remedy?</strong> The answer is yes: the class concept solves all the problems described above.</p>
+
+<h3 id="class-representation-of-a-function">Class representation of a function</h3>
+
+<p>A class contains a set of variables (data) and a set of functions, held together as one unit. The variables are visible in all the functions in the class. That is, we can view the variables as “global” in these functions. You can also make many copies of a class.</p>
+
+<p>Consider the function $y(t;v_0) = v_0t - \frac{1}{2}gt^2$. We may say that $v_0$ and $g$, represented by the variables <code class="highlighter-rouge">iniVel</code> and <code class="highlighter-rouge">g</code>, constitute the data. A MATLAB function, say <code class="highlighter-rouge">getValue(time)</code>, is then needed to compute the value of $y(t;v_0)$ and this function must have access to the data <code class="highlighter-rouge">iniVel</code> and <code class="highlighter-rouge">g</code>, while <code class="highlighter-rouge">time</code> is an argument. A programmer experienced with classes will then suggest collecting the data <code class="highlighter-rouge">iniVel</code> and <code class="highlighter-rouge">g</code>, and the function <code class="highlighter-rouge">getValue(time)</code>, together as a <strong>class</strong>. Also, a class usually has another function, called <strong>constructor</strong> for <strong>initializing the data</strong>. The constructor is always named similar to the class-name. Every <strong>class must have a name</strong>, often <strong>starting with a capital</strong>, so we choose <code class="highlighter-rouge">ProjectileHeight</code> as the name since the class represents a projectile motion. The next step is to implement this class in MATLAB. A complete class code <code class="highlighter-rouge">ProjectileHeight</code> for our problem here would look as follows in MATLAB:</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">classdef</span> <span class="n">ProjectileHeight</span>
+
+    <span class="nb">properties</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span><span class="p">;</span>
+        <span class="n">iniVel</span><span class="p">;</span> <span class="c1">% initial velocity</span>
+    <span class="k">end</span>
+
+    <span class="nb">methods</span> <span class="p">(</span><span class="n">Access</span> <span class="o">=</span> <span class="n">public</span><span class="p">)</span>
+
+        <span class="c1">% This is the class constructor</span>
+        <span class="k">function</span> <span class="n">ProjectileHeightObject</span> <span class="o">=</span> <span class="n">ProjectileHeight</span><span class="p">(</span><span class="n">iniVel</span><span class="p">)</span>
+            <span class="n">ProjectileHeightObject</span><span class="o">.</span><span class="n">iniVel</span> <span class="o">=</span> <span class="n">iniVel</span><span class="p">;</span>
+        <span class="k">end</span>
+
+        <span class="c1">% Computes the height of the Projectile motion for a given time and initial velocity: iniVel</span>
+        <span class="k">function</span> <span class="nb">height</span> <span class="o">=</span> <span class="n">getValue</span><span class="p">(</span><span class="n">ProjectileHeightObject</span><span class="p">,</span><span class="nb">time</span><span class="p">)</span>
+            <span class="nb">height</span> <span class="o">=</span> <span class="n">ProjectileHeightObject</span><span class="o">.</span><span class="n">iniVel</span> <span class="o">*</span> <span class="nb">time</span> <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">ProjectileHeightObject</span><span class="o">.</span><span class="n">g</span> <span class="o">*</span> <span class="nb">time</span><span class="o">^</span><span class="mi">2</span><span class="p">;</span>
+        <span class="k">end</span>
+
+    <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p><strong>A class creates a new data type</strong>, here of name <code class="highlighter-rouge">ProjectileHeight</code>, so when we use the class to make objects, those objects are of type <code class="highlighter-rouge">ProjectileHeight</code>. <strong>All the standard MATLAB objects, such as lists, tuples, strings, floating-point numbers, integers, …, are built-in MATLAB classes</strong>, and each time the user creates on these variable types, one instance of these classes are created by the MATLAB interpreter. A user-defined object class (like <code class="highlighter-rouge">ProjectileHeight</code>) is usually called an <strong>instance</strong>. We need such an instance to use the data in the class and call the value function. The following statement constructs an instance bound to the variable name <code class="highlighter-rouge">MyProjectileHeight</code>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">MyProjectileHeight</span> <span class="o">=</span> <span class="n">ProjectileHeight</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MyProjectileHeight = 
+  ProjectileHeight with properties:
+
+         g: 9.8100
+    iniVel: 100
+</code></pre></div></div>
+
+<p>Seemingly, we <em>call the class <code class="highlighter-rouge">ProjectileHeight</code> as if it were a function</em>. Indeed, <code class="highlighter-rouge">ProjectileHeight(3)</code> is automatically translated by MATLAB to a call to the constructor method <code class="highlighter-rouge">ProjectileHeight()</code> in class <code class="highlighter-rouge">ProjectileHeight</code>. With the instance <code class="highlighter-rouge">MyProjectileHeight</code>, we can compute the value of y(t=0.1;v_0=3) by the statement,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">height</span> <span class="o">=</span> <span class="n">MyProjectileHeight</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>height =
+   95.0950
+</code></pre></div></div>
+
+<p>Note that the <code class="highlighter-rouge">ProjectileHeightObject</code> input argument is dropped in the call to <code class="highlighter-rouge">getValue()</code> method. To access functions and variables in a class, one must prefix the function and variable names by the name of the instance and a dot: the <code class="highlighter-rouge">getValue()</code> function can be reached by <code class="highlighter-rouge">MyProjectileHeight.value</code>, and the variables are reached as <code class="highlighter-rouge">MyProjectileHeight.iniVel</code> and <code class="highlighter-rouge">MyProjectileHeight.g</code>. One could, for example, print the value of <code class="highlighter-rouge">iniVel</code> in the instance <code class="highlighter-rouge">getValue</code> by writing,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MyProjectileHeight</span><span class="o">.</span><span class="n">iniVel</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+   100
+</code></pre></div></div>
+
+<p>We have already introduced the term <strong>instance</strong> for the object of a class. <strong>Functions</strong> in classes are commonly called <strong>methods</strong>, and <strong>variables (data)</strong> in classes are called <strong>data attributes</strong>. Methods are also known as <strong>method attributes</strong>. For example, in our sample class <code class="highlighter-rouge">ProjectileHeight</code> we have two methods or method attributes, <code class="highlighter-rouge">ProjectileHeight()</code> and <code class="highlighter-rouge">getValue()</code>, two data attributes, <code class="highlighter-rouge">iniVel</code> and <code class="highlighter-rouge">g</code>. Note that the names of attributes can be chosen freely, just as names of ordinary MATLAB functions and variables. However, <strong>the constructor must have the same name as the name of the class, otherwise, it is not automatically called when new instances are created</strong>. You can do whatever you want in whatever method, but it is a common convention to <strong>use the constructor for initializing the variables of an instance of a class</strong>.</p>
+
+<h2 id="calling-object-methods-from-other-functions">Calling object methods from other functions</h2>
+
+<p>So far, we have an object-oriented implementation of our ProjectileHeight motion. Now, going back to the original differentiation problem, if we want to be able to differentiate the height with respect to time using the function <code class="highlighter-rouge">getDerivative()</code>, we will have to pass <code class="highlighter-rouge">MyProjectileHeight</code> object in its entirety to <code class="highlighter-rouge">getDerivative()</code>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">derivative</span> <span class="o">=</span> <span class="n">getDerivativeOOP</span><span class="p">(</span><span class="n">FuncObj</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="mf">1E-5</span><span class="p">;</span>
+    <span class="n">derivative</span> <span class="o">=</span> <span class="p">(</span><span class="n">FuncObj</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">h</span><span class="p">)</span> <span class="o">-</span> <span class="n">FuncObj</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="n">x</span><span class="p">))/</span><span class="n">h</span><span class="p">;</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">MyProjectileHeight</span> <span class="o">=</span> <span class="n">ProjectileHeight</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>   <span class="c1">% create object with initial velocity 100 (m/s)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MyProjectileHeight = 
+  ProjectileHeight with properties:
+
+         g: 9.8100
+    iniVel: 100
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">derivative</span> <span class="o">=</span> <span class="n">getDerivativeOOP</span><span class="p">(</span><span class="n">MyProjectileHeight</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">% compute derivative at time = 1 (s)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>derivative =
+   90.1900
+</code></pre></div></div>
+
+
+    
+    
+    <div style="margin-top:3rem">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'shahmoradi'; // required: replace example with your forum shortname
+    
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+</div>
+<hr class="shaded"/>
+<footer>
+    <div class="row">
+        <div class="col-lg-12 footer">
+            &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: July 20, 2019 <br />
+            
+                <span>Page last updated:</span>July 9, 2019<br/>
+            
+        <p>
+            <img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" />
+            <!-- Start of statc -->
+<div style="color: #ffffff; float: none; width: 100%;">
+    <span style="font-size:0.8em">visitor count: 
+        <script type="text/javascript">
+            var sc_project=12047472; 
+            var sc_invisible=0; 
+            var sc_security="fe09cd78"; 
+            var sc_text=3; 
+            var scJsHost = "https://";
+            document.write("<sc"+"ript type='text/javascript' src='" +
+            scJsHost+
+            "statcounter.com/counter/counter.js'></"+"script>");
+        </script>
+    </span>
+</div>
+<!-- End of statc -->
+        </p>
+        </div>
+    </div>
+    <!--Mathjax LaTeX engine-->
+    
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+        MathJax.Hub.Config({
+            config: ["MMLorHTML.js"],
+            extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+            jax: ["input/TeX"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+            TeX: {
+                TagSide: "right",
+                TagIndent: ".8em",
+                MultLineWidth: "85%",
+                equationNumbers: {
+                autoNumber: "AMS",
+                },
+                unicode: {
+                fonts: "STIXGeneral,'Arial Unicode MS'" 
+                }
+            },
+            showProcessingMessages: false
+        });
+    </script>
+    <style TYPE="text/css">
+        code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+    </style>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+            }
+        });
+        MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</footer>
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /#main -->
+        </div>
+        
+    </body>
+    
+</html>

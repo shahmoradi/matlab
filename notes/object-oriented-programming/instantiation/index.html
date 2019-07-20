@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="This note attempts to provide a brief introduction to the concepts of instantiation, objects, and classes in Object-Oriented Programming (OOP) paradigm via M...">
+<meta name="keywords" content="objectclassinstantiationobject_oriented_programmingmatlab,  object, class, instantiation, object_oriented_programming, matlab">
+<title>Instantiation | Scientific Computing with MATLAB</title>
+<link rel="stylesheet" href="/matlab/css/prismOkaidia.css">
+<script src="/matlab/js/prismOkaidia.js"></script>
+<!--
+<link rel="stylesheet" href="/matlab/css/syntax.css">
+-->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/matlab/css/bootstrap.min.css">
+
+
+
+<link rel="stylesheet" href="/matlab/css/customstyles.css">
+<link rel="stylesheet" href="/matlab/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="/matlab/css/theme-cdslab.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/matlab/js/jquery.navgoco.min.js"></script>
+<!-- make sidebar non-accordion -->
+<script src="/matlab/js/lockScrollbarPosition.js"></script>
+<!-- make sidebar non-accordion -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.sidenav').navgoco({
+              accordion: false,
+              caret: '<span class="caret"></span>',
+              openClass: 'open',
+              save: true,
+              cookie: {
+                  name: 'navgoco',
+                  expires: false,
+                  path: '/'
+              },
+              slide: {
+                  duration: 400,
+                  easing: 'swing'
+              }
+          });
+    });
+</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+<!--
+-->
+<script src="/matlab/js/toc.js"></script>
+<script src="/matlab/js/customscripts.js"></script>
+<link rel="shortcut icon" href="/matlab/images/favicon.ico">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+    </head>
+    <body>
+        <!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div id="sticky" class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-book fa-lg navbar-brand" href="/matlab/index.html">&nbsp;<span class="projectTitle"> Scientific Computing with MATLAB</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CDSLab<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/#about" target="_blank" rel="noopener">About</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/people" target="_blank" rel="noopener">People</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/matlab/" target="_blank" rel="noopener">Scientific Computing with MATLAB</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/python/" target="_blank" rel="noopener">Scientific Computing with Python</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">UTA<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">College of Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">Data Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/physics/" target="_blank" rel="noopener">Physics</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="keyword search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="/matlab/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: "/matlab/search.json",
+                                searchResultTemplate: '<li><a href="https://www.cdslab.org{url}" title="Instantiation">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div id="main">
+                <!-- Content Row -->
+                <div class="row">
+                    
+                    
+                        <!-- Sidebar Column -->
+                        <div class="col-md-3" id="tg-sb-sidebar">
+                            
+<ul id="mysidebar" class="sidenav">
+    <!--
+    -->
+    <li class="sidebarTitle">Table of Pages </li>
+    
+        
+            
+                <li>
+                    <a title="Overview" href="#"><b>Overview</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Preface" href="/matlab/notes/overview/preface/index.html">Preface</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 1" href="/matlab/notes/overview/release-note-1/index.html">Release note 1</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 2" href="/matlab/notes/overview/release-note-2/index.html">Release note 2</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Preliminary foundations" href="#"><b>Preliminary foundations</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Version control system" href="/matlab/notes/preliminary-foundations/version-control-system/index.html">Version control system</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Programming history" href="/matlab/notes/preliminary-foundations/programming-history/index.html">Programming history</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Computer program structure" href="/matlab/notes/preliminary-foundations/computer-program-structure/index.html">Computer program structure</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="MATLAB for beginners" href="/matlab/notes/preliminary-foundations/matlab-for-beginners/index.html">MATLAB for beginners</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Values, variables, and types" href="#"><b>Values, variables, and types</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="First program" href="/matlab/notes/values-variables-types/first-program/index.html">First program</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Values" href="/matlab/notes/values-variables-types/values/index.html">Values</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variables" href="/matlab/notes/values-variables-types/variables/index.html">Variables</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Operators" href="/matlab/notes/values-variables-types/operators/index.html">Operators</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Control constructs" href="#"><b>Control constructs</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Branching" href="/matlab/notes/control-constructs/branching/index.html">Branching</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Looping" href="/matlab/notes/control-constructs/looping/index.html">Looping</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Program units" href="#"><b>Program units</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Functions" href="/matlab/notes/program-units/functions/index.html">Functions</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variable scope" href="/matlab/notes/program-units/variable-scope/index.html">Variable scope</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Data transfer (I/O)" href="#"><b>Data transfer (I/O)</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Data input/ouput methods" href="/matlab/notes/data-transfer/io/index.html">Data input/ouput methods</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Errors and exceptions" href="#"><b>Errors and exceptions</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Exception handling" href="/matlab/notes/exceptions-errors/exception-handling/index.html">Exception handling</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Unit testing" href="/matlab/notes/exceptions-errors/unit-testing/index.html">Unit testing</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Scientific Computing" href="#"><b>Scientific Computing</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Vectorization and array computing" href="/matlab/notes/scientific-computing/vectorization/index.html">Vectorization and array computing</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Visualization and plotting" href="/matlab/notes/scientific-computing/visualization/index.html">Visualization and plotting</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Random numbers" href="/matlab/notes/scientific-computing/random-numbers/index.html">Random numbers</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Object-oriented programming" href="#"><b>Object-oriented programming</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li class="active"><a title="Instantiation" href="/matlab/notes/object-oriented-programming/instantiation/index.html">Instantiation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Encapsulation" href="/matlab/notes/object-oriented-programming/encapsulation/index.html">Encapsulation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Inheritance" href="/matlab/notes/object-oriented-programming/inheritance/index.html">Inheritance</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Polymorphism" href="/matlab/notes/object-oriented-programming/polymorphism/index.html">Polymorphism</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Abstraction" href="/matlab/notes/object-oriented-programming/abstraction/index.html">Abstraction</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+    
+    <!-- if you aren't using the accordion, uncomment this block:
+    -->
+    <p class="external">
+        <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+    </p>
+</ul>
+<!--
+This highlights the active parent class in the navgoco sidebar. 
+This is critical so that the parent expands when you're viewing a page.
+This must appear below the sidebar code above.
+Otherwise, if placed inside customscripts.js,
+the script runs before the sidebar code runs and the class never gets inserted.
+-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+                        </div>
+                        
+                    
+                    <!-- Content Column -->
+                    <div class="col-md-9" id="tg-sb-content">
+                        <div class="post-header">
+   <h1 class="post-title-main">Instantiation</h1>
+</div>
+
+<div class="post-content">
+    
+        <div class="summary">This note attempts to provide a brief introduction to the concepts of instantiation, objects, and classes in Object-Oriented Programming (OOP) paradigm via MATLAB.</div>
+    
+    
+        <br>
+        
+<script>
+    $( document ).ready(function() {
+        // Handler for .ready() called.
+        $('#toc').toc({ minimumHeaders: 0 
+                      , listType: 'ol'
+                      , showSpeed: 0
+                      , headers: 'h2,h3,h4,h5,h6'
+        });
+        /* the following offset helps account for the space taken up by the floating toolbar. */
+        $('#toc').on('click', 'a', function() {
+            var target = $(this.getAttribute('href')), scroll_target = target.offset().top$(window).scrollTop(scroll_target - 10);
+            return false
+        })
+    });
+</script>
+
+<div id="toc"></div>
+
+    
+    
+    <h2 id="objects-and-classes">Objects and classes</h2>
+
+<p>So far in the notes, we have seen the evolution of programming from simple variable definitions and tasks on the MATLAB command line to writing scripts and functions, while passing scalar or compound variables (lists, arrays, dictionaries, …) to functions. It took a few decades since the development of the first high-level programming language, <a href="https://en.wikipedia.org/wiki/Fortran" target="_blank">Fortran</a>, for the computer scientists to realize that one could take the programming paradigms to an even higher level of combining functions and their input/output data into a single entity called <a href="https://en.wikipedia.org/wiki/Object_(computer_science)" target="_blank">object</a>. Let have another look at the diagram we saw before about the evolution of computer programming paradigms,</p>
+
+<figure>
+    <img src="progEvol.png" />
+</figure>
+
+<p>But there is more to Object-Oriented Programming (OOP) than the simple concept of objects. As soon as we are talking about objects, one has to also specify the <strong>class</strong> to which the object belongs. For example, all dogs in the world belong to the generic class of dog. Similarly, in computer programming, including MATLAB, one has to first define a class from which objects can be <strong>instantiated</strong> whenever needed in the program.</p>
+
+<p>The concept of MATLAB class, as in almost any other programming language, relates to packing <strong>a set of variables</strong> together <strong>with a set of functions</strong> operating on those variables. The goal of writing classes is to achieve more modular code by grouping data and functions into manageable units. One thing to keep in mind for scientific computing is that classes, and more generally, <a href="https://en.wikipedia.org/wiki/Object-oriented_programming" target="_blank">Object Oriented Programming (OOP)</a>, are not necessary, and could be a hindrance to efficient computing if used naively. Nevertheless, classes lead to either more elegant solutions to the programming problem or a code that is easier to extend and maintain large scale projects. In the non-mathematical programming world where there are no mathematical concepts and associated algorithms to help structure the programming problem, software development can be very challenging. In those cases, Classes greatly improve the understanding of the problem and simplify the modeling of data. As a consequence, almost all large-scale software systems being developed in the world today are heavily based on classes (but certainly not all scientific projects!).</p>
+
+<p>One of the greatest advantages that the OOP brings to programming is <a href="https://en.wikipedia.org/wiki/Code_reuse" target="_blank"><strong>code-reusability</strong></a>; Once we define a blueprint class, all objects belonging to that class can be easily instantiated from it and personalized. Therefore, <strong>the first step</strong> in OOP is to define the class of an object that we want to create and use.</p>
+
+<h2 id="defining-classes-in-matlab">Defining classes in MATLAB</h2>
+
+<p>Programming with classes is offered by most modern programming languages, including MATLAB. MATLAB uses the concept of classes in almost every bit of it. However, most MATLAB users don’t even notice the heavy dependence of MATLAB on classes under the hood, until they learn what a class is, just as we have made progress in this class so far, without knowing about classes.</p>
+
+<p>Despite having a clean syntax, defining a valid class in MATLAB is rather tricky. First you have to make sure that your MATLAB class is all in a single MATLAB M-file that has the same name as the class-name. For example the following code will define a class named <code class="highlighter-rouge">Dog</code>, which does not have any properties (attributes) or methods,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">classdef</span> <span class="n">Dog</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>However, for this code snippet to be a valid MATLAB code, it must be saved in MATLAB M-file with the name <code class="highlighter-rouge">Dog.m</code>. In addition, there are strict rules with regards to where this file resides on your computer. To use a class, the class definition must be on the MATLAB’s path. There are two types of folders that can contain class definition files,</p>
+
+<ul>
+  <li>
+    <p><strong>Path folders</strong> – The folder is on the MATLAB path and the folder name does not begin with an <code class="highlighter-rouge">@</code> character. Use this type of folder when you want multiple classes in one folder. However, the entire class definition must be contained in one <code class="highlighter-rouge">.m</code> file.</p>
+  </li>
+  <li>
+    <p><strong>Class folders</strong> – The folder name begins with an <code class="highlighter-rouge">@</code> character followed by the class name. The folder is not on the MATLAB path, but its parent folder is on the path. Use this type of folder when you want to use multiple files for one class definition.  See MATLAB’s <a href="https://www.mathworks.com/help/matlab/ref/path.html" target="_blank"><code class="highlighter-rouge">path()</code></a> function for information about using the MATLAB path.</p>
+  </li>
+</ul>
+
+<p>The above code creates a class <code class="highlighter-rouge">Dog</code> that does not have any <strong>properties</strong> or <strong>attributes</strong> (variables that define different aspects of the object) or <strong>methods</strong> or <strong>functions</strong> (components of objects that define the tasks the object can do with or without the use of the object’s attributes). The MATLAB keyword <code class="highlighter-rouge">classdef</code> declares the beginning of a class definition, and the <code class="highlighter-rouge">end</code> keyword marks the end of the class definition.</p>
+
+<p>Once the class is created, you could instantiate objects from the blueprint class,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">my_dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
+  Dog with no properties.
+</code></pre></div></div>
+
+<p>where, the empty parentheses is added in recognition of the fact that Dog is a class, and not an attribute (variable), for example.</p>
+
+<p>You can confirm whether you have indeed instantiated an object from the class <code class="highlighter-rouge">Dog</code> via <code class="highlighter-rouge">class()</code> intrinsic function in MATLAB,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">my_dog</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+    'Dog'
+</code></pre></div></div>
+
+<p>#% class attributes vs. instance attributes</p>
+
+<p>The class <code class="highlighter-rouge">Dog</code> defined above has no use as it does not contain any attributes or methods. In practice, a dog has color, race, age, and so many other attributes. Besides, it can eat, run, sleep, bark, and so on. Therefore,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">classdef</span> <span class="n">Dog</span>
+    <span class="nb">properties</span>
+        <span class="n">age</span><span class="p">;</span>
+        <span class="n">name</span> <span class="o">=</span> <span class="s1">'unnamed'</span><span class="p">;</span>
+        <span class="n">race</span> <span class="o">=</span> <span class="s1">'unknown'</span><span class="p">;</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="s1">'unknown'</span><span class="p">;</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>Now, note that not all the attributes defined this way should be preassigned a <strong>default value</strong>. Once an object is instantiated from this class,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">my_dog</span> <span class="o">=</span> <span class="n">Dog</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
+  Dog with properties:
+
+      age: []
+     name: 'unnamed'
+     race: 'unknown'
+    color: 'unknown'
+</code></pre></div></div>
+
+<p>one could change the default values of the properties to anything else. For example,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">();</span>
+<span class="nb">disp</span><span class="p">(</span> <span class="p">[</span><span class="n">my_dog</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="s1">' is a '</span><span class="p">,</span><span class="n">my_dog</span><span class="o">.</span><span class="n">color</span><span class="p">,</span><span class="s1">'-color '</span><span class="p">,</span><span class="n">my_dog</span><span class="o">.</span><span class="n">race</span><span class="p">,</span><span class="s1">'-race dog of age '</span><span class="p">,</span><span class="nb">num2str</span><span class="p">(</span><span class="n">my_dog</span><span class="o">.</span><span class="n">age</span><span class="p">),</span><span class="s1">'.'</span><span class="p">]</span> <span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unnamed is a unknown-color unknown-race dog of age .
+</code></pre></div></div>
+
+<p>can be modified to,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_dog</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="n">my_dog</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Coco'</span><span class="p">;</span>
+<span class="n">my_dog</span><span class="o">.</span><span class="n">race</span> <span class="o">=</span> <span class="s1">'Terrier'</span><span class="p">;</span>
+<span class="n">my_dog</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">'brown'</span><span class="p">;</span>
+<span class="nb">disp</span><span class="p">(</span> <span class="p">[</span><span class="n">my_dog</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="s1">' is a '</span><span class="p">,</span><span class="n">my_dog</span><span class="o">.</span><span class="n">color</span><span class="p">,</span><span class="s1">'-color '</span><span class="p">,</span><span class="n">my_dog</span><span class="o">.</span><span class="n">race</span><span class="p">,</span><span class="s1">'-race dog of age '</span><span class="p">,</span><span class="nb">num2str</span><span class="p">(</span><span class="n">my_dog</span><span class="o">.</span><span class="n">age</span><span class="p">),</span><span class="s1">'.'</span><span class="p">]</span> <span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Coco is a brown-color Terrier-race dog of age 3.
+</code></pre></div></div>
+
+<h3 id="object-constructor">Object constructor</h3>
+
+<p>While the above approach to class attribute definition and value assignment works fine, it is verbose and rather tedious. Instead, there is a better way of initializing an instance of a class by defining an object constructor method within the class definition.  Amethod with the same name as the class-name can be defined in every class and used for performing tasks that are supposed to be done once (and only once) at the time of object instantiation. This includes the assignment of user-provided values to the attributes or default values in case no value is provided by the user.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">classdef</span> <span class="n">Dog</span>
+    <span class="nb">properties</span>
+        <span class="n">age</span><span class="p">;</span>
+        <span class="n">name</span><span class="p">;</span>
+        <span class="n">race</span><span class="p">;</span>
+        <span class="n">color</span><span class="p">;</span>
+    <span class="k">end</span>
+    <span class="nb">methods</span> <span class="p">(</span><span class="n">Access</span> <span class="o">=</span> <span class="n">public</span><span class="p">)</span>
+        <span class="c1">% This is the class constructor</span>
+        <span class="k">function</span> <span class="n">Self</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">race</span><span class="p">,</span><span class="n">color</span><span class="p">)</span>
+            <span class="c1">% instance attributes</span>
+            <span class="n">Self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
+            <span class="n">Self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+            <span class="n">Self</span><span class="o">.</span><span class="n">race</span> <span class="o">=</span> <span class="n">race</span><span class="p">;</span>
+            <span class="n">Self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s1">'Coco'</span><span class="p">,</span><span class="s1">'Terrier'</span><span class="p">,</span><span class="s1">'brown'</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
+  Dog with properties:
+
+      age: 3
+     name: 'Coco'
+     race: 'Terrier'
+    color: 'brown'
+</code></pre></div></div>
+
+<p>In OOP terminology, this intrinsic class method is called the object <strong>contructor method</strong>. In many object-oriented programming languages, by convention, the <strong>first input argument</strong> to the constructor method is <strong>always</strong> the object itself, that is going to be instantiated, and is frequently named <code class="highlighter-rouge">self</code>. However, since it is an output argument, in MATLAB, it is listed as the output of the constructor method and not among the input arguments. Also, the object’s name (here, <code class="highlighter-rouge">Self</code>) is arbitrary and can be set to anything, for example, <code class="highlighter-rouge">DogObj</code> standing for object,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">classdef</span> <span class="n">Dog</span>
+    <span class="nb">properties</span>
+        <span class="n">age</span><span class="p">;</span>
+        <span class="n">name</span><span class="p">;</span>
+        <span class="n">race</span><span class="p">;</span>
+        <span class="n">color</span><span class="p">;</span>
+    <span class="k">end</span>
+    <span class="nb">methods</span> <span class="p">(</span><span class="n">Access</span> <span class="o">=</span> <span class="n">public</span><span class="p">)</span>
+        <span class="c1">% This is the class constructor</span>
+        <span class="k">function</span> <span class="n">DogObj</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">race</span><span class="p">,</span><span class="n">color</span><span class="p">)</span>
+            <span class="c1">% instance attributes</span>
+            <span class="n">DogObj</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
+            <span class="n">DogObj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+            <span class="n">DogObj</span><span class="o">.</span><span class="n">race</span> <span class="o">=</span> <span class="n">race</span><span class="p">;</span>
+            <span class="n">DogObj</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span><span class="p">;</span>
+        <span class="k">end</span>
+    <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s1">'Coco'</span><span class="p">,</span><span class="s1">'Terrier'</span><span class="p">,</span><span class="s1">'brown'</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
+  Dog with properties:
+
+      age: 3
+     name: 'Coco'
+     race: 'Terrier'
+    color: 'brown'
+</code></pre></div></div>
+
+<p>I highly recommend you to stick to the common-practice in object-naming or choose a self-explanatory name. Also, note that the constructor is called automatically at the time of object instantiation.</p>
+
+<div class="alert alert-success" role="alert"><i class="fa fa-check-square-o"></i> <b>Tip:</b> Keep in mind that a class is just a blueprint for defining the Dog, and not for creating an instance of a dog with specific attributes. Therefore, always use class constructors in your class definitions to assign user-specified values to the class attributes at the time of object instantiation instead of setting the attributes to default values in the class.</div>
+
+<p>As a result, the best practice is to <strong>initialize attributes that are common to all instances of a class outside the constructor and keep instance-specific attributes initialization within the class constructor</strong>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">classdef</span> <span class="n">Dog</span>
+
+    <span class="nb">properties</span>
+
+        <span class="c1">% class attributes</span>
+        <span class="n">species</span> <span class="o">=</span> <span class="s1">'mammal'</span><span class="p">;</span>
+
+        <span class="c1">% instance attributes</span>
+        <span class="n">age</span><span class="p">;</span>
+        <span class="n">name</span><span class="p">;</span>
+        <span class="n">race</span><span class="p">;</span>
+        <span class="n">color</span><span class="p">;</span>
+
+    <span class="k">end</span>
+
+    <span class="nb">methods</span> <span class="p">(</span><span class="n">Access</span> <span class="o">=</span> <span class="n">public</span><span class="p">)</span>
+
+        <span class="c1">% This is the class constructor</span>
+        <span class="k">function</span> <span class="n">DogObj</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">race</span><span class="p">,</span><span class="n">color</span><span class="p">)</span>
+            <span class="c1">% instance attributes</span>
+            <span class="n">DogObj</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span><span class="p">;</span>
+            <span class="n">DogObj</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span><span class="p">;</span>
+            <span class="n">DogObj</span><span class="o">.</span><span class="n">race</span> <span class="o">=</span> <span class="n">race</span><span class="p">;</span>
+            <span class="n">DogObj</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span><span class="p">;</span>
+        <span class="k">end</span>
+
+    <span class="k">end</span>
+
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">my_dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s1">'Coco'</span><span class="p">,</span><span class="s1">'Terrier'</span><span class="p">,</span><span class="s1">'brown'</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
+  Dog with properties:
+
+    species: 'mammal'
+        age: 3
+       name: 'Coco'
+       race: 'Terrier'
+      color: 'brown'
+</code></pre></div></div>
+
+<h3 id="summary">Summary</h3>
+
+<p><strong>Class attributes</strong> are the attributes that apply to all instances of the class, and so by convention, are defined outside the object-constructor method of the class.</p>
+
+<p><strong>Instance attributes</strong> are the attributes that are unique to each instance of the class and are, therefore, by convention (not a strict language requirement), defined only inside the object-constructor method of the class.</p>
+
+    
+    
+    <div style="margin-top:3rem">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'shahmoradi'; // required: replace example with your forum shortname
+    
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+</div>
+<hr class="shaded"/>
+<footer>
+    <div class="row">
+        <div class="col-lg-12 footer">
+            &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: July 20, 2019 <br />
+            
+                <span>Page last updated:</span>July 9, 2019<br/>
+            
+        <p>
+            <img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" />
+            <!-- Start of statc -->
+<div style="color: #ffffff; float: none; width: 100%;">
+    <span style="font-size:0.8em">visitor count: 
+        <script type="text/javascript">
+            var sc_project=12047472; 
+            var sc_invisible=0; 
+            var sc_security="fe09cd78"; 
+            var sc_text=3; 
+            var scJsHost = "https://";
+            document.write("<sc"+"ript type='text/javascript' src='" +
+            scJsHost+
+            "statcounter.com/counter/counter.js'></"+"script>");
+        </script>
+    </span>
+</div>
+<!-- End of statc -->
+        </p>
+        </div>
+    </div>
+    <!--Mathjax LaTeX engine-->
+    
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+        MathJax.Hub.Config({
+            config: ["MMLorHTML.js"],
+            extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+            jax: ["input/TeX"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+            TeX: {
+                TagSide: "right",
+                TagIndent: ".8em",
+                MultLineWidth: "85%",
+                equationNumbers: {
+                autoNumber: "AMS",
+                },
+                unicode: {
+                fonts: "STIXGeneral,'Arial Unicode MS'" 
+                }
+            },
+            showProcessingMessages: false
+        });
+    </script>
+    <style TYPE="text/css">
+        code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+    </style>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+            }
+        });
+        MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</footer>
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /#main -->
+        </div>
+        
+    </body>
+    
+</html>

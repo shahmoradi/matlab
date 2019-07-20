@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="This note aims at explaining the concepts of branching statements and if-blocks.">
+<meta name="keywords" content="branchingcontrol_constructsif_blockmatlab,  branching, control_constructs, if_block, matlab">
+<title>Branching and If-constructs | Scientific Computing with MATLAB</title>
+<link rel="stylesheet" href="/matlab/css/prismOkaidia.css">
+<script src="/matlab/js/prismOkaidia.js"></script>
+<!--
+<link rel="stylesheet" href="/matlab/css/syntax.css">
+-->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/matlab/css/bootstrap.min.css">
+
+
+
+<link rel="stylesheet" href="/matlab/css/customstyles.css">
+<link rel="stylesheet" href="/matlab/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="/matlab/css/theme-cdslab.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/matlab/js/jquery.navgoco.min.js"></script>
+<!-- make sidebar non-accordion -->
+<script src="/matlab/js/lockScrollbarPosition.js"></script>
+<!-- make sidebar non-accordion -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.sidenav').navgoco({
+              accordion: false,
+              caret: '<span class="caret"></span>',
+              openClass: 'open',
+              save: true,
+              cookie: {
+                  name: 'navgoco',
+                  expires: false,
+                  path: '/'
+              },
+              slide: {
+                  duration: 400,
+                  easing: 'swing'
+              }
+          });
+    });
+</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+<!--
+-->
+<script src="/matlab/js/toc.js"></script>
+<script src="/matlab/js/customscripts.js"></script>
+<link rel="shortcut icon" href="/matlab/images/favicon.ico">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+    </head>
+    <body>
+        <!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div id="sticky" class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-book fa-lg navbar-brand" href="/matlab/index.html">&nbsp;<span class="projectTitle"> Scientific Computing with MATLAB</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CDSLab<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/#about" target="_blank" rel="noopener">About</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/people" target="_blank" rel="noopener">People</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/matlab/" target="_blank" rel="noopener">Scientific Computing with MATLAB</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/python/" target="_blank" rel="noopener">Scientific Computing with Python</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">UTA<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">College of Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">Data Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/physics/" target="_blank" rel="noopener">Physics</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="keyword search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="/matlab/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: "/matlab/search.json",
+                                searchResultTemplate: '<li><a href="https://www.cdslab.org{url}" title="Branching and If-constructs">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div id="main">
+                <!-- Content Row -->
+                <div class="row">
+                    
+                    
+                        <!-- Sidebar Column -->
+                        <div class="col-md-3" id="tg-sb-sidebar">
+                            
+<ul id="mysidebar" class="sidenav">
+    <!--
+    -->
+    <li class="sidebarTitle">Table of Pages </li>
+    
+        
+            
+                <li>
+                    <a title="Overview" href="#"><b>Overview</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Preface" href="/matlab/notes/overview/preface/index.html">Preface</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 1" href="/matlab/notes/overview/release-note-1/index.html">Release note 1</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 2" href="/matlab/notes/overview/release-note-2/index.html">Release note 2</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Preliminary foundations" href="#"><b>Preliminary foundations</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Version control system" href="/matlab/notes/preliminary-foundations/version-control-system/index.html">Version control system</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Programming history" href="/matlab/notes/preliminary-foundations/programming-history/index.html">Programming history</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Computer program structure" href="/matlab/notes/preliminary-foundations/computer-program-structure/index.html">Computer program structure</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="MATLAB for beginners" href="/matlab/notes/preliminary-foundations/matlab-for-beginners/index.html">MATLAB for beginners</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Values, variables, and types" href="#"><b>Values, variables, and types</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="First program" href="/matlab/notes/values-variables-types/first-program/index.html">First program</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Values" href="/matlab/notes/values-variables-types/values/index.html">Values</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variables" href="/matlab/notes/values-variables-types/variables/index.html">Variables</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Operators" href="/matlab/notes/values-variables-types/operators/index.html">Operators</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Control constructs" href="#"><b>Control constructs</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li class="active"><a title="Branching" href="/matlab/notes/control-constructs/branching/index.html">Branching</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Looping" href="/matlab/notes/control-constructs/looping/index.html">Looping</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Program units" href="#"><b>Program units</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Functions" href="/matlab/notes/program-units/functions/index.html">Functions</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variable scope" href="/matlab/notes/program-units/variable-scope/index.html">Variable scope</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Data transfer (I/O)" href="#"><b>Data transfer (I/O)</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Data input/ouput methods" href="/matlab/notes/data-transfer/io/index.html">Data input/ouput methods</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Errors and exceptions" href="#"><b>Errors and exceptions</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Exception handling" href="/matlab/notes/exceptions-errors/exception-handling/index.html">Exception handling</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Unit testing" href="/matlab/notes/exceptions-errors/unit-testing/index.html">Unit testing</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Scientific Computing" href="#"><b>Scientific Computing</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Vectorization and array computing" href="/matlab/notes/scientific-computing/vectorization/index.html">Vectorization and array computing</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Visualization and plotting" href="/matlab/notes/scientific-computing/visualization/index.html">Visualization and plotting</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Random numbers" href="/matlab/notes/scientific-computing/random-numbers/index.html">Random numbers</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Object-oriented programming" href="#"><b>Object-oriented programming</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Instantiation" href="/matlab/notes/object-oriented-programming/instantiation/index.html">Instantiation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Encapsulation" href="/matlab/notes/object-oriented-programming/encapsulation/index.html">Encapsulation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Inheritance" href="/matlab/notes/object-oriented-programming/inheritance/index.html">Inheritance</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Polymorphism" href="/matlab/notes/object-oriented-programming/polymorphism/index.html">Polymorphism</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Abstraction" href="/matlab/notes/object-oriented-programming/abstraction/index.html">Abstraction</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+    
+    <!-- if you aren't using the accordion, uncomment this block:
+    -->
+    <p class="external">
+        <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+    </p>
+</ul>
+<!--
+This highlights the active parent class in the navgoco sidebar. 
+This is critical so that the parent expands when you're viewing a page.
+This must appear below the sidebar code above.
+Otherwise, if placed inside customscripts.js,
+the script runs before the sidebar code runs and the class never gets inserted.
+-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+                        </div>
+                        
+                    
+                    <!-- Content Column -->
+                    <div class="col-md-9" id="tg-sb-content">
+                        <div class="post-header">
+   <h1 class="post-title-main">Branching and If-constructs</h1>
+</div>
+
+<div class="post-content">
+    
+        <div class="summary">This note aims at explaining the concepts of branching statements and if-blocks.</div>
+    
+    
+        <br>
+        
+<script>
+    $( document ).ready(function() {
+        // Handler for .ready() called.
+        $('#toc').toc({ minimumHeaders: 0 
+                      , listType: 'ol'
+                      , showSpeed: 0
+                      , headers: 'h2,h3,h4,h5,h6'
+        });
+        /* the following offset helps account for the space taken up by the floating toolbar. */
+        $('#toc').on('click', 'a', function() {
+            var target = $(this.getAttribute('href')), scroll_target = target.offset().top$(window).scrollTop(scroll_target - 10);
+            return false
+        })
+    });
+</script>
+
+<div id="toc"></div>
+
+    
+    
+    <h2 id="introduction">Introduction</h2>
+
+<p>The normal flow of control in procedural programming paradigm is in general, <em>sequential</em>. So is the flow of control in MATLAB.</p>
+
+<figure>
+	<img src="normalFlow.png" />
+    <figcaption>
+        Normal sequential control flow in imperative/procedural programming paradigms.
+    </figcaption>
+</figure>
+
+<figure>
+	<img src="conditionalFlow.png" />
+    <figcaption>
+        The conditional control flow in imperative/procedural programming paradigms.
+    </figcaption>
+</figure>
+
+<p>In MATLAB, you can achieve conditional flow control, using either <strong>if-block</strong> or <strong>switch-case</strong>.</p>
+
+<h2 id="matlab-if-blocks">MATLAB if-blocks</h2>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Enter a number:'</span><span class="p">);</span>
+<span class="k">if</span> <span class="nb">isnumeric</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="nb">sqrt</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+    <span class="nb">disp</span><span class="p">([</span><span class="s1">'Square root('</span><span class="p">,</span><span class="nb">num2str</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="s1">') = '</span><span class="p">,</span> <span class="nb">num2str</span><span class="p">(</span><span class="n">root</span><span class="p">)]);</span>
+<span class="k">elseif</span> <span class="nb">isnumeric</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="nb">disp</span><span class="p">([</span><span class="s1">'The input number is negative, there is no square root.'</span><span class="p">]);</span>
+<span class="k">else</span>
+    <span class="nb">disp</span><span class="p">([</span><span class="s1">'Please enter a real number!'</span><span class="p">]);</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter a number:13
+Square root = 3.6056
+
+Enter a number:-11
+The input number is negative, there is no square root
+
+Enter a number:i
+Square root = 0.70711+0.70711i
+</code></pre></div></div>
+
+<p>Note in the above example, how MATLAB treats complex variables. More information on operators that can be used to construct or combine logical conditions for if-statements can be found <a href="https://www.mathworks.com/help/matlab/logical-operations.html" target="_blank">here</a>.</p>
+
+<h3 id="exercise">Exercise</h3>
+
+<p><strong>1. </strong> Write a MATLAB script that takes two predefined matrices <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">B</code> as input and determines whether they have equal size. If so, then it concatenates the two matrices in a column-wise manner.</p>
+
+<p><strong>answer</strong></p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nb">isequal</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">),</span><span class="nb">size</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
+   <span class="n">C</span> <span class="o">=</span> <span class="p">[</span><span class="n">A</span><span class="p">;</span> <span class="n">B</span><span class="p">];</span>
+<span class="k">else</span>
+   <span class="nb">disp</span><span class="p">(</span><span class="s1">'A and B are not the same size.'</span><span class="p">)</span>
+   <span class="n">C</span> <span class="o">=</span> <span class="p">[];</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p><strong>2. </strong> Write a script that checks if it (the script itself) exists!</p>
+
+<p><strong>answer</strong></p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nb">exist</span><span class="p">(</span><span class="s1">'myScript.m'</span><span class="p">,</span><span class="s1">'file'</span><span class="p">)</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'Your file exists! Did you expect otherwise?'</span><span class="p">)</span>
+<span class="k">else</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'Your file does not exist! Then perhaps you don</span><span class="se">''</span><span class="s1">t exist either??'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p><strong>3. </strong> Write a script that takes an input predefined number $x$ and calculates the following function,</p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+\begin{equation*}
+y =
+\begin{cases}
+    x   & -1\leq x \leq 1 \\
+    x^2 & \text{otherwise} \\
+\end{cases}
+\end{equation*} %]]></script>
+
+<p><strong>answer</strong></p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'input the value of x: '</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">x</span> <span class="o">&lt;=</span> <span class="mi">1</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+<span class="k">else</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="o">^</span><span class="mi">2</span>
+<span class="k">end</span>
+<span class="nb">disp</span><span class="p">([</span><span class="s1">'y(x='</span><span class="p">,</span><span class="nb">num2str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="s1">') = '</span><span class="p">,</span><span class="nb">num2str</span><span class="p">(</span><span class="n">y</span><span class="p">)])</span>
+</code></pre></div></div>
+
+<h2 id="matlab-switch-case">MATLAB switch-case</h2>
+
+<p>Sometimes we may have many if statements which all use conditions based on the same variable. It is not incorrect to use if statements in such cases, but it can lead to a large number of consecutive if statements in our code, making it harder to read and more prone to errors. In this case, it is preferable to use a switch statement. The switch statement offers an easy way of writing code where the same variable needs to be checked against a number of different values.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">day</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Enter a day number:'</span><span class="p">);</span>
+<span class="k">switch</span> <span class="nb">day</span>
+    <span class="k">case</span> <span class="mi">1</span>
+        <span class="n">day_name</span> <span class="o">=</span> <span class="s1">'Monday'</span><span class="p">;</span>
+    <span class="k">case</span> <span class="mi">2</span>
+        <span class="n">day_name</span> <span class="o">=</span> <span class="s1">'Tuesday'</span><span class="p">;</span>
+    <span class="k">case</span> <span class="mi">3</span>
+        <span class="n">day_name</span> <span class="o">=</span> <span class="s1">'Wednesday'</span><span class="p">;</span>
+    <span class="k">case</span> <span class="mi">4</span>
+        <span class="n">day_name</span> <span class="o">=</span> <span class="s1">'Thursday'</span><span class="p">;</span>
+    <span class="k">case</span> <span class="mi">5</span>
+        <span class="n">day_name</span> <span class="o">=</span> <span class="s1">'Friday'</span><span class="p">;</span>
+    <span class="k">case</span> <span class="mi">6</span>
+        <span class="n">day_name</span> <span class="o">=</span> <span class="s1">'Saturday'</span><span class="p">;</span>
+    <span class="k">case</span> <span class="mi">7</span>
+        <span class="n">day_name</span> <span class="o">=</span> <span class="s1">'Sunday'</span><span class="p">;</span>
+    <span class="k">otherwise</span>
+        <span class="n">day_name</span> <span class="o">=</span> <span class="s1">'Unknown'</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="nb">disp</span><span class="p">([</span><span class="s1">'The corresponding weekday is '</span><span class="p">,</span><span class="n">day_name</span><span class="p">,</span><span class="s1">'.'</span><span class="p">])</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter a day number:4
+The corresponding weekday is Thursday.
+</code></pre></div></div>
+
+<p>MATLAB will compare the switch expression (in this case, <code class="highlighter-rouge">day</code>) with each case expression in turn (the numbers 1–7). When a comparison evaluates to <code class="highlighter-rouge">true</code>, MATLAB executes the corresponding statements and then exits the switch statement, i.e. control flow passes to after the <code class="highlighter-rouge">end</code> statement. The <code class="highlighter-rouge">otherwise</code> block is optional and executes only when no comparison evaluates to    <code class="highlighter-rouge">true</code>. Note that the <code class="highlighter-rouge">switch</code> statement is used only for equality tests – we cannot use it for other types of comparison (e.g. <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&lt;</code>, etc.).</p>
+
+<p>A <code class="highlighter-rouge">switch</code> statement may also take a cell array as one of its cases,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">day</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Enter a day number:'</span><span class="p">);</span>
+<span class="k">switch</span> <span class="nb">day</span>
+    <span class="k">case</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">}</span>
+        <span class="n">day_name</span> <span class="o">=</span> <span class="s1">'Weekday'</span><span class="p">;</span>
+    <span class="k">case</span> <span class="p">{</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">}</span>
+        <span class="n">day_name</span> <span class="o">=</span> <span class="s1">'Weekend'</span><span class="p">;</span>
+    <span class="k">otherwise</span>
+        <span class="n">day_name</span> <span class="o">=</span> <span class="s1">'Unknown'</span><span class="p">;</span>
+<span class="k">end</span>
+<span class="nb">disp</span><span class="p">([</span><span class="s1">'The input day number corresponds to '</span><span class="p">,</span><span class="n">day_name</span><span class="p">,</span><span class="s1">'.'</span><span class="p">])</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter a day number:6
+The input day number corresponds to Weekend.
+</code></pre></div></div>
+
+<h2 id="non-boolean-conditions-in-if-statements">Non-boolean conditions in if-statements</h2>
+
+<p>There is a rather interesting feature of conditions for if-statements in MATLAB (also in Python language), that allows the programmer to use a non-boolean variable or non-boolean value type directly in place of the condition in if-statement. What really happens here is that, MATLAB interpreter converts the non-boolean type to a boolean value, when it occurs in place of an if-statement condition.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="mf">5.6</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'The condition in this if statement is automatically converted from float to boolean'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The condition in this if statement is automatically converted from float to boolean
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">~</span><span class="mf">0.0</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'A float value of zero is converted to false'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A float value of zero is converted to false
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="mf">0.0</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'A float value of zero is converted to false'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="mf">0.000000000000000000000000000000000000000000000000000000000000000000001</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'Any non-zero float value of any precision is converted to true'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Any non-zero float value of any precision is converted to true
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="mf">1.e-323</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'Any non-zero float value of any precision is converted to true'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Any non-zero float value of any precision is converted to true
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="mf">1.e-324</span> <span class="c1">% make sure you don't go beyond computer precision</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'Any non-zero float value smaller than the computer precision will be set to 0'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">~</span><span class="mf">1.e-324</span> <span class="c1">% make sure you don't go beyond computer precision</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'Any non-zero float value smaller than the computer precision will be set to 0'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Any non-zero float value smaller than the computer precision will be set to 0
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="mi">12</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'The same rules also hold for integers.'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The same rules also hold for integers.
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="s1">''</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'An empty string is always converted to boolean false, because it is considered an empty logical vector.'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="s1">''</span>
+<span class="k">else</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'An empty string is always converted to boolean false, because it is considered an empty logical vector.'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An empty string is always converted to boolean false, because it is considered an empty logical vector.
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">[]</span>
+<span class="k">else</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'An empty vector is always converted to boolean false, because it is considered an empty logical vector.'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An empty vector is always converted to boolean false, because it is considered an empty logical vector.
+</code></pre></div></div>
+
+<p>But note that conversion from cell to logical is not possible in MATLAB:</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">{}</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'An empty cell cannot be converted to boolean value, because MATLAB wants it that way!'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Conversion to logical from cell is not possible. 
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">[</span><span class="s1">'amir'</span><span class="p">]</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'A non-empty vector is converted to boolean true.'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A non-empty vector is converted to boolean true.
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="s1">' '</span>
+    <span class="nb">disp</span><span class="p">(</span><span class="s1">'A non-empty string is converted to boolean true.'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A non-empty string is converted to boolean true.
+</code></pre></div></div>
+
+<h2 id="matlabs-built-in-logical-functions">MATLAB’s built-in logical functions</h2>
+
+<p>MATLAB has a wide range of functions whose names begins with <code class="highlighter-rouge">is</code>, and their output is a logical value type, which can be used in if-blocks. These functions are extremely useful in MATLAB coding, and you will encounter them frequently in your computational life. Here is a rather comprehensive list of them,</p>
+
+<table class="center">
+    <caption class="title" style="padding-bottom:10px;text-align:center;">
+        Table of MATLAB's <i>is-functions</i> and description of their functionality.
+    </caption>
+    <thead>
+        <tr>
+            <th><font>Expression</font></th>
+            <th><font>Description</font></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>isa()</code></td><td>Detect object of given MATLAB class or Java® class</td></tr>  
+        <tr><td><code>isappdata()</code></td><td>Determine if object has specific application-defined data</td></tr>
+        <tr><td><code>isbetween()</code></td><td>Array elements occurring within date and time interval</td></tr>
+        <tr><td><code>iscalendarduration()</code></td><td>Determine if input is duration array</td></tr>
+        <tr><td><code>iscategorical()</code></td><td>Determine whether input is categorical array</td></tr>
+        <tr><td><code>iscategory()</code></td><td>Test for categorical array categories</td></tr>
+        <tr><td><code>iscell()</code></td><td>Determine if input is cell array</td></tr>
+        <tr><td><code>iscellstr()</code></td><td>Determine if input is cell array of strings</td></tr>
+        <tr><td><code>ischar()</code></td><td>Determine if input is character array</td></tr>
+        <tr><td><code>iscolumn()</code></td><td>Determine whether input is column vector</td></tr>
+        <tr><td><code>iscom()</code></td><td>Determine if input is Component Object Model (COM) object</td></tr>
+        <tr><td><code>isdatetime()</code></td><td>Determine if input is datetime array</td></tr>
+        <tr><td><code>isdir()</code></td><td>Determine if input is folder</td></tr>
+        <tr><td><code>isdst()</code></td><td>Datetime values occurring during daylight saving time</td></tr>
+        <tr><td><code>isduration()</code></td><td>Determine if input is duration array</td></tr>
+        <tr><td><code>isempty()</code></td><td>Determine if input is empty array</td></tr>
+        <tr><td><code>isequal()</code></td><td>Determine if arrays are numerically equal</td></tr>
+        <tr><td><code>isequaln()</code></td><td>Determine if arrays are numerically equal, treating NaNs as equal</td></tr>
+        <tr><td><code>isevent()</code></td><td>Determine if input is Component Object Model (COM) object event</td></tr>
+        <tr><td><code>isfield()</code></td><td>Determine if input is MATLAB structure array field</td></tr>
+        <tr><td><code>isfinite()</code></td><td>Detect finite elements of array</td></tr>
+        <tr><td><code>isfloat()</code></td><td>Determine if input is floating-point array</td></tr>
+        <tr><td><code>ishandle()</code></td><td>Detect valid graphics object handles</td></tr>
+        <tr><td><code>ishold()</code></td><td>Determine if graphics hold state is on</td></tr>
+        <tr><td><code>isinf()</code></td><td>Detect infinite elements of array</td></tr>
+        <tr><td><code>isinteger()</code></td><td>Determine if input is integer array</td></tr>
+        <tr><td><code>isinterface()</code></td><td>Determine if input is Component Object Model (COM) interface</td></tr>
+        <tr><td><code>isjava()</code></td><td>Determine if input is Java object</td></tr>
+        <tr><td><code>iskeyword()</code></td><td>Determine if input is MATLAB keyword</td></tr>
+        <tr><td><code>isletter()</code></td><td>Detect elements that are alphabetic letters</td></tr>
+        <tr><td><code>islogical()</code></td><td>Determine if input is logical array</td></tr>
+        <tr><td><code>ismac()</code></td><td>Determine if running MATLAB for Macintosh OS X platform</td></tr>
+        <tr><td><code>ismatrix()</code></td><td>Determine whether input is matrix</td></tr>
+        <tr><td><code>ismember()</code></td><td>Detect members of specific set</td></tr>
+        <tr><td><code>ismethod()</code></td><td>Determine if input is object method</td></tr>
+        <tr><td><code>ismissing()</code></td><td>Find table elements with missing values</td></tr>
+        <tr><td><code>isnan()</code></td><td>Detect elements of array that are not a number (NaN)</td></tr>
+        <tr><td><code>isnumeric()</code></td><td>Determine if input is numeric array</td></tr>
+        <tr><td><code>isobject()</code></td><td>Determine if input is MATLAB object</td></tr>
+        <tr><td><code>isordinal()</code></td><td>Determine whether input is ordinal categorical array</td></tr>
+        <tr><td><code>ispc()</code></td><td>Determine if running MATLAB for PC (Windows®) platform</td></tr>
+        <tr><td><code>isprime()</code></td><td>Detect prime elements of array</td></tr>
+        <tr><td><code>isprop()</code></td><td>Determine if input is object property</td></tr>
+        <tr><td><code>isprotected()</code></td><td>Determine whether categories of categorical array are protected</td></tr>
+        <tr><td><code>isreal()</code></td><td>Determine if all array elements are real numbers</td></tr>
+        <tr><td><code>isrow()</code></td><td>Determine whether input is row vector</td></tr>
+        <tr><td><code>isscalar()</code></td><td>Determine if input is scalar</td></tr>
+        <tr><td><code>issorted()</code></td><td>Determine if set elements are in sorted order</td></tr>
+        <tr><td><code>isspace()</code></td><td>Detect space characters in array</td></tr>
+        <tr><td><code>issparse()</code></td><td>Determine if input is sparse array</td></tr>
+        <tr><td><code>isstrprop()</code></td><td>Determine if string is of specified category</td></tr>
+        <tr><td><code>isstruct()</code></td><td>Determine if input is MATLAB structure array</td></tr>
+        <tr><td><code>isstudent()</code></td><td>Determine if Student Version of MATLAB</td></tr>
+        <tr><td><code>istable()</code></td><td>Determine whether input is table</td></tr>
+        <tr><td><code>isundefined()</code></td><td>Find undefined elements in categorical array</td></tr>
+        <tr><td><code>isunix()</code></td><td>Determine if running MATLAB for UNIX®[a] platform.</td></tr>
+        <tr><td><code>isvarname()</code></td><td>Determine if input is valid variable name</td></tr>
+        <tr><td><code>isvector()</code></td><td>Determine if input is vector</td></tr>
+        <tr><td><code>isweekend()</code></td><td>Datetime values occurring during weekend</td></tr>
+    </tbody>
+</table>
+
+<p>For more information on each individual function, see <a href="https://www.mathworks.com/help/matlab/ref/is.html" target="_blank">MATLAB’s use manual</a>.</p>
+
+
+    
+    
+    <div style="margin-top:3rem">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'shahmoradi'; // required: replace example with your forum shortname
+    
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+</div>
+<hr class="shaded"/>
+<footer>
+    <div class="row">
+        <div class="col-lg-12 footer">
+            &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: July 20, 2019 <br />
+            
+                <span>Page last updated:</span>July 9, 2019<br/>
+            
+        <p>
+            <img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" />
+            <!-- Start of statc -->
+<div style="color: #ffffff; float: none; width: 100%;">
+    <span style="font-size:0.8em">visitor count: 
+        <script type="text/javascript">
+            var sc_project=12047472; 
+            var sc_invisible=0; 
+            var sc_security="fe09cd78"; 
+            var sc_text=3; 
+            var scJsHost = "https://";
+            document.write("<sc"+"ript type='text/javascript' src='" +
+            scJsHost+
+            "statcounter.com/counter/counter.js'></"+"script>");
+        </script>
+    </span>
+</div>
+<!-- End of statc -->
+        </p>
+        </div>
+    </div>
+    <!--Mathjax LaTeX engine-->
+    
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+        MathJax.Hub.Config({
+            config: ["MMLorHTML.js"],
+            extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+            jax: ["input/TeX"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+            TeX: {
+                TagSide: "right",
+                TagIndent: ".8em",
+                MultLineWidth: "85%",
+                equationNumbers: {
+                autoNumber: "AMS",
+                },
+                unicode: {
+                fonts: "STIXGeneral,'Arial Unicode MS'" 
+                }
+            },
+            showProcessingMessages: false
+        });
+    </script>
+    <style TYPE="text/css">
+        code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+    </style>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+            }
+        });
+        MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</footer>
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /#main -->
+        </div>
+        
+    </body>
+    
+</html>

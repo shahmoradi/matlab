@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="So far, we have indirectly discussed several methods of getting input information from the user, and several methods of outputting the result in a MATLAB pro...">
+<meta name="keywords" content="datainputoutputIOmatlab,  data, input, output, IO, matlab">
+<title>Data input/output methods | Scientific Computing with MATLAB</title>
+<link rel="stylesheet" href="/matlab/css/prismOkaidia.css">
+<script src="/matlab/js/prismOkaidia.js"></script>
+<!--
+<link rel="stylesheet" href="/matlab/css/syntax.css">
+-->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/matlab/css/bootstrap.min.css">
+
+
+
+<link rel="stylesheet" href="/matlab/css/customstyles.css">
+<link rel="stylesheet" href="/matlab/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="/matlab/css/theme-cdslab.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/matlab/js/jquery.navgoco.min.js"></script>
+<!-- make sidebar non-accordion -->
+<script src="/matlab/js/lockScrollbarPosition.js"></script>
+<!-- make sidebar non-accordion -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.sidenav').navgoco({
+              accordion: false,
+              caret: '<span class="caret"></span>',
+              openClass: 'open',
+              save: true,
+              cookie: {
+                  name: 'navgoco',
+                  expires: false,
+                  path: '/'
+              },
+              slide: {
+                  duration: 400,
+                  easing: 'swing'
+              }
+          });
+    });
+</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+<!--
+-->
+<script src="/matlab/js/toc.js"></script>
+<script src="/matlab/js/customscripts.js"></script>
+<link rel="shortcut icon" href="/matlab/images/favicon.ico">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+    </head>
+    <body>
+        <!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div id="sticky" class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-book fa-lg navbar-brand" href="/matlab/index.html">&nbsp;<span class="projectTitle"> Scientific Computing with MATLAB</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CDSLab<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/#about" target="_blank" rel="noopener">About</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/people" target="_blank" rel="noopener">People</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/matlab/" target="_blank" rel="noopener">Scientific Computing with MATLAB</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/python/" target="_blank" rel="noopener">Scientific Computing with Python</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">UTA<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">College of Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">Data Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/physics/" target="_blank" rel="noopener">Physics</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="keyword search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="/matlab/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: "/matlab/search.json",
+                                searchResultTemplate: '<li><a href="https://www.cdslab.org{url}" title="Data input/output methods">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div id="main">
+                <!-- Content Row -->
+                <div class="row">
+                    
+                    
+                        <!-- Sidebar Column -->
+                        <div class="col-md-3" id="tg-sb-sidebar">
+                            
+<ul id="mysidebar" class="sidenav">
+    <!--
+    -->
+    <li class="sidebarTitle">Table of Pages </li>
+    
+        
+            
+                <li>
+                    <a title="Overview" href="#"><b>Overview</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Preface" href="/matlab/notes/overview/preface/index.html">Preface</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 1" href="/matlab/notes/overview/release-note-1/index.html">Release note 1</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 2" href="/matlab/notes/overview/release-note-2/index.html">Release note 2</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Preliminary foundations" href="#"><b>Preliminary foundations</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Version control system" href="/matlab/notes/preliminary-foundations/version-control-system/index.html">Version control system</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Programming history" href="/matlab/notes/preliminary-foundations/programming-history/index.html">Programming history</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Computer program structure" href="/matlab/notes/preliminary-foundations/computer-program-structure/index.html">Computer program structure</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="MATLAB for beginners" href="/matlab/notes/preliminary-foundations/matlab-for-beginners/index.html">MATLAB for beginners</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Values, variables, and types" href="#"><b>Values, variables, and types</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="First program" href="/matlab/notes/values-variables-types/first-program/index.html">First program</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Values" href="/matlab/notes/values-variables-types/values/index.html">Values</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variables" href="/matlab/notes/values-variables-types/variables/index.html">Variables</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Operators" href="/matlab/notes/values-variables-types/operators/index.html">Operators</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Control constructs" href="#"><b>Control constructs</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Branching" href="/matlab/notes/control-constructs/branching/index.html">Branching</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Looping" href="/matlab/notes/control-constructs/looping/index.html">Looping</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Program units" href="#"><b>Program units</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Functions" href="/matlab/notes/program-units/functions/index.html">Functions</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variable scope" href="/matlab/notes/program-units/variable-scope/index.html">Variable scope</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Data transfer (I/O)" href="#"><b>Data transfer (I/O)</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li class="active"><a title="Data input/ouput methods" href="/matlab/notes/data-transfer/io/index.html">Data input/ouput methods</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Errors and exceptions" href="#"><b>Errors and exceptions</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Exception handling" href="/matlab/notes/exceptions-errors/exception-handling/index.html">Exception handling</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Unit testing" href="/matlab/notes/exceptions-errors/unit-testing/index.html">Unit testing</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Scientific Computing" href="#"><b>Scientific Computing</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Vectorization and array computing" href="/matlab/notes/scientific-computing/vectorization/index.html">Vectorization and array computing</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Visualization and plotting" href="/matlab/notes/scientific-computing/visualization/index.html">Visualization and plotting</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Random numbers" href="/matlab/notes/scientific-computing/random-numbers/index.html">Random numbers</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Object-oriented programming" href="#"><b>Object-oriented programming</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Instantiation" href="/matlab/notes/object-oriented-programming/instantiation/index.html">Instantiation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Encapsulation" href="/matlab/notes/object-oriented-programming/encapsulation/index.html">Encapsulation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Inheritance" href="/matlab/notes/object-oriented-programming/inheritance/index.html">Inheritance</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Polymorphism" href="/matlab/notes/object-oriented-programming/polymorphism/index.html">Polymorphism</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Abstraction" href="/matlab/notes/object-oriented-programming/abstraction/index.html">Abstraction</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+    
+    <!-- if you aren't using the accordion, uncomment this block:
+    -->
+    <p class="external">
+        <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+    </p>
+</ul>
+<!--
+This highlights the active parent class in the navgoco sidebar. 
+This is critical so that the parent expands when you're viewing a page.
+This must appear below the sidebar code above.
+Otherwise, if placed inside customscripts.js,
+the script runs before the sidebar code runs and the class never gets inserted.
+-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+                        </div>
+                        
+                    
+                    <!-- Content Column -->
+                    <div class="col-md-9" id="tg-sb-content">
+                        <div class="post-header">
+   <h1 class="post-title-main">Data input/output methods</h1>
+</div>
+
+<div class="post-content">
+    
+        <div class="summary">So far, we have indirectly discussed several methods of getting input information from the user, and several methods of outputting the result in a MATLAB program. This note attempts at formalizing all the previous discussions and introduce more general efficient methods of code interaction with users.</div>
+    
+    
+        <br>
+        
+<script>
+    $( document ).ready(function() {
+        // Handler for .ready() called.
+        $('#toc').toc({ minimumHeaders: 0 
+                      , listType: 'ol'
+                      , showSpeed: 0
+                      , headers: 'h2,h3,h4,h5,h6'
+        });
+        /* the following offset helps account for the space taken up by the floating toolbar. */
+        $('#toc').on('click', 'a', function() {
+            var target = $(this.getAttribute('href')), scroll_target = target.offset().top$(window).scrollTop(scroll_target - 10);
+            return false
+        })
+    });
+</script>
+
+<div id="toc"></div>
+
+    
+    
+    <h2 id="methods-of-data-inputoutput-in-matlab">Methods of data input/output in MATLAB</h2>
+
+<p>Let’s begin with an example code that explains the meaning of input/output (I/O) in MATLAB,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="nb">exp</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.1822
+</code></pre></div></div>
+
+<p>In the above code, <code class="highlighter-rouge">a</code>, <code class="highlighter-rouge">b</code>, <code class="highlighter-rouge">x</code> are examples of input data to code, and <code class="highlighter-rouge">y</code> is an example of code output. In such cases as in the above, the input data is said to be <strong>hardcoded</strong> in the program.</p>
+
+<div class="alert alert-warning" role="alert"><i class="fa fa-warning"></i> <b>Important:</b> <b>In general, in any programming language, including MATLAB, you should avoid hardcoding input information to your program as much as possible.</b><br />If data is hardcoded, then every time that it needs to be changed, the user has to change the content of the code. This is not considered good programming style for software development.</div>
+
+<p>Input data can be fed to a MATLAB program in four different ways,</p>
+
+<ol>
+  <li>let the user answer questions in a dialog in <strong>MATLAB terminal window</strong>,</li>
+  <li>let the user provide input on the <strong>operating system command line</strong>,</li>
+  <li>let the user write input data in a <strong>graphical interface</strong>,</li>
+  <li>let the user provide input data in a <strong>file</strong>.</li>
+</ol>
+
+<p>There are two major methods of data output,</p>
+
+<ul>
+  <li>writing to the terminal window, as previously done using <code class="highlighter-rouge">disp()</code> function, or,</li>
+  <li>writing to an output file.</li>
+</ul>
+
+<p>We have already extensively discussed printing output to the terminal window. Reading from and writing data to file is also easy as we will see here.</p>
+
+<h3 id="inputoutput-from-matlab-terminal-window">Input/output from MATLAB terminal window</h3>
+
+<p>We have already introduced and used this method frequently in the past, via the MATLAB’s built-in function <code class="highlighter-rouge">input()</code>. If we were to get the input data for the above code via the terminal window, an example approach would be the following,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">datain</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'input [a,b,c]: '</span><span class="p">);</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">datain</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">datain</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">datain</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="nb">exp</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>input a,b,c: [0.1, 1, 0.6]
+y =
+    0.1822
+</code></pre></div></div>
+
+<p>One could also read the input values as string ans then convert them to real values or parse the input using one of MATLAB’s built-in functions, for example,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">datain</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'input [a,b,c]: '</span><span class="p">,</span><span class="s1">'s'</span><span class="p">);</span>
+<span class="nb">input</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">]:</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.6</span><span class="p">]</span>
+<span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">datain</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+char
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">datain</span> <span class="o">=</span> <span class="nb">str2num</span><span class="p">(</span><span class="n">datain</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>datain =
+    0.1000    1.0000    0.6000
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">datain</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+double
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">datain</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">datain</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">datain</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="nb">exp</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>y =
+    0.1822
+</code></pre></div></div>
+
+<h3 id="inputoutput-data-from-operating-systems-command-line">Input/output data from operating system’s command line</h3>
+
+<p>This approach is most popular in Unix-like environments, where most users are accustomed to using the Bash command line. However, it can be readily used in <a href="https://en.wikipedia.org/wiki/Cmd.exe" target="_blank">Windows cmd</a> environment as well. For this approach, we have to invoke MATLAB from the computer operating system’s command line, that is, Bash in Linux systems, and cmd in Windows,</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>start matlab <span class="nt">-nosplash</span> <span class="nt">-nodesktop</span> <span class="nt">-r</span> <span class="s2">"testIO"</span>
+</code></pre></div></div>
+
+<p>Then a MATLAB command-line window opens in your computer like the following that runs automatically your code (stored in <code class="highlighter-rouge">testIO.m</code>).</p>
+
+<figure>
+    <img src="matlab.png" />
+</figure>
+
+<p>In the above command, we are starting MATLAB from the OS command line with our own choice of optional arguments for MATLAB. You can specify startup options (also called <strong>command flags</strong> or <strong>command-line switches</strong>) that instruct the MATLAB program to perform certain operations when you start it. On all platforms, specify the options as arguments to the MATLAB command when you start at the operating system prompt. For example, the following starts MATLAB and suppresses the display of the splash screen (a splash screen is a graphical control element consisting of a window containing an image, a logo, and the current version of the software. A splash screen usually appears while a game or program is launching),</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">matlab</span> <span class="o">-</span><span class="n">nosplash</span>
+</code></pre></div></div>
+
+<p>The flag <code class="highlighter-rouge">-nodesktop</code> result in opening only the MATLAB command line, and no MATLAB Graphical user interface (GUI) just like the figure above. Finally, the flag <code class="highlighter-rouge">-r</code> executes the MATLAB file that appears right after it, specified as a string or as the name of a MATLAB script or function. If a MATLAB statement is MATLAB code, you should enclose the string with double quotation marks. If a MATLAB statement is the name of a MATLAB function or script, <strong>do not specify the file extension</strong> and <strong>do not use quotation marks</strong>. Any required file must be on the MATLAB search path or in the startup folder. You can also set MATLAB’s working folder right from the command-line using <code class="highlighter-rouge">-sd</code> flag. You can find find more information about all possible flags <a href="https://www.mathworks.com/help/matlab/ref/matlabwindows.html" target="_blank">here</a>. On Windows platforms, you can precede a startup option with either a hyphen (<code class="highlighter-rouge">-</code>) or a slash (<code class="highlighter-rouge">/</code>). For example, <code class="highlighter-rouge">-nosplash</code> and <code class="highlighter-rouge">/nosplash</code> are equivalent.</p>
+
+<p>Note that you can also quote MATLAB on the OS command line, along with the name of the script you want to run. For example, suppose you wanted to run the original script,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="mf">0.1</span><span class="p">;</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="nb">exp</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>However, now with <code class="highlighter-rouge">a</code>, <code class="highlighter-rouge">b</code>, <code class="highlighter-rouge">x</code>, given at runtime. You could write a script file <code class="highlighter-rouge">test.m</code> that contains,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">y</span> <span class="o">=</span> <span class="n">a</span><span class="o">*</span><span class="nb">exp</span><span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>and give the variables values at runtime, on OS command line, like the following,</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>matlab <span class="nt">-nosplash</span> <span class="nt">-nodesktop</span> <span class="nt">-r</span> <span class="s2">"a = 0.1; b = 1; x = 0.6; testIO"</span>
+</code></pre></div></div>
+
+<p>The figure below shows a screen-shot illustrating the output of the above command.</p>
+
+<figure>
+    <img src="matlab1.png" />
+</figure>
+
+<h3 id="inputoutput-data-from-a-graphical-user-interface">Input/output data from a Graphical User Interface</h3>
+
+<p>This method of inputting data is done by constructing a Graphical User Interface  (GUI) which opens and takes input from the user. This is probably one of the most convenient methods for users to input data. You can do this in MATLAB for example by using the built-in function <code class="highlighter-rouge">inputdlg()</code> which creates a dialog box that gathers user input. But this method of data collection is beyond the scope of our class.  More information about this can be found <a href="https://www.mathworks.com/help/matlab/ref/inputdlg.html" target="_blank">here</a>.</p>
+
+<h3 id="inputoutput-data-from-file">Input/output data from file</h3>
+
+<p>In cases where the input/output data is large, the command-line arguments and input from the terminal window are not efficient anymore. In such cases, the most common approach is to let the code read/write data from a pre-existing file, the path to which is most often given to the code via the OS command line or MATLAB terminal window.</p>
+
+<p>There are many methods of importing and exporting data to and from MATLAB, only some of which we will discuss here. For more information see <a href="https://www.mathworks.com/help/matlab/import_export/ways-to-import-text-files.html" target="_blank">here</a>, <a href="https://www.mathworks.com/help/matlab/data-import-and-export.html" target="_blank">here</a>, and <a href="https://www.mathworks.com/help/matlab/text-files.html" target="_blank">here</a>. The following table shows some of the most important import functions in MATLAB, which we will discuss here as well.</p>
+
+<table class="center">
+    <caption class="title" style="padding-bottom:10px;text-align:center;">
+        Table of Common Methods for Importing Data from a File to MATLAB.
+    </caption>
+    <thead>
+        <tr>
+            <th><font>Function</font></th>
+            <th><font>Description</font></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>load()       </code></td><td> Load MATLAB variables from file into MATLAB workspace</td></tr>
+        <tr><td><code>save()       </code></td><td> save MATLAB variables from MATLAB workspace into a MATLAB `.mat` file.</td></tr>
+        <tr><td><code>fscanf()     </code></td><td> Read data from text file</td></tr>
+        <tr><td><code>fprintf()    </code></td><td> Write data to a text file</td></tr>
+        <tr><td><code>dlmread()    </code></td><td> Read ASCII-delimited file of numeric data into matrix</td></tr>
+        <tr><td><code>dlmwrite()   </code></td><td> Write a numeric matrix into ASCII-delimited file</td></tr>
+        <tr><td><code>csvread()    </code></td><td> Read comma-separated value (CSV) file</td></tr>
+        <tr><td><code>csvwrite()   </code></td><td> Write values of a matrix into a comma-separated (CSV) file</td></tr>
+        <tr><td><code>xlswrite()   </code></td><td> Read Microsoft Excel spreadsheet file</td></tr>
+        <tr><td><code>xlswrite()   </code></td><td> write data into a Microsoft Excel spreadsheet file</td></tr>
+        <tr><td><code>readtable()  </code></td><td> Create table from file</td></tr>
+        <tr><td><code>writetable() </code></td><td> Write table to file</td></tr>
+        <tr><td><code>imread()     </code></td><td> Read image from graphics file</td></tr>
+        <tr><td><code>imwrite()    </code></td><td> Write image to graphics file</td></tr>
+        <tr><td><code>importdata() </code></td><td> Load data from file</td></tr>
+        <tr><td><code>textscan()   </code></td><td> Read formatted data from text file or string</td></tr>
+        <tr><td><code>fgetl()      </code></td><td> Read line from file, removing newline characters</td></tr>
+        <tr><td><code>fread()      </code></td><td> Read data from binary file</td></tr>
+        <tr><td><code>fwrite()     </code></td><td> Write data to binary file</td></tr>
+        <tr><td><code>type()       </code></td><td> Display contents of file</td></tr>
+    </tbody>
+</table>
+
+<h4 id="loadingsaving-matlab-workspace-variables">Loading/saving MATLAB workspace variables</h4>
+
+<p>MATLAB has two useful functions that can save the workspace variables into special MATLAB <code class="highlighter-rouge">.mat</code> files, to be later load again into the same or another MATLAB workspace for further work or manipulation. The function <code class="highlighter-rouge">save()</code> saves workspace variables to a given file. The most useful options for this function are the following,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">save</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<span class="nb">save</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">variables</span><span class="p">)</span>
+<span class="nb">save</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">variables</span><span class="p">,</span><span class="n">fmt</span><span class="p">)</span>
+</code></pre></div></div>
+
+<ul>
+  <li><code class="highlighter-rouge">save(filename)</code> saves all variables from the current workspace in a MATLAB formatted binary file called <strong>MAT-file</strong> with the given name <code class="highlighter-rouge">filename</code>. If the file <code class="highlighter-rouge">filename</code> exists, <code class="highlighter-rouge">save()</code> overwrites the file.<br />
+<br /></li>
+  <li><code class="highlighter-rouge">save(filename,variables)</code> saves only the variables or fields of a structure array specified by <code class="highlighter-rouge">variables</code>. For example,
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">q</span> <span class="o">=</span> <span class="nb">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="nb">save</span><span class="p">(</span><span class="s1">'pqfile.mat'</span><span class="p">,</span><span class="s1">'p'</span><span class="p">,</span><span class="s1">'q'</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <p>will create the binary MAT file <a href="/matlab/notes/data-transfer/io/pqfile.mat" target="_blank">pqfile.mat</a> which contains the two variables.<br />
+<br /></p>
+  </li>
+  <li><code class="highlighter-rouge">save(filename,variables,fmt)</code> saves the requested variables with the file format specified by <code class="highlighter-rouge">fmt</code>. The variables argument is optional. If you do not specify variables, the save function saves all variables in the workspace. File format, specified as one of the following. When using the command form of save, you do not need to enclose the input in single or double quotes, for example, <code class="highlighter-rouge">save myFile.txt -ascii -tabs</code>. For example,
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">p</span> <span class="o">=</span> <span class="nb">rand</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>
+<span class="n">q</span> <span class="o">=</span> <span class="nb">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="nb">save</span><span class="p">(</span><span class="s1">'pqfile.txt'</span><span class="p">,</span><span class="s1">'p'</span><span class="p">,</span><span class="s1">'q'</span><span class="p">,</span><span class="s1">'-ascii'</span><span class="p">)</span>
+</code></pre></div>    </div>
+    <p>will create an ASCII text file <a href="/matlab/notes/data-transfer/io/pqfile.txt" target="_blank">pqfile.txt</a> which contains the two variables <code class="highlighter-rouge">p</code> and <code class="highlighter-rouge">q</code>.</p>
+  </li>
+</ul>
+
+<table class="center">
+    <caption class="title" style="padding-bottom:10px;text-align:center;">
+        Table of Common Methods for Importing Data from a File to MATLAB.
+    </caption>
+    <thead>
+        <tr>
+            <th><font>Value of fmt</font></th>
+            <th><font>File Format</font></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>'-mat'</code></td><td>Binary MAT-file format.</td></tr>
+        <tr><td><code>'-ascii'</code></td><td>Text format with 8 digits of precision.</td></tr>
+        <tr><td><code>'-ascii','-tabs'</code></td><td>Tab-delimited text format with 8 digits of precision.</td></tr>
+        <tr><td><code>'-ascii','-double'</code></td><td>Text format with 16 digits of precision.</td></tr>
+        <tr><td><code>'-ascii','-double','-tabs'</code></td><td>Tab-delimited text format with 16 digits of precision.</td></tr>
+    </tbody>
+</table>
+
+<p>Similarly, one can reload the same files into MATLAB workspace again if needed, for example using MATLAB <code class="highlighter-rouge">load()</code> function,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">load</span><span class="p">(</span><span class="s1">'pqfile.txt'</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="n">pqfile</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pqfile =
+  Columns 1 through 8
+    0.0975    0.2785    0.5469    0.9575    0.9649    0.1576    0.9706    0.9572
+    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000
+    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000
+    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000
+    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000
+    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000
+    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000
+    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000
+    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000
+    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000
+    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000    1.0000
+  Columns 9 through 10
+    0.4854    0.8003
+    1.0000    1.0000
+    1.0000    1.0000
+    1.0000    1.0000
+    1.0000    1.0000
+    1.0000    1.0000
+    1.0000    1.0000
+    1.0000    1.0000
+    1.0000    1.0000
+    1.0000    1.0000
+    1.0000    1.0000
+</code></pre></div></div>
+
+<p>But note that upon loading the Ascii file, the information about the individual variables is lost. By contrast, loading data using the MAT file will preserve the structure of the variables,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">load</span><span class="p">(</span><span class="s1">'pqfile.mat'</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="n">p</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p =
+  Columns 1 through 8
+    0.1419    0.4218    0.9157    0.7922    0.9595    0.6557    0.0357    0.8491
+  Columns 9 through 10
+    0.9340    0.6787
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">q</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>q =
+     1     1     1     1     1     1     1     1     1     1
+     1     1     1     1     1     1     1     1     1     1
+     1     1     1     1     1     1     1     1     1     1
+     1     1     1     1     1     1     1     1     1     1
+     1     1     1     1     1     1     1     1     1     1
+     1     1     1     1     1     1     1     1     1     1
+     1     1     1     1     1     1     1     1     1     1
+     1     1     1     1     1     1     1     1     1     1
+     1     1     1     1     1     1     1     1     1     1
+     1     1     1     1     1     1     1     1     1     1
+</code></pre></div></div>
+
+<h4 id="readingwriting-a-formatted-file-using-fscanf-and-fprintf">Reading/writing a formatted file using <code class="highlighter-rouge">fscanf()</code> and <code class="highlighter-rouge">fprintf()</code></h4>
+
+<p>There are numerous methods of reading the contents of a file in MATLAB. The most trivial and probably least pleasing method is through MATLAB’s built-in function <code class="highlighter-rouge">fscanf()</code>. To read a file, say <a href="/matlab/notes/data-transfer/io/data.in" target="_blank">this file</a>, you will have to first open it in MATLAB,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fileID</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">'data.in'</span><span class="p">,</span><span class="s1">'r'</span><span class="p">);</span>
+<span class="n">formatSpec</span> <span class="o">=</span> <span class="s1">'%f'</span><span class="p">;</span>
+<span class="n">A</span> <span class="o">=</span> <span class="nb">fscanf</span><span class="p">(</span><span class="n">fileID</span><span class="p">,</span><span class="n">formatSpec</span><span class="p">)</span>
+<span class="nb">fclose</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A =
+    1
+    3
+    4
+    5
+    6
+    7
+    88
+    65
+</code></pre></div></div>
+
+<p>Note that unlike the C language’s <code class="highlighter-rouge">fscanf()</code>, in MATLAB <code class="highlighter-rouge">fscanf()</code> is vectorized meaning that it can read multiple lines all at once. Here, the attribute <code class="highlighter-rouge">'r'</code> states that the file is opened to read it (vs writing, or some other purpose). A list of available options for <code class="highlighter-rouge">fopen()</code> is the following,</p>
+
+<table class="center">
+    <caption class="title" style="padding-bottom:10px;text-align:center;">
+        Table of Attributes for MATLAB function <code>fopen()</code>.
+    </caption>
+    <thead>
+        <tr>
+            <th><font>Attribute</font></th>
+            <th><font>Description</font></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>'r' </code></td><td>Open file for reading.</td></tr>
+        <tr><td><code>'w' </code></td><td>Open or create new file for writing. Discard existing contents, if any.</td></tr>
+        <tr><td><code>'a' </code></td><td>Open or create new file for writing. Append data to the end of the file.</td></tr>
+        <tr><td><code>'r+'</code></td><td>Open file for reading and writing.</td></tr>
+        <tr><td><code>'w+'</code></td><td>Open or create new file for reading and writing. Discard existing contents, if any.</td></tr>
+        <tr><td><code>'a+'</code></td><td>Open or create new file for reading and writing. Append data to the end of the file.</td></tr>
+        <tr><td><code>'A' </code></td><td>Open file for appending without automatic flushing of the current output buffer.</td></tr>
+        <tr><td><code>'W' </code></td><td>Open file for writing without automatic flushing of the current output buffer.</td></tr>
+    </tbody>
+</table>
+
+<p>The general syntax for reading an array from an input file using <code class="highlighter-rouge">fscanf()</code> is the following,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">array</span> <span class="o">=</span> <span class="nb">fscanf</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span><span class="nb">format</span><span class="p">)</span>
+<span class="p">[</span><span class="n">array</span><span class="p">,</span> <span class="nb">count</span><span class="p">]</span> <span class="o">=</span> <span class="nb">fscanf</span><span class="p">(</span><span class="n">fid</span><span class="p">,</span><span class="nb">format</span><span class="p">,</span><span class="nb">size</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>where the optional argument <code class="highlighter-rouge">size</code> specifies the amount of data to be read from the file. There are three versions of this argument,</p>
+<ul>
+  <li><code class="highlighter-rouge">n</code>: Reads exactly <code class="highlighter-rouge">n</code> values. After this statement, <code class="highlighter-rouge">array</code> will be a column vector containing <code class="highlighter-rouge">n</code> values read from the file.</li>
+  <li><code class="highlighter-rouge">Inf</code>: Reads until the end of the file. After this statement, <code class="highlighter-rouge">array</code> will be a column vector containing all of the data until the end of the file.</li>
+  <li><code class="highlighter-rouge">[n m]</code>: Reads exactly, $n\times m$ values, and format the data as an $n\times m$ array. For example, consider <a href="/matlab/notes/data-transfer/io/nums2.txt" target="_blank">this file</a>, which contains two columns of numeric data. One could read this data using <code class="highlighter-rouge">fscanf()</code> like the following,
+    <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">formatSpec</span> <span class="o">=</span> <span class="s1">'%d %f'</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">sizeA</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="n">Inf</span><span class="p">];</span>
+<span class="o">&gt;&gt;</span> <span class="n">fileID</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">'nums2.txt'</span><span class="p">,</span><span class="s1">'r'</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">A</span> <span class="o">=</span> <span class="nb">transpose</span><span class="p">(</span><span class="nb">fscanf</span><span class="p">(</span><span class="n">fileID</span><span class="p">,</span><span class="n">formatSpec</span><span class="p">,</span><span class="n">sizeA</span><span class="p">))</span>
+<span class="o">&gt;&gt;</span> <span class="nb">fclose</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span>
+</code></pre></div>    </div>
+    <p>A =
+      1.0000    2.0000    3.0000    4.0000    5.0000
+      0.8147    0.9058    0.1270    0.9134    0.6324</p>
+  </li>
+</ul>
+
+<p>Now suppose you perform some on operation on <code class="highlighter-rouge">A</code>, say the elemental multiplication of <code class="highlighter-rouge">A</code> by itself. Then you want to store (append) the result into another file. You can do this using MATLAB function <code class="highlighter-rouge">fprintf()</code>,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">formatSpec</span> <span class="o">=</span> <span class="s1">'%d %f \n'</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">fileID</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">'nums3.txt'</span><span class="p">,</span><span class="s1">'w+'</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="nb">fprintf</span><span class="p">(</span><span class="n">fileID</span><span class="p">,</span><span class="n">formatSpec</span><span class="p">,</span><span class="n">A</span><span class="o">.*</span><span class="n">A</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="nb">fclose</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>The option <code class="highlighter-rouge">w+</code> tells MATLAB to store the result in a file named <a href="/matlab/notes/data-transfer/io/nums3.txt" target="_blank">num3.txt</a>, and if the file does already exist, then append the result to the end of the current existing file. To see what formatting specifiers you can use with MATLAB <code class="highlighter-rouge">fscanf()</code> and <code class="highlighter-rouge">fprintf()</code>, see <a href="https://www.mathworks.com/help/matlab/ref/fprintf.html" target="_blank">this page</a>.</p>
+
+<p>MATLAB also has some rules to skip characters that are unwanted in the text file. These rules are really details that are specific to your needs and the best approach is to seek the solution to your specific problem by searching MATLAB’s  manual or the web. For example, consider <a href="/matlab/notes/data-transfer/io/temperature.dat" target="_blank">this file</a> which contains a set of temperature values in degrees (including the Celsius degrees symbol). One way to read this file and skipping the degrees symbol in MATLAB could be then the following set of commands,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">fileID</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">'temperature.dat'</span><span class="p">,</span><span class="s1">'r'</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">degrees</span> <span class="o">=</span> <span class="nb">char</span><span class="p">(</span><span class="mi">176</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span><span class="nb">count</span><span class="p">]</span> <span class="o">=</span> <span class="nb">fscanf</span><span class="p">(</span><span class="n">fileID</span><span class="p">,</span> <span class="p">[</span><span class="s1">'%d'</span> <span class="n">degrees</span> <span class="s1">'C'</span><span class="p">])</span>
+<span class="o">&gt;&gt;</span> <span class="nb">fclose</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A =
+    78
+    72
+    64
+    66
+    49
+count =
+     5
+</code></pre></div></div>
+
+<p>This method of reading a file is very powerful but rather detailed, low-level and cumbersome, especially that you have to define the format for the content of the file appropriately. Most often, other higher-level MATLAB’s built-in function come to rescue us from the hassles of using <code class="highlighter-rouge">fscanf()</code>. For more information about this function though, if you really want to stick to it, see <a href="https://www.mathworks.com/help/matlab/ref/fscanf.html#buaio_v-5" target="_blank">here</a>. Some important MATLAB special characters (<strong>escape characters</strong>) that can also appear in <code class="highlighter-rouge">fprintf()</code> are also given in the following table.</p>
+
+<table class="center">
+    <caption class="title" style="padding-bottom:10px;text-align:center;">
+        Table of escape characters in MATLAB.
+    </caption>
+    <thead>
+        <tr>
+            <th><font>Symbol</font></th>
+            <th><font>Effect on Text</font></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>''</code></td><td>Single quotation mark</td></tr>
+        <tr><td><code>%%</code></td><td>Single percent sign</td></tr>
+        <tr><td><code>\\</code></td><td>Single backslash</td></tr>
+        <tr><td><code>\n</code></td><td>New line</td></tr>
+        <tr><td><code>\t</code></td><td>Horizontal tab</td></tr>
+        <tr><td><code>\v</code></td><td>Vertical tab</td></tr>
+    </tbody>
+</table>
+
+<h4 id="readingwriting-data-using-dlmreaddlmwrite-and-csvreadcsvwrite">Reading/writing data using <code class="highlighter-rouge">dlmread()/dlmwrite()</code> and <code class="highlighter-rouge">csvread()/csvwrite()</code></h4>
+
+<p>The methods discussed above are rather primitive, in that they require a bit of effort by the user to know something about the structure of the file and its format. MATLAB has a long list of advanced IO functions that can handle a wide variety of data file formats. Two of the most common functions are dedicated specifically to read data files containing delimited data sets: <code class="highlighter-rouge">csvread()</code> and <code class="highlighter-rouge">dlmread()</code>.</p>
+
+<p>In the field of scientific computing, a <strong>Comma-Separated Values (CSV)</strong> data file is a type of file with extension <code class="highlighter-rouge">.csv</code>, which stores tabular data (numbers and text) in plain text format. Each line of the file is called a <strong>data record</strong> and each record consists of one or more <strong>fields, separated by commas</strong>. The use of the <strong>comma</strong> as a <strong>field separator</strong> is the source of the name for this file format.</p>
+
+<p>Now suppose you wanted to read two matrices whose elements were stored in CSV format in two csv data files <a href="/matlab/notes/data-transfer/io/matrix1.csv" target="_blank">matrix1.csv</a> and <a href="/matlab/notes/data-transfer/io/matrix2.csv" target="_blank">matrix2.csv</a>. You can accomplish this task simply by calling MATLAB’s built-in csv-reader function called <code class="highlighter-rouge">csvread(filename)</code>. Here the word <code class="highlighter-rouge">filename</code> is the path to the file in your local hard drive. For example, download these two given csv files above in your MATLAB working directory and then try,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">Mat1</span> <span class="o">=</span> <span class="nb">csvread</span><span class="p">(</span><span class="s1">'matrix1.csv'</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">Mat2</span> <span class="o">=</span> <span class="nb">csvread</span><span class="p">(</span><span class="s1">'matrix2.csv'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Then suppose you want to multiply these two vectors and store the result in a new variable and write it to a new output CSV file. You could do,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Mat3</span> <span class="o">=</span> <span class="n">Mat1</span> <span class="o">*</span> <span class="n">Mat2</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="nb">csvwrite</span><span class="p">(</span><span class="s1">'matrix3.csv'</span><span class="p">,</span><span class="n">Mat3</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>which would output <a href="/matlab/notes/data-transfer/io/matrix3.csv" target="_blank">this file: matrix3.csv</a> for you.</p>
+
+<p>Alternatively, you could also use MATLAB’s built-in functions <code class="highlighter-rouge">dlmread()</code> and <code class="highlighter-rouge">dlmwrite()</code> functions to do the same things as above. These two functions read and write ASCII-delimited file of numeric data. For example,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">Mat1</span> <span class="o">=</span> <span class="nb">dlmread</span><span class="p">(</span><span class="s1">'matrix1.csv'</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">Mat2</span> <span class="o">=</span> <span class="nb">dlmread</span><span class="p">(</span><span class="s1">'matrix2.csv'</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">Mat3</span> <span class="o">=</span> <span class="n">Mat1</span> <span class="o">*</span> <span class="n">Mat2</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="nb">dlmwrite</span><span class="p">(</span><span class="s1">'matrix3.dat'</span><span class="p">,</span><span class="n">Mat3</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Note that, <code class="highlighter-rouge">dlmread()</code> and <code class="highlighter-rouge">dlmwrite()</code> come with an optional argument <code class="highlighter-rouge">delimiter</code> of the following format,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">dlmread</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">delimiter</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="nb">dlmwrite</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span><span class="n">matrixObject</span><span class="p">,</span><span class="n">delimiter</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>where the argument <code class="highlighter-rouge">delimiter</code> is the <strong>field delimiter character</strong>, specified as a character vector or string. For example, in the above case, the delimiter is comma <code class="highlighter-rouge">','</code>. In other cases, you could, for example, use white space <code class="highlighter-rouge">' '</code>, or <code class="highlighter-rouge">'\t'</code> to specify a tab delimiter, and so on. For example, you could have equally written,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">dlmwrite</span><span class="p">(</span><span class="s1">'matrix4.dat'</span><span class="p">,</span><span class="n">Mat3</span><span class="p">,</span><span class="s1">'\t'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>to create a tab-delimited file named <a href="/matlab/notes/data-transfer/io/matrix4.dat" target="_blank">matrix4.dat</a>.</p>
+
+<h4 id="readingwriting-data-using-xlsread-and-xlswrite">Reading/writing data using <code class="highlighter-rouge">xlsread()</code> and <code class="highlighter-rouge">xlswrite()</code></h4>
+
+<p>Once data becomes more complex than simple numeric matrices or vectors, then we need more complex MATLAB functions for IO. An example of such a case is when you have stored your information in a Microsoft Excel file. For such cases, you can use <code class="highlighter-rouge">xlsread(filename)</code> to read the file specified by the input argument <code class="highlighter-rouge">filename</code> to this function. We will, later on, see some example usages of this function in homework. Similarly, you could write data into an excel file using <code class="highlighter-rouge">xlswrite()</code>. For example,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">values</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">;</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">'x'</span> <span class="p">;</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">};</span>
+<span class="o">&gt;&gt;</span> <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'First'</span><span class="p">,</span><span class="s1">'Second'</span><span class="p">,</span><span class="s1">'Third'</span><span class="p">};</span>
+<span class="o">&gt;&gt;</span> <span class="nb">xlswrite</span><span class="p">(</span><span class="s1">'XlsExample.xlsx'</span><span class="p">,[</span><span class="n">headers</span><span class="p">;</span> <span class="n">values</span><span class="p">]);</span>
+</code></pre></div></div>
+
+<p>would create this <a href="/matlab/notes/data-transfer/io/XlsExample.xlsx" target="_blank">Microsoft Excel file</a> for you.</p>
+
+<h4 id="readingwriting-data-using-readtable-and-writetable">Reading/writing data using <code class="highlighter-rouge">readtable()</code> and <code class="highlighter-rouge">writetable()</code></h4>
+
+<p>Another important and highly useful set of MATLAB functions for IO are <code class="highlighter-rouge">readtable()</code> and <code class="highlighter-rouge">writetable()</code>. The function <code class="highlighter-rouge">readtable()</code> is used to read data into MATLAB in the form of a MATLAB table data type. For example, you could read the same Excel file that we created above into MATLAB using <code class="highlighter-rouge">readtable()</code> instead of <code class="highlighter-rouge">xlsread()</code>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">XlsTable</span> <span class="o">=</span> <span class="nb">readtable</span><span class="p">(</span><span class="s1">'XlsExample.xlsx'</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>XlsTable = 
+    First    Second    Third
+    _____    ______    _____
+
+    1        2         '3'  
+    4        5         'x'  
+    7        8         '9'  
+</code></pre></div></div>
+
+<h4 id="reading-and-writing-image-files-using-imread-and-imwrite">Reading and writing image files using <code class="highlighter-rouge">imread()</code> and <code class="highlighter-rouge">imwrite()</code></h4>
+
+<p>MATLAB has a really wide range of input/output methods of data. We have already discussed some of the most useful IO approaches in the previous sections. For graphics files, however, none of the previous functions are useful. Suppose you wanted to import a <strong>jpg</strong> or <strong>png</strong> or some other type graphics file into MATLAB to further process it. For this purpose, MATLAB has the built-in function <code class="highlighter-rouge">imread()</code> which can read image from an input graphics file. For example, to read <a href="/matlab/notes/data-transfer/io/homer.jpg" target="_blank">this image file</a> in MATLAB, you could do,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">homer</span> <span class="o">=</span> <span class="nb">imread</span><span class="p">(</span><span class="s1">'homer.jpg'</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="nb">imshow</span><span class="p">(</span><span class="n">homer</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>to get the following figure in MATLAB,</p>
+
+<figure>
+    <img src="homerScreenShot.png" />
+</figure>
+
+<p>Now suppose you want to convert this figure to black-and-white and save it as a new figure. You could do,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">homerBW</span> <span class="o">=</span> <span class="nb">rgb2gray</span><span class="p">(</span><span class="n">homer</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="nb">imshow</span><span class="p">(</span><span class="n">homerBW</span><span class="p">)</span>
+<span class="o">&gt;&gt;</span> <span class="nb">imwrite</span><span class="p">(</span><span class="n">homerBW</span><span class="p">,</span><span class="s1">'homerBW.png'</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>to get this <a href="/matlab/notes/data-transfer/io/homerBW.png" target="_blank">black and white version of the above image</a>, now in <strong>png</strong> format (or in any format you may wish, that is also supported by MATLAB).</p>
+
+<h4 id="reading-a-file-using-importdata">Reading a file using <code class="highlighter-rouge">importdata()</code></h4>
+
+<p>Probably, the most general MATLAB function for data input is <code class="highlighter-rouge">importdata()</code>. This function can be used to import almost any type of data and MATLAB is capable of automatically recognizing the correct format for reading the file, based on its extension and content. For example, you could read the same image file above, using <code class="highlighter-rouge">importdata()</code>,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">newHomer</span> <span class="o">=</span> <span class="nb">importdata</span><span class="p">(</span><span class="s1">'homer.jpg'</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="nb">imshow</span><span class="p">(</span><span class="n">newHomer</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>to import it to MATLAB. At the same time, you could also use it to import data from the excel file that we created above, <a href="/matlab/notes/data-transfer/io/XlsExample.xlsx" target="_blank">XlsExample.xlsx</a>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">newXls</span> <span class="o">=</span> <span class="nb">importdata</span><span class="p">(</span><span class="s1">'XlsExample.xlsx'</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>newXls = 
+          data: [3x3 double]
+      textdata: {3x3 cell}
+    colheaders: {'First'  'Second'  'Third'}
+</code></pre></div></div>
+
+<p>or similarly, read a csv-delimited file like <a href="/matlab/notes/data-transfer/io/matrix3.csv" target="_blank">matrix3.csv</a>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">newMat3</span> <span class="o">=</span> <span class="nb">importdata</span><span class="p">(</span><span class="s1">'matrix3.csv'</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>newMat3 =
+  Columns 1 through 7
+       62774      103230       77362       87168       65546       64837      100700
+      104090      143080      104700      116500      108250      105400      111110
+       80351      112850       89506      113890      106030       70235      110620
+       99522      134130       73169      134190      117710       92878       94532
+       59531      102750       91679      111350       80539       84693       96078
+       58504       76982       52076       91449       80797       69246       61569
+       76170      104310       93950      114860       89779      101530       87014
+       91610      118380       90636      107840       91120       90247       84871
+       85943      110670       73451      114410      100840      111660       77908
+       82570       94427       57213       81175       79305       78718       68662
+  Columns 8 through 10
+       79446       78102      106570
+      102950      116850      137810
+      113210      108800      128700
+       93013      119130      132700
+       95750      100980      100450
+       67044       80635       78006
+       86355      103760      119710
+       92649       98589      132660
+       73117      109270       99401
+       65283       66888      114030
+</code></pre></div></div>
+
+<p>In general, you can use <code class="highlighter-rouge">importdata()</code> to read MATLAB binary files (MAT-files), ASCII files and Spreadsheets, as well as images and audio files.</p>
+
+<h4 id="reading-a-file-using-fgetl">Reading a file using <code class="highlighter-rouge">fgetl()</code></h4>
+
+<p>Another useful MATLAB function for reading the content of a file is <code class="highlighter-rouge">fgetl()</code> which can read a file line by line, removing the new line characters <code class="highlighter-rouge">\n</code> from the end of each line. The entire line is read as a string. For example, consider <a href="/matlab/notes/data-transfer/io/text.txt" target="_blank">this file</a>. One could read the content of this text file using the function <code class="highlighter-rouge">fgetl()</code> like the following,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">fid</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">'text.txt'</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="nb">line</span> <span class="o">=</span> <span class="nb">fgetl</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>  <span class="c1">% read line excluding newline character</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>line =
+The main benefit of using a weakly-typed language is the ability to do rapid prototyping. The number of lines of code required to declare and use a dynamically allocated array in C (and properly clean up after its use) is much greater than the number of lines required for the same process in MATLAB.
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">line</span> <span class="o">=</span> <span class="nb">fgetl</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>  <span class="c1">% read line excluding newline character</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>line =
+     ''
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">line</span> <span class="o">=</span> <span class="nb">fgetl</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>  <span class="c1">% read line excluding newline character</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>line =
+Weak typing is also good for code-reuse. You can code a scalar algorithm in MATLAB and with relatively little effort modify it to work on arrays as well as scalars. The fact that MATLAB is a scripted instead of a compiled language also contributes to rapid prototyping.
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">fclose</span><span class="p">(</span><span class="n">fid</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="reading-data-from-web-using-webread">Reading data from web using <code class="highlighter-rouge">webread()</code></h2>
+
+<p>In today’s world, it often happens that the data you need for your research is already stored somewhere on the world-wide-web. For such cases, MATLAB has built-in methods and functions to read and import data or even a webpage. For example, consider <a href="https://www.cdslab.org/ICP2017F/homework/5-problems/triggers.txt" target="_blank">this page</a> on this course’s website. It is indeed a text file containing a set of IDs for some astrophysical events. Suppose, you needed to read and store these IDs locally on your device. You could simply try the following code in MATLAB to fetch all of the table’s information in a single string via,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">webContent</span> <span class="o">=</span> <span class="nb">webread</span><span class="p">(</span><span class="s1">'https://www.cdslab.org/matlab/notes/data-transfer/io/triggers.txt'</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>webContent =
+    '00745966
+     00745090
+     00745022
+     00744791
+     00741528
+     00741220
+     00739517
+     00737438
+     ...
+     00100319'
+</code></pre></div></div>
+
+<p>Now if we wanted to get the individual IDs, we could simply use <code class="highlighter-rouge">strplit()</code> function to split the IDs at the line break characters <code class="highlighter-rouge">'\n'</code>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">webContent</span> <span class="o">=</span> <span class="nb">strsplit</span><span class="p">(</span><span class="n">webContent</span><span class="p">,</span><span class="s1">'\n'</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>webContent =
+  1×1019 cell array
+  Columns 1 through 11
+    {'00745966'}    {'00745090'}    {'00745022'} ...
+</code></pre></div></div>
+
+    
+    
+    <div style="margin-top:3rem">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'shahmoradi'; // required: replace example with your forum shortname
+    
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+</div>
+<hr class="shaded"/>
+<footer>
+    <div class="row">
+        <div class="col-lg-12 footer">
+            &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: July 20, 2019 <br />
+            
+                <span>Page last updated:</span>July 9, 2019<br/>
+            
+        <p>
+            <img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" />
+            <!-- Start of statc -->
+<div style="color: #ffffff; float: none; width: 100%;">
+    <span style="font-size:0.8em">visitor count: 
+        <script type="text/javascript">
+            var sc_project=12047472; 
+            var sc_invisible=0; 
+            var sc_security="fe09cd78"; 
+            var sc_text=3; 
+            var scJsHost = "https://";
+            document.write("<sc"+"ript type='text/javascript' src='" +
+            scJsHost+
+            "statcounter.com/counter/counter.js'></"+"script>");
+        </script>
+    </span>
+</div>
+<!-- End of statc -->
+        </p>
+        </div>
+    </div>
+    <!--Mathjax LaTeX engine-->
+    
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+        MathJax.Hub.Config({
+            config: ["MMLorHTML.js"],
+            extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+            jax: ["input/TeX"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+            TeX: {
+                TagSide: "right",
+                TagIndent: ".8em",
+                MultLineWidth: "85%",
+                equationNumbers: {
+                autoNumber: "AMS",
+                },
+                unicode: {
+                fonts: "STIXGeneral,'Arial Unicode MS'" 
+                }
+            },
+            showProcessingMessages: false
+        });
+    </script>
+    <style TYPE="text/css">
+        code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+    </style>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+            }
+        });
+        MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</footer>
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /#main -->
+        </div>
+        
+    </body>
+    
+</html>

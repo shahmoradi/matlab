@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="This note provides a brief review of Version Control Systems, why they are needed, how they work, and the most prominent and popular version control software...">
+<meta name="keywords" content="version_control_systemVCSgitmercurialgithubbitbucket,  version_control_system, VCS, git, mercurial, github, bitbucket">
+<title>A professional programmer uses Version Control System (VCS) | Scientific Computing with MATLAB</title>
+<link rel="stylesheet" href="/matlab/css/prismOkaidia.css">
+<script src="/matlab/js/prismOkaidia.js"></script>
+<!--
+<link rel="stylesheet" href="/matlab/css/syntax.css">
+-->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/matlab/css/bootstrap.min.css">
+
+
+
+<link rel="stylesheet" href="/matlab/css/customstyles.css">
+<link rel="stylesheet" href="/matlab/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="/matlab/css/theme-cdslab.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/matlab/js/jquery.navgoco.min.js"></script>
+<!-- make sidebar non-accordion -->
+<script src="/matlab/js/lockScrollbarPosition.js"></script>
+<!-- make sidebar non-accordion -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.sidenav').navgoco({
+              accordion: false,
+              caret: '<span class="caret"></span>',
+              openClass: 'open',
+              save: true,
+              cookie: {
+                  name: 'navgoco',
+                  expires: false,
+                  path: '/'
+              },
+              slide: {
+                  duration: 400,
+                  easing: 'swing'
+              }
+          });
+    });
+</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+<!--
+-->
+<script src="/matlab/js/toc.js"></script>
+<script src="/matlab/js/customscripts.js"></script>
+<link rel="shortcut icon" href="/matlab/images/favicon.ico">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+    </head>
+    <body>
+        <!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div id="sticky" class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-book fa-lg navbar-brand" href="/matlab/index.html">&nbsp;<span class="projectTitle"> Scientific Computing with MATLAB</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CDSLab<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/#about" target="_blank" rel="noopener">About</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/people" target="_blank" rel="noopener">People</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/matlab/" target="_blank" rel="noopener">Scientific Computing with MATLAB</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/python/" target="_blank" rel="noopener">Scientific Computing with Python</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">UTA<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">College of Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">Data Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/physics/" target="_blank" rel="noopener">Physics</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="keyword search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="/matlab/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: "/matlab/search.json",
+                                searchResultTemplate: '<li><a href="https://www.cdslab.org{url}" title="A professional programmer uses Version Control System (VCS)">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div id="main">
+                <!-- Content Row -->
+                <div class="row">
+                    
+                    
+                        <!-- Sidebar Column -->
+                        <div class="col-md-3" id="tg-sb-sidebar">
+                            
+<ul id="mysidebar" class="sidenav">
+    <!--
+    -->
+    <li class="sidebarTitle">Table of Pages </li>
+    
+        
+            
+                <li>
+                    <a title="Overview" href="#"><b>Overview</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Preface" href="/matlab/notes/overview/preface/index.html">Preface</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 1" href="/matlab/notes/overview/release-note-1/index.html">Release note 1</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 2" href="/matlab/notes/overview/release-note-2/index.html">Release note 2</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Preliminary foundations" href="#"><b>Preliminary foundations</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li class="active"><a title="Version control system" href="/matlab/notes/preliminary-foundations/version-control-system/index.html">Version control system</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Programming history" href="/matlab/notes/preliminary-foundations/programming-history/index.html">Programming history</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Computer program structure" href="/matlab/notes/preliminary-foundations/computer-program-structure/index.html">Computer program structure</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="MATLAB for beginners" href="/matlab/notes/preliminary-foundations/matlab-for-beginners/index.html">MATLAB for beginners</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Values, variables, and types" href="#"><b>Values, variables, and types</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="First program" href="/matlab/notes/values-variables-types/first-program/index.html">First program</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Values" href="/matlab/notes/values-variables-types/values/index.html">Values</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variables" href="/matlab/notes/values-variables-types/variables/index.html">Variables</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Operators" href="/matlab/notes/values-variables-types/operators/index.html">Operators</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Control constructs" href="#"><b>Control constructs</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Branching" href="/matlab/notes/control-constructs/branching/index.html">Branching</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Looping" href="/matlab/notes/control-constructs/looping/index.html">Looping</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Program units" href="#"><b>Program units</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Functions" href="/matlab/notes/program-units/functions/index.html">Functions</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variable scope" href="/matlab/notes/program-units/variable-scope/index.html">Variable scope</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Data transfer (I/O)" href="#"><b>Data transfer (I/O)</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Data input/ouput methods" href="/matlab/notes/data-transfer/io/index.html">Data input/ouput methods</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Errors and exceptions" href="#"><b>Errors and exceptions</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Exception handling" href="/matlab/notes/exceptions-errors/exception-handling/index.html">Exception handling</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Unit testing" href="/matlab/notes/exceptions-errors/unit-testing/index.html">Unit testing</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Scientific Computing" href="#"><b>Scientific Computing</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Vectorization and array computing" href="/matlab/notes/scientific-computing/vectorization/index.html">Vectorization and array computing</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Visualization and plotting" href="/matlab/notes/scientific-computing/visualization/index.html">Visualization and plotting</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Random numbers" href="/matlab/notes/scientific-computing/random-numbers/index.html">Random numbers</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Object-oriented programming" href="#"><b>Object-oriented programming</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Instantiation" href="/matlab/notes/object-oriented-programming/instantiation/index.html">Instantiation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Encapsulation" href="/matlab/notes/object-oriented-programming/encapsulation/index.html">Encapsulation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Inheritance" href="/matlab/notes/object-oriented-programming/inheritance/index.html">Inheritance</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Polymorphism" href="/matlab/notes/object-oriented-programming/polymorphism/index.html">Polymorphism</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Abstraction" href="/matlab/notes/object-oriented-programming/abstraction/index.html">Abstraction</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+    
+    <!-- if you aren't using the accordion, uncomment this block:
+    -->
+    <p class="external">
+        <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+    </p>
+</ul>
+<!--
+This highlights the active parent class in the navgoco sidebar. 
+This is critical so that the parent expands when you're viewing a page.
+This must appear below the sidebar code above.
+Otherwise, if placed inside customscripts.js,
+the script runs before the sidebar code runs and the class never gets inserted.
+-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+                        </div>
+                        
+                    
+                    <!-- Content Column -->
+                    <div class="col-md-9" id="tg-sb-content">
+                        <div class="post-header">
+   <h1 class="post-title-main">A professional programmer uses Version Control System (VCS)</h1>
+</div>
+
+<div class="post-content">
+    
+        <div class="summary">This note provides a brief review of Version Control Systems, why they are needed, how they work, and the most prominent and popular version control software that is available today for professional collaborative programming.</div>
+    
+    
+        <br>
+        
+<script>
+    $( document ).ready(function() {
+        // Handler for .ready() called.
+        $('#toc').toc({ minimumHeaders: 0 
+                      , listType: 'ol'
+                      , showSpeed: 0
+                      , headers: 'h2,h3,h4,h5,h6'
+        });
+        /* the following offset helps account for the space taken up by the floating toolbar. */
+        $('#toc').on('click', 'a', function() {
+            var target = $(this.getAttribute('href')), scroll_target = target.offset().top$(window).scrollTop(scroll_target - 10);
+            return false
+        })
+    });
+</script>
+
+<div id="toc"></div>
+
+    
+    
+    <h2 id="useful-links-for-future-reference">Useful links for future reference</h2>
+<ul>
+  <li><a href="/matlab/notes/preliminary-foundations/version-control-system/linuxRef.pdf" target="_blank">Linux commands cheat-sheet</a></li>
+  <li><a href="/matlab/notes/preliminary-foundations/version-control-system/progit.en.pdf" target="_blank">Git reference manual (2009)</a></li>
+  <li><a href="/matlab/notes/preliminary-foundations/version-control-system/github-git-cheat-sheet.pdf" target="_blank">Github’s Git cheat-sheet</a></li>
+  <li><a href="/matlab/notes/preliminary-foundations/version-control-system/atlassian_git_cheatsheet.pdf" target="_blank">Atlassian’s Git cheat-sheet</a></li>
+  <li><a href="/matlab/notes/preliminary-foundations/version-control-system/markdown-cheatsheet-online.pdf" target="_blank">Markdown language cheat-sheet</a></li>
+  <li><a href="https://ndpsoftware.com/git-cheatsheet.html" target="_blank">Advanced Git cheatsheet</a></li>
+</ul>
+
+<h2 id="motivation">Motivation</h2>
+<p>Back in the early years of my graduate studies when I started scientific research and programming, the directory containing my first project looked something like the following figure.</p>
+
+<figure>
+    <img src="badCodingHabit.png" />
+    <figcaption>
+        An example of bad coding style and poor project maintenance. The figure shows part of the content of a directory dedicated to a research project. Each folder contains one version of the project and its corresponding codes and results at a given time (i.e., one <a href="https://en.wikipedia.org/wiki/Deliverable" target="_blank">deliverable</a>). Obviously, tracking minor development stages of the project leading to each of the deliverables would be a very difficult task with such project management method.
+    </figcaption>
+</figure>
+
+<p>Clearly, there are many disadvantages and caveats with maintaining the structure of your project and codes similar to the content of the above figure:</p>
+
+<ol>
+  <li><strong>Data redundancy and storage inefficiency</strong><br />
+ Every time you want to develop your existing project and take it to the next level, you have to make a whole copy of the last version of your project to start the new development (i.e., the next version of your project). Obviously, the new version of your project will have a lot in common with the previous version. But, each one has its own dedicated separate folder. So, there is <em>a lot of code and data redundancy</em> in using such an approach to keeping track of your project’s version history.
+ <br /><br /></li>
+  <li><strong>High risk of errors and irreversible mistakes</strong><br />
+Using this method, it is easy to forget which directory you are in, and to accidentally write to the wrong file or to mistakenly overwrite files you did not mean to.
+<br /><br /></li>
+  <li><strong>Difficulty in tracking minor developments in the project</strong><br />
+ In professional programming, all minor developments and changes to a project must be tracked and well-documented (only the major versions of the project (called <a href="https://en.wikipedia.org/wiki/Deliverable" target="_blank">deliverable</a> in programming terminology) are supposed to be available to non-developers or customers. This means that in order to keep track of every minor stage of the program development, one has to create a <strong>new complete</strong> copy of the project, with its own dedicated directory. However, since this is practically impossible, the programmer or the researcher has to either skip documenting all minor improvements and therefore, lose track of detailed changes in the code, or otherwise, worsen the first caveat mentioned above, by generating more and more redundant copies of the same codes and data for the sake of keeping track of all minor stages of the development.
+ <br /><br /></li>
+  <li><strong>Ambiguity in version differences</strong><br />
+ With this primitive method of project version control, it is not clear what the main differences between different versions of the project are, unless a very detailed documentation is provided along with each version detailing the differences between the current, its ancestor (i.e., the previous version of the project) and its descendant (i.e., the next version of the project), or parallel independent versions of the project (i.e., the project <a href="https://en.wikipedia.org/wiki/Branching_(version_control)" target="_blank">branches</a>).
+ <br /><br /></li>
+  <li><strong>Sharing and collaboration difficulties</strong><br />
+ Since the entire project is locally stored and accessible to one programmer or researcher, any collaborative effort will be extremely difficult, and require manual duplication and syncing of the project with other developers.
+ <br /><br /></li>
+  <li><strong>Potential risk of complete data loss:</strong><br />
+ Since the project is stored locally, on a single computer or storage device, there is always a high risk of losing the entire project due to hardware failure, or other unpredicted events.
+ <br /><br /></li>
+</ol>
+
+<p>Fortunately, several smart powerful solutions and software have been developed, collectively known as <a href="https://en.wikipedia.org/wiki/Version_control" target="_blank">Version Control System (VCS)</a> for <a href="https://en.wikipedia.org/wiki/Software_configuration_management" target="_blank">project management</a>, in particular, since the dawn of the new millennium.
+<br /><br /></p>
+
+<p><a name="VCS"></a></p>
+<h2 id="what-is-version-control-system-vcs">What is Version Control System (VCS)?</h2>
+
+<p>Version control is a system (e.g., software) that records changes to a file or set of files over time so that you can recall specific versions later.<sup><a href="#fn1" id="ref1">1</a></sup>
+Depending on how the project is maintained and shared with others, VCS is classified into three categories:</p>
+
+<ol>
+  <li><strong>Local VCS</strong><br />
+ The simplest form of project version control, and probably the oldest method is <em>local VCS</em> where the VCS software keeps detailed track of the evolution of individual files in the project <em>only on a local storage device or computer</em>. A prime example of such version control software is the GNU <a href="https://www.gnu.org/software/rcs/" target="_blank">Revision Control System (RCS)</a>. Such VCS is able to avoid problems 1-4 mentioned above. The following figure illustrates the inner workings of a local VCS.<br />
+ <br />
+ <img src="/matlab/notes/preliminary-foundations/version-control-system/localVCS.png" alt="Local Version Control" /><br />
+ <br />
+ <strong>Major Caveats:</strong>
+    <ol>
+      <li>There is no easy way for collaboration and synchronization between team members.</li>
+      <li>There is a potential risk of complete data loss.<br />
+ <br /><br /></li>
+    </ol>
+  </li>
+  <li><strong>Centralized VCS (CVCS)</strong><br />
+ Since collaborative effort is at the heart of almost every large-scale project, a new generation of VCS has been developed that go beyond the capabilities of local VCS. These VCS have a central repository that is accessible by all members of the project’s team. This central repository contains all of the project’s information and its development history and clients (team members) can check out and work on individual files of the project. For many years this style of VCS used to be the dominant method of software version control. Prime examples include <a href="https://en.wikipedia.org/wiki/Concurrent_Versions_System" target="_blank">Concurrent Versions System (CVS)</a>, <a href="https://en.wikipedia.org/wiki/Perforce_Helix" target="_blank">Perforce Helix</a> and <a href="https://en.wikipedia.org/wiki/Apache_Subversion" target="_blank">Apache Subversion(SVN)</a>. The following figure illustrates the inner workings of a CVCS.<br />
+ <br />
+ <img src="/matlab/notes/preliminary-foundations/version-control-system/centralizedVCS.png" alt="Centralized Version Control" /><br />
+ <br />
+ <strong>Major Caveats:</strong>
+    <ol>
+      <li>Since the main database of the project is centralized, and team members have only snapshots of a specific version of the project, any failure in the central database would halt the individual and the collaborative works of all team members as no further developments can be submitted to the central database.</li>
+      <li>Also, if the central database is completely corrupted with no backups, then the entire history of the project is lost.
+ <br /><br /></li>
+    </ol>
+  </li>
+  <li><strong>Distributed VCS (DVCS)</strong><br />
+ In order to resolve the caveats of the aforementioned VCS, several new VCS, known as <em>distributed VCS</em>, have been developed within the first decade of the new millennium. With these VCS, each client has an entire copy of the central database at their own local storage device. Thus, every <strong>clone</strong> of the central repository that is with each client, is a full backup of all of the project’s data and history.  Consequently, if the central server/repository fails for any reason, the local repository of the team member that has the most recent clone of the project database, can be used to restore the central repository. <strong>This VCS paradigm is currently the most popular class of VCS</strong>. We will be using a major implementation of it known as <a href="https://git-scm.com/" target="_blank"><strong>Git</strong></a> here. Other major DVCS implementations include <a href="https://www.mercurial-scm.org/" target="_blank"><strong>Mercurial</strong></a>, <a href="https://bazaar.canonical.com/en/" target="_blank"><strong>Bazaar</strong></a>, and <a href="http://darcs.net/" target="_blank"><strong>Darcs</strong></a>. The following figure illustrates the inner working of a DVCS.<br />
+ <br />
+ <img src="/matlab/notes/preliminary-foundations/version-control-system/distributedVCS.png" alt="Distributed Version Control" /><br />
+ <br /></li>
+</ol>
+
+<p>A rather complete list of all major VCS software implementations can be found <a href="https://en.wikipedia.org/wiki/List_of_version_control_software" target="_blank">here</a>.</p>
+
+<p><a name="GM-VCS"></a></p>
+<h2 id="gitmercurial-version-control-system">Git/Mercurial version control system</h2>
+
+<p><strong>Git</strong> is a DVCS that grew out of frustration between the Linux kernel developing community and a proprietary VCS software company that maintained and indexed Linux kernel development. Similar to another major DVCS implementation <a href="https://www.mercurial-scm.org/" target="_blank"><strong>Mercurial</strong></a>, Git is designed with the following goals in mind:</p>
+
+<ul>
+  <li>Speed.</li>
+  <li>Simple design.</li>
+  <li>Strong support for non-linear development (thousands of parallel branches).</li>
+  <li>Fully distributed.</li>
+  <li>Able to handle large projects like the Linux kernel efficiently (speed and data size).</li>
+</ul>
+
+<p><a name="GM-indexingMethod"></a></p>
+<h3 id="gitmercurial-project-indexing-method">Git/Mercurial project indexing method</h3>
+
+<p>VCS software, such as SVN and Bazaar, index the new developments of a given project by tracking the changes in individual files of the project, similar to the diagram below.</p>
+
+<figure>
+    <img src="deltas.png" />
+    <figcaption>
+        <b>File-based</b> project indexing method that is common to some VCS software such as CVS, Subversion, Perforce, Bazaar. (<i>Diagram is adopted from <a href="https://git-scm.com/doc" target="_blank">Git documentation</a></i>).
+    </figcaption>
+</figure>
+
+<p>By contrast, both Git and Mercurial work by generating a complete snapshot of the project at any moment the project is committed to the local repository for the purpose of version control. Even if some files have not changed in the new version of the project, they will still exist in the newly generated version of the project. However, both Git and Mercurial have been designed smart enough to realize what changes have occurred to individual files and then store the files effectively, without redundancy.  The complete history of the project is constructed by the series of snapshots generated, a flow that is similar to the following illustration.</p>
+
+<figure>
+    <img src="snapshots.png" />
+    <figcaption>
+        <b>Snapshot-based</b> project indexing method that is used in Git and Mercurial VCS software. (<i>Diagram is adopted from <a href="https://git-scm.com/doc" target="_blank">Git documentation</a></i>).
+    </figcaption>
+</figure>
+
+<p><a name="gitAreas"></a>
+Each project’s file in Git/Mercurial indexing process can have one of the three possible states:</p>
+
+<ol>
+  <li><strong>modified, but not staged:</strong>
+ This is when a project file is modified by the user, but Git/Mercurial has no track of the file changes at the moment. If the file is lost or removed unexpectedly, then Git cannot recover the file.
+ <br /><br />
+ <a name="stagingArea"></a></li>
+  <li><strong>staged for commit to the repository:</strong>
+ When a file is modified it can be added to the Git staging area to be later <em>committed</em> permanently to the repository. The staging area is a file, generally contained in the project’s repository (<code class="highlighter-rouge">.git</code> directory), that stores information about what will go into the next <em>commit</em> to the repository. The staging area is also sometimes referred to as the <strong>index</strong>.
+ <br /><br /></li>
+  <li><strong>committed to the repository:</strong> Once the staged files are <em>committed</em> to the repository, they become a permanent part of it and can be later extracted (i.e., checked out) for review or further development.</li>
+</ol>
+
+<p>These three file states comprise an important integral part of Git and Mercurial. The following figure provides an illustration of these three file states.
+<br /></p>
+
+<figure>
+    <img src="gitAreas.png" />
+    <figcaption>
+        A diagram illustrating the project-indexing process of Git and Mercurial VCS software. Each project file can reside in three different states: <b>working directory</b>, <b>staging area</b>, or in the <b>local repository</b>. (<i>Diagram is adopted from <a href="https://git-scm.com/doc" target="_blank">Git documentation</a></i>).
+    </figcaption>
+</figure>
+
+<p><a name="remRepos"></a></p>
+<h3 id="remote-repository-options-for-your-gitmercurial-projects">Remote repository options for your Git/Mercurial projects</h3>
+
+<p>Git can be downloaded and installed from <a href="https://git-scm.com/downloads" target="_blank">here</a> for Windows, Mac, or Linux systems. The installation guide is available <a href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git" target="_blank">here</a>. Mercurial can be downloaded and installed from <a href="https://www.mercurial-scm.org/" target="_blank">here</a> for Windows, Mac, or other operating systems. For collaborative projects, you will need a central (remote) project-repository to which all team members submit their latest developments. <strong>Even if you are working on a project alone, it is always a good idea to submit all of your project developments to a remote repository for the sake of avoiding unpredicted data loss, also for publicly showcasing your work.</strong> Three popular online repositories for version-controlled projects are:</p>
+
+<ol>
+  <li><a href="https://github.com/" target="_blank"><strong>Github</strong></a>, which is also an Internet hosting service, works exclusively for projects that are indexed using Git VCS. As of today, all public projects (visible to everyone on the web) on Github are free-of-charge. For private projects, you will have to pay a monthly fee. However, <a href="https://github.com/blog/1900-the-best-developer-tools-now-free-for-students" target="_blank">Github Student</a> offers a micro-account specially for students with five private repositories free-of-charge (normally $7/month) while you’re a student.<br /><br /></li>
+  <li><a href="https://bitbucket.org/" target="_blank"><strong>Bitbucket</strong></a>, which used to exclusively host Mercurial-indexed projects. But since 2011, it can also host Git-indexed projects. As of today, all projects, public or private (up to 5 users), can be stored on Bitbucket free-of-charge.</li>
+  <li><a href="https://about.gitlab.com/" target="_blank"><strong>GitLab</strong></a>, is another rather-new  Git-repository manager that provides developer tools comparable wth GitHub, and even more. At the moment, it is not as popular as GitHub. However, it is used by many major companies and industries across the world for software version control (e.g., NASA, IBM, Boeing, CERN, Oracle, Sony, …).</li>
+</ol>
+
+<p>GitHub and Bitbucket are particularly useful for education as they provide notable services and options for educational accounts and purposes. The following is a concise comparison between the general features and services of Github and Bitbucket.</p>
+
+<p><br /></p>
+<table class="center">
+    <tbody>
+        <tr>
+            <td><strong>Feature</strong></td>
+            <td><strong>Bitbucket</strong></td>
+            <td><strong>Github</strong></td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Supported VCS</strong>
+            </td>
+            <td>
+                <em>Mercurial, Git</em>
+            </td>
+            <td>
+                <em>Git</em>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Public repos</strong>
+            </td>
+            <td>
+                <em>Free, unlimited</em>
+            </td>
+            <td>
+                <em>Free, unlimited</em>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Private repos</strong>
+            </td>
+            <td>
+                <em>Free up to 5 users</em>
+            </td>
+            <td>
+                <em>Starts at $7/month for unlimited users</em>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Popular projects hosted</strong>
+            </td>
+            <td>
+                <em><span class="s1">Adium, Mailchimp, Opera, Python, Django</span></em>
+            </td>
+            <td>
+                <em><span class="s1">Bootstrap, Node.js, jQuery, Rails, Homebrew</span></em>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Notable Extra features</strong>
+            </td>
+            <td>
+                <em><span class="s1">External authentication via Github, Twitter, Facebook, Google</span></em>
+            </td>
+            <td>
+                <em><span class="s1">Two-factor authentication, Github Pages, Github Gists</span></em>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<p><a name="gitProjectSetup"></a></p>
+<h2 id="setting-up-your-first-git-project-on-github">Setting up your first Git project on Github</h2>
+
+<p>Here, we will use Git as our version control software, and Github as our central (remote) repository. Follow the guidelines below to create your first Git project on Github.</p>
+
+<ol>
+  <li>Go to <a href="https://education.github.com/" target="_blank">Github Student</a> and create your student account.</li>
+  <li>Download and install <a href="https://git-scm.com/downloads" target="_blank">Git</a> on your computer.</li>
+</ol>
+
+<p><a name="gitID"></a></p>
+<h3 id="setting-up-your-git-identity">Setting up your Git identity</h3>
+
+<p>The first thing you should do when you install Git is to set your user-name and email address. This is important because every Git commit uses this information, and this information is permanently baked into the <em>commits</em> that will make to your projects’ repository. To set your name and email globally for all Git projects <em>once and for all</em> on your computer, use the following Git commands:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git config <span class="nt">--global</span> user.name <span class="s2">"&lt;your name, e.g., Amir Shahmoradi&gt;"</span>
+<span class="nv">$ </span>git config <span class="nt">--global</span> user.email &lt;your email, e.g., shahmoradi@utexas.edu&gt;
+</code></pre></div></div>
+
+<p>You need to do this only once if you pass the <code class="highlighter-rouge">--global</code> option because then Git will always use the provided information for anything you do with Git on your system. Later on, if you want to override this information with a different name or email address for some specific projects, you can run the above same Git commands, but <em>without the <code class="highlighter-rouge">--global</code> optional flag</em>, only <strong>when you are in your specific project’s directory</strong>.</p>
+
+<p><a name="gitInit"></a></p>
+<h3 id="two-methods-of-project-initialization">Two methods of project initialization</h3>
+
+<p>Now at this point, there are two ways for project initialization. We will go through both here. A good detailed tutorial can be found <a href="https://www.atlassian.com/git/tutorials/setting-up-a-repository" target="_blank">here</a>.</p>
+
+<h4 id="remote-project-initialization-on-github">Remote project initialization (on Github)</h4>
+
+<p>With this method you first initialize an empty project on Github, and then clone the project from the remote (Github) repository to your local device, using the <code class="highlighter-rouge">git clone</code> command, discussed later below. To create a remote repository on Github, login to your Github account and follow the instructions on <a href="https://help.github.com/articles/create-a-repo/" target="_blank">this page</a>.</p>
+
+<h4 id="local-project-initialization">Local project initialization</h4>
+
+<p>Local project initialization is done by the following git command:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git init
+</code></pre></div></div>
+
+<p>This command will initialize an empty repository in the current directory. If you check the directory containing your repository, you will notice that a new hidden  <code class="highlighter-rouge">.git</code> folder has been added to the directory. This folder will contain all of the history of your new project. Anything in the directory where the hidden <code class="highlighter-rouge">.git</code> folder exists will be indexed as part of the project.<br />
+In order to generate the project’s repository in a different directory, use</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git init &lt;directory name&gt;
+</code></pre></div></div>
+
+<p>Even if the requested directory does not exist, git will first automatically create the requested directory and initialize an empty project inside of it. That’s it! Now all you need to do is to start adding or developing your project files inside the project folder.</p>
+
+<p><a name="lorcalRemoteConnection"></a></p>
+<h3 id="local-device-and-remote-repository-ssh-connection">Local device and remote repository SSH connection</h3>
+
+<p><br /><strong>Why is SSH needed?</strong><br />
+Now every time may you want to <strong>clone</strong> your remote private repository to your local device or <strong>push</strong> your local repository to a remote server (your Github account), or basically do any communication between the local and remote repositories, Git will ask you to authenticate your connection by supplying your Github username and password. Note that this security check is necessary since you don’t want just anyone to be able to push unwanted changes to your personal projects or mess with them without your prior permission.
+However, this rather annoying user/pass request by Git can be resolved by setting up an <strong>SSH</strong> secure connection between your local device and the remote repository.<br />
+SSH, also known as <strong>Secure Shell</strong> or <strong>Secure Socket Shell</strong>, is a network protocol that gives users a secure way to access a computer over an unsecured network. SSH may also refer to the suite of utilities that implement the SSH protocol.</p>
+
+<p><strong>How does it work?</strong><br />
+Think of your local device as a person who has a set of keys. Now, if your remote repository is a home with an entrance keyhole that matches one of the person’s keys, then the person (i.e., your local device) can gain access to the interior of the home (i.e., your remote repository).</p>
+
+<p><strong>How is it set up?</strong><br />
+You can generate keys for your local device by following the instructions given <a href="https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/" target="_blank">here</a>. Once you have generated the key and the keyhole, you can add a copy of the keyhole to your Github account by following the instructions given <a href="https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/" target="_blank">here</a>.</p>
+
+<p>Here is an example educational video, explaining the SSH key setup process:</p>
+
+<p><br /></p>
+<div class="center">
+    <div class="video-wrapper">
+        <div class="video-container">
+            <iframe width="853" height="480" src="https://www.youtube.com/embed/H5qNpRGB7Qw?rel=0" frameborder="0" allowfullscreen=""></iframe>
+        </div>
+    </div>
+</div>
+<p><br /></p>
+
+<p><a name="mainGitCommands"></a></p>
+<h2 id="main-git-commands">Main Git commands</h2>
+
+<p>As of today, Git has more than 150 commands. For a complete list, you can type the following on your <em>Git bash</em> command window,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">help</span> <span class="nt">-a</span>
+</code></pre></div></div>
+
+<p>to see a list of all possible Git commands. Note that every Git command begins with <code class="highlighter-rouge">git</code>. Despite the long list of Git commands, you will likely use only five of them on an everyday basis. Not that the rest are unimportant, but with these five basic commands you will be at least able to develop and index your project and communicate with your remote repository as well as your colleagues. In order to understand these five, we will have to recall the three states of a project’s files, described earlier <a href="#gitAreas">above</a>.</p>
+
+<p><a name="git-status"></a></p>
+<h3 id="git-status-check-the-status-of-the-project"><strong>git status</strong>: Check the status of the project</h3>
+
+<p>First of all, you can check the status of your git project at any time by typing the following command in the git-bash prompt window, assuming the command line is already on the project’s directory.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+</code></pre></div></div>
+
+<p><a name="git-add"></a></p>
+<h3 id="git-add-add-files-to-the-staging-area"><strong>git add</strong>: Add files to the staging area</h3>
+
+<p>In order to add any of the modified or new files to the <a href="#stagingArea">staging area</a>, use</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add &lt;file name&gt;
+</code></pre></div></div>
+
+<p>To add all modified files (including file removals as well as changes) to the staging area, use</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add <span class="nt">-A</span>
+</code></pre></div></div>
+
+<p>or,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add <span class="nt">--all</span>
+</code></pre></div></div>
+
+<p>This command is equivalent to</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git add <span class="nb">.</span>
+<span class="nv">$ </span>git add <span class="nt">-u</span>
+</code></pre></div></div>
+
+<p>The first command stages the new and modified files, but not the deleted files. The second command stages the modified and deleted files, without the newly-created files.</p>
+
+<p>The full documentation for <code class="highlighter-rouge">git add</code> can be found <a href="https://git-scm.com/docs/git-add" target="_blank">here</a>.</p>
+
+<p><a name="git-commit"></a></p>
+<h3 id="git-commit-commit-the-staged-files-to-the-local-repository"><strong>git commit</strong>: Commit the staged files to the local repository</h3>
+
+<p>The stages files can be committed (i.e., submitted permanently) to the local repository by</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit
+</code></pre></div></div>
+
+<p>once this command is entered, a new page for <em>log message</em> will open on the command line, which contains the list of all files to be committed, and a place at the top of the page to add comments regarding this version of files that are being committed to the repository. To add a comment, press <code class="highlighter-rouge">i</code> to enter the <em>insert</em> mode of the <strong>vim</strong> text-editor. Once your comment is added to the text file, press <code class="highlighter-rouge">ESC</code> button to exit the insert mode, and write <code class="highlighter-rouge">:wq</code> on the command-line to <strong>w</strong>rite the comment file (i.e., save it) and <strong>q</strong>uit <em>vim</em> text-editor.</p>
+
+<p>If you use,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-a</span>
+</code></pre></div></div>
+
+<p>or,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-all</span>
+</code></pre></div></div>
+
+<p>Both commands act as a shortcut to first automatically <strong>stage files</strong> that have been <strong>modified and deleted</strong> and then <strong>commit</strong> them to the repository, but <strong>not the new files</strong> that you have not yet told Git about. Another useful flag is <code class="highlighter-rouge">-m</code> with which you can enter a short message on the command line as the log message of the commit, and therefore no new page will open up for entering log message,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-m</span> <span class="s2">"This is a test commit!"</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">-a</code> and <code class="highlighter-rouge">-m</code> flags can be combined to automatically stage and commit the files together,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">-am</span> <span class="s2">"This is a test commit!"</span>
+</code></pre></div></div>
+
+<p><em>But, keep in mind that with this method of staging, the <strong>new files</strong> will neither be staged nor committed to the repository.</em></p>
+
+<p>The full documentation for <code class="highlighter-rouge">git commit</code> can be found <a href="https://git-scm.com/docs/git-commit" target="_blank">here</a>.</p>
+
+<p><a name="git-push"></a></p>
+<h3 id="git-push-push-the-changes-in-local-repository-to-the-remote-repository"><strong>git push</strong>: Push the changes in local repository to the remote repository</h3>
+
+<p>Now, in order to <em>push</em> all your commits from the local repository to the remote repository, in order to place permanently there and be able to share it with others, use</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git push <span class="nt">--all</span>
+</code></pre></div></div>
+
+<p>We have not yet talked about <strong>git branches</strong>, but what the above command basically does is that it orders Git to <strong>push all branches of the project</strong> to the remote repository. Later on, we will talk more about different flags that can follow <code class="highlighter-rouge">git push</code> command.</p>
+
+<p>The full documentation for <code class="highlighter-rouge">git push</code> can be found <a href="https://git-scm.com/docs/git-push" target="_blank">here</a>.</p>
+
+<p><a name="git-pull"></a></p>
+<h3 id="git-pull-pull-the-latest-project-revision-from-the-remote-to-the-local-repository"><strong>git pull</strong>: Pull the latest project revision from the remote to the local repository</h3>
+
+<p>Sometimes, your project collaborators might be working simultaneously but independently on the project. In such cases, whenever you want to restart your work on your project, you may want to first <em>pull</em> the latest revision of the project – that is not available yet in your local repository – from the remote to your local repository. To do so, you can simply use</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git pull
+</code></pre></div></div>
+
+<p>There are some important details about <code class="highlighter-rouge">git pull</code> which we will delve into later on in the following sections.</p>
+
+<p>The full documentation for <code class="highlighter-rouge">git pull</code> can be found <a href="https://git-scm.com/docs/git-pull" target="_blank">here</a>.</p>
+
+<p><a name="git-summary"></a></p>
+<h3 id="summary-of-main-git-commands">Summary of main Git commands</h3>
+<p>All in all, the most trivial, but also the most useful git commands are the following:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+<span class="nv">$ </span>git add <span class="nt">--all</span>
+<span class="nv">$ </span>git commit
+<span class="nv">$ </span>git push <span class="nt">--all</span>
+</code></pre></div></div>
+
+<p>for submitting your changes to the local and remote repositories, and</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git pull
+</code></pre></div></div>
+
+<p>for syncing your local with the remote repository. Remember that you have to use these commands, in the above forms, **inside the directory of the project **.</p>
+
+<h2 id="getting-help-with-git-commands">Getting help with Git commands</h2>
+
+<p>There are basically three ways to request information about Git commands on the Git-bash command line:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git <span class="nb">help</span> &lt;<span class="nb">command </span>name&gt;
+<span class="nv">$ </span>git &lt;<span class="nb">command </span>name&gt; <span class="nt">--help</span>
+<span class="nv">$ </span>man git-&lt;<span class="nb">command </span>name&gt;
+</code></pre></div></div>
+<p>Note that the last command <code class="highlighter-rouge">man</code> is not a Git command, but a <a href="https://en.wikipedia.org/wiki/Bash_(Unix_shell)" target="_blank">Bash environment</a> command. Just as a reminder, all Git commands begin with the word <em>git</em>.</p>
+
+<h2 id="viewing-the-git-commit-history">Viewing the Git commit history</h2>
+
+<p>You can check the history of your project’s commits to the repository using the Git command <code class="highlighter-rouge">git log</code>.
+For example, here is a snippet from the output  of <code class="highlighter-rouge">git log</code> on my laptop screen:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="nv">$ </span>git log
+commit 264043e0d49006b7f59e57639961c333b5d5f124
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Tue Jan 24 17:48:33 2017 <span class="nt">-0600</span>
+
+    data tables <span class="k">for </span>1D model added.
+
+commit b45ddd780c18736bac42ff27aade301a6b0f09cb
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Tue Jan 24 10:08:53 2017 <span class="nt">-0600</span>
+
+    minor edit
+
+commit b6f4fb69d97a396bde7159c78424100704328634
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Thu Jan 12 21:03:28 2017 <span class="nt">-0600</span>
+
+    <span class="k">*</span>.txt files removed
+
+commit 961ff2d4ac68081a21864b2f1b067b43424d3342
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Thu Jan 12 21:02:00 2017 <span class="nt">-0600</span>
+
+    update
+
+commit 8fd3c49e90d96f4bcef2302c7b227f06ad7a5250
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Thu Jan 12 19:36:45 2017 <span class="nt">-0600</span>
+
+    minor
+
+commit cd0ed7def385ba29ea134bcc18a4ad0873d9f5ee
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Thu Jan 12 19:32:51 2017 <span class="nt">-0600</span>
+
+    minor
+
+commit 8096668868ef64189f788669d5f1838cd944f9b6
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Thu Jan 12 19:28:22 2017 <span class="nt">-0600</span>
+
+    minor
+
+commit c52ba6adea474625cce1493896ecaac40cb976af
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Thu Jan 12 19:24:23 2017 <span class="nt">-0600</span>
+
+    minor
+
+commit ab5a17f9e913e55cae0f971fd9b485a0a6e8dec3
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Thu Jan 12 19:16:27 2017 <span class="nt">-0600</span>
+
+    minor
+
+commit ce5c2421db6e76a338a0e6922acead9100a7c4c4
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Thu Jan 12 19:10:19 2017 <span class="nt">-0600</span>
+
+    minor
+
+commit 4a7d27d81260c2e2a29b6259e6c97befc065c069
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Thu Jan 12 19:05:14 2017 <span class="nt">-0600</span>
+
+:
+</code></pre></div></div>
+
+<p>There is a long list of options that can be used with <code class="highlighter-rouge">git log</code> command to display exactly what you need on the Bash environment screen.
+Some of the most useful options are discussed below.<br />
+To lists the differences between different commits of the same file, use <code class="highlighter-rouge">-p</code> flag:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">-p</span>
+</code></pre></div></div>
+
+<p>To list only a limited count of the most recent commits use <code class="highlighter-rouge">-&lt;number of commits to display&gt;</code> flag. For example:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">-2</span>
+<span class="nv">$ </span>git log <span class="nt">-2</span>
+commit 264043e0d49006b7f59e57639961c333b5d5f124
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Tue Jan 24 17:48:33 2017 <span class="nt">-0600</span>
+
+    data tables <span class="k">for </span>1D model added.
+
+commit b45ddd780c18736bac42ff27aade301a6b0f09cb
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Tue Jan 24 10:08:53 2017 <span class="nt">-0600</span>
+
+    minor edit
+</code></pre></div></div>
+<p><br />
+To list the statistics of the commits, use,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">--stat</span> <span class="nt">-1</span>
+commit 264043e0d49006b7f59e57639961c333b5d5f124
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Tue Jan 24 17:48:33 2017 <span class="nt">-0600</span>
+
+    data tables <span class="k">for </span>1D model added.
+
+ README.md                |   1 +
+ results/tables/README.md |   8 ++-
+ results/tables/tgm.mat   | Bin 0 -&gt; 2550889 bytes
+ src/defineProject.m      |   3 +-
+ src/main.m               |  82 +++++++++------------------
+ src/writeTables.m        |  75 ++++++++++++++++++++++++
+ 9 files changed, 140 insertions<span class="o">(</span>+<span class="o">)</span>, 56 deletions<span class="o">(</span>-<span class="o">)</span>
+</code></pre></div></div>
+<p><br />
+The log data can be even represented in formatted style via the flag <code class="highlighter-rouge">--pretty=format:"&lt;the desired format&gt;"</code>. For example,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">-3</span> <span class="nt">--pretty</span><span class="o">=</span>format:<span class="s2">"%h - %an, %ar : %s"</span>
+264043e - Amir Shahmoradi, 7 days ago : data tables <span class="k">for </span>1D model added.
+b45ddd7 - Amir Shahmoradi, 7 days ago : minor edit
+b6f4fb6 - Amir Shahmoradi, 3 weeks ago : <span class="k">*</span>.txt files removed
+</code></pre></div></div>
+
+<p>A list of available format options is provided below:</p>
+
+<table class="center">
+    <caption class="title" style="padding-bottom:10px">
+        Some useful options for <code>git log --pretty=format:"&lt;options&gt;"</code>. <sup><a href="#fn2" id="ref2">2</a></sup>
+    </caption>
+    <thead>
+        <tr>
+            <th>Option</th>
+            <th>Description of Output</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td><code>%H</code></td>
+        <td>Commit hash</td>
+    </tr>
+    <tr>
+        <td><code>%h</code></td>
+        <td>Abbreviated commit hash</td>
+    </tr>
+    <tr>
+        <td><code>%T</code></td>
+        <td>Tree hash</td>
+    </tr>
+    <tr>
+        <td><code>%t</code></td>
+        <td>Abbreviated tree hash</td>
+    </tr>
+    <tr>
+        <td><code>%P</code></td>
+        <td>Parent hashes</td>
+    </tr>
+    <tr>
+        <td><code>%p</code></td>
+        <td>Abbreviated parent hashes</td>
+    </tr>
+    <tr>
+        <td><code>%an</code></td>
+        <td>Author name</td>
+    </tr>
+    <tr>
+        <td><code>%ae</code></td>
+        <td>Author email</td>
+    </tr>
+    <tr>
+        <td><code>%ad</code></td>
+        <td>Author date (format respects the --date=option)</td>
+    </tr>
+    <tr>
+        <td><code>%ar</code></td>
+        <td>Author date, relative</td>
+    </tr>
+    <tr>
+        <td><code>%cn</code></td>
+        <td>Committer name</td>
+    </tr>
+    <tr>
+        <td><code>%ce</code></td>
+        <td>Committer email</td>
+    </tr>
+    <tr>
+        <td><code>%cd</code></td>
+        <td>Committer date</td>
+    </tr>
+    <tr>
+        <td><code>%cr</code></td>
+        <td>Committer date, relative</td>
+    </tr>
+    <tr>
+        <td><code>%s</code></td>
+        <td>Subject</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+A list of useful options for <code class="highlighter-rouge">git log</code> is given in the table below.</p>
+
+<table id="log_options" class="center">
+    <caption class="title" style="padding-bottom:10px">
+        Table 2: Common flags for <code>git log</code> command. <sup><a href="#fn1" id="ref1">1</a></sup>
+    </caption>
+    <colgroup>
+        <col style="width: 20%;" />
+        <col style="width: 80%;" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th>Option</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+                <td><code>-p</code></td>
+                <td>Show the patch introduced with each commit.</td>
+            </tr>
+            <tr>
+                <td><code>--stat</code></td>
+                <td>Show statistics for files modified in each commit.</td>
+            </tr>
+            <tr>
+                <td><code>--shortstat</code></td>
+                <td>Display only the changed/insertions/deletions line from the --stat command.</td>
+            </tr>
+            <tr>
+                <td><code>--name-only</code></td>
+                <td>Show the list of files modified after the commit information.</td>
+            </tr>
+            <tr>
+                <td><code>--name-status</code></td>
+                <td>Show the list of files affected with added/modified/deleted information as well.</td>
+            </tr>
+            <tr>
+                <td><code>--abbrev-commit</code></td>
+                <td>Show only the first few characters of the SHA-1 checksum instead of all 40.</td>
+            </tr>
+            <tr>
+                <td><code>--relative-date</code></td>
+                <td>Display the date in a relative format (for example, “2 weeks ago”) instead of using the full date format.</td>
+            </tr>
+            <tr>
+                <td><code>--graph</code></td>
+                <td>Display an ASCII graph of the branch and merge history beside the log output.</td>
+            </tr>
+            <tr>
+                <td><code>--pretty</code></td>
+                <td>Show commits in an alternate format. Options include oneline, short, full, fuller, and format (where you specify your own format).</td>
+        </tr>
+    </tbody>
+</table>
+<p><br /></p>
+
+<p>A list of useful options for <code class="highlighter-rouge">git log</code> commands that can change the format of the output, is given in the table below.</p>
+
+<table id="limit_options" class="center">
+    <caption class="title" style="padding-bottom:10px">
+        Table 3. Flags limiting the output of <code>git log</code> command. <sup><a href="#fn1" id="ref1">1</a></sup>
+    </caption>
+    <colgroup>
+        <col style="width: 33.3333%;" />
+        <col style="width: 66.6667%;" />
+    </colgroup>
+    <thead>
+        <tr>
+            <th class="tableblock halign-left valign-top">Option</th>
+            <th class="tableblock halign-left valign-top">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>-&lt;n&gt;</code></td>
+            <td>Show only the last n commits  (e.g., -2, -3, ...). </td>
+        </tr>
+        <tr>
+            <td><code>--since</code>, <code>--after</code></td>
+            <td>Limit the commits to those made after the specified date.</td>
+        </tr>
+        <tr>
+            <td><code>--until</code>, <code>--before</code></td>
+            <td>Limit the commits to those made before the specified date.</td>
+        </tr>
+        <tr>
+            <td><code>--author</code></td>
+            <td>Only show commits in which the author entry matches the specified string.</td>
+        </tr>
+        <tr>
+            <td><code>--committer</code></td>
+            <td>Only show commits in which the committer entry matches the specified string.</td>
+        </tr>
+        <tr>
+            <td><code>--grep</code></td>
+            <td>Only show commits with a commit message containing the string.</td>
+        </tr>
+        <tr>
+                <td><code>-S</code></td>
+                <td>Only show commits adding or removing code matching the string.</td>
+        </tr>
+    </tbody>
+</table>
+<p><br />
+For example, to list the commit history since a specific time in the past, use <code class="highlighter-rouge">--since</code> flag:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">--since</span><span class="o">=</span>2.weeks
+commit 264043e0d49006b7f59e57639961c333b5d5f124
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Tue Jan 24 17:48:33 2017 <span class="nt">-0600</span>
+
+    data tables <span class="k">for </span>1D model added.
+
+commit b45ddd780c18736bac42ff27aade301a6b0f09cb
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Tue Jan 24 10:08:53 2017 <span class="nt">-0600</span>
+
+    minor edit
+</code></pre></div></div>
+
+<p>or, with the following date format:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git log <span class="nt">--since</span><span class="o">=</span><span class="s2">"2017-01-15"</span>
+</code></pre></div></div>
+
+<h2 id="undoing-amending-and-tagging">Undoing, amending, and tagging</h2>
+
+<p>Suppose you want to undo the latest addition of files to the staging area of your Git repository. The command that you need to use to clean the stage area is,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git reset
+</code></pre></div></div>
+
+<p>This command is basically the opposite of <code class="highlighter-rouge">git add</code>. There are a lot of options that can accompany this Git command, details of which can be found in <a href="https://git-scm.com/docs/git-reset" target="_blank">Git documentation</a>.
+However, <strong>be careful when using this command</strong>, especially with flag <code class="highlighter-rouge">--hard</code>, which can result in changes in your working directory as well, thus leading to <strong>involuntary loss of latest uncommitted files</strong>.</p>
+
+<p>Another useful command is,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git commit <span class="nt">--amend</span>
+</code></pre></div></div>
+
+<p>which is used when you forget to add some files to your latest commit and now, you would like to add the latest content of your project’s staging area to the last commit, by <em>amending</em> it.</p>
+
+<p>The Git command <code class="highlighter-rouge">git tag</code> allows you to tag specific important commits in your project’s commit history, for example, a final release of your project (e.g., software). If you just type <code class="highlighter-rouge">git tag</code> on Git bash command line, it will list all tags in the project, <strong>in alphabetical order</strong>,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git tag
+v1.0
+v1.1
+v2.0
+</code></pre></div></div>
+
+<p>You can create a tag for the latest commit to your repository by using,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag <span class="nt">-a</span> v3.0 <span class="nt">-m</span> <span class="s2">"new version of the project"</span>
+</code></pre></div></div>
+
+<p>This will add a new tag pointing to the latest commit in the project with name <code class="highlighter-rouge">v3.0</code> and the message <em>new version of the project</em>.
+Now if you want to display the information about a specific tag, use <code class="highlighter-rouge">git show</code>,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git show v1.0
+tag v1.0
+Tagger: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Tue Jan 1 18:08:00 2017 <span class="nt">-0600</span>
+
+first tag
+
+commit 25129a074aece69d234838764e7df63ed1fb3023
+Author: Amir Shahmoradi &lt;a.shahmoradi@gmail.com&gt;
+Date:   Fri Dec 27 17:12:08 2016 <span class="nt">-0600</span>
+
+    Update README.md
+</code></pre></div></div>
+
+<p>You can also create a <strong>lightweight</strong> tag by avoiding <code class="highlighter-rouge">-a</code>, <code class="highlighter-rouge">-s</code>, or <code class="highlighter-rouge">-m</code> flags in your tag command,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag v4.0
+</code></pre></div></div>
+
+<p>Annotated tags (created with <code class="highlighter-rouge">-a</code> flag) are meant for very important project versions, such as a software release, while lightweight tags are meant for private or temporary object labels.<br />
+For more information about <code class="highlighter-rouge">git tag</code>, see <a href="https://git-scm.com/docs/git-tag" target="_blank">Git documentation</a>.
+<br /></p>
+
+<h2 id="working-with-remote-repositories">Working with remote Repositories</h2>
+
+<p>In order to see which remote servers you have configured for your project, you can run the following Git command,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote
+origin
+</code></pre></div></div>
+
+<p>In the output above, <code class="highlighter-rouge">origin</code> is the default name that Git gives to the server from which you cloned your the project. If you also specify <code class="highlighter-rouge">-v</code> flag, Git will show you the URLs that Git has stored corresponding to the remote’s short name (e.g., origin). This URL is used to read from or write to the remote repository.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote <span class="nt">-v</span>
+origin  git@github.com:shahmoradi/foo.git <span class="o">(</span>fetch<span class="o">)</span>
+origin  git@github.com:shahmoradi/foo.git <span class="o">(</span>push<span class="o">)</span>
+</code></pre></div></div>
+
+<p>In order to see more information about the remote repository of your project, you can use,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git remote show origin
+<span class="k">*</span> remote origin
+  Fetch URL: git@github.com:shahmoradi/foo.git
+  Push  URL: git@github.com:shahmoradi/foo.git
+  HEAD branch: master
+  Remote branches:
+    development tracked
+    master      tracked
+  Local branch configured <span class="k">for</span> <span class="s1">'git pull'</span>:
+    master merges with remote master
+  Local ref configured <span class="k">for</span> <span class="s1">'git push'</span>:
+    master pushes to master <span class="o">(</span>up to date<span class="o">)</span>
+</code></pre></div></div>
+
+<p>The above information indicates that the current HEAD branch of the project is on <em>master</em> branch, and the remote branches on the remote repository are <em>master</em> and <em>development</em>.</p>
+
+<p>You can find more information about <code class="highlighter-rouge">git remote</code> command in <a href="https://git-scm.com/docs/git-remote" target="_blank">Git documentation</a>.
+<br /></p>
+
+<h2 id="git-branching">Git branching</h2>
+
+<p>Branching is a powerful idea in the Version Control System which significantly facilitates collaboration or parallel development of a project. Suppose you have already a project which has reached its first release version, meaning that it works all fine. Now, you like to add a new feature to your project. To do this and to avoid further commits to your original project, you can create a new <strong>branch</strong> of the project which is specifically devoted to adding the new feature. See the following figure, for an example of Git branching.</p>
+
+<figure>
+    <img src="branch-flowchart.png" />
+    <figcaption style="text-align:center">
+        An example illustration of Git branching for a project with three branches: master, development, topic.
+    </figcaption>
+</figure>
+
+<p>When you create a Git project, the default single branch in your project is <strong>master</strong>. So, for example, if you search for your project branches, you’d see,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git branch
+<span class="k">*</span> master
+</code></pre></div></div>
+
+<p>If you have already created other branches in your project, for example, <strong>development</strong>, then you may see a Git message like the following,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git branch
+<span class="k">*</span> development
+  master
+</code></pre></div></div>
+
+<p>The <strong>*</strong> behind the branch name indicates that the <strong>project HEAD (i.e., your working directory)</strong> points to that branch. This means that all commits will be made to that branch highlighted by <strong>*</strong>. In the example above, the working directory points to the <em>development</em> branch.</p>
+
+<h3 id="creating-a-new-branch">Creating a new branch</h3>
+
+<p>In order to <strong>create a new branch</strong> in your project, use,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git branch &lt;branch name&gt;
+</code></pre></div></div>
+
+<p>For example,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git branch development
+</code></pre></div></div>
+
+<p>When you create a new branch, Git creates an exact duplicate of the current branch that you are in, but with the requested name for the new branch.</p>
+
+<h3 id="checking-out-a-branch">Checking out a branch</h3>
+
+<p>In order to <strong>switch to a specific Git branch</strong> in your project, use,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout &lt;branch name&gt;
+</code></pre></div></div>
+
+<p>For example,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout development
+Switched to branch <span class="s1">'development'</span>
+</code></pre></div></div>
+
+<p>A shortcut for <strong>both creating a new branch from the current branch, and switching to the new branch automatically</strong> is to use,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">-b</span> &lt;branch name&gt;
+</code></pre></div></div>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout <span class="nt">-b</span> <span class="nb">test
+</span>Switched to a new branch <span class="s1">'test'</span>
+</code></pre></div></div>
+
+<p>Now suppose, you have made some significant progress on your project <strong>development</strong> branch, and now you want to add the newly-developed feature in the development branch to your <strong>master</strong> branch. All you need to do is,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout master
+<span class="nv">$ </span>git merge development
+</code></pre></div></div>
+
+<p>By doing this, you first switch to master branch, then request Git to <strong>merge</strong> all changes made to the project on the <em>development</em> branch to be copied and transferred to the <em>master</em> branch. For example, if I have added a single <code class="highlighter-rouge">test.txt</code> file, and committed the change to the development branch, then upon merging it with the master branch, Git will display a message like the following,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git merge development
+Updating 25129a0..57ed7c2
+Fast-forward
+ test.txt | 2 ++
+ 1 file changed, 2 insertions<span class="o">(</span>+<span class="o">)</span>
+ create mode 100644 test.txt
+</code></pre></div></div>
+
+<p>Now suppose there was no change in the development branch ever since branching it from the master branch. Then upon merging, you would get a message like the following,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git merge development
+Already up-to-date.
+</code></pre></div></div>
+
+<p>Occasionally, conflicts may arise between branches upon merging. This happens when a common file between the two branches, has been modified on both branches in parallel. In such cases, you will need to resolve the conflict by choosing one of the file edits in one of the branches and discard the other. The following is an example merge conflict message by Git.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git merge development
+Auto-merging test.txt
+CONFLICT <span class="o">(</span>content<span class="o">)</span>: Merge conflict <span class="k">in </span>test.txt
+Automatic merge failed<span class="p">;</span> fix conflicts and <span class="k">then </span>commit the result.
+</code></pre></div></div>
+
+<p>For example, if you use <code class="highlighter-rouge">git status</code> command, the following is the typical message that will be displayed,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git status
+On branch <span class="nb">test
+</span>You have unmerged paths.
+  <span class="o">(</span>fix conflicts and run <span class="s2">"git commit"</span><span class="o">)</span>
+  <span class="o">(</span>use <span class="s2">"git merge --abort"</span> to abort the merge<span class="o">)</span>
+
+Unmerged paths:
+  <span class="o">(</span>use <span class="s2">"git add &lt;file&gt;..."</span> to mark resolution<span class="o">)</span>
+
+        both modified:   test.txt
+
+no changes added to commit <span class="o">(</span>use <span class="s2">"git add"</span> and/or <span class="s2">"git commit -a"</span><span class="o">)</span>
+</code></pre></div></div>
+
+<p>To resolve the conflict, open the conflicting file. There you will see segments of the file from both versions which are the cause of the conflict. Edit the file as you wish. and then perform the normal <code class="highlighter-rouge">git add</code> and <code class="highlighter-rouge">git commit</code> on the file, to resolve the conflict and complete the merge process.</p>
+
+<p>In addition to <code class="highlighter-rouge">git merge</code>, there is another more elegant and powerful Git command, <code class="highlighter-rouge">git rebase</code> for integrating changes in different branches into a single branch. But, the subject goes beyond the goals of this class, and the interested reader is referred to <a href="https://git-scm.com/docs/git-rebase" target="_blank">Git documentation</a> for this command and <a href="https://git-scm.com/book/en/v2/Git-Branching-Rebasing" target="_blank">this pedagogical Git page</a> for <code class="highlighter-rouge">git rebase</code>.</p>
+
+<h3 id="deleting-a-branch">Deleting a branch</h3>
+<p>Normally, when a branch merge is done, the development branch is not needed anymore, so it is always wise and cleaner to delete the unwanted branches, using the command <code class="highlighter-rouge">git branch -d &lt;branch name&gt;</code>. To do this, check out the same branch on which you just performed <code class="highlighter-rouge">git merge</code>, then delete the other unwanted branch,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git checkout master
+Your branch is ahead of <span class="s1">'origin/master'</span> by 1 commit.
+  <span class="o">(</span>use <span class="s2">"git push"</span> to publish your <span class="nb">local </span>commits<span class="o">)</span>
+Switched to branch <span class="s1">'master'</span>
+<span class="nv">$ </span>git branch <span class="nt">-d</span> <span class="nb">test
+</span>Deleted branch hotfix <span class="o">(</span>3a0874c<span class="o">)</span><span class="nb">.</span>
+</code></pre></div></div>
+
+<p><strong>Note that you cannot delete a branch while you are on it (i.e., while it is checked out)</strong>. If you do so, Git will print out an error message like the following on screen,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git branch <span class="nt">-d</span> <span class="nb">test
+</span>error: Cannot delete branch <span class="s1">'test'</span> checked out at <span class="s1">'C:/Users/Amir/git/foo'</span>
+</code></pre></div></div>
+
+<p><strong>You cannot delete a branch from another branch with which you have not performed the merging either</strong>. In this case, Git will print the following error,</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git branch <span class="nt">-d</span> <span class="nb">test
+</span>error: The branch <span class="s1">'test'</span> is not fully merged.
+If you are sure you want to delete it, run <span class="s1">'git branch -D test'</span><span class="nb">.</span>
+</code></pre></div></div>
+
+<div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> <b>Note:</b> 
+    <b>Advice for good project management</b><br />
+    Your <i>master</i> branch should always contain the latest clean version of your project, that is, the complete and working version/release. You should always make your new developments in a separate branch, and once it works and the new feature/development is complete, you merge the new development into the master branch.</div>
+
+<p><br /></p>
+
+<p><strong>Footnotes</strong></p>
+
+<p><sup id="fn1" style="font-size:1em">
+    1. For a thorough review of VCS and particularly Git, see the <a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control" target="_blank">Git documentation</a>. <a href="#ref1" title="Jump back to footnote 2 in the text.">↩</a>
+</sup><br />
+<sup id="fn2" style="font-size:1em">
+    2. See <a href="https://git-scm.com/docs/git-log" target="_blank">Git documentation</a> for more details and updates. <a href="#ref2" title="Jump back to footnote 2 in the text.">↩</a>
+</sup></p>
+
+<!--
+[^2]: <span style="font-size:0.7em">For a short history of Git see [Git history](https://git-scm.com/book/en/v2/Getting-Started-A-Short-History-of-Git){:target="_blank"}.</span>
+-->
+
+    
+    
+    <div style="margin-top:3rem">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'shahmoradi'; // required: replace example with your forum shortname
+    
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+</div>
+<hr class="shaded"/>
+<footer>
+    <div class="row">
+        <div class="col-lg-12 footer">
+            &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: July 20, 2019 <br />
+            
+                <span>Page last updated:</span>July 9, 2019<br/>
+            
+        <p>
+            <img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" />
+            <!-- Start of statc -->
+<div style="color: #ffffff; float: none; width: 100%;">
+    <span style="font-size:0.8em">visitor count: 
+        <script type="text/javascript">
+            var sc_project=12047472; 
+            var sc_invisible=0; 
+            var sc_security="fe09cd78"; 
+            var sc_text=3; 
+            var scJsHost = "https://";
+            document.write("<sc"+"ript type='text/javascript' src='" +
+            scJsHost+
+            "statcounter.com/counter/counter.js'></"+"script>");
+        </script>
+    </span>
+</div>
+<!-- End of statc -->
+        </p>
+        </div>
+    </div>
+    <!--Mathjax LaTeX engine-->
+    
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+        MathJax.Hub.Config({
+            config: ["MMLorHTML.js"],
+            extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+            jax: ["input/TeX"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+            TeX: {
+                TagSide: "right",
+                TagIndent: ".8em",
+                MultLineWidth: "85%",
+                equationNumbers: {
+                autoNumber: "AMS",
+                },
+                unicode: {
+                fonts: "STIXGeneral,'Arial Unicode MS'" 
+                }
+            },
+            showProcessingMessages: false
+        });
+    </script>
+    <style TYPE="text/css">
+        code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+    </style>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+            }
+        });
+        MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</footer>
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /#main -->
+        </div>
+        
+    </body>
+    
+</html>

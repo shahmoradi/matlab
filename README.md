@@ -1,2 +1,1 @@
-# matlab
-Scientific Computing with MATLAB, available at https://www.cdslab.org/matlab/
+Scientific Computing with MATLAB. Available at [https://www.cdslab.org/matlab/](https://www.cdslab.org/matlab/)

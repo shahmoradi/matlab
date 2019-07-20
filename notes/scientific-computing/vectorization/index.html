@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Vectorization, an extremely important concept in high-performance scientific computing, is the process of simultaneous execution of a set of computer instruc...">
+<meta name="keywords" content="vectorizationarray_computingFortranperformancescientific_computingMATLAB,  vectorization, array_computing, Fortran, performance, scientific_computing, MATLAB">
+<title>Vectorization and array computing | Scientific Computing with MATLAB</title>
+<link rel="stylesheet" href="/matlab/css/prismOkaidia.css">
+<script src="/matlab/js/prismOkaidia.js"></script>
+<!--
+<link rel="stylesheet" href="/matlab/css/syntax.css">
+-->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/matlab/css/bootstrap.min.css">
+
+
+
+<link rel="stylesheet" href="/matlab/css/customstyles.css">
+<link rel="stylesheet" href="/matlab/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="/matlab/css/theme-cdslab.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/matlab/js/jquery.navgoco.min.js"></script>
+<!-- make sidebar non-accordion -->
+<script src="/matlab/js/lockScrollbarPosition.js"></script>
+<!-- make sidebar non-accordion -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.sidenav').navgoco({
+              accordion: false,
+              caret: '<span class="caret"></span>',
+              openClass: 'open',
+              save: true,
+              cookie: {
+                  name: 'navgoco',
+                  expires: false,
+                  path: '/'
+              },
+              slide: {
+                  duration: 400,
+                  easing: 'swing'
+              }
+          });
+    });
+</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+<!--
+-->
+<script src="/matlab/js/toc.js"></script>
+<script src="/matlab/js/customscripts.js"></script>
+<link rel="shortcut icon" href="/matlab/images/favicon.ico">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+    </head>
+    <body>
+        <!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div id="sticky" class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-book fa-lg navbar-brand" href="/matlab/index.html">&nbsp;<span class="projectTitle"> Scientific Computing with MATLAB</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CDSLab<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/#about" target="_blank" rel="noopener">About</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/people" target="_blank" rel="noopener">People</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/matlab/" target="_blank" rel="noopener">Scientific Computing with MATLAB</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/python/" target="_blank" rel="noopener">Scientific Computing with Python</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">UTA<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">College of Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">Data Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/physics/" target="_blank" rel="noopener">Physics</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="keyword search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="/matlab/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: "/matlab/search.json",
+                                searchResultTemplate: '<li><a href="https://www.cdslab.org{url}" title="Vectorization and array computing">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div id="main">
+                <!-- Content Row -->
+                <div class="row">
+                    
+                    
+                        <!-- Sidebar Column -->
+                        <div class="col-md-3" id="tg-sb-sidebar">
+                            
+<ul id="mysidebar" class="sidenav">
+    <!--
+    -->
+    <li class="sidebarTitle">Table of Pages </li>
+    
+        
+            
+                <li>
+                    <a title="Overview" href="#"><b>Overview</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Preface" href="/matlab/notes/overview/preface/index.html">Preface</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 1" href="/matlab/notes/overview/release-note-1/index.html">Release note 1</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 2" href="/matlab/notes/overview/release-note-2/index.html">Release note 2</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Preliminary foundations" href="#"><b>Preliminary foundations</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Version control system" href="/matlab/notes/preliminary-foundations/version-control-system/index.html">Version control system</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Programming history" href="/matlab/notes/preliminary-foundations/programming-history/index.html">Programming history</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Computer program structure" href="/matlab/notes/preliminary-foundations/computer-program-structure/index.html">Computer program structure</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="MATLAB for beginners" href="/matlab/notes/preliminary-foundations/matlab-for-beginners/index.html">MATLAB for beginners</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Values, variables, and types" href="#"><b>Values, variables, and types</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="First program" href="/matlab/notes/values-variables-types/first-program/index.html">First program</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Values" href="/matlab/notes/values-variables-types/values/index.html">Values</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variables" href="/matlab/notes/values-variables-types/variables/index.html">Variables</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Operators" href="/matlab/notes/values-variables-types/operators/index.html">Operators</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Control constructs" href="#"><b>Control constructs</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Branching" href="/matlab/notes/control-constructs/branching/index.html">Branching</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Looping" href="/matlab/notes/control-constructs/looping/index.html">Looping</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Program units" href="#"><b>Program units</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Functions" href="/matlab/notes/program-units/functions/index.html">Functions</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variable scope" href="/matlab/notes/program-units/variable-scope/index.html">Variable scope</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Data transfer (I/O)" href="#"><b>Data transfer (I/O)</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Data input/ouput methods" href="/matlab/notes/data-transfer/io/index.html">Data input/ouput methods</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Errors and exceptions" href="#"><b>Errors and exceptions</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Exception handling" href="/matlab/notes/exceptions-errors/exception-handling/index.html">Exception handling</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Unit testing" href="/matlab/notes/exceptions-errors/unit-testing/index.html">Unit testing</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Scientific Computing" href="#"><b>Scientific Computing</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li class="active"><a title="Vectorization and array computing" href="/matlab/notes/scientific-computing/vectorization/index.html">Vectorization and array computing</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Visualization and plotting" href="/matlab/notes/scientific-computing/visualization/index.html">Visualization and plotting</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Random numbers" href="/matlab/notes/scientific-computing/random-numbers/index.html">Random numbers</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Object-oriented programming" href="#"><b>Object-oriented programming</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Instantiation" href="/matlab/notes/object-oriented-programming/instantiation/index.html">Instantiation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Encapsulation" href="/matlab/notes/object-oriented-programming/encapsulation/index.html">Encapsulation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Inheritance" href="/matlab/notes/object-oriented-programming/inheritance/index.html">Inheritance</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Polymorphism" href="/matlab/notes/object-oriented-programming/polymorphism/index.html">Polymorphism</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Abstraction" href="/matlab/notes/object-oriented-programming/abstraction/index.html">Abstraction</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+    
+    <!-- if you aren't using the accordion, uncomment this block:
+    -->
+    <p class="external">
+        <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+    </p>
+</ul>
+<!--
+This highlights the active parent class in the navgoco sidebar. 
+This is critical so that the parent expands when you're viewing a page.
+This must appear below the sidebar code above.
+Otherwise, if placed inside customscripts.js,
+the script runs before the sidebar code runs and the class never gets inserted.
+-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+                        </div>
+                        
+                    
+                    <!-- Content Column -->
+                    <div class="col-md-9" id="tg-sb-content">
+                        <div class="post-header">
+   <h1 class="post-title-main">Vectorization and array computing</h1>
+</div>
+
+<div class="post-content">
+    
+        <div class="summary">Vectorization, an extremely important concept in high-performance scientific computing, is the process of simultaneous execution of a set of computer instructions. This is contrary to the idea of looping and iteration which performs all program instructions sequentially. Vectorization can lead to significant runtime speed-up of the code.</div>
+    
+    
+        <br>
+        
+<script>
+    $( document ).ready(function() {
+        // Handler for .ready() called.
+        $('#toc').toc({ minimumHeaders: 0 
+                      , listType: 'ol'
+                      , showSpeed: 0
+                      , headers: 'h2,h3,h4,h5,h6'
+        });
+        /* the following offset helps account for the space taken up by the floating toolbar. */
+        $('#toc').on('click', 'a', function() {
+            var target = $(this.getAttribute('href')), scroll_target = target.offset().top$(window).scrollTop(scroll_target - 10);
+            return false
+        })
+    });
+</script>
+
+<div id="toc"></div>
+
+    
+    
+    <h2 id="vectorization-in-matlab">Vectorization in MATLAB</h2>
+
+<p>Experienced programmers who are concerned with producing compact and fast programs, try to avoid for-loops wherever possible in their MATLAB codes. There is a reason for this: for-loops and while-loops have significant overhead in interpreted languages such as MATLAB and Python.</p>
+
+<p>There is, of course, a remedy for this inefficiency. Since MATLAB is a matrix language, many of the matrix-level operations and functions are carried out internally using compiled C, Fortran, or assembly codes and are therefore executed at near-optimum efficiency. This is true of the arithmetic operators <code class="highlighter-rouge">*</code>, <code class="highlighter-rouge">+</code>,<code class="highlighter-rouge">-</code>,<code class="highlighter-rouge">\</code>, <code class="highlighter-rouge">/</code> and of relational and logical operators.</p>
+
+<p>However, for-loops may be executed relatively slowly, depending on what is inside the loop, and MATLAB may or may not be able to optimize the loop. One of the most important tips for producing efficient M-files is to avoid for-loops in favor of vectorized constructs, that is, to convert for-loops into an equivalent vector or matrix operations. Vectorization has important benefits beyond simply increasing the speed of execution. It can lead to shorter and more readable MATLAB code. Furthermore, it expresses algorithms in terms of high-level constructs that are more appropriate for high-performance computing. For example, consider the process of summation of a random vector in MATLAB,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span> <span class="o">=</span> <span class="mf">5e7</span><span class="p">;</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+<span class="nb">tic</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="k">for</span> <span class="nb">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">x</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">;</span> <span class="k">end</span><span class="p">,</span> <span class="nb">toc</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Elapsed time is 0.581945 seconds.
+</code></pre></div></div>
+
+<p>Now doing the same thing, using array notation would yield,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tic</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span><span class="p">);</span> <span class="nb">toc</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Elapsed time is 0.200450 seconds.
+</code></pre></div></div>
+
+<p>Amazing, isn’t it? You get almost 3x speedup in your MATLAB code if you use vectorized computation instead of for-loops. Later on, we will see that MATLAB has inherited these excellent vectorization techniques and syntax for matrix calculations from its high-performance ancestor, <a href="https://en.wikipedia.org/wiki/Fortran" target="_blank">Fortran</a>.</p>
+
+<h3 id="exercise">Exercise</h3>
+
+<p>How do you vectorize the following code?</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">:</span><span class="o">.</span><span class="mi">01</span><span class="p">:</span><span class="mi">10</span>
+    <span class="nb">i</span> <span class="o">=</span> <span class="nb">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="o">=</span> <span class="nb">sin</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p><strong>Answer</strong></p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">:</span><span class="o">.</span><span class="mi">01</span><span class="p">:</span><span class="mi">10</span><span class="p">;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="nb">sin</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+</code></pre></div></div>
+
+<h2 id="vectorization-of-array-operations">Vectorization of array operations</h2>
+
+<p>Vectorization of arrays can be done through <strong>array operators</strong>, which perform the same operation for all elements in the data set. These types of operations are useful for repetitive calculations. For example, suppose you collect the volume (V) of various cones by recording their diameter (D) and height (H). If you collect the information for just one cone, you can calculate the volume for that single cone as,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">;</span>
+<span class="n">H</span> <span class="o">=</span> <span class="mf">0.04</span><span class="p">;</span>
+<span class="n">V</span> <span class="o">=</span> <span class="mi">1</span><span class="p">/</span><span class="mi">12</span><span class="o">*</span><span class="nb">pi</span><span class="o">*</span><span class="p">(</span><span class="n">D</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">H</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>V =
+   4.1888e-04
+</code></pre></div></div>
+
+<p>Now, suppose we collect information on 10,000 cones. The vectors <code class="highlighter-rouge">D</code> and <code class="highlighter-rouge">H</code> each contain 10,000 elements, and you want to calculate 10,000 volumes. In most programming languages (except Fortran and R which have similar vectorization capabilities to MATLAB), you need to set up a loop similar to this MATLAB code (here instead of 10000, I am using 7),</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.2</span> <span class="mf">1.0</span> <span class="mf">1.5</span> <span class="mf">3.0</span> <span class="o">-</span><span class="mf">1.0</span> <span class="mf">4.2</span> <span class="mf">3.14</span><span class="p">];</span>
+<span class="n">H</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0400</span> <span class="mf">1.0000</span> <span class="mf">2.2500</span> <span class="mf">9.0000</span> <span class="mf">1.0000</span> <span class="mf">17.6400</span> <span class="mf">9.8596</span><span class="p">];</span>
+<span class="k">for</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">7</span>
+   <span class="n">V</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span><span class="p">/</span><span class="mi">12</span><span class="o">*</span><span class="nb">pi</span><span class="o">*</span><span class="p">(</span><span class="n">D</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">H</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="k">end</span>
+<span class="n">V</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>V =
+    0.0004    0.2618    1.3254   21.2058    0.2618   81.4640   25.4500
+</code></pre></div></div>
+
+<p>With MATLAB, you can perform the calculation for each element of a vector with similar syntax as the scalar case,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">V</span> <span class="o">=</span> <span class="mi">1</span><span class="p">/</span><span class="mi">12</span><span class="o">*</span><span class="nb">pi</span><span class="o">*</span><span class="p">(</span><span class="n">D</span><span class="o">.^</span><span class="mi">2</span><span class="p">)</span><span class="o">.*</span><span class="n">H</span><span class="p">;</span>  <span class="c1">% Vectorized Calculation</span>
+<span class="n">V</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>V =
+    0.0004    0.2618    1.3254   21.2058    0.2618   81.4640   25.4500
+</code></pre></div></div>
+
+<div class="alert alert-warning" role="alert"><i class="fa fa-warning"></i> <b>Important:</b> Placing a period (<code>.</code>) before the operators <code>*</code>, <code>/</code>, and <code>^</code>, transforms them into array operators.</div>
+
+<h2 id="logical-array-operations">Logical array operations</h2>
+
+<p>MATLAB comparison operators also accept vector inputs and return vector outputs. For example, suppose while collecting data from 10,000 cones, you record several negative values for the diameter. You can determine which values in a vector are valid with the <code class="highlighter-rouge">&gt;=</code> operator,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.2</span> <span class="mf">1.0</span> <span class="mf">1.5</span> <span class="mf">3.0</span> <span class="o">-</span><span class="mf">1.0</span> <span class="mf">4.2</span> <span class="mf">3.14</span><span class="p">];</span>
+<span class="n">D</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     0     1     1     1     0     1     1
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">(</span><span class="nb">ans</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+logical
+</code></pre></div></div>
+
+<p>You can directly exploit the logical indexing power of MATLAB to select the valid cone volumes, <code class="highlighter-rouge">Vgood</code>, for which the corresponding elements of D are nonnegative,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vgood</span> <span class="o">=</span> <span class="n">V</span><span class="p">(</span><span class="n">D</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">% removing all data corresponding to negative diameters</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Vgood =
+    0.2618    1.3254   21.2058   81.4640   25.4500
+</code></pre></div></div>
+
+<p>MATLAB allows you to perform a logical AND or OR on the elements of an entire vector with the functions all and any, respectively. You can throw a warning if all values of <code class="highlighter-rouge">D</code> are below zero,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">D</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">% gives no warning because not all values are negative</span>
+   <span class="nb">warning</span><span class="p">(</span><span class="s1">'All values of diameter are negative.'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+
+<p>or,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">(</span><span class="n">D</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span>
+   <span class="nb">warning</span><span class="p">(</span><span class="s1">'Some values of diameter are negative.'</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Warning: Some values of diameter are negative. 
+</code></pre></div></div>
+
+<p>MATLAB can also compare two vectors of the same size, allowing you to impose further restrictions. This code finds all the values where <code class="highlighter-rouge">V</code> is nonnegative and <code class="highlighter-rouge">D</code> is greater than <code class="highlighter-rouge">H</code>,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.2</span> <span class="mf">1.0</span> <span class="mf">1.5</span> <span class="mf">3.0</span> <span class="o">-</span><span class="mf">1.0</span> <span class="mf">4.2</span> <span class="mf">3.14</span><span class="p">];</span>
+<span class="n">H</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0400</span> <span class="mf">1.0000</span> <span class="mf">2.2500</span> <span class="mf">1.5000</span> <span class="mf">1.0000</span> <span class="mf">0.6400</span> <span class="mf">9.8596</span><span class="p">];</span>
+<span class="n">V</span><span class="p">((</span><span class="n">V</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">D</span> <span class="o">&gt;</span> <span class="n">H</span><span class="p">))</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+   21.2058   81.4640
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">V</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>V =
+    0.0004    0.2618    1.3254   21.2058    0.2618   81.4640   25.4500
+</code></pre></div></div>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">V</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">D</span> <span class="o">&gt;</span> <span class="n">H</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+     0     0     0     1     0     1     0
+</code></pre></div></div>
+
+<p>The resulting vector is the same size as the inputs. To aid comparison, MATLAB contains special values to denote <strong>overflow</strong>, <strong>underflow</strong>, and <strong>undefined operators</strong>, such as <strong>inf</strong> and <strong>nan</strong>. Logical operators <a href="https://www.mathworks.com/help/matlab/ref/isinf.html" target="_blank">isinf</a> and <a href="https://www.mathworks.com/help/matlab/ref/isnan.html" target="_blank">isnan</a> exist to help perform logical tests for these special values. For example, it is often useful to exclude <code class="highlighter-rouge">NaN</code> values from computations,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">-</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="n">NaN</span> <span class="mi">2</span> <span class="n">NaN</span> <span class="mi">11</span> <span class="mi">4</span> <span class="n">Inf</span><span class="p">];</span>
+<span class="n">xvalid</span> <span class="o">=</span> <span class="n">x</span><span class="p">(</span><span class="o">~</span><span class="nb">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xvalid =
+     2    -1     0     3     2    11     4   Inf
+</code></pre></div></div>
+
+<div class="alert alert-danger" role="alert"><i class="fa fa-exclamation-circle"></i> <b>Warning:</b> Note that <code>Inf == Inf</code> returns <code>true</code>; however, <code>NaN == NaN</code> always returns <code>false</code> in MATLAB.</div>
+
+<h2 id="matrix-operations">Matrix Operations</h2>
+
+<p>Matrix operations act according to the rules of linear algebra. These operations are most useful in vectorization if you are working with multidimensional data. Suppose you want to evaluate a function, $F$, of two variables, $x$, and $y$,</p>
+
+<script type="math/tex; mode=display">F(x,y) = x*\exp(-x2 - y2) ~.</script>
+
+<p>To evaluate this function at every combination of points in the $x$ and $y$, you need to define a grid of values,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span><span class="mf">0.2</span><span class="p">:</span><span class="mi">2</span><span class="p">;</span>
+<span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.5</span><span class="p">:</span><span class="mf">0.2</span><span class="p">:</span><span class="mf">1.5</span><span class="p">;</span>
+<span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">);</span>
+<span class="n">F</span> <span class="o">=</span> <span class="n">X</span><span class="o">.*</span><span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="n">X</span><span class="o">.^</span><span class="mi">2</span><span class="o">-</span><span class="n">Y</span><span class="o">.^</span><span class="mi">2</span><span class="p">);</span>
+</code></pre></div></div>
+
+<p>Without <code class="highlighter-rouge">meshgrid()</code>, you might need to write two for-loops to iterate through vector combinations. The function <code class="highlighter-rouge">ndgrid()</code> also creates number grids from vectors, but unlike <code class="highlighter-rouge">meshgrid()</code>, it can construct grids beyond three dimensions. <code class="highlighter-rouge">meshgrid()</code> can only construct 2-D and 3-D grids.</p>
+
+<p>The following table contains a list of MATLAB functions that are commonly used in vectorized codes,</p>
+
+<table class="center">
+    <caption class="title" style="padding-bottom:10px;text-align:center;">
+        Table of MATLAB's most-widely used vectorization functions.
+    </caption>
+    <thead>
+        <tr>
+            <th><font>Function</font></th>
+            <th><font>Description</font></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><code>all</code></td><td>Determine if all array elements are nonzero or true</td></tr>
+        <tr><td><code>any</code></td><td>Determine if any array elements are nonzero</td></tr>
+        <tr><td><code>cumsum</code></td><td>Cumulative sum</td></tr>
+        <tr><td><code>diff</code></td><td>Differences and Approximate Derivatives</td></tr>
+        <tr><td><code>find</code></td><td>Find indices and values of nonzero elements</td></tr>
+        <tr><td><code>ind2sub</code></td><td>Subscripts from linear index</td></tr>
+        <tr><td><code>ipermute</code></td><td>Inverse permute dimensions of N-D array</td></tr>
+        <tr><td><code>logical</code></td><td>Convert numeric values to logicals</td></tr>
+        <tr><td><code>meshgrid</code></td><td>Rectangular grid in 2-D and 3-D space</td></tr>
+        <tr><td><code>ndgrid</code></td><td>Rectangular grid in N-D space</td></tr>
+        <tr><td><code>permute</code></td><td>Rearrange dimensions of N-D array</td></tr>
+        <tr><td><code>prod</code></td><td>Product of array elements</td></tr>
+        <tr><td><code>repmat</code></td><td>Repeat copies of array</td></tr>
+        <tr><td><code>reshape</code></td><td>Reshape array</td></tr>
+        <tr><td><code>shiftdim</code></td><td>Shift dimensions</td></tr>
+        <tr><td><code>sort</code></td><td>Sort array elements</td></tr>
+        <tr><td><code>squeeze</code></td><td>Remove singleton dimensions</td></tr>
+        <tr><td><code>sub2ind</code></td><td>Convert subscripts to linear indices</td></tr>
+        <tr><td><code>sum</code></td><td>Sum of array elements</td></tr>
+    </tbody>
+</table>
+
+<h2 id="why-is-vectorized-code-faster-than-for-loops">Why is vectorized code faster than for-loops?</h2>
+
+<p>The reason for the speedup in vectorized has to be sought in the way the memory of the computer is built. The figure below represents a schematic diagram of the Central Processing Unit (CPU) of every modern computer in relationship with computer memory.</p>
+
+<figure>
+    <img src="cpu-memory.jpg" />
+    <figcaption>
+        The hierarchy of memory in most modern computers and its relationship with the CPU.
+    </figcaption>
+</figure>
+
+<p>At the highest level of the memory hierarchy, closest to the CPU, we have the CPU register. A processor register is a quickly accessible location available to a computer’s CPU. Registers usually consist of a small amount of fast storage and maybe read-only or write-only. The CPU has super fast access to data stored in the register. But the problem is that this memory is very small, typically on the orders of bits of information.</p>
+
+<p>At the second level of the hierarchy of memory, we have the CPU cache, typically comprised of three different levels L1, L2, L3, which rank from fastest to slowest respectively, in terms of CPU access. However, the faster the cache memory, the smaller it is. Therefore, L1 is the fastest of the three, but also the smallest of the three levels.</p>
+
+<p>CPU Caching was invented to solve a significant problem. In the early decades of computing, the main memory was extremely slow and incredibly expensive — but CPUs weren’t particularly fast, either. Starting in the 1980s, the gap began to widen quickly. Microprocessor clock speeds took off, but memory access times improved far less dramatically. As this gap grew, it became increasingly clear that a new type of fast memory was needed to bridge the gap. See the figure below.</p>
+
+<figure>
+    <img src="CPU-DRAM.png" />
+    <figcaption>
+        The growing gap between the speed of DRAM memories and CPUs in time.
+    </figcaption>
+</figure>
+
+<p>After CPU cache, there the Random Access Memory (RAM) which you hear the most about when you go to buy a new computer. Typical computers contain 4-32 Gb of RAM. When you open MATLAB and create some variables, all of your data is stored on this memory. However, this memory is the slowest of all in terms of access to CPU.</p>
+
+<p>When you use for-loops in MATLAB to perform some specific calculations on a vector, you are asking MATLAB to go to this memory at each loop iteration to fetch an element of the loop, bring it to the CPU, perform the set of operations requested, and send it back to memory. However, the CPU is much more capable than doing a single calculation at a time. Therefore, if you could somehow tell MATLAB to fetch a bulk of elements from your vector and bring them to CPU to perform the requested operations, your code would become much faster. The way to tell MATLAB to do so is called <strong>vectorization</strong>. By vectorizing your code, you tell MATLAB to bring as much information as possible to the highest memory level close to CPU, to perform the operations on all of them simultaneously and return the result for all of them back to the memory altogether. This results in much faster code, since nowadays, as the figure above shows, the bottleneck in code performance is not the CPU speed, but the memory access.</p>
+
+<h2 id="measuring-the-performance-of-your-matlab-functions-and-scripts">Measuring the performance of your MATLAB functions and scripts</h2>
+
+<p>MATLAB has several built-in methods of timing how long it takes to run a MATLAB function or script. The <code class="highlighter-rouge">timeit()</code> function as well as <code class="highlighter-rouge">tic</code> and <code class="highlighter-rouge">toc</code>, are in particular very useful. Use the <code class="highlighter-rouge">timeit()</code> function for rigorous measurement of your function’s execution time. Use <code class="highlighter-rouge">tic</code> and <code class="highlighter-rouge">toc</code> to estimate time for smaller portions of code that are not complete functions.</p>
+
+<p>For additional details about the performance of your code, such as function call information and execution time of individual lines of code, MATLAB has more sophisticated tools such as <em>MATLAB® Profiler</em>.</p>
+
+<h3 id="timing-matlab-functions">Timing MATLAB functions</h3>
+
+<p>To measure the time required to run a function, whether built-in or your own, you can use the <code class="highlighter-rouge">timeit()</code> function. The <code class="highlighter-rouge">timeit()</code> function calls the user-specified function multiple times and returns the median of the time measurements. This function takes <strong>a handle to the function whose performance is to be measured</strong> and returns the typical execution time, in seconds.</p>
+
+<p>For example, suppose that you want to measure the performance of MATLAB’s built-in function, <code class="highlighter-rouge">isprime()</code> for a given input value to this function. You can compute the time to execute the function using <code class="highlighter-rouge">timeit()</code> like the following,</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">timeit</span><span class="p">(</span> <span class="o">@</span><span class="p">()</span><span class="nb">isprime</span><span class="p">(</span><span class="mi">10</span><span class="o">^</span><span class="mi">14</span><span class="p">)</span> <span class="p">)</span> <span class="c1">% pass the function as a handle to timeit()</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+    0.0787
+</code></pre></div></div>
+
+<p>Note that, this function <code class="highlighter-rouge">isprime()</code> will have different performance given different input numbers,</p>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">timeit</span><span class="p">(</span> <span class="o">@</span><span class="p">()</span><span class="nb">isprime</span><span class="p">(</span><span class="mi">10</span><span class="o">^</span><span class="mi">4</span><span class="p">)</span> <span class="p">)</span> <span class="c1">% pass the function as a handle to timeit()</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+   2.0402e-05
+</code></pre></div></div>
+
+<h3 id="time-portions-of-code">Time Portions of Code</h3>
+
+<p>To estimate how long a portion of your program takes to run or to compare the speed of different implementations of portions of your program, you can use MATLAB stopwatch timer functions: <code class="highlighter-rouge">tic</code> and <code class="highlighter-rouge">toc</code>. Invoking <code class="highlighter-rouge">tic</code> starts the timer, and the next <code class="highlighter-rouge">toc</code> reads the elapsed time.</p>
+
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tic</span>
+   <span class="c1">% The program section to time. </span>
+<span class="nb">toc</span>
+</code></pre></div></div>
+
+<p>Sometimes programs run too fast for <code class="highlighter-rouge">tic</code> and <code class="highlighter-rouge">toc</code> to provide useful data. If your code is faster than <strong>1/10 second</strong>, consider timing it while running in a loop, and then average the result to find the time for a single run of the loop.</p>
+
+<h4 id="the-cputime-function-vs-tictoc-and-timeit">The <code class="highlighter-rouge">cputime()</code> function vs. <code class="highlighter-rouge">tic/toc</code> and <code class="highlighter-rouge">timeit()</code></h4>
+
+<p>There is another MATLAB function that can do the timing of your scripts or your functions: The <code class="highlighter-rouge">cputime()</code> function measures the total CPU time and <strong>sums across all threads (cores) in the CPU</strong>. This measurement is different from the <strong>wall-clock time</strong> that <code class="highlighter-rouge">timeit()</code> or <code class="highlighter-rouge">tic/toc</code> return, and could be misleading. For example, the CPU time for the pause function is typically small, but the wall-clock time accounts for the actual time that MATLAB execution is paused. Therefore, the wall-clock time might be longer.</p>
+
+<p>If your function uses four processing cores equally, the CPU time could be approximately four times higher than the wall-clock time.</p>
+
+<p>Frequently, your best choice to measure the performance of your code is <code class="highlighter-rouge">timeit()</code> or <code class="highlighter-rouge">tic</code> and <code class="highlighter-rouge">toc</code>. These functions return wall-clock time. Note that, unlike <code class="highlighter-rouge">tic</code> and <code class="highlighter-rouge">toc</code>, the <code class="highlighter-rouge">timeit()</code> function calls your code multiple times, and, therefore, considers the cost of first-time calls to your functions, which are typically more time-consuming than subsequent calls.</p>
+
+<h3 id="some-tips-for-measuring-performance">Some tips for Measuring Performance</h3>
+
+<ul>
+  <li>Always time a <strong>significant enough</strong> portion of code. Normally, the code that you are timing should <strong>take more than 1/10 second to run</strong>, otherwise, the timing may not be very accurate.</li>
+  <li>Put the code you are trying to time into a function instead of timing it at the command line or inside a script.</li>
+  <li>Unless you are trying to measure <strong>first-time cost of running your code</strong>, run your code multiple times. Use the <code class="highlighter-rouge">timeit()</code> function for multiple calls timing of your function.</li>
+  <li>Avoid <code class="highlighter-rouge">clear all</code> when measuring the performance of your MATLAB scripts. This will add additional time to wipe MATLAB workspace from all current existing variable definitions, and therefore contaminate the timing measurements of the actual code in your MATLAB scripts.</li>
+  <li>When performing timing measurements, assign your output to a variable instead of letting it default to <code class="highlighter-rouge">ans()</code>.</li>
+</ul>
+
+    
+    
+    <div style="margin-top:3rem">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'shahmoradi'; // required: replace example with your forum shortname
+    
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+</div>
+<hr class="shaded"/>
+<footer>
+    <div class="row">
+        <div class="col-lg-12 footer">
+            &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: July 20, 2019 <br />
+            
+                <span>Page last updated:</span>July 9, 2019<br/>
+            
+        <p>
+            <img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" />
+            <!-- Start of statc -->
+<div style="color: #ffffff; float: none; width: 100%;">
+    <span style="font-size:0.8em">visitor count: 
+        <script type="text/javascript">
+            var sc_project=12047472; 
+            var sc_invisible=0; 
+            var sc_security="fe09cd78"; 
+            var sc_text=3; 
+            var scJsHost = "https://";
+            document.write("<sc"+"ript type='text/javascript' src='" +
+            scJsHost+
+            "statcounter.com/counter/counter.js'></"+"script>");
+        </script>
+    </span>
+</div>
+<!-- End of statc -->
+        </p>
+        </div>
+    </div>
+    <!--Mathjax LaTeX engine-->
+    
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+        MathJax.Hub.Config({
+            config: ["MMLorHTML.js"],
+            extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+            jax: ["input/TeX"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+            TeX: {
+                TagSide: "right",
+                TagIndent: ".8em",
+                MultLineWidth: "85%",
+                equationNumbers: {
+                autoNumber: "AMS",
+                },
+                unicode: {
+                fonts: "STIXGeneral,'Arial Unicode MS'" 
+                }
+            },
+            showProcessingMessages: false
+        });
+    </script>
+    <style TYPE="text/css">
+        code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+    </style>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+            }
+        });
+        MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</footer>
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /#main -->
+        </div>
+        
+    </body>
+    
+</html>

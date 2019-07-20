@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="This note aims at explaining the concept of modules in Python.">
+<meta name="keywords" content="pythonmodulesimportdircommand_linetimetimeittest_block,  python, modules, import, dir, command_line, time, timeit, test_block">
+<title>Python modules | Scientific Computing with MATLAB</title>
+<link rel="stylesheet" href="/matlab/css/prismOkaidia.css">
+<script src="/matlab/js/prismOkaidia.js"></script>
+<!--
+<link rel="stylesheet" href="/matlab/css/syntax.css">
+-->
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/matlab/css/bootstrap.min.css">
+
+
+
+<link rel="stylesheet" href="/matlab/css/customstyles.css">
+<link rel="stylesheet" href="/matlab/css/boxshadowproperties.css">
+<!-- most color styles are extracted out to here -->
+<link rel="stylesheet" href="/matlab/css/theme-cdslab.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+<script src="/matlab/js/jquery.navgoco.min.js"></script>
+<!-- make sidebar non-accordion -->
+<script src="/matlab/js/lockScrollbarPosition.js"></script>
+<!-- make sidebar non-accordion -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.sidenav').navgoco({
+              accordion: false,
+              caret: '<span class="caret"></span>',
+              openClass: 'open',
+              save: true,
+              cookie: {
+                  name: 'navgoco',
+                  expires: false,
+                  path: '/'
+              },
+              slide: {
+                  duration: 400,
+                  easing: 'swing'
+              }
+          });
+    });
+</script>
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- Anchor.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.min.js"></script>
+<!--
+-->
+<script src="/matlab/js/toc.js"></script>
+<script src="/matlab/js/customscripts.js"></script>
+<link rel="shortcut icon" href="/matlab/images/favicon.ico">
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+
+    <script>
+        $(document).ready(function() {
+            // Initialize navgoco with default options
+            $("#mysidebar").navgoco({
+                caretHtml: '',
+                accordion: true,
+                openClass: 'active', // open
+                save: false, // leave false or nav highlighting doesn't work right
+                cookie: {
+                    name: 'navgoco',
+                    expires: false,
+                    path: '/'
+                },
+                slide: {
+                    duration: 400,
+                    easing: 'swing'
+                }
+            });
+            $("#collapseAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', false);
+            });
+            $("#expandAll").click(function(e) {
+                e.preventDefault();
+                $("#mysidebar").navgoco('toggle', true);
+            });
+        });
+    </script>
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+            $("#tg-sb-link").click(function() {
+                $("#tg-sb-sidebar").toggle();
+                $("#tg-sb-content").toggleClass('col-md-9');
+                $("#tg-sb-content").toggleClass('col-md-12');
+                $("#tg-sb-icon").toggleClass('fa-toggle-on');
+                $("#tg-sb-icon").toggleClass('fa-toggle-off');
+            });
+        });
+    </script>
+    
+    </head>
+    <body>
+        <!-- Navigation -->
+<nav class="navbar navbar-inverse navbar-static-top">
+    <div id="sticky" class="container topnavlinks">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="fa fa-book fa-lg navbar-brand" href="/matlab/index.html">&nbsp;<span class="projectTitle"> Scientific Computing with MATLAB</span></a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <!-- toggle sidebar button -->
+                <li><a id="tg-sb-link" href="#"><i id="tg-sb-icon" class="fa fa-toggle-on"></i> Nav</a></li>
+                <!-- entries without drop-downs appear here -->
+                
+                
+                
+                <!-- entries with drop-downs appear here -->
+                <!-- conditional logic to control which topnav appears for the audience defined in the configuration file.-->
+                
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">CDSLab<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/#about" target="_blank" rel="noopener">About</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/people" target="_blank" rel="noopener">People</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tutorials<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.cdslab.org/matlab/" target="_blank" rel="noopener">Scientific Computing with MATLAB</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.cdslab.org/python/" target="_blank" rel="noopener">Scientific Computing with Python</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">UTA<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">College of Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/science/" target="_blank" rel="noopener">Data Science</a></li>
+                                
+                                
+                                
+                                <li><a href="https://www.uta.edu/physics/" target="_blank" rel="noopener">Physics</a></li>
+                                
+                                
+                            </ul>
+                        </li>
+                    
+                
+                
+                <!--comment out this block if you want to hide search-->
+                <li>
+                    <!--start search-->
+                    <div id="search-demo-container">
+                        <input type="text" id="search-input" placeholder="keyword search...">
+                        <ul id="results-container"></ul>
+                    </div>
+                    <script src="/matlab/js/jekyll-search.js" type="text/javascript"></script>
+                    <script type="text/javascript">
+                            SimpleJekyllSearch.init({
+                                searchInput: document.getElementById('search-input'),
+                                resultsContainer: document.getElementById('results-container'),
+                                dataSource: "/matlab/search.json",
+                                searchResultTemplate: '<li><a href="https://www.cdslab.org{url}" title="Python modules">{title}</a></li>',
+                    noResultsText: 'No results found.',
+                            limit: 10,
+                            fuzzy: true,
+                    })
+                    </script>
+                    <!--end search-->
+                </li>
+            </ul>
+        </div>
+        </div>
+        <!-- /.container -->
+</nav>
+
+        <!-- Page Content -->
+        <div class="container">
+            <div id="main">
+                <!-- Content Row -->
+                <div class="row">
+                    
+                    
+                        <!-- Sidebar Column -->
+                        <div class="col-md-3" id="tg-sb-sidebar">
+                            
+<ul id="mysidebar" class="sidenav">
+    <!--
+    -->
+    <li class="sidebarTitle">Table of Pages </li>
+    
+        
+            
+                <li>
+                    <a title="Overview" href="#"><b>Overview</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Preface" href="/matlab/notes/overview/preface/index.html">Preface</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 1" href="/matlab/notes/overview/release-note-1/index.html">Release note 1</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Release note 2" href="/matlab/notes/overview/release-note-2/index.html">Release note 2</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Preliminary foundations" href="#"><b>Preliminary foundations</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Version control system" href="/matlab/notes/preliminary-foundations/version-control-system/index.html">Version control system</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Programming history" href="/matlab/notes/preliminary-foundations/programming-history/index.html">Programming history</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Computer program structure" href="/matlab/notes/preliminary-foundations/computer-program-structure/index.html">Computer program structure</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="MATLAB for beginners" href="/matlab/notes/preliminary-foundations/matlab-for-beginners/index.html">MATLAB for beginners</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Values, variables, and types" href="#"><b>Values, variables, and types</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="First program" href="/matlab/notes/values-variables-types/first-program/index.html">First program</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Values" href="/matlab/notes/values-variables-types/values/index.html">Values</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variables" href="/matlab/notes/values-variables-types/variables/index.html">Variables</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Operators" href="/matlab/notes/values-variables-types/operators/index.html">Operators</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Control constructs" href="#"><b>Control constructs</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Branching" href="/matlab/notes/control-constructs/branching/index.html">Branching</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Looping" href="/matlab/notes/control-constructs/looping/index.html">Looping</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Program units" href="#"><b>Program units</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Functions" href="/matlab/notes/program-units/functions/index.html">Functions</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Variable scope" href="/matlab/notes/program-units/variable-scope/index.html">Variable scope</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Data transfer (I/O)" href="#"><b>Data transfer (I/O)</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Data input/ouput methods" href="/matlab/notes/data-transfer/io/index.html">Data input/ouput methods</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Errors and exceptions" href="#"><b>Errors and exceptions</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Exception handling" href="/matlab/notes/exceptions-errors/exception-handling/index.html">Exception handling</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Unit testing" href="/matlab/notes/exceptions-errors/unit-testing/index.html">Unit testing</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Scientific Computing" href="#"><b>Scientific Computing</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Vectorization and array computing" href="/matlab/notes/scientific-computing/vectorization/index.html">Vectorization and array computing</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Visualization and plotting" href="/matlab/notes/scientific-computing/visualization/index.html">Visualization and plotting</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Random numbers" href="/matlab/notes/scientific-computing/random-numbers/index.html">Random numbers</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+            
+                <li>
+                    <a title="Object-oriented programming" href="#"><b>Object-oriented programming</b></a>
+                    <ul>
+                        
+                                
+                                    
+                                        <li><a title="Instantiation" href="/matlab/notes/object-oriented-programming/instantiation/index.html">Instantiation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Encapsulation" href="/matlab/notes/object-oriented-programming/encapsulation/index.html">Encapsulation</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Inheritance" href="/matlab/notes/object-oriented-programming/inheritance/index.html">Inheritance</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Polymorphism" href="/matlab/notes/object-oriented-programming/polymorphism/index.html">Polymorphism</a></li>
+                                    
+                                    
+                                
+                        
+                                
+                                    
+                                        <li><a title="Abstraction" href="/matlab/notes/object-oriented-programming/abstraction/index.html">Abstraction</a></li>
+                                    
+                                    
+                                
+                        
+                    </ul>
+                </li>
+            
+        
+    
+    <!-- if you aren't using the accordion, uncomment this block:
+    -->
+    <p class="external">
+        <a href="#" id="collapseAll">Collapse All</a> | <a href="#" id="expandAll">Expand All</a>
+    </p>
+</ul>
+<!--
+This highlights the active parent class in the navgoco sidebar. 
+This is critical so that the parent expands when you're viewing a page.
+This must appear below the sidebar code above.
+Otherwise, if placed inside customscripts.js,
+the script runs before the sidebar code runs and the class never gets inserted.
+-->
+<script>$("li.active").parents('li').toggleClass("active");</script>
+
+                        </div>
+                        
+                    
+                    <!-- Content Column -->
+                    <div class="col-md-9" id="tg-sb-content">
+                        <div class="post-header">
+   <h1 class="post-title-main">Python modules</h1>
+</div>
+
+<div class="post-content">
+    
+        <div class="summary">This note aims at explaining the concept of modules in Python.</div>
+    
+    
+        <br>
+        
+<script>
+    $( document ).ready(function() {
+        // Handler for .ready() called.
+        $('#toc').toc({ minimumHeaders: 0 
+                      , listType: 'ol'
+                      , showSpeed: 0
+                      , headers: 'h2,h3,h4,h5,h6'
+        });
+        /* the following offset helps account for the space taken up by the floating toolbar. */
+        $('#toc').on('click', 'a', function() {
+            var target = $(this.getAttribute('href')), scroll_target = target.offset().top$(window).scrollTop(scroll_target - 10);
+            return false
+        })
+    });
+</script>
+
+<div id="toc"></div>
+
+    
+    
+    <h2 id="python-modules">Python modules</h2>
+
+<p>We have already used Python modules extensively in previous topics, homework, and quizzes. although we never discussed them. To put it simply, Python modules are a collection of Python definitions, variables, functions, … that can be reused as a library in future.</p>
+
+<p>Sometimes you want to reuse a function from an old program in a new program. The simplest way to do this is to copy and paste the old source code into the new program. However, this is not good programming practice, because you then over
+time end up with multiple identical versions of the same function. When you want to improve the function or correct a bug, you need to remember to do the same update in all files with a copy of the function, and in real life, most programmers fail to do so. You easily end up with a mess of different versions with different quality of basically the same code. Therefore, a golden rule of programming is to have one and only one version of a piece of code. All programs that want to use this piece of code must access one and only one place where the source code is kept. This principle is easy to implement if we create a module containing the code we want to reuse later in different programs.</p>
+
+<h2 id="the-import-statement">The import statement</h2>
+
+<p>We have already used the <code class="highlighter-rouge">math</code> module on multiple occasions, using the <code class="highlighter-rouge">import</code> statement. Here is an example:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>120
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">math</span><span class="o">.</span><span class="n">pi</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3.141592653589793
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">math</span><span class="o">.</span><span class="n">e</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.718281828459045
+</code></pre></div></div>
+
+<p>In its simplest form, the import has the following syntax:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">module1</span><span class="p">[,</span> <span class="n">module2</span><span class="p">[,</span><span class="o">...</span> <span class="n">moduleN</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>like,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span><span class="p">,</span> <span class="n">cmath</span><span class="p">,</span> <span class="n">numpy</span>
+</code></pre></div></div>
+
+<p>The standard approach for calling names and definitions (variables, functions, …) inside the module is using the module-name prefix, like the above examples. To call the module names without the prefix, use the following module import statement,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>120
+</code></pre></div></div>
+
+<p>To import only specific names, use the format like the following,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">factorial</span><span class="p">,</span><span class="n">erf</span>
+</code></pre></div></div>
+
+<p>This will import the four math modules names <code class="highlighter-rouge">pi, e, factorial, erf</code>. You could also change the name of the input module, or specific names from it, upon importing the module into your code, using <code class="highlighter-rouge">import as</code> statement,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5.0
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">double</span> <span class="k">as</span> <span class="n">dble</span>
+<span class="n">dble</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>13.0
+</code></pre></div></div>
+
+<div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> <b>Note:</b> A module can contain executable statements as well as function definitions. These statements are intended to initialize the module. They are executed <b>only the first time the module name is encountered in an import statement</b>.</div>
+
+<div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> <b>Note:</b> Also, note that in general the practice of <code>from mod_name import *</code> from a module is discouraged since it often causes poorly readable code. It is however very useful for time-saving and writing compact concise code in interactive sessions like IPython, or Jupyter.</div>
+
+<h2 id="listing-all-names-in-an-imported-module">Listing all names in an imported module</h2>
+
+<p>To get a list of all available names in an imported module, use <code class="highlighter-rouge">dir()</code> function.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
+<span class="nb">dir</span><span class="p">(</span><span class="n">math</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['__doc__',
+ '__loader__',
+ '__name__',
+ '__package__',
+ '__spec__',
+ 'acos',
+ 'acosh',
+ 'asin',
+ 'asinh',
+ 'atan',
+ 'atan2',
+ 'atanh',
+ 'ceil',
+ 'copysign',
+ 'cos',
+ 'cosh',
+ 'degrees',
+ 'e',
+ 'erf',
+ 'erfc',
+ 'exp',
+ 'expm1',
+ 'fabs',
+ 'factorial',
+ 'floor',
+ 'fmod',
+ 'frexp',
+ 'fsum',
+ 'gamma',
+ 'gcd',
+ 'hypot',
+ 'inf',
+ 'isclose',
+ 'isfinite',
+ 'isinf',
+ 'isnan',
+ 'ldexp',
+ 'lgamma',
+ 'log',
+ 'log10',
+ 'log1p',
+ 'log2',
+ 'modf',
+ 'nan',
+ 'pi',
+ 'pow',
+ 'radians',
+ 'sin',
+ 'sinh',
+ 'sqrt',
+ 'tan',
+ 'tanh',
+ 'trunc']
+</code></pre></div></div>
+
+<h2 id="python-standard-modules">Python standard Modules</h2>
+<p>Python comes with a set of standard modules as its library, the so-called <a href="https://docs.python.org/3/library/" target="_blank"><strong>Python Standard Library</strong></a>. Some of these modules are built into the Python interpreter; these provide access to operations that are not part of the core of the language but are nevertheless built-in, for efficiency and other reasons.</p>
+
+<h2 id="creating-modules">Creating modules</h2>
+
+<p>To make a Python module, simply collect all the functions that constitute the module in one single file with a given filename, for example, <code class="highlighter-rouge">mymodule.py</code>. This file will be automatically a module, with name <code class="highlighter-rouge">mymodule</code>, from which you can import functions and definitions in the standard way described above.</p>
+
+<div class="bs-callout bs-callout-info">
+<b>Why and when do you need to create a module?</b><br /><br />
+    Sometimes you want to reuse a function from an old program in a new program. The simplest way to do this is to copy and paste the old source code into the new program. However, this is not good programming practice, because you then over time end up with multiple identical versions of the same function. When you want to improve the function or correct a bug, you need to remember to do the same update in all files with a copy of the function, and in real life, most programmers fail to do so. You easily end up with a mess of different versions with different quality of basically the same code. Therefore, a golden rule of programming is to have one and only one version of a piece of code. All programs that want to use this piece of code must access one and only one place where the source code is kept. This principle is easy to implement if we create a module containing the code we want to reuse later in different programs.
+</div>
+
+<p>Note that modules can import other modules. It is customary but not required to place all import statements at the beginning of a module (or script, for that matter). The imported module names are placed in the importing module’s global <a href="https://en.wikipedia.org/wiki/Symbol_table" target="_blank">symbol table</a>.</p>
+
+<h3 id="executing-modules-as-scripts">Executing modules as scripts</h3>
+
+<p>When a Python module is called from the Bash command prompt like,</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python mycode.py
+</code></pre></div></div>
+
+<p>the code in the module will be executed, just as if you imported it inside another code. This is good, but can sometimes become problematic. Let’s explain this with an example, a <a href="/matlab/notes/program-units/variable-scope/find_primes.py" target="_blank">script</a> that finds and reports all prime numbers smaller than a given input number $n$.</p>
+
+<p>When you execute this code as a standalone Python script, it will ask you for an integer, to give you all integers that are smaller than the input number. Now suppose you wanted to import this script as a Python module into your code. If you do so, the Python interpreter would run all statements in this script and asks you to input an integer, before importing the rest of the functions in this script.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">find_primes</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter an integer number:
+n = 13
+
+Here is a list of all prime numbers smaller than 13:
+13
+11
+7
+5
+3
+2
+</code></pre></div></div>
+
+<p>This may not be necessarily what we want to do. For example, we may only want to use the functions <code class="highlighter-rouge">get_primes</code> and <code class="highlighter-rouge">is_prime</code> in this script, without asking the user to input an integer and finding all smaller primes. The solution is to put the part of the code in the script that we don’t want to be executed as a module, that is,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'Enter an integer number: '</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">'n = '</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s"> Here is a list of all prime numbers smaller than {}:'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="n">get_primes</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>inside the following if-block,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Enter an integer number: '</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">'n = '</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'Here is a list of all prime numbers smaller than {}:'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="n">get_primes</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>When the code is run as a standalone script, the <code class="highlighter-rouge">__name__</code> property of the code is set to <code class="highlighter-rouge">__main__</code>. However, when the script is imported as a module inside another code, the <code class="highlighter-rouge">__name__</code> property is automatically set to the name of the module <code class="highlighter-rouge">find_primes</code>. Thus as a module, the above if-block will not be executed, but the rest of the code (the two functions) will be properly imported. The corrected script is named <code class="highlighter-rouge">mod_find_primes.py</code> and can be downloaded from <a href="/matlab/notes/program-units/variable-scope/mod_find_primes.py" target="_blank">here</a>.</p>
+
+<pre><code class="language-Python">import mod_find_primes
+mod_find_primes.__name__
+</code></pre>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'mod_find_primes'
+</code></pre></div></div>
+
+<p>You could also import specific names or functions from your module, for example,</p>
+
+<pre><code class="language-Python">from mod_find_primes import is_prime
+</code></pre>
+
+<p>In summary,</p>
+
+<div class="bs-callout bs-callout-danger">
+    <b>Add test blocks to your modules</b><br /><br />
+    It is recommended to only have functions and not any statements outside functions in a module. The reason is that the module file is executed from top to bottom during the import. With function definitions only in the module file and no main program, there will be no calculations or output from the import, just definitions of functions. But in case you need to write a module that can be run standalone, then put all script statements for the standalone part of the module inside a <b>test block</b> (the if-block described above).</div>
+
+<h3 id="command-line-arguments">Command line arguments</h3>
+
+<p>Test blocks are especially useful when your module can be also run as a standalone Python script that takes in <strong>command-line arguments</strong>. <a href="/matlab/notes/program-units/variable-scope/cmd_find_primes.py" target="_blank">Here</a> is a modified version of the <code class="highlighter-rouge">mod_find_primes</code> module now named <code class="highlighter-rouge">cmd_find_primes</code> that instead of using <code class="highlighter-rouge">input()</code> function, reads the integer number from the Bash command line. To do so, you need to modify the last part of the original module to the following, using Python’s standard <code class="highlighter-rouge">sys</code> module,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="nn">sys</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span> <span class="c"># check the number of arguments to be exactly 2.</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'''
+    Error: Exactly two arguments must be given on the command line.
+    Usage:'''</span><span class="p">)</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">"     "</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">"&lt;a positive integer number&gt;"</span><span class="p">,</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+        <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">(</span><span class="s">'     Program stopped.</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">print</span><span class="p">(</span><span class="s">'Here is a list of all prime numbers smaller than {}:'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+        <span class="n">get_primes</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>Now if you run this code, from the Bash command line, or inside IPython, like the following,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">run</span> <span class="n">cmd_find_primes</span><span class="o">.</span><span class="n">py</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: Exactly two arguments must be given on the command line.
+Usage:
+  cmd_find_primes.py &lt;a positive integer number&gt;
+</code></pre></div></div>
+
+<p>An exception has occurred, use %tb to see the full traceback.</p>
+
+<p>SystemExit:      Program stopped.</p>
+
+<p>The code will expect you to enter an integer right after the name of the script,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">run</span> <span class="n">cmd_find_primes</span><span class="o">.</span><span class="n">py</span> <span class="mi">13</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Here is a list of all prime numbers smaller than 13:
+13
+11
+7
+5
+3
+2
+</code></pre></div></div>
+
+<p>In general, I recommend you to use the <code class="highlighter-rouge">sys</code> module for input arguments instead of Python’s <code class="highlighter-rouge">input()</code> function.</p>
+
+<div class="alert alert-success" role="alert"><i class="fa fa-check-square-o"></i> <b>Tip:</b> 
+    <b>Modules and main functions</b><br /><br />
+    If you have some functions and the main program in some program file, just move the main program to the test-block. Then the file can act as a module, giving access to all the functions in other files, or the file can be executed from the command line, in the same way as the original program.</div>
+
+<h3 id="test-blocks-for-module-code-verification">Test blocks for module code verification</h3>
+
+<p>It is a good programming habit to let the test block do one or more of three things:</p>
+<ol>
+  <li>provide information on how the module or program is used,</li>
+  <li>test if the module functions work properly,</li>
+  <li>offer interaction with users such that the module file can be applied as a useful program.</li>
+</ol>
+
+<p>To achieve the second task, we have to write functions that verify the implementation in a module. The general advice is to write test functions that,</p>
+<ol>
+  <li>have names starting with <code class="highlighter-rouge">test_</code>,</li>
+  <li>express the success or failure of a test through a boolean variable, say <code class="highlighter-rouge">success</code>,</li>
+  <li>run <code class="highlighter-rouge">assert success, msg</code> to raise an <code class="highlighter-rouge">AssertionError</code> with an optional message <code class="highlighter-rouge">msg</code> in case the test fails.</li>
+</ol>
+
+<p>We talk about this later on in the notes.</p>
+
+<div class="alert alert-success" role="alert"><i class="fa fa-check-square-o"></i> <b>Tip:</b> <b>Doc-strings in modules</b><br />It is a good habit to include a doc-string in the beginning of your module file. This docstring should explain the purpose and use of the module.</div>
+
+<p><br /></p>
+
+<h3 id="scope-of-definitions-in-your-module">Scope of definitions in your module</h3>
+
+<p>Once you have created your module, you can import it just like any other module into our program, for example,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">cmd_find_primes</span>
+<span class="nb">dir</span><span class="p">(</span><span class="n">cmd_find_primes</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['__builtins__',
+ '__cached__',
+ '__doc__',
+ '__file__',
+ '__loader__',
+ '__name__',
+ '__package__',
+ '__spec__',
+ 'get_primes',
+ 'is_prime']
+</code></pre></div></div>
+
+<p>However, more often than not, you may want to define variables that are to be used only within the module itself and not be accessed by the user. The convention is to start the names of these variables by an underscore. For example,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_topic</span> <span class="o">=</span> <span class="s">"Python programming"</span>
+</code></pre></div></div>
+
+<p>This, however, does not prevent the import of the variable <code class="highlighter-rouge">_topic</code> into your code from your the <a href="/matlab/notes/program-units/variable-scope/mod_cmd_find_primes_del.py" target="_blank">module</a> containing it. One solution is to delete the variables to which we do not want the user to have access, at the end of the module,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">del</span> <span class="n">_topic</span>
+</code></pre></div></div>
+
+<p>such that the <a href="" target="_blank">module</a> containing the above statement will give,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">mod_cmd_find_primes_del</span>
+<span class="nb">dir</span><span class="p">(</span> <span class="n">mod_cmd_find_primes_del</span> <span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['__builtins__',
+ '__cached__',
+ '__doc__',
+ '__file__',
+ '__loader__',
+ '__name__',
+ '__package__',
+ '__spec__',
+ 'get_primes',
+ 'is_prime']
+</code></pre></div></div>
+
+<p>However, note that if you import all definitions in <a href="/matlab/notes/program-units/variable-scope/mod_cmd_find_primes_all.py" target="_blank">your module</a> as standalone definitions like the following,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">mod_cmd_find_primes_all</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="nb">dir</span><span class="p">()</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['In',
+ 'Out',
+ '_',
+ '_3',
+ '__',
+ '___',
+ '__builtin__',
+ '__builtins__',
+ '__doc__',
+ '__loader__',
+ '__name__',
+ '__package__',
+ '__spec__',
+ '_dh',
+ '_i',
+ '_i1',
+ '_i2',
+ '_i3',
+ '_i4',
+ '_i5',
+ '_ih',
+ '_ii',
+ '_iii',
+ '_oh',
+ '_sh',
+ 'exit',
+ 'get_ipython',
+ 'get_primes',
+ 'is_prime',
+ 'quit']
+</code></pre></div></div>
+
+<p>you see that the variable <code class="highlighter-rouge">_topic</code> is not imported. In general, to avoid confusion, it is best to define an <code class="highlighter-rouge">__all__</code> variable in your module, which contains a list of all variable and function names that are to be imported as standalone definitions using <code class="highlighter-rouge">from mymodule import *</code>. For example, add the following to the above module,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">'get_primes'</span><span class="p">]</span>
+</code></pre></div></div>
+
+<p>Upon importing this module, now only the function <code class="highlighter-rouge">get_prime</code> will be imported and not <code class="highlighter-rouge">_topic</code> or <code class="highlighter-rouge">is_prime</code>.</p>
+
+<h3 id="the-path-to-your-modules">The path to your modules</h3>
+
+<p>When you create a module, if it is in the current directory of your code, then it will be automatically found by the Python interpreter. This is, however, not generally the case if your module lives in another directory than the current working directory of Python interpreter. To add the module’s directory to the path of your Python interpreter, use the following,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">myModuleFolder</span> <span class="o">=</span> <span class="err">’</span><span class="n">the</span> <span class="n">path</span> <span class="n">to</span> <span class="n">your</span> <span class="n">module</span><span class="err">’</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['',
+ 'C:\\Program Files\\Anaconda3\\Scripts',
+ 'C:\\Program Files\\Anaconda3\\lib\\site-packages\\lmfit-0.9.5_44_gb2041c3-py3.5.egg',
+ 'C:\\Program Files\\Anaconda3\\python35.zip',
+ 'C:\\Program Files\\Anaconda3\\DLLs',
+ 'C:\\Program Files\\Anaconda3\\lib',
+ 'C:\\Program Files\\Anaconda3',
+ 'c:\\program files\\anaconda3\\lib\\site-packages\\setuptools-20.3-py3.5.egg',
+ 'C:\\Program Files\\Anaconda3\\lib\\site-packages',
+ 'C:\\Program Files\\Anaconda3\\lib\\site-packages\\Sphinx-1.3.5-py3.5.egg',
+ 'C:\\Program Files\\Anaconda3\\lib\\site-packages\\win32',
+ 'C:\\Program Files\\Anaconda3\\lib\\site-packages\\win32\\lib',
+ 'C:\\Program Files\\Anaconda3\\lib\\site-packages\\Pythonwin',
+ 'C:\\Program Files\\Anaconda3\\lib\\site-packages\\IPython\\extensions',
+ 'C:\\Users\\Amir\\.ipython']
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">myModuleFolder</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[’the path to your module’,
+ '',
+ 'C:\\Program Files\\Anaconda3\\Scripts',
+ 'C:\\Program Files\\Anaconda3\\lib\\site-packages\\lmfit-0.9.5_44_gb2041c3-py3.5.egg',
+ 'C:\\Program Files\\Anaconda3\\python35.zip',
+ 'C:\\Program Files\\Anaconda3\\DLLs',
+ 'C:\\Program Files\\Anaconda3\\lib',
+ 'C:\\Program Files\\Anaconda3',
+ 'c:\\program files\\anaconda3\\lib\\site-packages\\setuptools-20.3-py3.5.egg',
+ 'C:\\Program Files\\Anaconda3\\lib\\site-packages',
+ 'C:\\Program Files\\Anaconda3\\lib\\site-packages\\Sphinx-1.3.5-py3.5.egg',
+ 'C:\\Program Files\\Anaconda3\\lib\\site-packages\\win32',
+ 'C:\\Program Files\\Anaconda3\\lib\\site-packages\\win32\\lib',
+ 'C:\\Program Files\\Anaconda3\\lib\\site-packages\\Pythonwin',
+ 'C:\\Program Files\\Anaconda3\\lib\\site-packages\\IPython\\extensions',
+ 'C:\\Users\\Amir\\.ipython']
+</code></pre></div></div>
+
+<p>In the above, we added the path to our module to the list of all paths the Python interpreter will search, to find the module requested to be imported (Note that <code class="highlighter-rouge">'the path to your module'</code> is not a real system path, this was just an example).</p>
+
+<h2 id="some-useful-python-modules">Some useful Python modules</h2>
+
+<p>One of the greatest strengths of Python as a scientific programming language is that, for almost everything that you could imagine and want to write code, someone has already written it, and so there is <em>no reason to reinvent the wheel if someone has already done it for you</em>. Throughout your career, you will get to know many of the most important modules for your domain of science. Here I will introduce only a very few general-purpose modules that have some interesting and rather useful functions in them.</p>
+
+<h3 id="the-collections-module">The <code class="highlighter-rouge">collections</code> module</h3>
+
+<p>This module contains some non-standard Python data types that can be very handy at times.</p>
+
+<h4 id="the-counter-data-type">The <strong>Counter</strong> data type</h4>
+
+<p>The <code class="highlighter-rouge">Counter</code> function from module <code class="highlighter-rouge">collections</code> takes in a list and creates a dictionary, whose keys are unique elements in the input list and the values of the keys, are the number of times each key appears in the list. For example,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
+<span class="n">c</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Counter({0: 2, 1: 3, 2: 1, 3: 3, 4: 3, 6: 1, 7: 1, 8: 1, 9: 1, 34: 5, 45: 1})
+</code></pre></div></div>
+
+<p>There are basically three methods for generating a Counter dictionary,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c1</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">([</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">])</span> <span class="c"># input a list directly into Counter</span>
+<span class="n">c2</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">({</span><span class="s">'a'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">'b'</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s">'c'</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span> <span class="c"># Give it the Counter dictionary</span>
+<span class="n">c3</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c"># or simply give it the counts</span>
+<span class="n">c1</span> <span class="o">==</span> <span class="n">c2</span> <span class="o">==</span> <span class="n">c3</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+</code></pre></div></div>
+
+<h5 id="what-is-counter-useful-for">What is Counter useful for?</h5>
+
+<p>Suppose you have a long list of letters, and for some reason, you need to count the number of times each letter appears in your string. You can achieve your goal as in the following example,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="s">'amirshahmoradijakelucerotravismike'</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'The letter {} appears only {} times in the string'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">c</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The letter v appears only 1 times in the string
+The letter a appears only 5 times in the string
+The letter u appears only 1 times in the string
+The letter l appears only 1 times in the string
+The letter j appears only 1 times in the string
+The letter d appears only 1 times in the string
+The letter h appears only 2 times in the string
+The letter o appears only 2 times in the string
+The letter i appears only 4 times in the string
+The letter k appears only 2 times in the string
+The letter c appears only 1 times in the string
+The letter t appears only 1 times in the string
+The letter s appears only 2 times in the string
+The letter m appears only 3 times in the string
+The letter r appears only 4 times in the string
+The letter e appears only 3 times in the string   ​
+</code></pre></div></div>
+
+<p>Now suppose you wanted to count the number of times different words appear in a given text,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s">"Data science is a multi-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from structured and unstructured data."</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="s">'The word "{}" appears only {} times in the text'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="n">c</span><span class="p">[</span><span class="n">word</span><span class="p">]))</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The word "Data" appears only 1 times in the text
+The word "science" appears only 1 times in the text
+The word "is" appears only 1 times in the text
+The word "a" appears only 1 times in the text
+The word "multi-disciplinary" appears only 1 times in the text
+The word "field" appears only 1 times in the text
+The word "that" appears only 1 times in the text
+The word "uses" appears only 1 times in the text
+The word "scientific" appears only 1 times in the text
+The word "methods," appears only 1 times in the text
+The word "processes," appears only 1 times in the text
+The word "algorithms" appears only 1 times in the text
+The word "and" appears only 3 times in the text
+The word "systems" appears only 1 times in the text
+The word "to" appears only 1 times in the text
+The word "extract" appears only 1 times in the text
+The word "knowledge" appears only 1 times in the text
+The word "insights" appears only 1 times in the text
+The word "from" appears only 1 times in the text
+The word "structured" appears only 1 times in the text
+The word "unstructured" appears only 1 times in the text
+The word "data." appears only 1 times in the text
+</code></pre></div></div>
+
+<p>Now, you can also apply all different methods that exist for Counter data types on the variable <code class="highlighter-rouge">c</code> in the above case. For example, you could ask for the 3 most common words in the text,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[('Engineering', 3), ('the', 2), ('is', 2)]
+</code></pre></div></div>
+
+<h4 id="the-ordereddict-data-type">The <strong>OrderedDict</strong> data type</h4>
+
+<p>This is also a subclass of dictionary data type, which provides all the methods provided by <code class="highlighter-rouge">dict</code>, but which also retains the order by which elements are added to the dictionary. Consider the following ordinary dictionary,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+</code></pre></div></div>
+
+<p>A normal dictionary does not conserve the order by which elements were added to the dictionary,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 1
+3 3
+5 5
+6 6
+</code></pre></div></div>
+
+<p>To save the order of the elements, you can use <code class="highlighter-rouge">OrderedDict</code>,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span> <span class="k">as</span> <span class="n">od</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">od</span><span class="p">([(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)])</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 5
+3 3
+6 6
+1 1
+</code></pre></div></div>
+
+<p>The only difference is that <code class="highlighter-rouge">OrderedDict</code> preserves the by which the keys are inserted to the dictionary. A regular dict doesn’t track the insertion order and <strong>iterating over an ordinary dictionary outputs the dictionary items in an arbitrary order</strong>. By contrast, <code class="highlighter-rouge">OrderedDict</code> keeps the order the items are inserted in the dictionary for the entire lifetime of the dictionary.</p>
+
+<div class="alert alert-warning" role="alert"><i class="fa fa-warning"></i> <b>Important:</b> Keep in mind that two ordered dictionaries with the same contents may not necessarily be equal since the order of their content also matters.</div>
+
+<h3 id="the-timeit-module">The <code class="highlighter-rouge">timeit</code> module</h3>
+
+<p>This is a module that provides some useful functions for timing the performance and speed of pieces of your Python code.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">timeit</span> <span class="k">as</span> <span class="n">tt</span>
+<span class="n">tt</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span> <span class="s">"-"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span> <span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">10000</span> <span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.03779717059364884
+</code></pre></div></div>
+
+<p>The first input to <code class="highlighter-rouge">timeit</code> function above is the operation which we would like to time, and the second input, tell the function, how many times repeat the task (If the operation takes a tiny amount, you would want to repeat it many many times, in order to get a sensible timing output). Here is the same operation as above, but now using the <a href="http://book.pythontips.com/en/latest/map_filter.html#map" target="_blank">map</a> function,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tt</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span> <span class="s">"-"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)))</span> <span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">10000</span> <span class="p">)</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.384857713242468  
+</code></pre></div></div>
+
+<p>In IPython or Jupyter, you can do the timing operation in a smarter way using IPython magic function <a href="https://ipython.org/ipython-doc/dev/interactive/magics.html#magic-timeit" target="_blank">%timeit</a>,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">timeit</span> <span class="s">"-"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10000 loops, best of 3: 36.6 µs per loop
+</code></pre></div></div>
+
+<p>The IPython’s magic function automatically figures how many times it should run the operation to get a sensible timing of the operation.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">timeit</span> <span class="s">"-"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)))</span>
+</code></pre></div></div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10000 loops, best of 3: 21 µs per loop
+</code></pre></div></div>
+
+<p>In general, as you noticed in the above example, the function <code class="highlighter-rouge">map</code> performs much better and faster than Python’s for-loop.</p>
+
+<h3 id="the-time-module">The <code class="highlighter-rouge">time</code> module</h3>
+
+<p>More generally, if you want to measure the CPU time spent on a specific part of your code, you can use the <code class="highlighter-rouge">clock()</code> method from <code class="highlighter-rouge">time</code> module,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="c"># do some work</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>   <span class="c"># get the initial CPU time</span>
+<span class="c"># do some further work which you want to time</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>   <span class="c"># get the final CPU time</span>
+<span class="n">cpu_time</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span>  <span class="c"># This is the time spent on the task being timed.</span>
+</code></pre></div></div>
+
+<p>The <code class="highlighter-rouge">time.clock()</code> function returns the CPU time spent in the program since its start. If the interest is in the total time, also including reading and writing files, <code class="highlighter-rouge">time.time()</code> is the appropriate function to call. Now suppose you had a list of functions that performed the same task but using different methods, and you wanted to time their performance. Since in Python, functions are ordinary objects, making a list of functions is no more special than making a list of strings or numbers. You can, therefore, create a list of function names and call them one by one, inside a loop, and time each one respectively.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">time</span>
+<span class="n">functions</span> <span class="o">=</span> <span class="p">[</span><span class="n">func1</span><span class="p">,</span> <span class="n">func2</span><span class="p">,</span> <span class="n">func3</span><span class="p">,</span> <span class="n">func4</span><span class="p">,</span><span class="n">func5</span><span class="p">,</span> <span class="n">func6</span><span class="p">,</span> <span class="n">func7</span><span class="p">,</span> <span class="n">func8</span><span class="p">,</span><span class="n">func9</span><span class="p">,</span> <span class="n">func10</span><span class="p">]</span>
+<span class="n">timings</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># timings[i] holds CPU time for functions[i]</span>
+<span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">:</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+    <span class="n">function</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">input</span> <span class="n">variables</span><span class="o">&gt;</span><span class="p">)</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+    <span class="n">cpu_time</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span>
+    <span class="n">timings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cpu_time</span><span class="p">)</span>
+</code></pre></div></div>
+
+    
+    
+    <div style="margin-top:3rem">
+        <div id="disqus_thread"></div>
+        <script type="text/javascript">
+            /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'shahmoradi'; // required: replace example with your forum shortname
+    
+            /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+                var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+
+</div>
+<hr class="shaded"/>
+<footer>
+    <div class="row">
+        <div class="col-lg-12 footer">
+            &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: July 20, 2019 <br />
+            
+                <span>Page last updated:</span>July 9, 2019<br/>
+            
+        <p>
+            <img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" />
+            <!-- Start of statc -->
+<div style="color: #ffffff; float: none; width: 100%;">
+    <span style="font-size:0.8em">visitor count: 
+        <script type="text/javascript">
+            var sc_project=12047472; 
+            var sc_invisible=0; 
+            var sc_security="fe09cd78"; 
+            var sc_text=3; 
+            var scJsHost = "https://";
+            document.write("<sc"+"ript type='text/javascript' src='" +
+            scJsHost+
+            "statcounter.com/counter/counter.js'></"+"script>");
+        </script>
+    </span>
+</div>
+<!-- End of statc -->
+        </p>
+        </div>
+    </div>
+    <!--Mathjax LaTeX engine-->
+    
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script>
+        MathJax.Hub.Config({
+            config: ["MMLorHTML.js"],
+            extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js"],
+            jax: ["input/TeX"],
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: false
+            },
+            TeX: {
+                TagSide: "right",
+                TagIndent: ".8em",
+                MultLineWidth: "85%",
+                equationNumbers: {
+                autoNumber: "AMS",
+                },
+                unicode: {
+                fonts: "STIXGeneral,'Arial Unicode MS'" 
+                }
+            },
+            showProcessingMessages: false
+        });
+    </script>
+    <style TYPE="text/css">
+        code.has-jax {font: inherit; font-size: 100%; background: inherit; border: inherit;}
+    </style>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['$','$'], ['\\(','\\)']],
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'] // removed 'code' entry
+            }
+        });
+        MathJax.Hub.Queue(function() {
+            var all = MathJax.Hub.getAllJax(), i;
+            for(i = 0; i < all.length; i += 1) {
+                all[i].SourceElement().parentNode.className += ' has-jax';
+            }
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+</footer>
+
+                    </div>
+                    <!-- /.row -->
+                </div>
+                <!-- /.container -->
+            </div>
+            <!-- /#main -->
+        </div>
+        
+    </body>
+    
+</html>

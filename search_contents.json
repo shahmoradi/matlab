@@ -1,0 +1,338 @@
+[
+
+    
+
+    
+    {
+        "title": "Branching and If-constructs",
+        "tags": "branchingcontrol_constructsif_blockmatlab",
+        "keywords": "branching, control_constructs, if_block, matlab",
+        "url": "/notes/control-constructs/branching/index.html",
+        "summary": "This note aims at explaining the concepts of branching statements and if-blocks."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Computer program structure",
+        "tags": "computerprogramcontentsdebuggingerror",
+        "keywords": "computer, program, contents, debugging, error",
+        "url": "/notes/preliminary-foundations/computer-program-structure/index.html",
+        "summary": "This note aims at introducing the fundamental elements of a computer program, including Python programs, as well as the common types of errors that could occur in computer programming."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Encapsulation",
+        "tags": "objectclassencapsulationdata_hidingobject_oriented_programmingmatlab",
+        "keywords": "object, class, encapsulation, data hiding, object_oriented_programming, matlab",
+        "url": "/notes/object-oriented-programming/encapsulation/index.html",
+        "summary": "This note provides a brief review of the notion of encapsulation and data hiding in Object-Oriented Programming (OOP) paradigm via MATLAB."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Exception handling",
+        "tags": "exception_handlingtry_catchmatlab",
+        "keywords": "exception_handling, try_catch, matlab",
+        "url": "/notes/exceptions-errors/exception-handling/index.html",
+        "summary": "This note briefly discusses how to deal with exceptions in MATLAB. An <b>exception</b> is an event which occurs during the execution of a program and disrupts the normal flow of the program's instructions. The process to deal with such exceptional events in the program is called <b>Exception handling</b>."
+    }
+    ,
+    
+
+    
+
+    
+    {
+        "title": "First MATLAB program",
+        "tags": "firstmatlabprogram",
+        "keywords": "first, matlab, program",
+        "url": "/notes/values-variables-types/first-program/index.html",
+        "summary": "This note aims at explaining the difference between programming languages and the natural languages, the type of programming errors and the meaning code debugging how to perform simple arithmetic operations on the MATLAB command line."
+    }
+    ,
+    
+
+    
+    {
+        "title": "",
+        "tags": "",
+        "keywords": "",
+        "url": "/css/footer-cdslab.css",
+        "summary": ""
+    }
+    ,
+    
+
+    
+    {
+        "title": "Functions in MATLAB",
+        "tags": "functionmatlab",
+        "keywords": "function, program_unit, matlab",
+        "url": "/notes/program-units/functions/index.html",
+        "summary": "This note aims at explaining the concepts of functions as program units."
+    }
+    ,
+    
+
+    
+    {
+        "title": "",
+        "tags": "",
+        "keywords": "",
+        "url": "/index.html",
+        "summary": ""
+    }
+    ,
+    
+
+    
+    {
+        "title": "Instantiation",
+        "tags": "objectclassinstantiationobject_oriented_programmingmatlab",
+        "keywords": "object, class, instantiation, object_oriented_programming, matlab",
+        "url": "/notes/object-oriented-programming/instantiation/index.html",
+        "summary": "This note attempts to provide a brief introduction to the concepts of instantiation, objects, and classes in Object-Oriented Programming (OOP) paradigm via MATLAB."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Data input/output methods",
+        "tags": "datainputoutputIOmatlab",
+        "keywords": "data, input, output, IO, matlab",
+        "url": "/notes/data-transfer/io/index.html",
+        "summary": "So far, we have indirectly discussed several methods of getting input information from the user, and several methods of outputting the result in a MATLAB program. This note attempts at formalizing all the previous discussions and introduce more general efficient methods of code interaction with users."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Loops and iteration constructs",
+        "tags": "forloopwhilelist_comprehensioniterationdictionarylistmatlab",
+        "keywords": "for, loop, while, list_comprehension, iteration, dictionary, list, matlab",
+        "url": "/notes/control-constructs/looping/index.html",
+        "summary": "This note aims at explaining the concept of iterations and loop constructs in MATLAB."
+    }
+    ,
+    
+
+    
+    {
+        "title": "",
+        "tags": "",
+        "keywords": "",
+        "url": "/js/lunr-feed.js",
+        "summary": ""
+    }
+    ,
+    
+
+    
+    {
+        "title": "",
+        "tags": "",
+        "keywords": "",
+        "url": "/js/lunr-tags.js",
+        "summary": ""
+    }
+    ,
+    
+
+    
+    {
+        "title": "MATLAB for beginners",
+        "tags": "MATLABbeginner",
+        "keywords": "MATLAB, beginner",
+        "url": "/notes/preliminary-foundations/matlab-for-beginners/index.html",
+        "summary": "This note aims at providing an introduction to MATLAB programming for beginners, how to install it, different components of the Graphical Unit Interface of MATLAB, as well as how to perform simple arithmetic operations in MATLAB."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Python modules",
+        "tags": "pythonmodulesimportdircommand_linetimetimeittest_block",
+        "keywords": "python, modules, import, dir, command_line, time, timeit, test_block",
+        "url": "/notes/program-units/modules/index.html",
+        "summary": "This note aims at explaining the concept of modules in Python."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Operators",
+        "tags": "operatorsmatlab",
+        "keywords": "operators, matlab",
+        "url": "/notes/values-variables-types/operators/index.html",
+        "summary": "This note reviews some of the most widely used operators in MATLAB."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Preface",
+        "tags": "amir_shahmoradimatlabgetting_startedhomepagefront_matterfrontpageauthoraboutscientific_computingaudienceoutcomesFortranCinteroperation",
+        "keywords": "amir_shahmoradi, matlab, getting_started, homepage, front_matter, frontpage, author, about, scientific_computing, audience, outcomes, Fortran, C, interoperation",
+        "url": "/notes/overview/preface/index.html",
+        "summary": ""
+    }
+    ,
+    
+
+    
+    {
+        "title": "A Brief History of Programming",
+        "tags": "programminghistoryeniacfermiacpythonfortrancc++matlab",
+        "keywords": "programming, history, eniac, fermiac, python, fortran, c, c++, matlab",
+        "url": "/notes/preliminary-foundations/programming-history/index.html",
+        "summary": "This note provides a brief history of the development of computers and computer programming languages and their mutual interaction with rapid developments in natural sciences in the 20th century."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Random numbers",
+        "tags": "random_numbersmatlab",
+        "keywords": "random_numbers, matlab",
+        "url": "/notes/scientific-computing/random-numbers/index.html",
+        "summary": "This note attempts to provide a summary of some of the most widely-used approaches for generating random numbers in MATLAB."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Release Note 1",
+        "tags": "release_note",
+        "keywords": "release_note",
+        "url": "/notes/overview/release-note-1/index.html",
+        "summary": ""
+    }
+    ,
+    
+
+    
+    {
+        "title": "Release Note 2",
+        "tags": "release_note",
+        "keywords": "release_note",
+        "url": "/notes/overview/release-note-2/index.html",
+        "summary": ""
+    }
+    ,
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    {
+        "title": "Unit testing",
+        "tags": "unit_testingerror_handlingmatlab",
+        "keywords": "unit_testing, error_handling, matlab",
+        "url": "/notes/exceptions-errors/unit-testing/index.html",
+        "summary": "This note aims at providing a brief introduction to the concept of Unit Testing in computer programming and the unit testing frameworks in MATLAB."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Values in MATLAB",
+        "tags": "valuetypematlab",
+        "keywords": "value, type, matlab",
+        "url": "/notes/values-variables-types/values/index.html",
+        "summary": "This note aims at introducing the basic value types in MATLAB."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Variable scope",
+        "tags": "variable_scopefunctionprogram_unitmatlab",
+        "keywords": "variable_scope, function, program unit, matlab",
+        "url": "/notes/program-units/variable-scope/index.html",
+        "summary": "This note aims at explaining the the scope of variables in MATLAB programming environment."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Variables in MATLAB",
+        "tags": "variabletypematlab",
+        "keywords": "variable, type, matlab",
+        "url": "/notes/values-variables-types/variables/index.html",
+        "summary": "This note aims at introducing the variables and the basic variable types in MATLAB."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Vectorization and array computing",
+        "tags": "vectorizationarray_computingFortranperformancescientific_computingMATLAB",
+        "keywords": "vectorization, array_computing, Fortran, performance, scientific_computing, MATLAB",
+        "url": "/notes/scientific-computing/vectorization/index.html",
+        "summary": "Vectorization, an extremely important concept in high-performance scientific computing, is the process of simultaneous execution of a set of computer instructions. This is contrary to the idea of looping and iteration which performs all program instructions sequentially. Vectorization can lead to significant runtime speed-up of the code."
+    }
+    ,
+    
+
+    
+    {
+        "title": "A professional programmer uses Version Control System (VCS)",
+        "tags": "version_control_systemVCSgitmercurialgithubbitbucket",
+        "keywords": "version_control_system, VCS, git, mercurial, github, bitbucket",
+        "url": "/notes/preliminary-foundations/version-control-system/index.html",
+        "summary": "This note provides a brief review of Version Control Systems, why they are needed, how they work, and the most prominent and popular version control software that is available today for professional collaborative programming."
+    }
+    ,
+    
+
+    
+    {
+        "title": "Visualization and plotting",
+        "tags": "visualizationplottingcurvefigurematlab",
+        "keywords": "visualization, plotting, curve, figure, matlab",
+        "url": "/notes/scientific-computing/visualization/index.html",
+        "summary": "This note attempts to provide a summary of the myriad of the existing methods of data visualization in MATLAB."
+    }
+    ,
+    
+
+    
+    {
+        "title": "",
+        "tags": "",
+        "keywords": "",
+        "url": "/assets/css/style.css",
+        "summary": ""
+    }
+    
+    
+
+
+
+]
