@@ -61,7 +61,7 @@
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="" href="/matlab/feed.xml">
 
     <script>
         $(document).ready(function() {
@@ -727,7 +727,7 @@ double
 <span class="n">q</span> <span class="o">=</span> <span class="nb">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 <span class="nb">save</span><span class="p">(</span><span class="s1">'pqfile.mat'</span><span class="p">,</span><span class="s1">'p'</span><span class="p">,</span><span class="s1">'q'</span><span class="p">)</span>
 </code></pre></div>    </div>
-    <p>will create the binary MAT file <a href="/matlab/notes/data-transfer/io/pqfile.mat" target="_blank">pqfile.mat</a> which contains the two variables.<br />
+    <p>will create the binary MAT file <a href="pqfile.mat" target="_blank">pqfile.mat</a> which contains the two variables.<br />
 <br /></p>
   </li>
   <li><code class="highlighter-rouge">save(filename,variables,fmt)</code> saves the requested variables with the file format specified by <code class="highlighter-rouge">fmt</code>. The variables argument is optional. If you do not specify variables, the save function saves all variables in the workspace. File format, specified as one of the following. When using the command form of save, you do not need to enclose the input in single or double quotes, for example, <code class="highlighter-rouge">save myFile.txt -ascii -tabs</code>. For example,
@@ -735,7 +735,7 @@ double
 <span class="n">q</span> <span class="o">=</span> <span class="nb">ones</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
 <span class="nb">save</span><span class="p">(</span><span class="s1">'pqfile.txt'</span><span class="p">,</span><span class="s1">'p'</span><span class="p">,</span><span class="s1">'q'</span><span class="p">,</span><span class="s1">'-ascii'</span><span class="p">)</span>
 </code></pre></div>    </div>
-    <p>will create an ASCII text file <a href="/matlab/notes/data-transfer/io/pqfile.txt" target="_blank">pqfile.txt</a> which contains the two variables <code class="highlighter-rouge">p</code> and <code class="highlighter-rouge">q</code>.</p>
+    <p>will create an ASCII text file <a href="pqfile.txt" target="_blank">pqfile.txt</a> which contains the two variables <code class="highlighter-rouge">p</code> and <code class="highlighter-rouge">q</code>.</p>
   </li>
 </ul>
 
@@ -819,7 +819,7 @@ double
 
 <h4 id="readingwriting-a-formatted-file-using-fscanf-and-fprintf">Reading/writing a formatted file using <code class="highlighter-rouge">fscanf()</code> and <code class="highlighter-rouge">fprintf()</code></h4>
 
-<p>There are numerous methods of reading the contents of a file in MATLAB. The most trivial and probably least pleasing method is through MATLAB’s built-in function <code class="highlighter-rouge">fscanf()</code>. To read a file, say <a href="/matlab/notes/data-transfer/io/data.in" target="_blank">this file</a>, you will have to first open it in MATLAB,</p>
+<p>There are numerous methods of reading the contents of a file in MATLAB. The most trivial and probably least pleasing method is through MATLAB’s built-in function <code class="highlighter-rouge">fscanf()</code>. To read a file, say <a href="data.in" target="_blank">this file</a>, you will have to first open it in MATLAB,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">fileID</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">'data.in'</span><span class="p">,</span><span class="s1">'r'</span><span class="p">);</span>
 <span class="n">formatSpec</span> <span class="o">=</span> <span class="s1">'%f'</span><span class="p">;</span>
@@ -871,7 +871,7 @@ double
 <ul>
   <li><code class="highlighter-rouge">n</code>: Reads exactly <code class="highlighter-rouge">n</code> values. After this statement, <code class="highlighter-rouge">array</code> will be a column vector containing <code class="highlighter-rouge">n</code> values read from the file.</li>
   <li><code class="highlighter-rouge">Inf</code>: Reads until the end of the file. After this statement, <code class="highlighter-rouge">array</code> will be a column vector containing all of the data until the end of the file.</li>
-  <li><code class="highlighter-rouge">[n m]</code>: Reads exactly, $n\times m$ values, and format the data as an $n\times m$ array. For example, consider <a href="/matlab/notes/data-transfer/io/nums2.txt" target="_blank">this file</a>, which contains two columns of numeric data. One could read this data using <code class="highlighter-rouge">fscanf()</code> like the following,
+  <li><code class="highlighter-rouge">[n m]</code>: Reads exactly, $n\times m$ values, and format the data as an $n\times m$ array. For example, consider <a href="nums2.txt" target="_blank">this file</a>, which contains two columns of numeric data. One could read this data using <code class="highlighter-rouge">fscanf()</code> like the following,
     <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">formatSpec</span> <span class="o">=</span> <span class="s1">'%d %f'</span><span class="p">;</span>
 <span class="o">&gt;&gt;</span> <span class="n">sizeA</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="n">Inf</span><span class="p">];</span>
 <span class="o">&gt;&gt;</span> <span class="n">fileID</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">'nums2.txt'</span><span class="p">,</span><span class="s1">'r'</span><span class="p">);</span>
@@ -891,9 +891,9 @@ double
 <span class="o">&gt;&gt;</span> <span class="nb">fclose</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>The option <code class="highlighter-rouge">w+</code> tells MATLAB to store the result in a file named <a href="/matlab/notes/data-transfer/io/nums3.txt" target="_blank">num3.txt</a>, and if the file does already exist, then append the result to the end of the current existing file. To see what formatting specifiers you can use with MATLAB <code class="highlighter-rouge">fscanf()</code> and <code class="highlighter-rouge">fprintf()</code>, see <a href="https://www.mathworks.com/help/matlab/ref/fprintf.html" target="_blank">this page</a>.</p>
+<p>The option <code class="highlighter-rouge">w+</code> tells MATLAB to store the result in a file named <a href="nums3.txt" target="_blank">num3.txt</a>, and if the file does already exist, then append the result to the end of the current existing file. To see what formatting specifiers you can use with MATLAB <code class="highlighter-rouge">fscanf()</code> and <code class="highlighter-rouge">fprintf()</code>, see <a href="https://www.mathworks.com/help/matlab/ref/fprintf.html" target="_blank">this page</a>.</p>
 
-<p>MATLAB also has some rules to skip characters that are unwanted in the text file. These rules are really details that are specific to your needs and the best approach is to seek the solution to your specific problem by searching MATLAB’s  manual or the web. For example, consider <a href="/matlab/notes/data-transfer/io/temperature.dat" target="_blank">this file</a> which contains a set of temperature values in degrees (including the Celsius degrees symbol). One way to read this file and skipping the degrees symbol in MATLAB could be then the following set of commands,</p>
+<p>MATLAB also has some rules to skip characters that are unwanted in the text file. These rules are really details that are specific to your needs and the best approach is to seek the solution to your specific problem by searching MATLAB’s  manual or the web. For example, consider <a href="temperature.dat" target="_blank">this file</a> which contains a set of temperature values in degrees (including the Celsius degrees symbol). One way to read this file and skipping the degrees symbol in MATLAB could be then the following set of commands,</p>
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">fileID</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">'temperature.dat'</span><span class="p">,</span><span class="s1">'r'</span><span class="p">);</span>
 <span class="o">&gt;&gt;</span> <span class="n">degrees</span> <span class="o">=</span> <span class="nb">char</span><span class="p">(</span><span class="mi">176</span><span class="p">);</span>
 <span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">A</span><span class="p">,</span><span class="nb">count</span><span class="p">]</span> <span class="o">=</span> <span class="nb">fscanf</span><span class="p">(</span><span class="n">fileID</span><span class="p">,</span> <span class="p">[</span><span class="s1">'%d'</span> <span class="n">degrees</span> <span class="s1">'C'</span><span class="p">])</span>
@@ -937,7 +937,7 @@ count =
 
 <p>In the field of scientific computing, a <strong>Comma-Separated Values (CSV)</strong> data file is a type of file with extension <code class="highlighter-rouge">.csv</code>, which stores tabular data (numbers and text) in plain text format. Each line of the file is called a <strong>data record</strong> and each record consists of one or more <strong>fields, separated by commas</strong>. The use of the <strong>comma</strong> as a <strong>field separator</strong> is the source of the name for this file format.</p>
 
-<p>Now suppose you wanted to read two matrices whose elements were stored in CSV format in two csv data files <a href="/matlab/notes/data-transfer/io/matrix1.csv" target="_blank">matrix1.csv</a> and <a href="/matlab/notes/data-transfer/io/matrix2.csv" target="_blank">matrix2.csv</a>. You can accomplish this task simply by calling MATLAB’s built-in csv-reader function called <code class="highlighter-rouge">csvread(filename)</code>. Here the word <code class="highlighter-rouge">filename</code> is the path to the file in your local hard drive. For example, download these two given csv files above in your MATLAB working directory and then try,</p>
+<p>Now suppose you wanted to read two matrices whose elements were stored in CSV format in two csv data files <a href="matrix1.csv" target="_blank">matrix1.csv</a> and <a href="matrix2.csv" target="_blank">matrix2.csv</a>. You can accomplish this task simply by calling MATLAB’s built-in csv-reader function called <code class="highlighter-rouge">csvread(filename)</code>. Here the word <code class="highlighter-rouge">filename</code> is the path to the file in your local hard drive. For example, download these two given csv files above in your MATLAB working directory and then try,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">Mat1</span> <span class="o">=</span> <span class="nb">csvread</span><span class="p">(</span><span class="s1">'matrix1.csv'</span><span class="p">);</span>
 <span class="o">&gt;&gt;</span> <span class="n">Mat2</span> <span class="o">=</span> <span class="nb">csvread</span><span class="p">(</span><span class="s1">'matrix2.csv'</span><span class="p">);</span>
@@ -949,7 +949,7 @@ count =
 <span class="o">&gt;&gt;</span> <span class="nb">csvwrite</span><span class="p">(</span><span class="s1">'matrix3.csv'</span><span class="p">,</span><span class="n">Mat3</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>which would output <a href="/matlab/notes/data-transfer/io/matrix3.csv" target="_blank">this file: matrix3.csv</a> for you.</p>
+<p>which would output <a href="matrix3.csv" target="_blank">this file: matrix3.csv</a> for you.</p>
 
 <p>Alternatively, you could also use MATLAB’s built-in functions <code class="highlighter-rouge">dlmread()</code> and <code class="highlighter-rouge">dlmwrite()</code> functions to do the same things as above. These two functions read and write ASCII-delimited file of numeric data. For example,</p>
 
@@ -970,7 +970,7 @@ count =
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">dlmwrite</span><span class="p">(</span><span class="s1">'matrix4.dat'</span><span class="p">,</span><span class="n">Mat3</span><span class="p">,</span><span class="s1">'\t'</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>to create a tab-delimited file named <a href="/matlab/notes/data-transfer/io/matrix4.dat" target="_blank">matrix4.dat</a>.</p>
+<p>to create a tab-delimited file named <a href="matrix4.dat" target="_blank">matrix4.dat</a>.</p>
 
 <h4 id="readingwriting-data-using-xlsread-and-xlswrite">Reading/writing data using <code class="highlighter-rouge">xlsread()</code> and <code class="highlighter-rouge">xlswrite()</code></h4>
 
@@ -980,7 +980,7 @@ count =
 <span class="o">&gt;&gt;</span> <span class="nb">xlswrite</span><span class="p">(</span><span class="s1">'XlsExample.xlsx'</span><span class="p">,[</span><span class="n">headers</span><span class="p">;</span> <span class="n">values</span><span class="p">]);</span>
 </code></pre></div></div>
 
-<p>would create this <a href="/matlab/notes/data-transfer/io/XlsExample.xlsx" target="_blank">Microsoft Excel file</a> for you.</p>
+<p>would create this <a href="XlsExample.xlsx" target="_blank">Microsoft Excel file</a> for you.</p>
 
 <h4 id="readingwriting-data-using-readtable-and-writetable">Reading/writing data using <code class="highlighter-rouge">readtable()</code> and <code class="highlighter-rouge">writetable()</code></h4>
 
@@ -999,7 +999,7 @@ count =
 
 <h4 id="reading-and-writing-image-files-using-imread-and-imwrite">Reading and writing image files using <code class="highlighter-rouge">imread()</code> and <code class="highlighter-rouge">imwrite()</code></h4>
 
-<p>MATLAB has a really wide range of input/output methods of data. We have already discussed some of the most useful IO approaches in the previous sections. For graphics files, however, none of the previous functions are useful. Suppose you wanted to import a <strong>jpg</strong> or <strong>png</strong> or some other type graphics file into MATLAB to further process it. For this purpose, MATLAB has the built-in function <code class="highlighter-rouge">imread()</code> which can read image from an input graphics file. For example, to read <a href="/matlab/notes/data-transfer/io/homer.jpg" target="_blank">this image file</a> in MATLAB, you could do,</p>
+<p>MATLAB has a really wide range of input/output methods of data. We have already discussed some of the most useful IO approaches in the previous sections. For graphics files, however, none of the previous functions are useful. Suppose you wanted to import a <strong>jpg</strong> or <strong>png</strong> or some other type graphics file into MATLAB to further process it. For this purpose, MATLAB has the built-in function <code class="highlighter-rouge">imread()</code> which can read image from an input graphics file. For example, to read <a href="homer.jpg" target="_blank">this image file</a> in MATLAB, you could do,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">homer</span> <span class="o">=</span> <span class="nb">imread</span><span class="p">(</span><span class="s1">'homer.jpg'</span><span class="p">);</span>
 <span class="o">&gt;&gt;</span> <span class="nb">imshow</span><span class="p">(</span><span class="n">homer</span><span class="p">)</span>
@@ -1018,7 +1018,7 @@ count =
 <span class="o">&gt;&gt;</span> <span class="nb">imwrite</span><span class="p">(</span><span class="n">homerBW</span><span class="p">,</span><span class="s1">'homerBW.png'</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>to get this <a href="/matlab/notes/data-transfer/io/homerBW.png" target="_blank">black and white version of the above image</a>, now in <strong>png</strong> format (or in any format you may wish, that is also supported by MATLAB).</p>
+<p>to get this <a href="homerBW.png" target="_blank">black and white version of the above image</a>, now in <strong>png</strong> format (or in any format you may wish, that is also supported by MATLAB).</p>
 
 <h4 id="reading-a-file-using-importdata">Reading a file using <code class="highlighter-rouge">importdata()</code></h4>
 
@@ -1027,7 +1027,7 @@ count =
 <span class="o">&gt;&gt;</span> <span class="nb">imshow</span><span class="p">(</span><span class="n">newHomer</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>to import it to MATLAB. At the same time, you could also use it to import data from the excel file that we created above, <a href="/matlab/notes/data-transfer/io/XlsExample.xlsx" target="_blank">XlsExample.xlsx</a>,</p>
+<p>to import it to MATLAB. At the same time, you could also use it to import data from the excel file that we created above, <a href="XlsExample.xlsx" target="_blank">XlsExample.xlsx</a>,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">newXls</span> <span class="o">=</span> <span class="nb">importdata</span><span class="p">(</span><span class="s1">'XlsExample.xlsx'</span><span class="p">)</span>
 </code></pre></div></div>
@@ -1037,7 +1037,7 @@ count =
     colheaders: {'First'  'Second'  'Third'}
 </code></pre></div></div>
 
-<p>or similarly, read a csv-delimited file like <a href="/matlab/notes/data-transfer/io/matrix3.csv" target="_blank">matrix3.csv</a>,</p>
+<p>or similarly, read a csv-delimited file like <a href="matrix3.csv" target="_blank">matrix3.csv</a>,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">newMat3</span> <span class="o">=</span> <span class="nb">importdata</span><span class="p">(</span><span class="s1">'matrix3.csv'</span><span class="p">)</span>
 </code></pre></div></div>
@@ -1070,7 +1070,7 @@ count =
 
 <h4 id="reading-a-file-using-fgetl">Reading a file using <code class="highlighter-rouge">fgetl()</code></h4>
 
-<p>Another useful MATLAB function for reading the content of a file is <code class="highlighter-rouge">fgetl()</code> which can read a file line by line, removing the new line characters <code class="highlighter-rouge">\n</code> from the end of each line. The entire line is read as a string. For example, consider <a href="/matlab/notes/data-transfer/io/text.txt" target="_blank">this file</a>. One could read the content of this text file using the function <code class="highlighter-rouge">fgetl()</code> like the following,</p>
+<p>Another useful MATLAB function for reading the content of a file is <code class="highlighter-rouge">fgetl()</code> which can read a file line by line, removing the new line characters <code class="highlighter-rouge">\n</code> from the end of each line. The entire line is read as a string. For example, consider <a href="text.txt" target="_blank">this file</a>. One could read the content of this text file using the function <code class="highlighter-rouge">fgetl()</code> like the following,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">fid</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="s1">'text.txt'</span><span class="p">);</span>
 <span class="o">&gt;&gt;</span> <span class="nb">line</span> <span class="o">=</span> <span class="nb">fgetl</span><span class="p">(</span><span class="n">fid</span><span class="p">)</span>  <span class="c1">% read line excluding newline character</span>
@@ -1148,7 +1148,7 @@ Weak typing is also good for code-reuse. You can code a scalar algorithm in MATL
     <div class="row">
         <div class="col-lg-12 footer">
             &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: August 12, 2019 <br />
+            Site last generated: August 13, 2019 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

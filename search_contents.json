@@ -74,7 +74,7 @@
     {
         "title": "Functions in MATLAB",
         "tags": "functionmatlab",
-        "keywords": "function, program_unit, matlab",
+        "keywords": "function, program_unit, matlab, global",
         "url": "/notes/program-units/functions/index.html",
         "summary": "This note aims at explaining the concepts of functions as program units."
     }
@@ -318,17 +318,6 @@
         "keywords": "visualization, plotting, curve, figure, matlab",
         "url": "/notes/scientific-computing/visualization/index.html",
         "summary": "This note attempts to provide a summary of the myriad of the existing methods of data visualization in MATLAB."
-    }
-    ,
-    
-
-    
-    {
-        "title": "",
-        "tags": "",
-        "keywords": "",
-        "url": "/assets/css/style.css",
-        "summary": ""
     }
     
     

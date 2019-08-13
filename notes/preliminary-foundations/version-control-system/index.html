@@ -61,7 +61,7 @@
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="" href="/matlab/feed.xml">
 
     <script>
         $(document).ready(function() {
@@ -545,11 +545,11 @@ the script runs before the sidebar code runs and the class never gets inserted.
     
     <h2 id="useful-links-for-future-reference">Useful links for future reference</h2>
 <ul>
-  <li><a href="/matlab/notes/preliminary-foundations/version-control-system/linuxRef.pdf" target="_blank">Linux commands cheat-sheet</a></li>
-  <li><a href="/matlab/notes/preliminary-foundations/version-control-system/progit.en.pdf" target="_blank">Git reference manual (2009)</a></li>
-  <li><a href="/matlab/notes/preliminary-foundations/version-control-system/github-git-cheat-sheet.pdf" target="_blank">Github’s Git cheat-sheet</a></li>
-  <li><a href="/matlab/notes/preliminary-foundations/version-control-system/atlassian_git_cheatsheet.pdf" target="_blank">Atlassian’s Git cheat-sheet</a></li>
-  <li><a href="/matlab/notes/preliminary-foundations/version-control-system/markdown-cheatsheet-online.pdf" target="_blank">Markdown language cheat-sheet</a></li>
+  <li><a href="linuxRef.pdf" target="_blank">Linux commands cheat-sheet</a></li>
+  <li><a href="progit.en.pdf" target="_blank">Git reference manual (2009)</a></li>
+  <li><a href="github-git-cheat-sheet.pdf" target="_blank">Github’s Git cheat-sheet</a></li>
+  <li><a href="atlassian_git_cheatsheet.pdf" target="_blank">Atlassian’s Git cheat-sheet</a></li>
+  <li><a href="markdown-cheatsheet-online.pdf" target="_blank">Markdown language cheat-sheet</a></li>
   <li><a href="https://ndpsoftware.com/git-cheatsheet.html" target="_blank">Advanced Git cheatsheet</a></li>
 </ul>
 
@@ -599,7 +599,7 @@ Depending on how the project is maintained and shared with others, VCS is classi
   <li><strong>Local VCS</strong><br />
  The simplest form of project version control, and probably the oldest method is <em>local VCS</em> where the VCS software keeps detailed track of the evolution of individual files in the project <em>only on a local storage device or computer</em>. A prime example of such version control software is the GNU <a href="https://www.gnu.org/software/rcs/" target="_blank">Revision Control System (RCS)</a>. Such VCS is able to avoid problems 1-4 mentioned above. The following figure illustrates the inner workings of a local VCS.<br />
  <br />
- <img src="/matlab/notes/preliminary-foundations/version-control-system/localVCS.png" alt="Local Version Control" /><br />
+ <img src="localVCS.png" alt="Local Version Control" /><br />
  <br />
  <strong>Major Caveats:</strong>
     <ol>
@@ -611,7 +611,7 @@ Depending on how the project is maintained and shared with others, VCS is classi
   <li><strong>Centralized VCS (CVCS)</strong><br />
  Since collaborative effort is at the heart of almost every large-scale project, a new generation of VCS has been developed that go beyond the capabilities of local VCS. These VCS have a central repository that is accessible by all members of the project’s team. This central repository contains all of the project’s information and its development history and clients (team members) can check out and work on individual files of the project. For many years this style of VCS used to be the dominant method of software version control. Prime examples include <a href="https://en.wikipedia.org/wiki/Concurrent_Versions_System" target="_blank">Concurrent Versions System (CVS)</a>, <a href="https://en.wikipedia.org/wiki/Perforce_Helix" target="_blank">Perforce Helix</a> and <a href="https://en.wikipedia.org/wiki/Apache_Subversion" target="_blank">Apache Subversion(SVN)</a>. The following figure illustrates the inner workings of a CVCS.<br />
  <br />
- <img src="/matlab/notes/preliminary-foundations/version-control-system/centralizedVCS.png" alt="Centralized Version Control" /><br />
+ <img src="centralizedVCS.png" alt="Centralized Version Control" /><br />
  <br />
  <strong>Major Caveats:</strong>
     <ol>
@@ -623,7 +623,7 @@ Depending on how the project is maintained and shared with others, VCS is classi
   <li><strong>Distributed VCS (DVCS)</strong><br />
  In order to resolve the caveats of the aforementioned VCS, several new VCS, known as <em>distributed VCS</em>, have been developed within the first decade of the new millennium. With these VCS, each client has an entire copy of the central database at their own local storage device. Thus, every <strong>clone</strong> of the central repository that is with each client, is a full backup of all of the project’s data and history.  Consequently, if the central server/repository fails for any reason, the local repository of the team member that has the most recent clone of the project database, can be used to restore the central repository. <strong>This VCS paradigm is currently the most popular class of VCS</strong>. We will be using a major implementation of it known as <a href="https://git-scm.com/" target="_blank"><strong>Git</strong></a> here. Other major DVCS implementations include <a href="https://www.mercurial-scm.org/" target="_blank"><strong>Mercurial</strong></a>, <a href="https://bazaar.canonical.com/en/" target="_blank"><strong>Bazaar</strong></a>, and <a href="http://darcs.net/" target="_blank"><strong>Darcs</strong></a>. The following figure illustrates the inner working of a DVCS.<br />
  <br />
- <img src="/matlab/notes/preliminary-foundations/version-control-system/distributedVCS.png" alt="Distributed Version Control" /><br />
+ <img src="distributedVCS.png" alt="Distributed Version Control" /><br />
  <br /></li>
 </ol>
 
@@ -1515,7 +1515,7 @@ If you are sure you want to delete it, run <span class="s1">'git branch -D test'
     <div class="row">
         <div class="col-lg-12 footer">
             &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: August 12, 2019 <br />
+            Site last generated: August 13, 2019 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

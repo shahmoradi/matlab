@@ -61,7 +61,7 @@
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="" href="/matlab/feed.xml">
 
     <script>
         $(document).ready(function() {
@@ -558,31 +558,31 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <p>The following are a few example arithmetic operations with values in MATLAB. You can perform very simple arithmetic on the MATLAB command line, and the result immediately by pressing <code class="highlighter-rouge">enter</code>.</p>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">5</span> <span class="c1">% Just typing some comment on the MATLAB command line. Anything after % is a comment and will be ignored.</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">2</span> <span class="o">+</span> <span class="mi">5</span> <span class="c1">% Just typing some comment on the MATLAB command line. Anything after % is a comment and will be ignored.</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      7
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">7</span> <span class="c1">% difference</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">2</span> <span class="o">-</span> <span class="mi">7</span> <span class="c1">% difference</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     -5
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">7</span> <span class="c1">% product</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">2</span> <span class="o">*</span> <span class="mi">7</span> <span class="c1">% product</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     14
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">true</span> <span class="c1">% logical true value</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">true</span> <span class="c1">% logical true value</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      1
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">false</span> <span class="c1">% logical false value</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">false</span> <span class="c1">% logical false value</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      0
@@ -592,44 +592,44 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <p>You can use the MATLAB’s built-in function <code class="highlighter-rouge">class</code> to get the type of a value in MATLAB (Of course, this is somewhat obvious and redundant for a value input as we already readily know the type of a value).</p>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">7</span><span class="p">)</span> <span class="c1">% class function gives you the type of the input object to function "class"</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="mi">7</span><span class="p">)</span> <span class="c1">% class function gives you the type of the input object to function "class"</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 double
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="s1">'This is a MATLAB string (char)'</span><span class="p">)</span> <span class="c1">% a char value in MATLAB</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">(</span><span class="s1">'This is a MATLAB string (char)'</span><span class="p">)</span> <span class="c1">% a char value in MATLAB</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 char
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="err">"</span><span class="n">This</span> <span class="nb">is</span> <span class="n">a</span> <span class="n">MATLAB</span> <span class="nb">string</span><span class="err">"</span><span class="p">)</span> <span class="c1">% Note that you cannot use quotation marks for representing string values.</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">(</span><span class="err">"</span><span class="n">This</span> <span class="nb">is</span> <span class="n">a</span> <span class="n">MATLAB</span> <span class="nb">string</span><span class="err">"</span><span class="p">)</span> <span class="c1">% Note that you cannot use quotation marks for representing string values.</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> class("This is a MATLAB string") % Note that you cannot use quotation marks for representing string values.
        ↑
 Error: The input character is not valid in MATLAB statements or expressions.
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 double
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">class</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">(</span><span class="nb">class</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 char
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 logical
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">(</span><span class="nb">false</span><span class="p">)</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 logical
@@ -643,25 +643,25 @@ logical
 
 <p>Use <code class="highlighter-rouge">,</code> or space to separate the elements of a row-wise vector.</p>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span> <span class="c1">% a space-separated row vector</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span> <span class="c1">% a space-separated row vector</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      1     2     3     4
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">([</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">])</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">([</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">])</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 double
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="c1">% a comma-separated row vector</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span> <span class="c1">% a comma-separated row vector</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      1     2     3     4
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 double
@@ -669,7 +669,7 @@ double
 
 <div class="alert alert-success" role="alert"><i class="fa fa-check-square-o"></i> <b>Tip:</b> Use <code class="highlighter-rouge">;</code> to separate the elements of a column-wise vector.</div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">4</span><span class="p">]</span> <span class="c1">% a column vector</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">4</span><span class="p">]</span> <span class="c1">% a column vector</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      1
@@ -678,7 +678,7 @@ double
      4
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">([</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">4</span><span class="p">])</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">([</span><span class="mi">1</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">4</span><span class="p">])</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 double
@@ -688,7 +688,7 @@ double
 
 <p>Use <code class="highlighter-rouge">;</code> to separate a row of the matrix from the next.</p>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">;</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">;</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span> <span class="c1">% a 3 by 4 matrix</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">;</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">;</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span> <span class="c1">% a 3 by 4 matrix</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      1     2     3     4
@@ -704,19 +704,19 @@ double
 
 <p>Cell arrays are array entities that can contain data of varying types and sizes. A <strong>cell array</strong> is a data type with indexed data containers called <strong>cells</strong>, where each cell can contain any type of data. Cell arrays commonly contain either a list of text strings, combinations of text and numbers, or numeric arrays of different sizes. Refer to sets of cells by enclosing indices in smooth parentheses, <code class="highlighter-rouge">()</code>. Access the contents of cells by indexing with curly braces, <code class="highlighter-rouge">{}</code>. Also, to define a cell, use <code class="highlighter-rouge">{}</code> like the following notation,</p>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">{</span><span class="s1">'Hi'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">,</span> <span class="s1">'World!'</span><span class="p">}</span> <span class="c1">% a cell array of strings</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="s1">'Hi'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">,</span> <span class="s1">'World!'</span><span class="p">}</span> <span class="c1">% a cell array of strings</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
     'Hi'    ' '    'World!'
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">({</span><span class="s1">'Hi'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">,</span> <span class="s1">'World!'</span><span class="p">})</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">({</span><span class="s1">'Hi'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">,</span> <span class="s1">'World!'</span><span class="p">})</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 cell
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">{</span><span class="s1">'Hi'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="s1">'World!'</span><span class="p">}</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="s1">'Hi'</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="s1">'World!'</span><span class="p">}</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
     'Hi'    [1]    [1]    'World!'
@@ -739,55 +739,55 @@ cell
 
 <p>Value coercion is the <strong>implicit</strong> process by which the MATLAB interpreter/compiler automatically converts a value of one type into a value of another type when that second type is required by the surrounding context. For example,</p>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">int32</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span> <span class="c1">% int32 gives a 32-bit (4-byte) integer.</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">(</span><span class="nb">int32</span><span class="p">(</span><span class="mf">1.0</span><span class="p">))</span> <span class="c1">% int32 gives a 32-bit (4-byte) integer.</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 int32
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">int32</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="nb">int32</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="c1">% Note that the product of two integers, is integer.</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">int32</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span> <span class="o">*</span> <span class="nb">int32</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="c1">% Note that the product of two integers, is integer.</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
            2
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">ans</span><span class="p">)</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">(</span><span class="nb">ans</span><span class="p">)</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 int32
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">int32</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">2.5</span> <span class="c1">% Note that the product of float and integer is coerced into an integer!</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">int32</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="mf">2.5</span> <span class="c1">% Note that the product of float and integer is coerced into an integer!</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
            3
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">ans</span><span class="p">)</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">(</span><span class="nb">ans</span><span class="p">)</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 int32
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">int32</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="p">/</span> <span class="mf">2.5</span> <span class="c1">% Note that the division of float and integer, is coerced into an integer.</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">int32</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="p">/</span> <span class="mf">2.5</span> <span class="c1">% Note that the division of float and integer, is coerced into an integer.</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
            0
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="mf">2.0</span> <span class="p">/</span> <span class="mi">7</span> <span class="c1">% floating point division with float result</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mf">2.0</span> <span class="p">/</span> <span class="mi">7</span> <span class="c1">% floating point division with float result</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     0.2857
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">true</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1">% logical and double are coerced into double</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">true</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1">% logical and double are coerced into double</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      2
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">true</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">(</span><span class="nb">true</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 double
@@ -795,25 +795,25 @@ double
 
 <p>However, note that,</p>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">true</span> <span class="o">+</span> <span class="nb">int32</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">% you cannot combine logical with integer</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">true</span> <span class="o">+</span> <span class="nb">int32</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1">% you cannot combine logical with integer</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error using  + 
 Integers can only be combined with integers of the same class, or scalar doubles.
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">true</span> <span class="o">+</span> <span class="nb">false</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">true</span> <span class="o">+</span> <span class="nb">false</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      1
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">true</span> <span class="o">*</span> <span class="nb">false</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">true</span> <span class="o">*</span> <span class="nb">false</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      0
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">true</span> <span class="p">/</span> <span class="nb">false</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">true</span> <span class="p">/</span> <span class="nb">false</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Undefined operator '/' for input arguments of type 'logical'.
 </code></pre></div></div>
@@ -826,28 +826,28 @@ Integers can only be combined with integers of the same class, or scalar doubles
 
 <p>MATLAB has a built-in function called <code class="highlighter-rouge">format</code> that can modify the output style of MATLAB on the command line. For example,</p>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">/</span><span class="mi">5</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">2</span><span class="p">/</span><span class="mi">5</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     0.4000
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">format</span> <span class="n">long</span>
-<span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">/</span><span class="mi">5</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">format</span> <span class="n">long</span>
+<span class="mi">2</span><span class="p">/</span><span class="mi">5</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
    0.400000000000000
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">format</span> <span class="n">short</span>
-<span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">/</span><span class="mi">5</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">format</span> <span class="n">short</span>
+<span class="mi">2</span><span class="p">/</span><span class="mi">5</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     0.4000
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">format</span> <span class="n">loose</span>
-<span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">/</span><span class="mi">5</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">format</span> <span class="n">loose</span>
+<span class="mi">2</span><span class="p">/</span><span class="mi">5</span>
 </code></pre></div></div>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
@@ -855,8 +855,8 @@ Integers can only be combined with integers of the same class, or scalar doubles
     0.4000
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">format</span> <span class="n">compact</span>
-<span class="o">&gt;&gt;</span> <span class="mi">2</span><span class="p">/</span><span class="mi">5</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">format</span> <span class="n">compact</span>
+<span class="mi">2</span><span class="p">/</span><span class="mi">5</span>
 </code></pre></div></div>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     0.4000
@@ -916,7 +916,7 @@ Integers can only be combined with integers of the same class, or scalar doubles
     <div class="row">
         <div class="col-lg-12 footer">
             &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: August 12, 2019 <br />
+            Site last generated: August 13, 2019 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

@@ -61,7 +61,7 @@
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
-<link rel="alternate" type="application/rss+xml" title="documentation-theme-jekyll" href="/matlab/feed.xml">
+<link rel="alternate" type="application/rss+xml" title="" href="/matlab/feed.xml">
 
     <script>
         $(document).ready(function() {
@@ -688,7 +688,7 @@ time end up with multiple identical versions of the same function. When you want
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>python mycode.py
 </code></pre></div></div>
 
-<p>the code in the module will be executed, just as if you imported it inside another code. This is good, but can sometimes become problematic. Let’s explain this with an example, a <a href="/matlab/notes/program-units/variable-scope/find_primes.py" target="_blank">script</a> that finds and reports all prime numbers smaller than a given input number $n$.</p>
+<p>the code in the module will be executed, just as if you imported it inside another code. This is good, but can sometimes become problematic. Let’s explain this with an example, a <a href="find_primes.py" target="_blank">script</a> that finds and reports all prime numbers smaller than a given input number $n$.</p>
 
 <p>When you execute this code as a standalone Python script, it will ask you for an integer, to give you all integers that are smaller than the input number. Now suppose you wanted to import this script as a Python module into your code. If you do so, the Python interpreter would run all statements in this script and asks you to input an integer, before importing the rest of the functions in this script.</p>
 
@@ -723,7 +723,7 @@ Here is a list of all prime numbers smaller than 13:
     <span class="n">get_primes</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>When the code is run as a standalone script, the <code class="highlighter-rouge">__name__</code> property of the code is set to <code class="highlighter-rouge">__main__</code>. However, when the script is imported as a module inside another code, the <code class="highlighter-rouge">__name__</code> property is automatically set to the name of the module <code class="highlighter-rouge">find_primes</code>. Thus as a module, the above if-block will not be executed, but the rest of the code (the two functions) will be properly imported. The corrected script is named <code class="highlighter-rouge">mod_find_primes.py</code> and can be downloaded from <a href="/matlab/notes/program-units/variable-scope/mod_find_primes.py" target="_blank">here</a>.</p>
+<p>When the code is run as a standalone script, the <code class="highlighter-rouge">__name__</code> property of the code is set to <code class="highlighter-rouge">__main__</code>. However, when the script is imported as a module inside another code, the <code class="highlighter-rouge">__name__</code> property is automatically set to the name of the module <code class="highlighter-rouge">find_primes</code>. Thus as a module, the above if-block will not be executed, but the rest of the code (the two functions) will be properly imported. The corrected script is named <code class="highlighter-rouge">mod_find_primes.py</code> and can be downloaded from <a href="mod_find_primes.py" target="_blank">here</a>.</p>
 
 <pre><code class="language-Python">import mod_find_primes
 mod_find_primes.__name__
@@ -744,7 +744,7 @@ mod_find_primes.__name__
 
 <h3 id="command-line-arguments">Command line arguments</h3>
 
-<p>Test blocks are especially useful when your module can be also run as a standalone Python script that takes in <strong>command-line arguments</strong>. <a href="/matlab/notes/program-units/variable-scope/cmd_find_primes.py" target="_blank">Here</a> is a modified version of the <code class="highlighter-rouge">mod_find_primes</code> module now named <code class="highlighter-rouge">cmd_find_primes</code> that instead of using <code class="highlighter-rouge">input()</code> function, reads the integer number from the Bash command line. To do so, you need to modify the last part of the original module to the following, using Python’s standard <code class="highlighter-rouge">sys</code> module,</p>
+<p>Test blocks are especially useful when your module can be also run as a standalone Python script that takes in <strong>command-line arguments</strong>. <a href="cmd_find_primes.py" target="_blank">Here</a> is a modified version of the <code class="highlighter-rouge">mod_find_primes</code> module now named <code class="highlighter-rouge">cmd_find_primes</code> that instead of using <code class="highlighter-rouge">input()</code> function, reads the integer number from the Bash command line. To do so, you need to modify the last part of the original module to the following, using Python’s standard <code class="highlighter-rouge">sys</code> module,</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">sys</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span> <span class="c"># check the number of arguments to be exactly 2.</span>
@@ -833,7 +833,7 @@ Usage:
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_topic</span> <span class="o">=</span> <span class="s">"Python programming"</span>
 </code></pre></div></div>
 
-<p>This, however, does not prevent the import of the variable <code class="highlighter-rouge">_topic</code> into your code from your the <a href="/matlab/notes/program-units/variable-scope/mod_cmd_find_primes_del.py" target="_blank">module</a> containing it. One solution is to delete the variables to which we do not want the user to have access, at the end of the module,</p>
+<p>This, however, does not prevent the import of the variable <code class="highlighter-rouge">_topic</code> into your code from your the <a href="mod_cmd_find_primes_del.py" target="_blank">module</a> containing it. One solution is to delete the variables to which we do not want the user to have access, at the end of the module,</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">del</span> <span class="n">_topic</span>
 </code></pre></div></div>
 
@@ -854,7 +854,7 @@ Usage:
  'is_prime']
 </code></pre></div></div>
 
-<p>However, note that if you import all definitions in <a href="/matlab/notes/program-units/variable-scope/mod_cmd_find_primes_all.py" target="_blank">your module</a> as standalone definitions like the following,</p>
+<p>However, note that if you import all definitions in <a href="mod_cmd_find_primes_all.py" target="_blank">your module</a> as standalone definitions like the following,</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">mod_cmd_find_primes_all</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="nb">dir</span><span class="p">()</span>
@@ -1161,7 +1161,7 @@ The word "data." appears only 1 times in the text
     <div class="row">
         <div class="col-lg-12 footer">
             &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: August 12, 2019 <br />
+            Site last generated: August 13, 2019 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             
