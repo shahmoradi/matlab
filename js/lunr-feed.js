@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="keywords" content=" ">
-<title> | Scientific Computing with MATLAB</title>
+<title> | Data Science with MATLAB</title>
 <link rel="stylesheet" href="/matlab/css/prismOkaidia.css">
 <script src="/matlab/js/prismOkaidia.js"></script>
 <!--
@@ -120,7 +120,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="fa fa-book fa-lg navbar-brand" href="/matlab/index.html">&nbsp;<span class="projectTitle"> Scientific Computing with MATLAB</span></a>
+            <a class="fa fa-book fa-lg navbar-brand" href="/matlab/index.html">&nbsp;<span class="projectTitle"> Data Science with MATLAB</span></a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
@@ -633,7 +633,7 @@ $(document).ready(function() {
     <div class="row">
         <div class="col-lg-12 footer">
             &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: July 20, 2019 <br />
+            Site last generated: August 12, 2019 <br />
             
         <p>
             <img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" />

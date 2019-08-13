@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
         <title>documentation-theme-jekyll</title>
-        <description>A reference and tutorial on the foundations of scientific computing with the MATLAB programming language.</description>
+        <description>A reference and tutorial on the foundations of Data Science and Scientific Computing with the MATLAB programming language.</description>
         <link>https://www.cdslab.org/</link>
         <atom:link href="https://www.cdslab.org/feed.xml" rel="self" type="application/rss+xml"/>
-        <pubDate>Sat, 20 Jul 2019 08:51:21 -0500</pubDate>
-        <lastBuildDate>Sat, 20 Jul 2019 08:51:21 -0500</lastBuildDate>
+        <pubDate>Mon, 12 Aug 2019 23:58:37 -0500</pubDate>
+        <lastBuildDate>Mon, 12 Aug 2019 23:58:37 -0500</lastBuildDate>
         <generator>Jekyll v3.8.5</generator>
         
     </channel>
