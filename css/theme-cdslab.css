@@ -260,3 +260,31 @@ height: 100%;
 }
 
 /* End of fluid video embedding aspect ratio */
+
+
+.social-icons a{color: black;}
+.social-icons {
+    text-align: right;
+    float: none;
+    margin-bottom:  1.25rem;
+    margin-right:   1.25rem;
+    /*
+    */
+}
+.social-icon{
+    text-align: center;
+    margin-left: 1rem;
+}
+/* this part adds an icon after external links, using FontAwesome*/
+.social-icon a:hover{
+    color: var(--greyblue);
+    text-decoration: none;
+}
+.social-icon a[href^="http://"]:after, a[href^="https://"]:after {
+    content: none;
+    text-decoration: none;
+    font-family: FontAwesome;
+    font-weight: normal;
+    font-style: normal;
+    display: none;
+}
