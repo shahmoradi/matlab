@@ -705,7 +705,7 @@ $(document).ready(function() {
             Site last generated: August 23, 2019 <br />
             
         <p>
-            <img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" />
+            <a href="https://www.cdslab.org" target="_blank"><img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" /></a>
             <!-- Start of statc -->
 <div style="color: #ffffff; float: none; width: 100%;">
     <span style="font-size:0.8em">visitor count: 
