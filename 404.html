@@ -146,6 +146,10 @@
                                 <li><a href="https://www.cdslab.org/people" target="_blank" rel="noopener">People</a></li>
                                 
                                 
+                                
+                                <li><a href="https://www.cdslab.org/research" target="_blank" rel="noopener">Research</a></li>
+                                
+                                
                             </ul>
                         </li>
                     
@@ -154,11 +158,11 @@
                             <ul class="dropdown-menu">
                                 
                                 
-                                <li><a href="https://www.cdslab.org/matlab/" target="_blank" rel="noopener">Scientific Computing with MATLAB</a></li>
+                                <li><a href="https://www.cdslab.org/matlab/" target="_blank" rel="noopener">MATLAB Programming</a></li>
                                 
                                 
                                 
-                                <li><a href="https://www.cdslab.org/python/" target="_blank" rel="noopener">Scientific Computing with Python</a></li>
+                                <li><a href="https://www.cdslab.org/python/" target="_blank" rel="noopener">Python Programming</a></li>
                                 
                                 
                             </ul>
