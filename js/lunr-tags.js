@@ -202,7 +202,7 @@
                                 searchInput: document.getElementById('search-input'),
                                 resultsContainer: document.getElementById('results-container'),
                                 dataSource: "/matlab/search.json",
-                                searchResultTemplate: '<li><a href="https://www.cdslab.org{url}" title="">{title}</a></li>',
+                                searchResultTemplate: '<li><a href="https://www.cdslab.org/matlab{url}" title="">{title}</a></li>',
                     noResultsText: 'No results found.',
                             limit: 10,
                             fuzzy: true,
@@ -739,8 +739,8 @@ $(document).ready(function() {
 </div>
 
         <div class="col-lg-12 footer">
-            &copy;2019 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: October 22, 2019 <br />
+            &copy;2020 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: March 24, 2020 <br />
             
         <p>
             <a href="https://www.cdslab.org" target="_blank"><img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" /></a>
