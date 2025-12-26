@@ -562,7 +562,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <h2 id="global-variable-usage-syntax">Global variable usage syntax</h2>
 
 <ul>
-  <li>To access a global variable from within a function, one should explicitly label the variable as <code class="highlighter-rouge">global</code>.</li>
+  <li>To access a global variable from within a function, one should explicitly label the variable as <code class="language-plaintext highlighter-rouge">global</code>.</li>
   <li>A global variable must be declared global before it is used the first time in a function.</li>
   <li>Global variable declarations should be placed at the beginning of a function definition.</li>
   <li>For making a variable global in MATLAB’s base workspace, you should also first declare it as global.</li>
@@ -579,27 +579,27 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">setGlobalx</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="o">&gt;&gt;</span> <span class="n">x</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Undefined function or variable 'x'. 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Undefined function or variable 'x'. 
 </code></pre></div></div>
 
-<p>The problem here is that <code class="highlighter-rouge">x</code> is not declared as global in MATLAB’s base workspace. To do so,</p>
+<p>The problem here is that <code class="language-plaintext highlighter-rouge">x</code> is not declared as global in MATLAB’s base workspace. To do so,</p>
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="k">global</span> <span class="n">x</span>
 <span class="o">&gt;&gt;</span> <span class="n">setGlobalx</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="o">&gt;&gt;</span> <span class="n">x</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x =
     10
 </code></pre></div></div>
 
 <h3 id="exercise">Exercise</h3>
 
-<p>Consider the same <code class="highlighter-rouge">reverseSentence</code> function that we discussed above, but this time instead of giving it an input argument, we want to use a global variable string from MATLAB’s base workspace. How would you implement this, such that the following commands lead to the same output from the new global function?</p>
+<p>Consider the same <code class="language-plaintext highlighter-rouge">reverseSentence</code> function that we discussed above, but this time instead of giving it an input argument, we want to use a global variable string from MATLAB’s base workspace. How would you implement this, such that the following commands lead to the same output from the new global function?</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="k">global</span> <span class="n">globalString</span>
 <span class="o">&gt;&gt;</span> <span class="n">globalString</span> <span class="o">=</span> <span class="s1">'MATLAB is a rather strange but very powerful programming language'</span><span class="p">;</span>
 <span class="o">&gt;&gt;</span> <span class="n">reverseSentenceGlobal</span><span class="p">()</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>language programming powerful very but strange rather a is MATLAB 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>language programming powerful very but strange rather a is MATLAB 
 </code></pre></div></div>
 
 <p><strong>Answer</strong></p>
@@ -621,35 +621,35 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <h2 id="persistent-variables">Persistent variables</h2>
 
-<p>Sometimes you may need to keep a variable inside a function local, but still, you want the variable to retain its value from the last call of the function in the most recent function call. This is very useful, in particular, makes your code immune to pitfalls of declaring variables <code class="highlighter-rouge">global</code>. The way to it is through the use of <code class="highlighter-rouge">persistent</code> attribute.</p>
+<p>Sometimes you may need to keep a variable inside a function local, but still, you want the variable to retain its value from the last call of the function in the most recent function call. This is very useful, in particular, makes your code immune to pitfalls of declaring variables <code class="language-plaintext highlighter-rouge">global</code>. The way to it is through the use of <code class="language-plaintext highlighter-rouge">persistent</code> attribute.</p>
 
-<p>When you declare a variable within a function as persistent, the variable retains its value from one function call to the next. Other local variables retain their value only during the current execution of a function. Persistent variables are equivalent to static variables in other programming languages. Like <code class="highlighter-rouge">global</code> attribute inside functions, you have to declare variables using the <code class="highlighter-rouge">persistent</code> keyword before you use them inside the function. For example, consider the following function that adds an input value to some older value that already exists in the function from the old calls. If it is the first function call, then simply the input value is returned.</p>
+<p>When you declare a variable within a function as persistent, the variable retains its value from one function call to the next. Other local variables retain their value only during the current execution of a function. Persistent variables are equivalent to static variables in other programming languages. Like <code class="language-plaintext highlighter-rouge">global</code> attribute inside functions, you have to declare variables using the <code class="language-plaintext highlighter-rouge">persistent</code> keyword before you use them inside the function. For example, consider the following function that adds an input value to some older value that already exists in the function from the old calls. If it is the first function call, then simply the input value is returned.</p>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">result</span> <span class="o">=</span> <span class="n">findSum</span><span class="p">(</span><span class="n">inputvalue</span><span class="p">)</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nb">result</span> <span class="o">=</span> <span class="n">findSum</span><span class="p">(</span><span class="n">inputvalue</span><span class="p">)</span>
     <span class="k">persistent</span> <span class="n">summ</span>
     <span class="k">if</span> <span class="nb">isempty</span><span class="p">(</span><span class="n">summ</span><span class="p">)</span>
     <span class="n">summ</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">end</span>
     <span class="n">summ</span> <span class="o">=</span> <span class="n">summ</span> <span class="o">+</span> <span class="n">inputvalue</span><span class="p">;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">summ</span><span class="p">;</span>
+    <span class="nb">result</span> <span class="o">=</span> <span class="n">summ</span><span class="p">;</span>
 <span class="k">end</span>
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">findSum</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     10
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">findSum</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     20
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">findSum</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     30
 </code></pre></div></div>
 
@@ -659,13 +659,13 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <span class="nb">clear</span> <span class="o">&lt;</span><span class="n">functionName</span><span class="o">&gt;</span> <span class="c1">% clears only this specific function's workspace</span>
 </code></pre></div></div>
 
-<p>To prevent clearing persistent variables, lock the function file using <code class="highlighter-rouge">mlock</code>.</p>
+<p>To prevent clearing persistent variables, lock the function file using <code class="language-plaintext highlighter-rouge">mlock</code>.</p>
 
 <p><a href="https://www.mathworks.com/help/matlab/matlab_prog/variables-in-nested-and-anonymous-functions.html" target="_blank">Here</a> are some advanced general advice by MATLAB developers on defining new variables and the scope of variables in MATLAB functions.</p>
 
 <h2 id="matlab-functions-vs-matlab-scripts">MATLAB functions vs. MATLAB scripts</h2>
 
-<p>MATLAB scripts are m-files containing MATLAB statements. MATLAB <code class="highlighter-rouge">functions</code> are another type of m-file, which were comprehensively discussed above. The biggest difference between scripts and functions are the following.</p>
+<p>MATLAB scripts are m-files containing MATLAB statements. MATLAB <code class="language-plaintext highlighter-rouge">functions</code> are another type of m-file, which were comprehensively discussed above. The biggest difference between scripts and functions are the following.</p>
 
 <ul>
   <li>
@@ -675,7 +675,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
     <p>Functions much more flexible than scripts. They are therefore more suitable for general purpose tasks, or for writing scientific software. Scripts are useful for tasks that don’t change. They are also a way to document a specific sequence of actions, say a function call with special parameter values, that may be hard to remember.</p>
   </li>
   <li>
-    <p>A script can be thought of as a keyboard macro: when you type the name of the script, all of the commands contained in it are executed just as if you had typed these commands into the command window. Thus, all variables created in the script are added to the workspace for the current session. Also, if any of the variables in the script file have the same name as the ones in your current workspace, the values of those variables in the workspace are changed by the actions in the script. This can be used to your advantage. It can also cause unwanted <a href="https://en.wikipedia.org/wiki/Side_effect_(computer_science)" target="_blank">side-effects</a>. In contrast, function variables are local to the function. (with the exception that you could declare and use global variables with explicit <code class="highlighter-rouge">global</code> attribute.) The local scope of function variables gives you greater security and flexibility. To summarize, the workspace of MATLAB scripts is the base MATLAB workspace, whereas functions have their own individual workspaces.</p>
+    <p>A script can be thought of as a keyboard macro: when you type the name of the script, all of the commands contained in it are executed just as if you had typed these commands into the command window. Thus, all variables created in the script are added to the workspace for the current session. Also, if any of the variables in the script file have the same name as the ones in your current workspace, the values of those variables in the workspace are changed by the actions in the script. This can be used to your advantage. It can also cause unwanted <a href="https://en.wikipedia.org/wiki/Side_effect_(computer_science)" target="_blank">side-effects</a>. In contrast, function variables are local to the function. (with the exception that you could declare and use global variables with explicit <code class="language-plaintext highlighter-rouge">global</code> attribute.) The local scope of function variables gives you greater security and flexibility. To summarize, the workspace of MATLAB scripts is the base MATLAB workspace, whereas functions have their own individual workspaces.</p>
   </li>
 </ul>
 
@@ -775,8 +775,8 @@ the script runs before the sidebar code runs and the class never gets inserted.
 </div>
 
         <div class="col-lg-12 footer">
-            &copy;2022 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: October 5, 2022 <br />
+            &copy;2025 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: December 25, 2025 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

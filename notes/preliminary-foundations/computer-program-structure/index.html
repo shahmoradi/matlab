@@ -627,21 +627,21 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <h3 id="syntax-error">Syntax error</h3>
 <p><br />
-A program, whether interpreted or compiled, can be successfully run only if it is <em>syntactically correct</em>. Syntax errors are related to the structure and standard of the language, and the order by which the language <strong>tokens</strong> are allowed to appear in the code. For example, the following Python <code class="highlighter-rouge">print</code> statement is a syntax error in Python 3 standard, whereas it was considered to be the correct syntax for <code class="highlighter-rouge">print</code> in Python 2 standard.<br />
+A program, whether interpreted or compiled, can be successfully run only if it is <em>syntactically correct</em>. Syntax errors are related to the structure and standard of the language, and the order by which the language <strong>tokens</strong> are allowed to appear in the code. For example, the following Python <code class="language-plaintext highlighter-rouge">print</code> statement is a syntax error in Python 3 standard, whereas it was considered to be the correct syntax for <code class="language-plaintext highlighter-rouge">print</code> in Python 2 standard.<br />
 <br /></p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span> <span class="s">'Hello World!'</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span> <span class="sh">'</span><span class="s">Hello World!</span><span class="sh">'</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  File "&lt;ipython-input-21-10fdc521e430&gt;", line 1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  File "&lt;ipython-input-21-10fdc521e430&gt;", line 1
     print 'Hello World!'
                        ^
 SyntaxError: Missing parentheses in call to 'print'
 </code></pre></div></div>
 
-<p>The syntactically-correct usage of <code class="highlighter-rouge">print</code> in Python 3 would be,</p>
+<p>The syntactically-correct usage of <code class="language-plaintext highlighter-rouge">print</code> in Python 3 would be,</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span> <span class="p">(</span><span class="s">'Hello World!'</span><span class="p">)</span>  
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print </span><span class="p">(</span><span class="sh">'</span><span class="s">Hello World!</span><span class="sh">'</span><span class="p">)</span>  
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello World!
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Hello World!
 </code></pre></div></div>
 
 <h3 id="runtime-error">Runtime error</h3>
@@ -659,20 +659,20 @@ SyntaxError: Missing parentheses in call to 'print'
 
 <h3 id="semantic-error">Semantic error</h3>
 
-<p>Unlike syntax errors that comprise of something the compiler/interpreter does not understand, semantic errors do not cause any compiler/interpreter error messages. However, the resulting compiled/interpreted code will NOT do what it is intended to do. Semantic errors are the most dangerous types of programming errors, as they do not raise any error flag by the compiler/interpreter, yet the program will not do what it is intended to do, although the code may look perfectly fine on its face. A semantic error is almost synonymous with <strong>logical error</strong>. Dividing two integers using the regular division operator <code class="highlighter-rouge">/</code> in Python 2 and expecting the result to be real, would result in a semantic error. This is because, in Python 2 standard, the regular division operator is equivalent to <strong>integer division</strong> for integer operands:</p>
+<p>Unlike syntax errors that comprise of something the compiler/interpreter does not understand, semantic errors do not cause any compiler/interpreter error messages. However, the resulting compiled/interpreted code will NOT do what it is intended to do. Semantic errors are the most dangerous types of programming errors, as they do not raise any error flag by the compiler/interpreter, yet the program will not do what it is intended to do, although the code may look perfectly fine on its face. A semantic error is almost synonymous with <strong>logical error</strong>. Dividing two integers using the regular division operator <code class="language-plaintext highlighter-rouge">/</code> in Python 2 and expecting the result to be real, would result in a semantic error. This is because, in Python 2 standard, the regular division operator is equivalent to <strong>integer division</strong> for integer operands:</p>
 
 <p>In Python 2,</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">2</span><span class="o">/</span><span class="mi">7</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0
 </code></pre></div></div>
 
-<p>Whereas, you might have really meant a <strong>float division</strong> by using <code class="highlighter-rouge">/</code>, as in Python 3,</p>
+<p>Whereas, you might have really meant a <strong>float division</strong> by using <code class="language-plaintext highlighter-rouge">/</code>, as in Python 3,</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="mi">2</span><span class="o">/</span><span class="mi">7</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.2857142857142857
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.2857142857142857
 </code></pre></div></div>
 
     
@@ -770,8 +770,8 @@ SyntaxError: Missing parentheses in call to 'print'
 </div>
 
         <div class="col-lg-12 footer">
-            &copy;2022 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: October 5, 2022 <br />
+            &copy;2025 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: December 25, 2025 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

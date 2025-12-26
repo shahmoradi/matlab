@@ -547,7 +547,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
     
     
-    <p>MATLAB visualization and plotting capabilities are among the most powerful features of MATLAB and a major driver of MATLAB popularity, to the extent that many Python packages, the most prominent of which are <code class="highlighter-rouge">matplotlib</code> have been inspired by MATLAB plotting syntax and capabilities.</p>
+    <p>MATLAB visualization and plotting capabilities are among the most powerful features of MATLAB and a major driver of MATLAB popularity, to the extent that many Python packages, the most prominent of which are <code class="language-plaintext highlighter-rouge">matplotlib</code> have been inspired by MATLAB plotting syntax and capabilities.</p>
 
 <h2 id="curve-plotting-in-matlab">Curve plotting in MATLAB</h2>
 
@@ -555,7 +555,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <h3 id="plotting-simple-2d-data">Plotting simple 2D data</h3>
 
-<p>One of the most widely used MATLAB plotting functions is <code class="highlighter-rouge">plot()</code>. With this function, plotting x-y data is as simple as it can be. All you need to have is a dataset consisting of X and Y vectors,</p>
+<p>One of the most widely used MATLAB plotting functions is <code class="language-plaintext highlighter-rouge">plot()</code>. With this function, plotting x-y data is as simple as it can be. All you need to have is a dataset consisting of X and Y vectors,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">X</span> <span class="o">=</span> <span class="mi">0</span><span class="p">:</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">10</span><span class="p">;</span>
 <span class="o">&gt;&gt;</span> <span class="nb">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="nb">sin</span><span class="p">(</span><span class="n">X</span><span class="p">));</span>
@@ -568,12 +568,12 @@ the script runs before the sidebar code runs and the class never gets inserted.
 </figure>
 <p><br /></p>
 
-<p>You could also save this figure in almost any format you wish using <code class="highlighter-rouge">save()</code> function,</p>
+<p>You could also save this figure in almost any format you wish using <code class="language-plaintext highlighter-rouge">save()</code> function,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">saveas</span><span class="p">(</span><span class="nb">gcf</span><span class="p">,</span><span class="s1">'sin.png'</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>Here, <code class="highlighter-rouge">gcf</code> refers tothe current figure handle in MATLAB environment. If you wish to add new data to this plot, you could use <code class="highlighter-rouge">hold on;</code> command,</p>
+<p>Here, <code class="language-plaintext highlighter-rouge">gcf</code> refers tothe current figure handle in MATLAB environment. If you wish to add new data to this plot, you could use <code class="language-plaintext highlighter-rouge">hold on;</code> command,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">hold</span> <span class="n">on</span><span class="p">;</span>
 <span class="o">&gt;&gt;</span> <span class="nb">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="nb">cos</span><span class="p">(</span><span class="n">X</span><span class="p">));</span>
@@ -601,14 +601,14 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">legend</span><span class="p">(</span> <span class="p">{</span> <span class="s1">'Sin(X)'</span> <span class="p">,</span> <span class="s1">'Cos(X)'</span> <span class="p">}</span> <span class="p">,</span> <span class="s1">'fontsize'</span> <span class="p">,</span> <span class="mi">13</span> <span class="p">,</span> <span class="s1">'location'</span> <span class="p">,</span> <span class="s1">'southwest'</span> <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Note that the <code class="highlighter-rouge">fontsize</code> keyword is not necessary. You could simply omit it and MATLAB’s default font size will be used instead.</p>
+<p>Note that the <code class="language-plaintext highlighter-rouge">fontsize</code> keyword is not necessary. You could simply omit it and MATLAB’s default font size will be used instead.</p>
 
 <p>You could also change the line-width of the borders of the plot, for example, by,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">set</span><span class="p">(</span> <span class="nb">gca</span> <span class="p">,</span> <span class="s1">'linewidth'</span> <span class="p">,</span> <span class="mi">3</span> <span class="p">);</span>
 </code></pre></div></div>
 
-<p>Here, <code class="highlighter-rouge">gca</code> is a MATLAB keyword that refers to the current active plot in the current active figure. If you wanted to thicken the curve lines themselves, you could simple add the <code class="highlighter-rouge">'linewidth'</code> keyword when calling <code class="highlighter-rouge">plot()</code>, along with the desired line width value. You could also determine the line color using <code class="highlighter-rouge">color</code> keyword followed by the desired color,</p>
+<p>Here, <code class="language-plaintext highlighter-rouge">gca</code> is a MATLAB keyword that refers to the current active plot in the current active figure. If you wanted to thicken the curve lines themselves, you could simple add the <code class="language-plaintext highlighter-rouge">'linewidth'</code> keyword when calling <code class="language-plaintext highlighter-rouge">plot()</code>, along with the desired line width value. You could also determine the line color using <code class="language-plaintext highlighter-rouge">color</code> keyword followed by the desired color,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">hold</span> <span class="n">off</span><span class="p">;</span> <span class="c1">% this closes access to the old figure</span>
 <span class="o">&gt;&gt;</span> <span class="nb">figure</span><span class="p">()</span> <span class="c1">% this creates a new figure handle</span>
@@ -629,7 +629,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
     <img src="sinCosDecorated.png" />
 </figure>
 
-<p>You can also plot the data using different line/ point styles. For example, to plot the same data using points instead of lines, all you need to do, is to add the <code class="highlighter-rouge">'.'</code> string to your <code class="highlighter-rouge">plot()</code> functions, indicating that you want a scatter plot, instead of line plot,</p>
+<p>You can also plot the data using different line/ point styles. For example, to plot the same data using points instead of lines, all you need to do, is to add the <code class="language-plaintext highlighter-rouge">'.'</code> string to your <code class="language-plaintext highlighter-rouge">plot()</code> functions, indicating that you want a scatter plot, instead of line plot,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">figure</span><span class="p">()</span> <span class="c1">% this creates a new figure handle</span>
 <span class="o">&gt;&gt;</span> <span class="nb">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="nb">sin</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="s1">'.'</span><span class="p">,</span> <span class="s1">'color'</span><span class="p">,</span> <span class="s1">'blue'</span><span class="p">,</span> <span class="s1">'markersize'</span><span class="p">,</span> <span class="mi">20</span><span class="p">);</span>
@@ -658,7 +658,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <h3 id="closing-figures-and-plots-in-matlab">Closing figures and plots in MATLAB</h3>
 
-<p>for closing the current active figure in MATLAB, you could simply use <code class="highlighter-rouge">close(gcf)</code>. Here, <code class="highlighter-rouge">gcf</code> refers to the current active figure handle. To close all open figures, simply type <code class="highlighter-rouge">close all;</code>.</p>
+<p>for closing the current active figure in MATLAB, you could simply use <code class="language-plaintext highlighter-rouge">close(gcf)</code>. Here, <code class="language-plaintext highlighter-rouge">gcf</code> refers to the current active figure handle. To close all open figures, simply type <code class="language-plaintext highlighter-rouge">close all;</code>.</p>
 
     
     
@@ -755,8 +755,8 @@ the script runs before the sidebar code runs and the class never gets inserted.
 </div>
 
         <div class="col-lg-12 footer">
-            &copy;2022 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: October 5, 2022 <br />
+            &copy;2025 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: December 25, 2025 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

@@ -558,9 +558,9 @@ There is a distinction between an exceptional situation in a program and an erro
 
 <p>A simple way of error handling is to write multiple if-blocks each of which handles a specific exceptional situation. In other words, let the code execute some statements, and if something goes wrong, write the program in such a way that it can detect this and jump to a set of statements that handle the erroneous situation as desired.</p>
 
-<h2 id="the-trycatch-statement">The <code class="highlighter-rouge">try/catch</code> statement</h2>
+<h2 id="the-trycatch-statement">The <code class="language-plaintext highlighter-rouge">try/catch</code> statement</h2>
 
-<p>A more modern and flexible way of handling such potential exceptions in MATLAB is through MATLAB’s <strong>try/catch</strong> construction. You can use a try/catch statement to execute code after your program encounters an exception. The <code class="highlighter-rouge">try/catch</code> statements can be useful when,</p>
+<p>A more modern and flexible way of handling such potential exceptions in MATLAB is through MATLAB’s <strong>try/catch</strong> construction. You can use a try/catch statement to execute code after your program encounters an exception. The <code class="language-plaintext highlighter-rouge">try/catch</code> statements can be useful when,</p>
 
 <ul>
   <li>you Want to finish the program in another way that avoids errors (which could lead to abrupt interruption of the program) or,</li>
@@ -573,7 +573,7 @@ There is a distinction between an exceptional situation in a program and an erro
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span>
   <span class="k">try</span> <span class="n">statements</span> <span class="p">(</span><span class="nb">all</span> <span class="n">the</span> <span class="n">normal</span> <span class="n">things</span> <span class="n">you</span> <span class="n">would</span> <span class="n">want</span> <span class="n">to</span> <span class="n">do</span><span class="p">)</span><span class="k">...</span>
 <span class="k">catch</span> <span class="n">exception</span>
-  <span class="k">catch</span> <span class="n">block</span> <span class="p">(</span><span class="n">things</span> <span class="n">to</span> <span class="n">do</span> <span class="n">when</span> <span class="n">the</span> <span class="k">try</span> <span class="n">statements</span> <span class="n">go</span> <span class="n">wrong</span><span class="p">)</span> <span class="k">...</span>
+  <span class="k">catch</span> <span class="n">block</span> <span class="p">(</span><span class="n">things</span> <span class="n">to</span> <span class="n">do</span> <span class="nb">when</span> <span class="n">the</span> <span class="k">try</span> <span class="n">statements</span> <span class="n">go</span> <span class="n">wrong</span><span class="p">)</span> <span class="k">...</span>
 <span class="k">end</span>
 </code></pre></div></div>
 
@@ -582,7 +582,7 @@ There is a distinction between an exceptional situation in a program and an erro
 <p>For example, suppose we wanted to read data from a webpage that does not exist,</p>
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">webContent</span> <span class="o">=</span> <span class="nb">webread</span><span class="p">(</span><span class="s1">'https://www.cdslab.org/non-existing-page.html'</span><span class="p">)</span>
 <span class="n">Error</span> <span class="n">using</span> <span class="n">readContentFromWebService</span> <span class="p">(</span><span class="nb">line</span> <span class="mi">45</span><span class="p">)</span>
-<span class="n">The</span> <span class="n">server</span> <span class="n">returned</span> <span class="n">the</span> <span class="n">status</span> <span class="mi">404</span> <span class="n">with</span> <span class="n">message</span> <span class="err">"</span><span class="n">Not</span> <span class="n">Found</span><span class="err">"</span> <span class="n">in</span> <span class="n">response</span> <span class="n">to</span> <span class="n">the</span> <span class="n">request</span> <span class="n">to</span> <span class="n">URL</span> <span class="n">https</span><span class="p">://</span><span class="n">www</span><span class="o">.</span><span class="n">cdslab</span><span class="o">.</span><span class="n">org</span><span class="p">/</span><span class="n">non</span><span class="o">-</span><span class="n">existing</span><span class="o">-</span><span class="n">page</span><span class="o">.</span><span class="n">html</span><span class="o">.</span>
+<span class="n">The</span> <span class="n">server</span> <span class="n">returned</span> <span class="n">the</span> <span class="n">status</span> <span class="mi">404</span> <span class="n">with</span> <span class="n">message</span> <span class="s2">"Not Found"</span> <span class="n">in</span> <span class="n">response</span> <span class="n">to</span> <span class="n">the</span> <span class="n">request</span> <span class="n">to</span> <span class="n">URL</span> <span class="n">https</span><span class="p">://</span><span class="n">www</span><span class="o">.</span><span class="n">cdslab</span><span class="o">.</span><span class="n">org</span><span class="p">/</span><span class="n">non</span><span class="o">-</span><span class="n">existing</span><span class="o">-</span><span class="n">page</span><span class="o">.</span><span class="n">html</span><span class="o">.</span>
 <span class="n">Error</span> <span class="n">in</span> <span class="nb">webread</span> <span class="p">(</span><span class="nb">line</span> <span class="mi">125</span><span class="p">)</span>
 <span class="p">[</span><span class="nb">varargout</span><span class="p">{</span><span class="mi">1</span><span class="p">:</span><span class="nb">nargout</span><span class="p">}]</span> <span class="o">=</span> <span class="n">readContentFromWebService</span><span class="p">(</span><span class="n">connection</span><span class="p">,</span> <span class="n">options</span><span class="p">);</span> 
 </code></pre></div></div>
@@ -692,8 +692,8 @@ There is a distinction between an exceptional situation in a program and an erro
 </div>
 
         <div class="col-lg-12 footer">
-            &copy;2022 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: October 5, 2022 <br />
+            &copy;2025 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: December 25, 2025 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

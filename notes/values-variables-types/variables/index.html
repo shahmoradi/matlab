@@ -554,19 +554,19 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">format</span> <span class="n">compact</span>
 <span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1">% assign value 1 to a</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
      1
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 double
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="o">=</span> <span class="n">b</span> <span class="c1">% this is wrong</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1 = b
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1 = b
    ↑
 Error: The expression to the left of the equals sign is not a valid target for an assignment.
 </code></pre></div></div>
@@ -575,23 +575,23 @@ Error: The expression to the left of the equals sign is not a valid target for a
 
 <h2 id="variable-naming-convention-in-matlab">Variable naming convention in MATLAB</h2>
 
-<p>A MATLAB variable can only begin with a letter followed by underscore <code class="highlighter-rouge">_</code> and numbers inside or at the end of the variable name. MATLAB is case sensitive, so <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">a</code> are not the same variable. Other symbols are syntactically invalid anywhere in a variable name. Examples of valid names are,</p>
+<p>A MATLAB variable can only begin with a letter followed by underscore <code class="language-plaintext highlighter-rouge">_</code> and numbers inside or at the end of the variable name. MATLAB is case sensitive, so <code class="language-plaintext highlighter-rouge">A</code> and <code class="language-plaintext highlighter-rouge">a</code> are not the same variable. Other symbols are syntactically invalid anywhere in a variable name. Examples of valid names are,</p>
 <ul>
-  <li><code class="highlighter-rouge">x6</code></li>
-  <li><code class="highlighter-rouge">lastValue</code></li>
-  <li><code class="highlighter-rouge">n_factorial</code></li>
+  <li><code class="language-plaintext highlighter-rouge">x6</code></li>
+  <li><code class="language-plaintext highlighter-rouge">lastValue</code></li>
+  <li><code class="language-plaintext highlighter-rouge">n_factorial</code></li>
 </ul>
 
 <p>Examples of invalid names are,</p>
 <ul>
-  <li><code class="highlighter-rouge">6x</code></li>
-  <li><code class="highlighter-rouge">n!</code></li>
-  <li><code class="highlighter-rouge">end</code> (see below for the reason)</li>
+  <li><code class="language-plaintext highlighter-rouge">6x</code></li>
+  <li><code class="language-plaintext highlighter-rouge">n!</code></li>
+  <li><code class="language-plaintext highlighter-rouge">end</code> (see below for the reason)</li>
 </ul>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">new_var</span><span class="err">$</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> new_var$
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> new_var$
         ↑
 Error: The input character is not valid in MATLAB statements or expressions.
 </code></pre></div></div>
@@ -599,21 +599,21 @@ Error: The input character is not valid in MATLAB statements or expressions.
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">amir</span> <span class="o">=</span> <span class="s1">'teacher'</span><span class="p">;</span>
 <span class="o">&gt;&gt;</span> <span class="nb">disp</span><span class="p">([</span><span class="s1">'Amir is a '</span><span class="p">,</span> <span class="n">amir</span><span class="p">])</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Amir is a teacher
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Amir is a teacher
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">life_expectancy</span> <span class="o">=</span> <span class="mi">120</span><span class="p">;</span> <span class="nb">disp</span><span class="p">(</span> <span class="p">[</span><span class="s1">'The life expectancy for the millennials is projected to be '</span><span class="p">,</span><span class="n">life_expectancy</span><span class="p">,</span><span class="s1">' years! (But don</span><span class="se">''</span><span class="s1">t believe it...)'</span><span class="p">]</span> <span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The life expectancy for the millennials is projected to be x years! (But don't believe it...)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The life expectancy for the millennials is projected to be x years! (But don't believe it...)
 </code></pre></div></div>
 
 <h3 id="matlab-reserved-names-keywords">MATLAB reserved names (keywords)</h3>
 
-<p>There are some limitation as to what names you can choose for your variables, even if they completely obey MATLAB syntax standard. Variable names in MATLAB cannot be the same as <strong>MATLAB keywords</strong>, which are simply names that reserved for a specific purpose in MATLAB programming.  They are used to define the syntax and structure of the MATLAB language. Note that <strong>MATLAB keywords are case-sensitive</strong>.  You <strong>cannot</strong> define variables with the exact same names as <strong>MATLAB keywords</strong>, such as <code class="highlighter-rouge">if</code> or <code class="highlighter-rouge">end</code>. For a complete list of MATLAB keyword, run the <code class="highlighter-rouge">iskeyword</code> command,</p>
+<p>There are some limitation as to what names you can choose for your variables, even if they completely obey MATLAB syntax standard. Variable names in MATLAB cannot be the same as <strong>MATLAB keywords</strong>, which are simply names that reserved for a specific purpose in MATLAB programming.  They are used to define the syntax and structure of the MATLAB language. Note that <strong>MATLAB keywords are case-sensitive</strong>.  You <strong>cannot</strong> define variables with the exact same names as <strong>MATLAB keywords</strong>, such as <code class="language-plaintext highlighter-rouge">if</code> or <code class="language-plaintext highlighter-rouge">end</code>. For a complete list of MATLAB keyword, run the <code class="language-plaintext highlighter-rouge">iskeyword</code> command,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">iskeyword</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
     'break'
     'case'
     'catch'
@@ -642,78 +642,78 @@ Error: The input character is not valid in MATLAB statements or expressions.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">true</span> <span class="c1">% true is a predefined MATLAB logical variable</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      1
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 logical
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">true</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">%  true is now redefined as double</span>
 <span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">true</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     'double'
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">nan</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">nan</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
    NaN
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">nan</span><span class="p">)</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">nan</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 double
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">nan</span> <span class="o">=</span> <span class="nb">true</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">nan</span> <span class="o">=</span> <span class="nb">true</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nan =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nan =
      0
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">nan</span> <span class="o">=</span> <span class="nb">false</span> <span class="c1">% redefine nan</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">nan</span> <span class="o">=</span> <span class="nb">false</span> <span class="c1">% redefine nan</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nan =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nan =
      0
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="nb">nan</span><span class="p">)</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">nan</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 logical
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">who</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Your variables are:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Your variables are:
 
 life_expectancy  nan              true             
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">whos</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name                 Size            Bytes  Class      Attributes
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name                 Size            Bytes  Class      Attributes
 
   life_expectancy      1x1                 8  double               
   nan                  1x1                 1  logical              
   true                 1x1                 8  double               
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">clear</span> <span class="nb">nan</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">clear</span> <span class="n">nan</span>
 <span class="o">&gt;&gt;</span> <span class="nb">who</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Your variables are:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Your variables are:
 
 life_expectancy  true             
 </code></pre></div></div>
 
-<p>Notice that when all the MATLAB’s workspace is cleared using <code class="highlighter-rouge">clear all</code>, <code class="highlighter-rouge">whos</code> and <code class="highlighter-rouge">who</code> do not return anything,</p>
+<p>Notice that when all the MATLAB’s workspace is cleared using <code class="language-plaintext highlighter-rouge">clear all</code>, <code class="language-plaintext highlighter-rouge">whos</code> and <code class="language-plaintext highlighter-rouge">who</code> do not return anything,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">clear</span> <span class="nb">all</span>
 <span class="o">&gt;&gt;</span> <span class="nb">whos</span>
@@ -722,31 +722,31 @@ life_expectancy  true
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">pi</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     3.1416
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">nan</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">nan</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
    NaN
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">inf</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">inf</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
    Inf
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">i</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">i</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
    0.0000 + 1.0000i
 </code></pre></div></div>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">j</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">j</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
    0.0000 + 1.0000i
 </code></pre></div></div>
 
@@ -784,26 +784,26 @@ life_expectancy  true
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
      1     2     3     4
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 double
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">;</span><span class="mi">4</span><span class="p">]</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
      1
      2
      3
      4
 </code></pre></div></div>
 
-<h3 id="the-colon-operator-">The colon operator <code class="highlighter-rouge">:</code></h3>
+<h3 id="the-colon-operator-">The colon operator <code class="language-plaintext highlighter-rouge">:</code></h3>
 
 <p>MATLAB has a special character shortcut notation for occasions when you want to create a numeric vector of a specific range with a predefined fixed spacing between the values of the vector. This shortcut has the following form,</p>
 
@@ -814,17 +814,17 @@ double
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">100</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x =
      0    10    20    30    40    50    60    70    80    90   100
 </code></pre></div></div>
 
-<h3 id="the-transpose-operator-">The transpose operator <code class="highlighter-rouge">'</code></h3>
+<h3 id="the-transpose-operator-">The transpose operator <code class="language-plaintext highlighter-rouge">'</code></h3>
 
-<p>Now as you may have noticed, MATLAB by default creates row-wise vectors, just as <code class="highlighter-rouge">x</code> was generated above. If you want to initialize <code class="highlighter-rouge">x</code> as a column-wise vector, all you need to do is to add the transpose operator <code class="highlighter-rouge">'</code> at the end of the vector or the variable name (but now, you would also need the vector constructor <code class="highlighter-rouge">[]</code>),</p>
+<p>Now as you may have noticed, MATLAB by default creates row-wise vectors, just as <code class="language-plaintext highlighter-rouge">x</code> was generated above. If you want to initialize <code class="language-plaintext highlighter-rouge">x</code> as a column-wise vector, all you need to do is to add the transpose operator <code class="language-plaintext highlighter-rouge">'</code> at the end of the vector or the variable name (but now, you would also need the vector constructor <code class="language-plaintext highlighter-rouge">[]</code>),</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">100</span><span class="p">]</span><span class="o">'</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x =
      0
     10
     20
@@ -840,12 +840,12 @@ double
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">whos</span> <span class="n">x</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name       Size            Bytes  Class     Attributes
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name       Size            Bytes  Class     Attributes
 
   x         11x1                88  double
 </code></pre></div></div>
 
-<p>Now, pay attention to the size of the vector <code class="highlighter-rouge">x</code>. What does it mean when it says <code class="highlighter-rouge">88 Bytes</code>?</p>
+<p>Now, pay attention to the size of the vector <code class="language-plaintext highlighter-rouge">x</code>. What does it mean when it says <code class="language-plaintext highlighter-rouge">88 Bytes</code>?</p>
 
 <h3 id="creating-matrices">Creating matrices</h3>
 
@@ -857,14 +857,14 @@ double
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      0     0
      0     0
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="nb">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
      0     0     0
 </code></pre></div></div>
 
@@ -874,7 +874,7 @@ double
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="nb">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
      1     1     1
 </code></pre></div></div>
 
@@ -884,7 +884,7 @@ double
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">I</span> <span class="o">=</span> <span class="nb">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I =
      1     0     0
      0     1     0
      0     0     1
@@ -892,7 +892,7 @@ double
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">I</span> <span class="o">=</span> <span class="nb">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>I =
      1     0     0     0
      0     1     0     0
      0     0     1     0
@@ -905,7 +905,7 @@ double
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="mi">1</span> <span class="o">-</span><span class="mi">1</span> <span class="o">-</span><span class="mi">2</span> <span class="o">-</span><span class="mi">5</span><span class="p">];</span>
 <span class="o">&gt;&gt;</span> <span class="n">D</span> <span class="o">=</span> <span class="nb">diag</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D =
      2     0     0     0     0
      0     1     0     0     0
      0     0    -1     0     0
@@ -915,7 +915,7 @@ double
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">D</span> <span class="o">=</span> <span class="nb">diag</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D =
      0     0     2     0     0     0     0
      0     0     0     1     0     0     0
      0     0     0     0    -1     0     0
@@ -927,7 +927,7 @@ double
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">D</span> <span class="o">=</span> <span class="nb">diag</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>D =
      0     0     0     0     0     0     0
      0     0     0     0     0     0     0
      2     0     0     0     0     0     0
@@ -937,11 +937,11 @@ double
      0     0     0     0    -5     0     0
 </code></pre></div></div>
 
-<p>Note that <code class="highlighter-rouge">diag</code> can also get diagonal elements of an input matrix, if it already exists.</p>
+<p>Note that <code class="language-plaintext highlighter-rouge">diag</code> can also get diagonal elements of an input matrix, if it already exists.</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="nb">eye</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a =
      1     0     0     0     0
      0     1     0     0     0
      0     0     1     0     0
@@ -949,7 +949,7 @@ double
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">diag</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      1
      1
      1
@@ -957,14 +957,14 @@ double
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">diag</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      0
      0
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">diag</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      0
      0
      0
@@ -976,7 +976,7 @@ double
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">ndgrid</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">19</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">12</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>X =
      1     1     1     1     1     1
      3     3     3     3     3     3
      5     5     5     5     5     5
@@ -1027,31 +1027,31 @@ Y =
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">C</span> <span class="o">=</span> <span class="p">{}</span> <span class="c1">% empty cell array</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>C = 
      {}
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 cell
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">size</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      0     0
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">length</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      0
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">emptyCell</span> <span class="o">=</span> <span class="nb">cell</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emptyCell = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emptyCell = 
     []    []    []    []
     []    []    []    []
     []    []    []    []
@@ -1059,7 +1059,7 @@ cell
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">emptyCell</span> <span class="o">=</span> <span class="nb">cell</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emptyCell(:,:,1) = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>emptyCell(:,:,1) = 
     []    []    []    []
     []    []    []    []
     []    []    []    []
@@ -1071,29 +1071,29 @@ emptyCell(:,:,2) =
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Hi'</span><span class="p">,</span> <span class="s1">' '</span><span class="p">,</span> <span class="s1">'World!'</span><span class="p">}</span> <span class="c1">% a cell array of strings</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = 
     'Hi'    ' '    'World!'
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 cell
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">size</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">% the length of a, in all directions (dimension)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      1     3
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">length</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c1">% the length of a, along the longest dimension</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      3
 </code></pre></div></div>
 
-<p>To call a specific element, use <code class="highlighter-rouge">()</code>. For example,</p>
+<p>To call a specific element, use <code class="language-plaintext highlighter-rouge">()</code>. For example,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">names</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Bloggs'</span><span class="p">,</span> <span class="s1">'San'</span><span class="p">,</span> <span class="s1">'Andersen'</span><span class="p">};</span>
 <span class="o">&gt;&gt;</span> <span class="n">first_cell</span> <span class="o">=</span> <span class="n">names</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
@@ -1101,11 +1101,11 @@ cell
 <span class="o">&gt;&gt;</span> <span class="n">third_string</span> <span class="o">=</span> <span class="n">names</span><span class="p">{</span><span class="mi">3</span><span class="p">};</span>
 </code></pre></div></div>
 
-<p>You can see what the type of each element is by using <code class="highlighter-rouge">who</code> and <code class="highlighter-rouge">whos</code>,</p>
+<p>You can see what the type of each element is by using <code class="language-plaintext highlighter-rouge">who</code> and <code class="language-plaintext highlighter-rouge">whos</code>,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">whos</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name               Size            Bytes  Class     Attributes
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name               Size            Bytes  Class     Attributes
 
   a                  1x3               354  cell                
   ans                1x1                 8  double              
@@ -1116,11 +1116,11 @@ cell
   third_string       1x8                16  char     
 </code></pre></div></div>
 
-<p>Note that <code class="highlighter-rouge">who</code> only gives you the names of the variables,</p>
+<p>Note that <code class="language-plaintext highlighter-rouge">who</code> only gives you the names of the variables,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">who</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Your variables are:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Your variables are:
 
 a              ans            chr            first_cell     names          rest_of_cells  third_string  
 </code></pre></div></div>
@@ -1135,13 +1135,13 @@ a              ans            chr            first_cell     names          rest_
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">newChr</span> <span class="o">=</span> <span class="s1">'You</span><span class="se">''</span><span class="s1">re right'</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>newChr =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>newChr =
 You're right
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">newChr</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 char
 </code></pre></div></div>
 
@@ -1151,19 +1151,19 @@ char
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">newChr</span> <span class="o">=</span> <span class="s1">'You</span><span class="se">''</span><span class="s1">re right'</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>newChr =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>newChr =
 You're right
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">newChr</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 Y
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">newChr</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 You'
 </code></pre></div></div>
 
@@ -1177,7 +1177,7 @@ You'
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arr =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arr =
      1     2     3     4
 </code></pre></div></div>
 
@@ -1185,7 +1185,7 @@ You'
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">arr</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="s1">'Amir'</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arr =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>arr =
 Amir
 </code></pre></div></div>
 
@@ -1201,22 +1201,22 @@ You'
 
 <p>A <strong>structure</strong> is a MATLAB data type in which the whole object has a name, just like regular and cell arrays. However, unlike cells and regular arrays, the elements of a structure object can be accessed by their assigned <strong>field names</strong> instead of a numerical index, as in numeric arrays and cells.</p>
 
-<p>Like cell arrays, structures can contain data of varying types and sizes. A <strong>structure</strong> object is a MATLAB data type that groups related data using data containers called <strong>fields</strong> (instead of cells as in cell arrays). <strong>Each field can contain any type of data</strong>. You can access data in a structure using <strong>dot notation</strong> of the form <code class="highlighter-rouge">structName.fieldName</code>. Here is <a href="https://www.mathworks.com/videos/introducing-structures-and-cell-arrays-101508.html" target="_blank">MATLAB video</a> about cell and structure arrays.</p>
+<p>Like cell arrays, structures can contain data of varying types and sizes. A <strong>structure</strong> object is a MATLAB data type that groups related data using data containers called <strong>fields</strong> (instead of cells as in cell arrays). <strong>Each field can contain any type of data</strong>. You can access data in a structure using <strong>dot notation</strong> of the form <code class="language-plaintext highlighter-rouge">structName.fieldName</code>. Here is <a href="https://www.mathworks.com/videos/introducing-structures-and-cell-arrays-101508.html" target="_blank">MATLAB video</a> about cell and structure arrays.</p>
 
 <h3 id="creating-structures">Creating structures</h3>
 
-<p>To create a structure, you can use function <code class="highlighter-rouge">struct</code>,</p>
+<p>To create a structure, you can use function <code class="language-plaintext highlighter-rouge">struct</code>,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">field</span> <span class="o">=</span> <span class="s1">'f'</span><span class="p">;</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>value = {'some text';
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>value = {'some text';
          [10, 20, 30];
          magic(5)};
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="nb">struct</span><span class="p">(</span><span class="n">field</span><span class="p">,</span><span class="n">value</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s = 
 3x1 struct array with fields:
     f
 </code></pre></div></div>
@@ -1225,53 +1225,53 @@ You'
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">s</span> <span class="o">=</span> <span class="nb">struct</span><span class="p">()</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>s = 
 struct with no fields.
 </code></pre></div></div>
 
 <p>One can also create structure objects by simply using the dot notation,</p>
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">amir</span><span class="o">.</span><span class="n">univ</span> <span class="o">=</span> <span class="s1">'UTA'</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>amir = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>amir = 
     univ: 'UTA'
 </code></pre></div></div>
 
 <p>Structure objects described above are examples of <strong>scalar objects</strong> meaning that there is only one single structure object with a set of fields. However, MATLAB also provides ways of creating <strong>structure arrays</strong>. You might think of structure array, as a cell array, whose columns are indexed by character names (field names) instead of integer indices, and whose rows represent the elements of the structure array. For example,</p>
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">student</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Marshall'</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
     name: 'Marshall'
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">student</span><span class="o">.</span><span class="n">grade</span> <span class="o">=</span> <span class="mf">4.0</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
      name: 'Marshall'
     grade: 4
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">student</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
      name: 'Marshall'
     grade: 4
 </code></pre></div></div>
 
-<p>would create a scalar structure <code class="highlighter-rouge">student</code> with two fields. However, as soon as you add another name to this structure, using array notation like the following,</p>
+<p>would create a scalar structure <code class="language-plaintext highlighter-rouge">student</code> with two fields. However, as soon as you add another name to this structure, using array notation like the following,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">student</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Vivek'</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
 1x2 struct array with fields:
     name
     grade
 </code></pre></div></div>
 
-<p>the scalar structure <code class="highlighter-rouge">student</code> is automatically converted to a <strong>structure array</strong>, that has two rows indexed by integer numbers, and each row has two fields <code class="highlighter-rouge">name</code> and <code class="highlighter-rouge">grade</code>. Note that, even though we added only the <code class="highlighter-rouge">name</code> field for the second structure element, the other field name is also automatically created for the second structure element, although with no content (the content of the field <code class="highlighter-rouge">grade</code> for the second element of the structure is empty). There is even no need to add the elements in increasing order. For example,</p>
+<p>the scalar structure <code class="language-plaintext highlighter-rouge">student</code> is automatically converted to a <strong>structure array</strong>, that has two rows indexed by integer numbers, and each row has two fields <code class="language-plaintext highlighter-rouge">name</code> and <code class="language-plaintext highlighter-rouge">grade</code>. Note that, even though we added only the <code class="language-plaintext highlighter-rouge">name</code> field for the second structure element, the other field name is also automatically created for the second structure element, although with no content (the content of the field <code class="language-plaintext highlighter-rouge">grade</code> for the second element of the structure is empty). There is even no need to add the elements in increasing order. For example,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">student</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Travis'</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>student = 
 1x4 struct array with fields:
     name
     grade
@@ -1279,7 +1279,7 @@ struct with no fields.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">whos</span> <span class="n">student</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name         Size            Bytes  Class     Attributes
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name         Size            Bytes  Class     Attributes
 
   student      1x4               654  struct          
 </code></pre></div></div>
@@ -1301,7 +1301,7 @@ struct with no fields.
 
 <p>Tables are arrays in a tabular form whose named columns can have different types. A table is a data type suitable for column-oriented or tabular data that is often stored as columns in a text file or in a spreadsheet. Tables consist of rows and column-oriented variables. Each variable in a table can have a different data type and a different size <strong>with the one restriction</strong> that <strong>each variable must have the same number of rows</strong>. For more information, see <a href="https://www.mathworks.com/videos/tables-and-categorical-arrays-in-release-2013b-101607.html" target="_blank">MATLAB’s educational video on Tables</a>.</p>
 
-<p>To create a table, you can use the function <code class="highlighter-rouge">table</code>,</p>
+<p>To create a table, you can use the function <code class="language-plaintext highlighter-rouge">table</code>,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">LastName</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Smith'</span><span class="p">;</span><span class="s1">'Johnson'</span><span class="p">;</span><span class="s1">'Williams'</span><span class="p">;</span><span class="s1">'Jones'</span><span class="p">;</span><span class="s1">'Brown'</span><span class="p">};</span>
 <span class="o">&gt;&gt;</span> <span class="n">Age</span> <span class="o">=</span> <span class="p">[</span><span class="mi">38</span><span class="p">;</span><span class="mi">43</span><span class="p">;</span><span class="mi">38</span><span class="p">;</span><span class="mi">40</span><span class="p">;</span><span class="mi">49</span><span class="p">];</span>
@@ -1310,7 +1310,7 @@ struct with no fields.
 <span class="o">&gt;&gt;</span> <span class="n">BloodPressure</span> <span class="o">=</span> <span class="p">[</span><span class="mi">124</span> <span class="mi">93</span><span class="p">;</span> <span class="mi">109</span> <span class="mi">77</span><span class="p">;</span> <span class="mi">125</span> <span class="mi">83</span><span class="p">;</span> <span class="mi">117</span> <span class="mi">75</span><span class="p">;</span> <span class="mi">122</span> <span class="mi">80</span><span class="p">];</span>
 <span class="o">&gt;&gt;</span> <span class="n">T</span> <span class="o">=</span> <span class="nb">table</span><span class="p">(</span><span class="n">Age</span><span class="p">,</span><span class="n">Height</span><span class="p">,</span><span class="n">Weight</span><span class="p">,</span><span class="n">BloodPressure</span><span class="p">,</span><span class="s1">'RowNames'</span><span class="p">,</span><span class="n">LastName</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>T = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>T = 
                 Age    Height    Weight    BloodPressure
                 ___    ______    ______    _____________
     Smith       38     71        176       124     93   
@@ -1330,17 +1330,17 @@ struct with no fields.
   <li>Accessing elements in the array.</li>
 </ul>
 
-<p>Depending on whether we have a cell array or a standard array of a basic data type (e.g. char), we can distinguish the different behavior of each of the types of brackets: <code class="highlighter-rouge">[]</code>, <code class="highlighter-rouge">{}</code> and <code class="highlighter-rouge">()</code>.</p>
+<p>Depending on whether we have a cell array or a standard array of a basic data type (e.g. char), we can distinguish the different behavior of each of the types of brackets: <code class="language-plaintext highlighter-rouge">[]</code>, <code class="language-plaintext highlighter-rouge">{}</code> and <code class="language-plaintext highlighter-rouge">()</code>.</p>
 
 <h3 id="creating-an-array">Creating an Array</h3>
 
 <ul>
-  <li><strong>Square brackets <code class="highlighter-rouge">[ ]</code></strong>: Creates an array where all entries have the same type, e.g. double or char. For example,
+  <li><strong>Square brackets <code class="language-plaintext highlighter-rouge">[ ]</code></strong>: Creates an array where all entries have the same type, e.g. double or char. For example,
     <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">numArray</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mf">62.7</span><span class="p">,</span> <span class="mi">3</span><span class="p">];</span>
 <span class="n">charArray</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="s1">'c'</span><span class="p">];</span>
 </code></pre></div>    </div>
   </li>
-  <li><strong>Curly brackets <code class="highlighter-rouge">{ }</code></strong>: Creates a cell array. Its cells can contain any type. They can contain items of the same type or a mixture of types. For example,
+  <li><strong>Curly brackets <code class="language-plaintext highlighter-rouge">{ }</code></strong>: Creates a cell array. Its cells can contain any type. They can contain items of the same type or a mixture of types. For example,
     <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sameTypeCells</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Once'</span><span class="p">,</span> <span class="s1">'upon'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">,</span> <span class="s1">'time'</span><span class="p">}</span>
 <span class="n">diffTypeCells</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Number'</span><span class="p">,</span> <span class="mi">17</span><span class="p">}</span>
 </code></pre></div>    </div>
@@ -1351,26 +1351,26 @@ struct with no fields.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">4</span><span class="p">]</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ans =
      1     4
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">whos</span> <span class="nb">ans</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name      Size            Bytes  Class     Attributes
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name      Size            Bytes  Class     Attributes
 
   ans       1x2                16  double              
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">]</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      1     4
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">whos</span> <span class="nb">ans</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name      Size            Bytes  Class     Attributes
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name      Size            Bytes  Class     Attributes
 
   ans       1x2                16  double              
 </code></pre></div></div>
@@ -1379,13 +1379,13 @@ struct with no fields.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">sameTypeCells</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'Once'</span>  <span class="s1">'upon'</span>  <span class="s1">'a'</span>  <span class="s1">'time'</span><span class="p">}</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sameTypeCells = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sameTypeCells = 
     'Once'    'upon'    'a'    'time'
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">whos</span> <span class="n">sameTypeCells</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name               Size            Bytes  Class    Attributes
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  Name               Size            Bytes  Class    Attributes
 
   sameTypeCells      1x4               474  cell               
 </code></pre></div></div>
@@ -1395,38 +1395,38 @@ struct with no fields.
 <p>There are two primary ways of creating arrays in MATLAB, each of which has its own usage,<br />
 <br /></p>
 <ul>
-  <li><strong>Round brackets <code class="highlighter-rouge">( )</code></strong>: These can be used to access one or more elements from any type of array. The elements returned always have the same type as the array, i.e. for an array of doubles the round bracket will return doubles, for an array of cells they will return cells. For example, using the arrays created above:
+  <li><strong>Round brackets <code class="language-plaintext highlighter-rouge">( )</code></strong>: These can be used to access one or more elements from any type of array. The elements returned always have the same type as the array, i.e. for an array of doubles the round bracket will return doubles, for an array of cells they will return cells. For example, using the arrays created above:
     <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">numArray</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span> <span class="c1">% Second and third elements.</span>
 </code></pre></div>    </div>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ans =
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  ans =
      62.7000    3.0000
 </code></pre></div>    </div>
     <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">sameTypeCells</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span> <span class="c1">% first and third</span>
 </code></pre></div>    </div>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  y = 
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  y = 
       'Once'    'a'
 </code></pre></div>    </div>
     <p><br /></p>
   </li>
-  <li><strong>Curly brackets <code class="highlighter-rouge">{ }</code></strong>: When used for accessing elements, curly brackets are specific to cell arrays. They can be used to obtain the content of a cell in its native data type, i.e. not in the form of a cell. For example,
+  <li><strong>Curly brackets <code class="language-plaintext highlighter-rouge">{ }</code></strong>: When used for accessing elements, curly brackets are specific to cell arrays. They can be used to obtain the content of a cell in its native data type, i.e. not in the form of a cell. For example,
     <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">sameTypeCells</span><span class="p">{</span><span class="mi">2</span><span class="p">}</span>
 </code></pre></div>    </div>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
   upon
 </code></pre></div>    </div>
     <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">sameTypeCells</span><span class="p">{</span><span class="mi">2</span><span class="p">})</span>
 </code></pre></div>    </div>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
   char
 </code></pre></div>    </div>
     <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">sameTypeCells</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div>    </div>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
   'upon'
 </code></pre></div>    </div>
     <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">sameTypeCells</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 </code></pre></div>    </div>
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
   cell
 </code></pre></div>    </div>
   </li>
@@ -1438,7 +1438,7 @@ struct with no fields.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span> <span class="p">;</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span> <span class="p">;</span> <span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span> <span class="p">]</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test =
      1     2     3     4
      1     2     4     5
      3     5     6     7
@@ -1446,17 +1446,17 @@ struct with no fields.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span><span class="p">(:,:)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      1     2     3     4
      1     2     4     5
      3     5     6     7
 </code></pre></div></div>
 
-<p>The symbol <code class="highlighter-rouge">:</code> means all the elements. But, you could also specify a range to only get a slice of the array,</p>
+<p>The symbol <code class="language-plaintext highlighter-rouge">:</code> means all the elements. But, you could also specify a range to only get a slice of the array,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      2     3
      2     4
 </code></pre></div></div>
@@ -1465,7 +1465,7 @@ struct with no fields.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">4</span><span class="p">])</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      1     5
      3     7
 </code></pre></div></div>
@@ -1474,16 +1474,16 @@ struct with no fields.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span> <span class="p">;</span> <span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span> <span class="p">;</span> <span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span> <span class="p">}</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>test = 
     [1]    [2]    [3]    [4]
     [1]    [2]    [4]    [5]
     [3]    [5]    [6]    [7]
 </code></pre></div></div>
 
-<p>Now, note that slicing this cell, would give you a cell slice, not a matrix of the values, and note that to do this, you have to access the elements using <code class="highlighter-rouge">()</code> instead of <code class="highlighter-rouge">{}</code>.</p>
+<p>Now, note that slicing this cell, would give you a cell slice, not a matrix of the values, and note that to do this, you have to access the elements using <code class="language-plaintext highlighter-rouge">()</code> instead of <code class="language-plaintext highlighter-rouge">{}</code>.</p>
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span><span class="p">(:,:)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
     [1]    [2]    [3]    [4]
     [1]    [2]    [4]    [5]
     [3]    [5]    [6]    [7]
@@ -1491,22 +1491,22 @@ struct with no fields.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">4</span><span class="p">])</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans = 
     [1]    [5]
     [3]    [7]
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">test</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">4</span><span class="p">]))</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 cell
 </code></pre></div></div>
 
-<p>If you try slicing the cell  array using <code class="highlighter-rouge">{}</code>, you won’t get a slice anymore, but a MATLAB <a href="https://www.mathworks.com/help/matlab/matlab_prog/comma-separated-lists.html" target="_blank">comma-separated list</a>,</p>
+<p>If you try slicing the cell  array using <code class="language-plaintext highlighter-rouge">{}</code>, you won’t get a slice anymore, but a MATLAB <a href="https://www.mathworks.com/help/matlab/matlab_prog/comma-separated-lists.html" target="_blank">comma-separated list</a>,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">test</span><span class="p">{</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">4</span><span class="p">]}</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      1
 ans =
      3
@@ -1518,11 +1518,11 @@ ans =
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">test</span><span class="p">{</span><span class="mi">2</span><span class="p">:</span><span class="mi">3</span><span class="p">,[</span><span class="mi">1</span> <span class="mi">4</span><span class="p">]})</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error using class
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error using class
 The CLASS function must be called from a class constructor. 
 </code></pre></div></div>
 
-<p>Since slicing the cell array by <code class="highlighter-rouge">{}</code> returns a comma-separated list, MATLAB’s <code class="highlighter-rouge">class()</code> function gives an error, since it cannot take as input, a list of values.</p>
+<p>Since slicing the cell array by <code class="language-plaintext highlighter-rouge">{}</code> returns a comma-separated list, MATLAB’s <code class="language-plaintext highlighter-rouge">class()</code> function gives an error, since it cannot take as input, a list of values.</p>
 
 
     
@@ -1620,8 +1620,8 @@ The CLASS function must be called from a class constructor.
 </div>
 
         <div class="col-lg-12 footer">
-            &copy;2022 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: October 5, 2022 <br />
+            &copy;2025 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: December 25, 2025 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

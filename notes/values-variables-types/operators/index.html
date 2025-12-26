@@ -645,13 +645,13 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <span class="o">&gt;&gt;</span> <span class="n">y</span><span class="o">=</span><span class="mi">4</span><span class="p">;</span>
 <span class="o">&gt;&gt;</span> <span class="n">x</span><span class="p">/</span><span class="n">y</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     1.2500
 </code></pre></div></div>
 
-<p>whereas the same code in strongly-typed compiled languages, such as C and Fortran would have given <em>integer</em> value <code class="highlighter-rouge">1</code>.</p>
+<p>whereas the same code in strongly-typed compiled languages, such as C and Fortran would have given <em>integer</em> value <code class="language-plaintext highlighter-rouge">1</code>.</p>
 
-<p>Weak typing, combined with intrinsic MATLAB <a href="https://www.google.com/search?q=operator+overloading&amp;spell=1&amp;sa=X&amp;ved=0ahUKEwix2e-x1-vVAhUF-lQKHXZxCZYQvwUIIygA&amp;biw=1344&amp;bih=744" target="_blank"><strong>operator overloading</strong></a> can also lead to unexpected results when operations between mixed types are done. Consider what happens when you add <code class="highlighter-rouge">1+'1'</code>, that is, the scalar 1 and the character ‘1’. The surprising result is 50. MATLAB automatically converts the character <code class="highlighter-rouge">'1'</code> to its ASCII representation value, which is 49 (You can get the ASCII code for any character using the <code class="highlighter-rouge">abs()</code> function). After this implicit conversion, MATLAB adds the scalar value of <code class="highlighter-rouge">1</code> to return <code class="highlighter-rouge">50</code>.</p>
+<p>Weak typing, combined with intrinsic MATLAB <a href="https://www.google.com/search?q=operator+overloading&amp;spell=1&amp;sa=X&amp;ved=0ahUKEwix2e-x1-vVAhUF-lQKHXZxCZYQvwUIIygA&amp;biw=1344&amp;bih=744" target="_blank"><strong>operator overloading</strong></a> can also lead to unexpected results when operations between mixed types are done. Consider what happens when you add <code class="language-plaintext highlighter-rouge">1+'1'</code>, that is, the scalar 1 and the character ‘1’. The surprising result is 50. MATLAB automatically converts the character <code class="language-plaintext highlighter-rouge">'1'</code> to its ASCII representation value, which is 49 (You can get the ASCII code for any character using the <code class="language-plaintext highlighter-rouge">abs()</code> function). After this implicit conversion, MATLAB adds the scalar value of <code class="language-plaintext highlighter-rouge">1</code> to return <code class="language-plaintext highlighter-rouge">50</code>.</p>
 
 <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> <b>Note:</b> While this example is somewhat contrived it can easily arise, especially when passing a function argument where the type is undetermined. To write a completely safe weakly-typed code, user input should always be checked before performing operations on it.</div>
 
@@ -661,21 +661,21 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <span class="o">&gt;&gt;</span> <span class="n">y</span><span class="o">=</span><span class="s1">'10'</span><span class="p">;</span>
 <span class="o">&gt;&gt;</span> <span class="n">x</span><span class="o">+</span><span class="n">y</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     59    58
 </code></pre></div></div>
 
-<p>What happened above is that <code class="highlighter-rouge">'10'</code> is considered as a vector of characters, therefore, when you add it to <code class="highlighter-rouge">10</code>, Matlab automatically converts this string to a vector of corresponding ASCII values and adds the value <code class="highlighter-rouge">10</code> to each one.</p>
+<p>What happened above is that <code class="language-plaintext highlighter-rouge">'10'</code> is considered as a vector of characters, therefore, when you add it to <code class="language-plaintext highlighter-rouge">10</code>, Matlab automatically converts this string to a vector of corresponding ASCII values and adds the value <code class="language-plaintext highlighter-rouge">10</code> to each one.</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="s1">'Hello'</span> <span class="o">+</span> <span class="s1">'World'</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     159 212 222 216 211
 </code></pre></div></div>
 
 <h3 id="explicit-type-casting">Explicit type casting</h3>
 
-<p>Unlike implicit type casting which is done by MATLAB under the hood as described above, which can also be dangerous, you can also explicitly request MATLAB to convert the type of a variable to some other type, using MATLAB’s built-in functions like <code class="highlighter-rouge">cast</code>, or one of the <a href="https://www.mathworks.com/help/matlab/data-type-conversion.html" target="_blank">many other functions</a> that MATLAB has for this purpose.</p>
+<p>Unlike implicit type casting which is done by MATLAB under the hood as described above, which can also be dangerous, you can also explicitly request MATLAB to convert the type of a variable to some other type, using MATLAB’s built-in functions like <code class="language-plaintext highlighter-rouge">cast</code>, or one of the <a href="https://www.mathworks.com/help/matlab/data-type-conversion.html" target="_blank">many other functions</a> that MATLAB has for this purpose.</p>
 
 <h2 id="array-vs-matrix-operations">Array vs. Matrix Operations</h2>
 
@@ -691,18 +691,18 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <p>You can build expressions that use any combination of arithmetic, relational, and logical operators. Precedence levels determine the order in which MATLAB® evaluates an expression. Within each precedence level, operators have equal precedence and are evaluated from left to right. The precedence rules for MATLAB operators are shown in this list, ordered from highest precedence level to lowest precedence level:</p>
 <ol>
-  <li>Parentheses <code class="highlighter-rouge">()</code>.</li>
-  <li>Transpose <code class="highlighter-rouge">.'</code>, power <code class="highlighter-rouge">.^</code>, complex conjugate transpose <code class="highlighter-rouge">'</code>, matrix power <code class="highlighter-rouge">^</code>.</li>
-  <li>Power with unary minus <code class="highlighter-rouge">.^-</code>, unary plus <code class="highlighter-rouge">.^+</code>, or logical negation <code class="highlighter-rouge">.^~</code> as well as matrix power with unary minus <code class="highlighter-rouge">^-</code>, unary plus <code class="highlighter-rouge">^+</code>, or logical negation <code class="highlighter-rouge">^~</code>. (Note:   Although most operators work from left to right, the operators <code class="highlighter-rouge">^-</code>, <code class="highlighter-rouge">.^-</code>, <code class="highlighter-rouge">^+</code>, <code class="highlighter-rouge">.^+</code>, <code class="highlighter-rouge">^~</code>, and <code class="highlighter-rouge">.^~</code> work from second from the right to left. It is recommended that you use parentheses to explicitly specify the intended precedence of statements containing these operator combinations.)</li>
-  <li>Unary plus <code class="highlighter-rouge">+</code>, unary minus <code class="highlighter-rouge">-</code>, logical negation <code class="highlighter-rouge">~</code>.</li>
-  <li>Multiplication <code class="highlighter-rouge">.*</code>, right division <code class="highlighter-rouge">./</code>, left division <code class="highlighter-rouge">.\</code>, matrix multiplication <code class="highlighter-rouge">*</code>, matrix right division <code class="highlighter-rouge">/</code>, matrix left division <code class="highlighter-rouge">\</code>.</li>
-  <li>Addition <code class="highlighter-rouge">+</code>, subtraction <code class="highlighter-rouge">-</code>.</li>
-  <li>Colon operator <code class="highlighter-rouge">:</code>.</li>
-  <li>Less than <code class="highlighter-rouge">&lt;</code>, less than or equal to <code class="highlighter-rouge">&lt;=</code>, greater than <code class="highlighter-rouge">&gt;</code>, greater than or equal to <code class="highlighter-rouge">&gt;=</code>, equal to <code class="highlighter-rouge">==</code>, not equal to <code class="highlighter-rouge">~=</code>.</li>
-  <li>Element-wise AND <code class="highlighter-rouge">&amp;</code>.</li>
-  <li>Element-wise OR <code class="highlighter-rouge">|</code>.</li>
-  <li><a href="shortCircuit.mp4" target="_blank">Short-circuit</a> AND <code class="highlighter-rouge">&amp;&amp;</code>.</li>
-  <li><a href="shortCircuit.mp4" target="_blank">Short-circuit</a> OR <code class="highlighter-rouge">||</code>.</li>
+  <li>Parentheses <code class="language-plaintext highlighter-rouge">()</code>.</li>
+  <li>Transpose <code class="language-plaintext highlighter-rouge">.'</code>, power <code class="language-plaintext highlighter-rouge">.^</code>, complex conjugate transpose <code class="language-plaintext highlighter-rouge">'</code>, matrix power <code class="language-plaintext highlighter-rouge">^</code>.</li>
+  <li>Power with unary minus <code class="language-plaintext highlighter-rouge">.^-</code>, unary plus <code class="language-plaintext highlighter-rouge">.^+</code>, or logical negation <code class="language-plaintext highlighter-rouge">.^~</code> as well as matrix power with unary minus <code class="language-plaintext highlighter-rouge">^-</code>, unary plus <code class="language-plaintext highlighter-rouge">^+</code>, or logical negation <code class="language-plaintext highlighter-rouge">^~</code>. (Note:   Although most operators work from left to right, the operators <code class="language-plaintext highlighter-rouge">^-</code>, <code class="language-plaintext highlighter-rouge">.^-</code>, <code class="language-plaintext highlighter-rouge">^+</code>, <code class="language-plaintext highlighter-rouge">.^+</code>, <code class="language-plaintext highlighter-rouge">^~</code>, and <code class="language-plaintext highlighter-rouge">.^~</code> work from second from the right to left. It is recommended that you use parentheses to explicitly specify the intended precedence of statements containing these operator combinations.)</li>
+  <li>Unary plus <code class="language-plaintext highlighter-rouge">+</code>, unary minus <code class="language-plaintext highlighter-rouge">-</code>, logical negation <code class="language-plaintext highlighter-rouge">~</code>.</li>
+  <li>Multiplication <code class="language-plaintext highlighter-rouge">.*</code>, right division <code class="language-plaintext highlighter-rouge">./</code>, left division <code class="language-plaintext highlighter-rouge">.\</code>, matrix multiplication <code class="language-plaintext highlighter-rouge">*</code>, matrix right division <code class="language-plaintext highlighter-rouge">/</code>, matrix left division <code class="language-plaintext highlighter-rouge">\</code>.</li>
+  <li>Addition <code class="language-plaintext highlighter-rouge">+</code>, subtraction <code class="language-plaintext highlighter-rouge">-</code>.</li>
+  <li>Colon operator <code class="language-plaintext highlighter-rouge">:</code>.</li>
+  <li>Less than <code class="language-plaintext highlighter-rouge">&lt;</code>, less than or equal to <code class="language-plaintext highlighter-rouge">&lt;=</code>, greater than <code class="language-plaintext highlighter-rouge">&gt;</code>, greater than or equal to <code class="language-plaintext highlighter-rouge">&gt;=</code>, equal to <code class="language-plaintext highlighter-rouge">==</code>, not equal to <code class="language-plaintext highlighter-rouge">~=</code>.</li>
+  <li>Element-wise AND <code class="language-plaintext highlighter-rouge">&amp;</code>.</li>
+  <li>Element-wise OR <code class="language-plaintext highlighter-rouge">|</code>.</li>
+  <li><a href="shortCircuit.mp4" target="_blank">Short-circuit</a> AND <code class="language-plaintext highlighter-rouge">&amp;&amp;</code>.</li>
+  <li><a href="shortCircuit.mp4" target="_blank">Short-circuit</a> OR <code class="language-plaintext highlighter-rouge">||</code>.</li>
 </ol>
 
 <p>You can learn more about operator precedence in <a href="https://www.mathworks.com/help/matlab/matlab_prog/operator-precedence.html" target="_blank">MATLAB manual</a>.</p>
@@ -803,8 +803,8 @@ the script runs before the sidebar code runs and the class never gets inserted.
 </div>
 
         <div class="col-lg-12 footer">
-            &copy;2022 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: October 5, 2022 <br />
+            &copy;2025 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: December 25, 2025 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

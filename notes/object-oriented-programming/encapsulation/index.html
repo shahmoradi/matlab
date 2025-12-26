@@ -573,7 +573,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <span class="k">end</span>
 </code></pre></div></div>
 
-<p>But, here is the catch with this problem of differentiation. The <code class="highlighter-rouge">getDerivative</code> function works with any function <code class="highlighter-rouge">func</code> that takes <strong>only</strong> one argument. In other words, if we want to input <code class="highlighter-rouge">getHeight</code> to <code class="highlighter-rouge">getDerivative</code>, then we will have to redefine <code class="highlighter-rouge">getHeight</code> to take only one argument.  You may wonder why not change <code class="highlighter-rouge">getDerivative</code>. For this simple problem, this could be a solution. But, with larger problems, you are more likely to use sophisticated routines and modules that have been already developed and many of these routines take a function as input that only has one input variable. This is quite often the case with high-performance integration routines.</p>
+<p>But, here is the catch with this problem of differentiation. The <code class="language-plaintext highlighter-rouge">getDerivative</code> function works with any function <code class="language-plaintext highlighter-rouge">func</code> that takes <strong>only</strong> one argument. In other words, if we want to input <code class="language-plaintext highlighter-rouge">getHeight</code> to <code class="language-plaintext highlighter-rouge">getDerivative</code>, then we will have to redefine <code class="language-plaintext highlighter-rouge">getHeight</code> to take only one argument.  You may wonder why not change <code class="language-plaintext highlighter-rouge">getDerivative</code>. For this simple problem, this could be a solution. But, with larger problems, you are more likely to use sophisticated routines and modules that have been already developed and many of these routines take a function as input that only has one input variable. This is quite often the case with high-performance integration routines.</p>
 
 <p>One perhaps-bad solution to the above problem is to use <strong>global variables</strong>. The requirement is thus to define MATLAB implementations of mathematical functions of one variable with one argument, the independent variable,</p>
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nb">height</span> <span class="o">=</span> <span class="n">getHeightGlobal</span><span class="p">(</span><span class="nb">time</span><span class="p">)</span>
@@ -583,20 +583,20 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <span class="k">end</span>
 </code></pre></div></div>
 
-<p>This function will work only if <code class="highlighter-rouge">iniVel</code> is a global variable, initialized before one attempts to call the function. Here is an example call where <code class="highlighter-rouge">getDerivative</code> differentiates y,</p>
+<p>This function will work only if <code class="language-plaintext highlighter-rouge">iniVel</code> is a global variable, initialized before one attempts to call the function. Here is an example call where <code class="language-plaintext highlighter-rouge">getDerivative</code> differentiates y,</p>
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">iniVel</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 <span class="n">derivative</span> <span class="o">=</span> <span class="n">getDerivative</span><span class="p">(</span><span class="o">@</span><span class="n">getHeightGlobal</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>The use of global variables is in general considered bad programming. Why global variables are problematic in the present case can be illustrated when there is a need to work with several versions of a function. Suppose we want to work with two versions of $y(t;v_0)$, one with $v_0=1$ and one with $v_0=5$. Every time we call <code class="highlighter-rouge">y</code>, we must remember which version of the function we work with, and set <code class="highlighter-rouge">iniVel</code> accordingly before the call,</p>
+<p>The use of global variables is in general considered bad programming. Why global variables are problematic in the present case can be illustrated when there is a need to work with several versions of a function. Suppose we want to work with two versions of $y(t;v_0)$, one with $v_0=1$ and one with $v_0=5$. Every time we call <code class="language-plaintext highlighter-rouge">y</code>, we must remember which version of the function we work with, and set <code class="language-plaintext highlighter-rouge">iniVel</code> accordingly before the call,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">global</span> <span class="n">iniVel</span><span class="p">;</span> <span class="n">iniVel</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">r1</span> <span class="o">=</span> <span class="n">getHeightGlobal</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="k">global</span> <span class="n">iniVel</span><span class="p">;</span> <span class="n">iniVel</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="n">r2</span> <span class="o">=</span> <span class="n">getHeightGlobal</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p><em>Another problem</em> is that variables with simple names like <code class="highlighter-rouge">iniVel</code>, may easily be used as global variables in other parts of the program. These parts may change our <code class="highlighter-rouge">iniVel</code> in a context different from the <code class="highlighter-rouge">getHeightGlobal</code> function, but the change affects the correctness of the <code class="highlighter-rouge">getHeightGlobal</code> function. In such a case, we say that changing <code class="highlighter-rouge">iniVel</code> has <strong>side effects</strong>, i.e., <strong>the change affects other parts of the program in an unintentional way</strong>. This is one reason why a golden rule of programming tells us to <strong>limit the use of global variables as much as possible</strong>.</p>
+<p><em>Another problem</em> is that variables with simple names like <code class="language-plaintext highlighter-rouge">iniVel</code>, may easily be used as global variables in other parts of the program. These parts may change our <code class="language-plaintext highlighter-rouge">iniVel</code> in a context different from the <code class="language-plaintext highlighter-rouge">getHeightGlobal</code> function, but the change affects the correctness of the <code class="language-plaintext highlighter-rouge">getHeightGlobal</code> function. In such a case, we say that changing <code class="language-plaintext highlighter-rouge">iniVel</code> has <strong>side effects</strong>, i.e., <strong>the change affects other parts of the program in an unintentional way</strong>. This is one reason why a golden rule of programming tells us to <strong>limit the use of global variables as much as possible</strong>.</p>
 
-<p>An alternative solution to the problem of needing two <code class="highlighter-rouge">iniVel</code> parameters could be to introduce two <code class="highlighter-rouge">getHeight</code> functions, each with a distinct <code class="highlighter-rouge">iniVel</code> parameter,</p>
+<p>An alternative solution to the problem of needing two <code class="language-plaintext highlighter-rouge">iniVel</code> parameters could be to introduce two <code class="language-plaintext highlighter-rouge">getHeight</code> functions, each with a distinct <code class="language-plaintext highlighter-rouge">iniVel</code> parameter,</p>
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="nb">height</span> <span class="o">=</span> <span class="n">getHeightGlobal_1</span><span class="p">(</span><span class="nb">time</span><span class="p">)</span>
     <span class="k">global</span> <span class="n">iniVel_1</span><span class="p">;</span> <span class="c1">% initial velocity</span>
     <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span><span class="p">;</span>
@@ -610,7 +610,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <span class="k">end</span>
 </code></pre></div></div>
 
-<p>Now we need to initialize <code class="highlighter-rouge">iniVel_1</code> and <code class="highlighter-rouge">iniVel_2</code> once, and then we can work with <code class="highlighter-rouge">getHeightGlobal_1()</code> and <code class="highlighter-rouge">getHeightGlobal_2()</code>. However, if we need $100$ <code class="highlighter-rouge">iniVel</code> parameters, we need $100$ functions. This is tedious to code, error-prone, difficult to administer, and simply a really bad solution to a programming problem.</p>
+<p>Now we need to initialize <code class="language-plaintext highlighter-rouge">iniVel_1</code> and <code class="language-plaintext highlighter-rouge">iniVel_2</code> once, and then we can work with <code class="language-plaintext highlighter-rouge">getHeightGlobal_1()</code> and <code class="language-plaintext highlighter-rouge">getHeightGlobal_2()</code>. However, if we need $100$ <code class="language-plaintext highlighter-rouge">iniVel</code> parameters, we need $100$ functions. This is tedious to code, error-prone, difficult to administer, and simply a really bad solution to a programming problem.</p>
 
 <p><strong>So, is there a good remedy?</strong> The answer is yes: the class concept solves all the problems described above.</p>
 
@@ -618,15 +618,15 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <p>A class contains a set of variables (data) and a set of functions, held together as one unit. The variables are visible in all the functions in the class. That is, we can view the variables as “global” in these functions. You can also make many copies of a class.</p>
 
-<p>Consider the function $y(t;v_0) = v_0t - \frac{1}{2}gt^2$. We may say that $v_0$ and $g$, represented by the variables <code class="highlighter-rouge">iniVel</code> and <code class="highlighter-rouge">g</code>, constitute the data. A MATLAB function, say <code class="highlighter-rouge">getValue(time)</code>, is then needed to compute the value of $y(t;v_0)$ and this function must have access to the data <code class="highlighter-rouge">iniVel</code> and <code class="highlighter-rouge">g</code>, while <code class="highlighter-rouge">time</code> is an argument. A programmer experienced with classes will then suggest collecting the data <code class="highlighter-rouge">iniVel</code> and <code class="highlighter-rouge">g</code>, and the function <code class="highlighter-rouge">getValue(time)</code>, together as a <strong>class</strong>. Also, a class usually has another function, called <strong>constructor</strong> for <strong>initializing the data</strong>. The constructor is always named similar to the class-name. Every <strong>class must have a name</strong>, often <strong>starting with a capital</strong>, so we choose <code class="highlighter-rouge">ProjectileHeight</code> as the name since the class represents a projectile motion. The next step is to implement this class in MATLAB. A complete class code <code class="highlighter-rouge">ProjectileHeight</code> for our problem here would look as follows in MATLAB:</p>
+<p>Consider the function $y(t;v_0) = v_0t - \frac{1}{2}gt^2$. We may say that $v_0$ and $g$, represented by the variables <code class="language-plaintext highlighter-rouge">iniVel</code> and <code class="language-plaintext highlighter-rouge">g</code>, constitute the data. A MATLAB function, say <code class="language-plaintext highlighter-rouge">getValue(time)</code>, is then needed to compute the value of $y(t;v_0)$ and this function must have access to the data <code class="language-plaintext highlighter-rouge">iniVel</code> and <code class="language-plaintext highlighter-rouge">g</code>, while <code class="language-plaintext highlighter-rouge">time</code> is an argument. A programmer experienced with classes will then suggest collecting the data <code class="language-plaintext highlighter-rouge">iniVel</code> and <code class="language-plaintext highlighter-rouge">g</code>, and the function <code class="language-plaintext highlighter-rouge">getValue(time)</code>, together as a <strong>class</strong>. Also, a class usually has another function, called <strong>constructor</strong> for <strong>initializing the data</strong>. The constructor is always named similar to the class-name. Every <strong>class must have a name</strong>, often <strong>starting with a capital</strong>, so we choose <code class="language-plaintext highlighter-rouge">ProjectileHeight</code> as the name since the class represents a projectile motion. The next step is to implement this class in MATLAB. A complete class code <code class="language-plaintext highlighter-rouge">ProjectileHeight</code> for our problem here would look as follows in MATLAB:</p>
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">classdef</span> <span class="n">ProjectileHeight</span>
 
-    <span class="nb">properties</span>
+    <span class="k">properties</span>
         <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span><span class="p">;</span>
         <span class="n">iniVel</span><span class="p">;</span> <span class="c1">% initial velocity</span>
     <span class="k">end</span>
 
-    <span class="nb">methods</span> <span class="p">(</span><span class="n">Access</span> <span class="o">=</span> <span class="n">public</span><span class="p">)</span>
+    <span class="k">methods</span> <span class="p">(</span><span class="n">Access</span> <span class="o">=</span> <span class="n">public</span><span class="p">)</span>
 
         <span class="c1">% This is the class constructor</span>
         <span class="k">function</span> <span class="n">ProjectileHeightObject</span> <span class="o">=</span> <span class="n">ProjectileHeight</span><span class="p">(</span><span class="n">iniVel</span><span class="p">)</span>
@@ -643,38 +643,38 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <span class="k">end</span>
 </code></pre></div></div>
 
-<p><strong>A class creates a new data type</strong>, here of name <code class="highlighter-rouge">ProjectileHeight</code>, so when we use the class to make objects, those objects are of type <code class="highlighter-rouge">ProjectileHeight</code>. <strong>All the standard MATLAB objects, such as lists, tuples, strings, floating-point numbers, integers, …, are built-in MATLAB classes</strong>, and each time the user creates on these variable types, one instance of these classes are created by the MATLAB interpreter. A user-defined object class (like <code class="highlighter-rouge">ProjectileHeight</code>) is usually called an <strong>instance</strong>. We need such an instance to use the data in the class and call the value function. The following statement constructs an instance bound to the variable name <code class="highlighter-rouge">MyProjectileHeight</code>,</p>
+<p><strong>A class creates a new data type</strong>, here of name <code class="language-plaintext highlighter-rouge">ProjectileHeight</code>, so when we use the class to make objects, those objects are of type <code class="language-plaintext highlighter-rouge">ProjectileHeight</code>. <strong>All the standard MATLAB objects, such as lists, tuples, strings, floating-point numbers, integers, …, are built-in MATLAB classes</strong>, and each time the user creates on these variable types, one instance of these classes are created by the MATLAB interpreter. A user-defined object class (like <code class="language-plaintext highlighter-rouge">ProjectileHeight</code>) is usually called an <strong>instance</strong>. We need such an instance to use the data in the class and call the value function. The following statement constructs an instance bound to the variable name <code class="language-plaintext highlighter-rouge">MyProjectileHeight</code>,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">MyProjectileHeight</span> <span class="o">=</span> <span class="n">ProjectileHeight</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MyProjectileHeight = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MyProjectileHeight = 
   ProjectileHeight with properties:
 
          g: 9.8100
     iniVel: 100
 </code></pre></div></div>
 
-<p>Seemingly, we <em>call the class <code class="highlighter-rouge">ProjectileHeight</code> as if it were a function</em>. Indeed, <code class="highlighter-rouge">ProjectileHeight(3)</code> is automatically translated by MATLAB to a call to the constructor method <code class="highlighter-rouge">ProjectileHeight()</code> in class <code class="highlighter-rouge">ProjectileHeight</code>. With the instance <code class="highlighter-rouge">MyProjectileHeight</code>, we can compute the value of y(t=0.1;v_0=3) by the statement,</p>
+<p>Seemingly, we <em>call the class <code class="language-plaintext highlighter-rouge">ProjectileHeight</code> as if it were a function</em>. Indeed, <code class="language-plaintext highlighter-rouge">ProjectileHeight(3)</code> is automatically translated by MATLAB to a call to the constructor method <code class="language-plaintext highlighter-rouge">ProjectileHeight()</code> in class <code class="language-plaintext highlighter-rouge">ProjectileHeight</code>. With the instance <code class="language-plaintext highlighter-rouge">MyProjectileHeight</code>, we can compute the value of y(t=0.1;v_0=3) by the statement,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">height</span> <span class="o">=</span> <span class="n">MyProjectileHeight</span><span class="o">.</span><span class="n">getValue</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>height =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>height =
    95.0950
 </code></pre></div></div>
 
-<p>Note that the <code class="highlighter-rouge">ProjectileHeightObject</code> input argument is dropped in the call to <code class="highlighter-rouge">getValue()</code> method. To access functions and variables in a class, one must prefix the function and variable names by the name of the instance and a dot: the <code class="highlighter-rouge">getValue()</code> function can be reached by <code class="highlighter-rouge">MyProjectileHeight.value</code>, and the variables are reached as <code class="highlighter-rouge">MyProjectileHeight.iniVel</code> and <code class="highlighter-rouge">MyProjectileHeight.g</code>. One could, for example, print the value of <code class="highlighter-rouge">iniVel</code> in the instance <code class="highlighter-rouge">getValue</code> by writing,</p>
+<p>Note that the <code class="language-plaintext highlighter-rouge">ProjectileHeightObject</code> input argument is dropped in the call to <code class="language-plaintext highlighter-rouge">getValue()</code> method. To access functions and variables in a class, one must prefix the function and variable names by the name of the instance and a dot: the <code class="language-plaintext highlighter-rouge">getValue()</code> function can be reached by <code class="language-plaintext highlighter-rouge">MyProjectileHeight.value</code>, and the variables are reached as <code class="language-plaintext highlighter-rouge">MyProjectileHeight.iniVel</code> and <code class="language-plaintext highlighter-rouge">MyProjectileHeight.g</code>. One could, for example, print the value of <code class="language-plaintext highlighter-rouge">iniVel</code> in the instance <code class="language-plaintext highlighter-rouge">getValue</code> by writing,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">MyProjectileHeight</span><span class="o">.</span><span class="n">iniVel</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
    100
 </code></pre></div></div>
 
-<p>We have already introduced the term <strong>instance</strong> for the object of a class. <strong>Functions</strong> in classes are commonly called <strong>methods</strong>, and <strong>variables (data)</strong> in classes are called <strong>data attributes</strong>. Methods are also known as <strong>method attributes</strong>. For example, in our sample class <code class="highlighter-rouge">ProjectileHeight</code> we have two methods or method attributes, <code class="highlighter-rouge">ProjectileHeight()</code> and <code class="highlighter-rouge">getValue()</code>, two data attributes, <code class="highlighter-rouge">iniVel</code> and <code class="highlighter-rouge">g</code>. Note that the names of attributes can be chosen freely, just as names of ordinary MATLAB functions and variables. However, <strong>the constructor must have the same name as the name of the class, otherwise, it is not automatically called when new instances are created</strong>. You can do whatever you want in whatever method, but it is a common convention to <strong>use the constructor for initializing the variables of an instance of a class</strong>.</p>
+<p>We have already introduced the term <strong>instance</strong> for the object of a class. <strong>Functions</strong> in classes are commonly called <strong>methods</strong>, and <strong>variables (data)</strong> in classes are called <strong>data attributes</strong>. Methods are also known as <strong>method attributes</strong>. For example, in our sample class <code class="language-plaintext highlighter-rouge">ProjectileHeight</code> we have two methods or method attributes, <code class="language-plaintext highlighter-rouge">ProjectileHeight()</code> and <code class="language-plaintext highlighter-rouge">getValue()</code>, two data attributes, <code class="language-plaintext highlighter-rouge">iniVel</code> and <code class="language-plaintext highlighter-rouge">g</code>. Note that the names of attributes can be chosen freely, just as names of ordinary MATLAB functions and variables. However, <strong>the constructor must have the same name as the name of the class, otherwise, it is not automatically called when new instances are created</strong>. You can do whatever you want in whatever method, but it is a common convention to <strong>use the constructor for initializing the variables of an instance of a class</strong>.</p>
 
 <h2 id="calling-object-methods-from-other-functions">Calling object methods from other functions</h2>
 
-<p>So far, we have an object-oriented implementation of our ProjectileHeight motion. Now, going back to the original differentiation problem, if we want to be able to differentiate the height with respect to time using the function <code class="highlighter-rouge">getDerivative()</code>, we will have to pass <code class="highlighter-rouge">MyProjectileHeight</code> object in its entirety to <code class="highlighter-rouge">getDerivative()</code>,</p>
+<p>So far, we have an object-oriented implementation of our ProjectileHeight motion. Now, going back to the original differentiation problem, if we want to be able to differentiate the height with respect to time using the function <code class="language-plaintext highlighter-rouge">getDerivative()</code>, we will have to pass <code class="language-plaintext highlighter-rouge">MyProjectileHeight</code> object in its entirety to <code class="language-plaintext highlighter-rouge">getDerivative()</code>,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">derivative</span> <span class="o">=</span> <span class="n">getDerivativeOOP</span><span class="p">(</span><span class="n">FuncObj</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
     <span class="n">h</span> <span class="o">=</span> <span class="mf">1E-5</span><span class="p">;</span>
@@ -684,7 +684,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">MyProjectileHeight</span> <span class="o">=</span> <span class="n">ProjectileHeight</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>   <span class="c1">% create object with initial velocity 100 (m/s)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MyProjectileHeight = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MyProjectileHeight = 
   ProjectileHeight with properties:
 
          g: 9.8100
@@ -693,7 +693,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">derivative</span> <span class="o">=</span> <span class="n">getDerivativeOOP</span><span class="p">(</span><span class="n">MyProjectileHeight</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="c1">% compute derivative at time = 1 (s)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>derivative =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>derivative =
    90.1900
 </code></pre></div></div>
 
@@ -793,8 +793,8 @@ the script runs before the sidebar code runs and the class never gets inserted.
 </div>
 
         <div class="col-lg-12 footer">
-            &copy;2022 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: October 5, 2022 <br />
+            &copy;2025 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: December 25, 2025 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

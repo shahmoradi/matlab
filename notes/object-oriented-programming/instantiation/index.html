@@ -565,49 +565,49 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <p>Programming with classes is offered by most modern programming languages, including MATLAB. MATLAB uses the concept of classes in almost every bit of it. However, most MATLAB users don’t even notice the heavy dependence of MATLAB on classes under the hood, until they learn what a class is, just as we have made progress in this class so far, without knowing about classes.</p>
 
-<p>Despite having a clean syntax, defining a valid class in MATLAB is rather tricky. First you have to make sure that your MATLAB class is all in a single MATLAB M-file that has the same name as the class-name. For example the following code will define a class named <code class="highlighter-rouge">Dog</code>, which does not have any properties (attributes) or methods,</p>
+<p>Despite having a clean syntax, defining a valid class in MATLAB is rather tricky. First you have to make sure that your MATLAB class is all in a single MATLAB M-file that has the same name as the class-name. For example the following code will define a class named <code class="language-plaintext highlighter-rouge">Dog</code>, which does not have any properties (attributes) or methods,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">classdef</span> <span class="n">Dog</span>
 <span class="k">end</span>
 </code></pre></div></div>
 
-<p>However, for this code snippet to be a valid MATLAB code, it must be saved in MATLAB M-file with the name <code class="highlighter-rouge">Dog.m</code>. In addition, there are strict rules with regards to where this file resides on your computer. To use a class, the class definition must be on the MATLAB’s path. There are two types of folders that can contain class definition files,</p>
+<p>However, for this code snippet to be a valid MATLAB code, it must be saved in MATLAB M-file with the name <code class="language-plaintext highlighter-rouge">Dog.m</code>. In addition, there are strict rules with regards to where this file resides on your computer. To use a class, the class definition must be on the MATLAB’s path. There are two types of folders that can contain class definition files,</p>
 
 <ul>
   <li>
-    <p><strong>Path folders</strong> – The folder is on the MATLAB path and the folder name does not begin with an <code class="highlighter-rouge">@</code> character. Use this type of folder when you want multiple classes in one folder. However, the entire class definition must be contained in one <code class="highlighter-rouge">.m</code> file.</p>
+    <p><strong>Path folders</strong> – The folder is on the MATLAB path and the folder name does not begin with an <code class="language-plaintext highlighter-rouge">@</code> character. Use this type of folder when you want multiple classes in one folder. However, the entire class definition must be contained in one <code class="language-plaintext highlighter-rouge">.m</code> file.</p>
   </li>
   <li>
-    <p><strong>Class folders</strong> – The folder name begins with an <code class="highlighter-rouge">@</code> character followed by the class name. The folder is not on the MATLAB path, but its parent folder is on the path. Use this type of folder when you want to use multiple files for one class definition.  See MATLAB’s <a href="https://www.mathworks.com/help/matlab/ref/path.html" target="_blank"><code class="highlighter-rouge">path()</code></a> function for information about using the MATLAB path.</p>
+    <p><strong>Class folders</strong> – The folder name begins with an <code class="language-plaintext highlighter-rouge">@</code> character followed by the class name. The folder is not on the MATLAB path, but its parent folder is on the path. Use this type of folder when you want to use multiple files for one class definition.  See MATLAB’s <a href="https://www.mathworks.com/help/matlab/ref/path.html" target="_blank"><code class="language-plaintext highlighter-rouge">path()</code></a> function for information about using the MATLAB path.</p>
   </li>
 </ul>
 
-<p>The above code creates a class <code class="highlighter-rouge">Dog</code> that does not have any <strong>properties</strong> or <strong>attributes</strong> (variables that define different aspects of the object) or <strong>methods</strong> or <strong>functions</strong> (components of objects that define the tasks the object can do with or without the use of the object’s attributes). The MATLAB keyword <code class="highlighter-rouge">classdef</code> declares the beginning of a class definition, and the <code class="highlighter-rouge">end</code> keyword marks the end of the class definition.</p>
+<p>The above code creates a class <code class="language-plaintext highlighter-rouge">Dog</code> that does not have any <strong>properties</strong> or <strong>attributes</strong> (variables that define different aspects of the object) or <strong>methods</strong> or <strong>functions</strong> (components of objects that define the tasks the object can do with or without the use of the object’s attributes). The MATLAB keyword <code class="language-plaintext highlighter-rouge">classdef</code> declares the beginning of a class definition, and the <code class="language-plaintext highlighter-rouge">end</code> keyword marks the end of the class definition.</p>
 
 <p>Once the class is created, you could instantiate objects from the blueprint class,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">my_dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
   Dog with no properties.
 </code></pre></div></div>
 
 <p>where, the empty parentheses is added in recognition of the fact that Dog is a class, and not an attribute (variable), for example.</p>
 
-<p>You can confirm whether you have indeed instantiated an object from the class <code class="highlighter-rouge">Dog</code> via <code class="highlighter-rouge">class()</code> intrinsic function in MATLAB,</p>
+<p>You can confirm whether you have indeed instantiated an object from the class <code class="language-plaintext highlighter-rouge">Dog</code> via <code class="language-plaintext highlighter-rouge">class()</code> intrinsic function in MATLAB,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="nb">class</span><span class="p">(</span><span class="n">my_dog</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     'Dog'
 </code></pre></div></div>
 
 <p>#% class attributes vs. instance attributes</p>
 
-<p>The class <code class="highlighter-rouge">Dog</code> defined above has no use as it does not contain any attributes or methods. In practice, a dog has color, race, age, and so many other attributes. Besides, it can eat, run, sleep, bark, and so on. Therefore,</p>
+<p>The class <code class="language-plaintext highlighter-rouge">Dog</code> defined above has no use as it does not contain any attributes or methods. In practice, a dog has color, race, age, and so many other attributes. Besides, it can eat, run, sleep, bark, and so on. Therefore,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">classdef</span> <span class="n">Dog</span>
-    <span class="nb">properties</span>
+    <span class="k">properties</span>
         <span class="n">age</span><span class="p">;</span>
         <span class="n">name</span> <span class="o">=</span> <span class="s1">'unnamed'</span><span class="p">;</span>
         <span class="n">race</span> <span class="o">=</span> <span class="s1">'unknown'</span><span class="p">;</span>
@@ -620,7 +620,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">my_dog</span> <span class="o">=</span> <span class="n">Dog</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
   Dog with properties:
 
       age: []
@@ -634,7 +634,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">();</span>
 <span class="nb">disp</span><span class="p">(</span> <span class="p">[</span><span class="n">my_dog</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="s1">' is a '</span><span class="p">,</span><span class="n">my_dog</span><span class="o">.</span><span class="n">color</span><span class="p">,</span><span class="s1">'-color '</span><span class="p">,</span><span class="n">my_dog</span><span class="o">.</span><span class="n">race</span><span class="p">,</span><span class="s1">'-race dog of age '</span><span class="p">,</span><span class="nb">num2str</span><span class="p">(</span><span class="n">my_dog</span><span class="o">.</span><span class="n">age</span><span class="p">),</span><span class="s1">'.'</span><span class="p">]</span> <span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unnamed is a unknown-color unknown-race dog of age .
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>unnamed is a unknown-color unknown-race dog of age .
 </code></pre></div></div>
 
 <p>can be modified to,</p>
@@ -645,7 +645,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <span class="n">my_dog</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="s1">'brown'</span><span class="p">;</span>
 <span class="nb">disp</span><span class="p">(</span> <span class="p">[</span><span class="n">my_dog</span><span class="o">.</span><span class="n">name</span><span class="p">,</span><span class="s1">' is a '</span><span class="p">,</span><span class="n">my_dog</span><span class="o">.</span><span class="n">color</span><span class="p">,</span><span class="s1">'-color '</span><span class="p">,</span><span class="n">my_dog</span><span class="o">.</span><span class="n">race</span><span class="p">,</span><span class="s1">'-race dog of age '</span><span class="p">,</span><span class="nb">num2str</span><span class="p">(</span><span class="n">my_dog</span><span class="o">.</span><span class="n">age</span><span class="p">),</span><span class="s1">'.'</span><span class="p">]</span> <span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Coco is a brown-color Terrier-race dog of age 3.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Coco is a brown-color Terrier-race dog of age 3.
 </code></pre></div></div>
 
 <h3 id="object-constructor">Object constructor</h3>
@@ -653,13 +653,13 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <p>While the above approach to class attribute definition and value assignment works fine, it is verbose and rather tedious. Instead, there is a better way of initializing an instance of a class by defining an object constructor method within the class definition.  Amethod with the same name as the class-name can be defined in every class and used for performing tasks that are supposed to be done once (and only once) at the time of object instantiation. This includes the assignment of user-provided values to the attributes or default values in case no value is provided by the user.</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">classdef</span> <span class="n">Dog</span>
-    <span class="nb">properties</span>
+    <span class="k">properties</span>
         <span class="n">age</span><span class="p">;</span>
         <span class="n">name</span><span class="p">;</span>
         <span class="n">race</span><span class="p">;</span>
         <span class="n">color</span><span class="p">;</span>
     <span class="k">end</span>
-    <span class="nb">methods</span> <span class="p">(</span><span class="n">Access</span> <span class="o">=</span> <span class="n">public</span><span class="p">)</span>
+    <span class="k">methods</span> <span class="p">(</span><span class="n">Access</span> <span class="o">=</span> <span class="n">public</span><span class="p">)</span>
         <span class="c1">% This is the class constructor</span>
         <span class="k">function</span> <span class="n">Self</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">race</span><span class="p">,</span><span class="n">color</span><span class="p">)</span>
             <span class="c1">% instance attributes</span>
@@ -674,7 +674,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s1">'Coco'</span><span class="p">,</span><span class="s1">'Terrier'</span><span class="p">,</span><span class="s1">'brown'</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
   Dog with properties:
 
       age: 3
@@ -683,16 +683,16 @@ the script runs before the sidebar code runs and the class never gets inserted.
     color: 'brown'
 </code></pre></div></div>
 
-<p>In OOP terminology, this intrinsic class method is called the object <strong>contructor method</strong>. In many object-oriented programming languages, by convention, the <strong>first input argument</strong> to the constructor method is <strong>always</strong> the object itself, that is going to be instantiated, and is frequently named <code class="highlighter-rouge">self</code>. However, since it is an output argument, in MATLAB, it is listed as the output of the constructor method and not among the input arguments. Also, the object’s name (here, <code class="highlighter-rouge">Self</code>) is arbitrary and can be set to anything, for example, <code class="highlighter-rouge">DogObj</code> standing for object,</p>
+<p>In OOP terminology, this intrinsic class method is called the object <strong>contructor method</strong>. In many object-oriented programming languages, by convention, the <strong>first input argument</strong> to the constructor method is <strong>always</strong> the object itself, that is going to be instantiated, and is frequently named <code class="language-plaintext highlighter-rouge">self</code>. However, since it is an output argument, in MATLAB, it is listed as the output of the constructor method and not among the input arguments. Also, the object’s name (here, <code class="language-plaintext highlighter-rouge">Self</code>) is arbitrary and can be set to anything, for example, <code class="language-plaintext highlighter-rouge">DogObj</code> standing for object,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">classdef</span> <span class="n">Dog</span>
-    <span class="nb">properties</span>
+    <span class="k">properties</span>
         <span class="n">age</span><span class="p">;</span>
         <span class="n">name</span><span class="p">;</span>
         <span class="n">race</span><span class="p">;</span>
         <span class="n">color</span><span class="p">;</span>
     <span class="k">end</span>
-    <span class="nb">methods</span> <span class="p">(</span><span class="n">Access</span> <span class="o">=</span> <span class="n">public</span><span class="p">)</span>
+    <span class="k">methods</span> <span class="p">(</span><span class="n">Access</span> <span class="o">=</span> <span class="n">public</span><span class="p">)</span>
         <span class="c1">% This is the class constructor</span>
         <span class="k">function</span> <span class="n">DogObj</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">race</span><span class="p">,</span><span class="n">color</span><span class="p">)</span>
             <span class="c1">% instance attributes</span>
@@ -707,7 +707,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">my_dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s1">'Coco'</span><span class="p">,</span><span class="s1">'Terrier'</span><span class="p">,</span><span class="s1">'brown'</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
   Dog with properties:
 
       age: 3
@@ -724,7 +724,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">classdef</span> <span class="n">Dog</span>
 
-    <span class="nb">properties</span>
+    <span class="k">properties</span>
 
         <span class="c1">% class attributes</span>
         <span class="n">species</span> <span class="o">=</span> <span class="s1">'mammal'</span><span class="p">;</span>
@@ -737,7 +737,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
     <span class="k">end</span>
 
-    <span class="nb">methods</span> <span class="p">(</span><span class="n">Access</span> <span class="o">=</span> <span class="n">public</span><span class="p">)</span>
+    <span class="k">methods</span> <span class="p">(</span><span class="n">Access</span> <span class="o">=</span> <span class="n">public</span><span class="p">)</span>
 
         <span class="c1">% This is the class constructor</span>
         <span class="k">function</span> <span class="n">DogObj</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="n">age</span><span class="p">,</span><span class="n">name</span><span class="p">,</span><span class="n">race</span><span class="p">,</span><span class="n">color</span><span class="p">)</span>
@@ -755,7 +755,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">my_dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="s1">'Coco'</span><span class="p">,</span><span class="s1">'Terrier'</span><span class="p">,</span><span class="s1">'brown'</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>my_dog = 
   Dog with properties:
 
     species: 'mammal'
@@ -866,8 +866,8 @@ the script runs before the sidebar code runs and the class never gets inserted.
 </div>
 
         <div class="col-lg-12 footer">
-            &copy;2022 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: October 5, 2022 <br />
+            &copy;2025 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: December 25, 2025 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

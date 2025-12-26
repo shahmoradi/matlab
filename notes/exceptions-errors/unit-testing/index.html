@@ -573,11 +573,11 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <h3 id="script-based-unit-tests">Script-based unit-tests</h3>
 
-<p>The simplest method of unit-testing in MATLAB is to write tests in scripts that verify the accuracy of the output or the expected behavior of MATLAB scripts, functions, or classes that you write. For example, you can use the <code class="highlighter-rouge">assert</code> function to test whether actual output values match the expected values. Or you can test whether the output variables have the correct size and type. To run your test scripts you will have to use MATLAB’s built-in function <code class="highlighter-rouge">runtests</code>.</p>
+<p>The simplest method of unit-testing in MATLAB is to write tests in scripts that verify the accuracy of the output or the expected behavior of MATLAB scripts, functions, or classes that you write. For example, you can use the <code class="language-plaintext highlighter-rouge">assert</code> function to test whether actual output values match the expected values. Or you can test whether the output variables have the correct size and type. To run your test scripts you will have to use MATLAB’s built-in function <code class="language-plaintext highlighter-rouge">runtests</code>.</p>
 
 <h4 id="example">Example</h4>
 
-<p>To see how it works, let’s look at an example from <a href="https://www.mathworks.com/help/matlab/matlab_prog/write-script-based-unit-tests.html" target="_blank">MATLAB manual</a>. Suppose you want to write a MATLAB function, <code class="highlighter-rouge">rightTri.m</code>, in your current MATLAB® folde that takes lengths of two sides of a triangle as input and returns the three angles of the corresponding right triangle. The input sides are the two shorter edges of the triangle, not the hypotenuse.</p>
+<p>To see how it works, let’s look at an example from <a href="https://www.mathworks.com/help/matlab/matlab_prog/write-script-based-unit-tests.html" target="_blank">MATLAB manual</a>. Suppose you want to write a MATLAB function, <code class="language-plaintext highlighter-rouge">rightTri.m</code>, in your current MATLAB® folde that takes lengths of two sides of a triangle as input and returns the three angles of the corresponding right triangle. The input sides are the two shorter edges of the triangle, not the hypotenuse.</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">function</span> <span class="n">angles</span> <span class="o">=</span> <span class="n">rightTri</span><span class="p">(</span><span class="n">sides</span><span class="p">)</span>
     <span class="n">A</span> <span class="o">=</span> <span class="nb">atand</span><span class="p">(</span><span class="n">sides</span><span class="p">(</span><span class="mi">1</span><span class="p">)/</span><span class="n">sides</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
@@ -590,7 +590,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <h5 id="create-test-script">Create test-script</h5>
 
-<p>Now, in your working folder, create a new script, <code class="highlighter-rouge">rightTriTest.m</code>. Each unit test checks a different output of the rightTri function. <strong>A test-script must adhere to the following conventions</strong>,</p>
+<p>Now, in your working folder, create a new script, <code class="language-plaintext highlighter-rouge">rightTriTest.m</code>. Each unit test checks a different output of the rightTri function. <strong>A test-script must adhere to the following conventions</strong>,</p>
 
 <ul>
   <li>The name of the script file must start or end with the word ‘test’, which is case-insensitive.</li>
@@ -601,7 +601,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
   <li>If the script file does not include any code sections, MATLAB generates a single test element from the full contents of the script file. The name of the test element is the same as the script file name. In this case, if MATLAB encounters a failed test, it halts execution of the entire script.</li>
 </ul>
 
-<p>Now, in <code class="highlighter-rouge">rightTriTest.m</code>, write four tests to test the output of <code class="highlighter-rouge">rightTri.m</code>. Use the <code class="highlighter-rouge">assert</code> function to test the different conditions. In the shared variables section, define four triangle geometries and define a precondition that the rightTri function returns a right triangle.</p>
+<p>Now, in <code class="language-plaintext highlighter-rouge">rightTriTest.m</code>, write four tests to test the output of <code class="language-plaintext highlighter-rouge">rightTri.m</code>. Use the <code class="language-plaintext highlighter-rouge">assert</code> function to test the different conditions. In the shared variables section, define four triangle geometries and define a precondition that the rightTri function returns a right triangle.</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">% test triangles</span>
 <span class="n">tri</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span> <span class="mi">9</span><span class="p">];</span>
@@ -654,11 +654,11 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <h5 id="run-tests">Run tests</h5>
 
-<p>Execute the <code class="highlighter-rouge">runtests</code> function to run the four tests in <code class="highlighter-rouge">rightTriTest.m</code>. The runtests function executes each test in each code section individually. If Test 1 fails, MATLAB still runs the remaining tests. If you execute rightTriTest as a script instead of by using runtests, MATLAB halts execution of the entire script if it encounters a failed assertion. Additionally, when you run tests using the runtests function, MATLAB provides informative test diagnostics.</p>
+<p>Execute the <code class="language-plaintext highlighter-rouge">runtests</code> function to run the four tests in <code class="language-plaintext highlighter-rouge">rightTriTest.m</code>. The runtests function executes each test in each code section individually. If Test 1 fails, MATLAB still runs the remaining tests. If you execute rightTriTest as a script instead of by using runtests, MATLAB halts execution of the entire script if it encounters a failed assertion. Additionally, when you run tests using the runtests function, MATLAB provides informative test diagnostics.</p>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="nb">runtests</span><span class="p">(</span><span class="s1">'rightTriTest'</span><span class="p">);</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">result</span> <span class="o">=</span> <span class="nb">runtests</span><span class="p">(</span><span class="s1">'rightTriTest'</span><span class="p">);</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running rightTriTest
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running rightTriTest
 ..
 ================================================================================
 Error occurred in rightTriTest/Test3_30_60_90Triangle and it did not run to completion.
@@ -704,7 +704,7 @@ Failure Summary:
 
 <h5 id="revise-test-to-use-tolerance">Revise test to use tolerance</h5>
 
-<p>Save <code class="highlighter-rouge">rightTriTest.m</code> as <code class="highlighter-rouge">rightTriTolTest.m</code>, and revise Test 3 and Test 4 to use a tolerance. In Test 3 and Test 4, instead of asserting that the angles are equal to an expected value, assert that the difference between the actual and expected values is less than or equal to a specified tolerance. Define the tolerance in the shared variables section of the test script so it is accessible to both tests.</p>
+<p>Save <code class="language-plaintext highlighter-rouge">rightTriTest.m</code> as <code class="language-plaintext highlighter-rouge">rightTriTolTest.m</code>, and revise Test 3 and Test 4 to use a tolerance. In Test 3 and Test 4, instead of asserting that the angles are equal to an expected value, assert that the difference between the actual and expected values is less than or equal to a specified tolerance. Define the tolerance in the shared variables section of the test script so it is accessible to both tests.</p>
 
 <p>For script-based unit tests, manually verify that the difference between two values is less than a specified tolerance. If instead you write a function-based unit test, you can access built-in constraints to specify a tolerance when comparing floating-point values.</p>
 
@@ -754,9 +754,9 @@ Failure Summary:
 
 <p>Now, rerun the tests,</p>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="nb">runtests</span><span class="p">(</span><span class="s1">'rightTriTolTest'</span><span class="p">);</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">result</span> <span class="o">=</span> <span class="nb">runtests</span><span class="p">(</span><span class="s1">'rightTriTolTest'</span><span class="p">);</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running rightTriTolTest
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Running rightTriTolTest
 ....
 Done rightTriTolTest
 __________
@@ -891,8 +891,8 @@ rt =
 </div>
 
         <div class="col-lg-12 footer">
-            &copy;2022 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: October 5, 2022 <br />
+            &copy;2025 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: December 25, 2025 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

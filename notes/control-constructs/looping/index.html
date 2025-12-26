@@ -560,7 +560,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <span class="k">end</span>
 </code></pre></div></div>
 
-<p>Usually, <code class="highlighter-rouge">expression</code> is a vector of the form <code class="highlighter-rouge">istart:stepSize:iend</code> where <code class="highlighter-rouge">fix((iend-istart)/stepSize+1)</code> gives the number of iterations requested by the user, assuming <code class="highlighter-rouge">iend&gt;istart</code>. The <code class="highlighter-rouge">statements</code> are the set of programming tasks that have to be repeated. For example consider a script named <code class="highlighter-rouge">runForLoop.m</code>,</p>
+<p>Usually, <code class="language-plaintext highlighter-rouge">expression</code> is a vector of the form <code class="language-plaintext highlighter-rouge">istart:stepSize:iend</code> where <code class="language-plaintext highlighter-rouge">fix((iend-istart)/stepSize+1)</code> gives the number of iterations requested by the user, assuming <code class="language-plaintext highlighter-rouge">iend&gt;istart</code>. The <code class="language-plaintext highlighter-rouge">statements</code> are the set of programming tasks that have to be repeated. For example consider a script named <code class="language-plaintext highlighter-rouge">runForLoop.m</code>,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">index</span> <span class="o">=</span> <span class="n">istart</span><span class="p">:</span><span class="n">stepSize</span><span class="p">:</span><span class="n">iend</span>
     <span class="nb">disp</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
@@ -573,7 +573,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <span class="o">&gt;&gt;</span> <span class="n">stepSize</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 <span class="o">&gt;&gt;</span> <span class="n">runForLoop</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    -2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    -2
      1
      4
      7
@@ -588,7 +588,7 @@ number of iterations: 5
 <span class="o">&gt;&gt;</span> <span class="n">stepSize</span> <span class="o">=</span> <span class="o">-</span><span class="mi">3</span><span class="p">;</span>
 <span class="o">&gt;&gt;</span> <span class="n">runForLoop</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    10
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    10
      7
      4
      1
@@ -598,7 +598,7 @@ number of iterations: 5
 
 <h3 id="breaking-a-for-loop-immaturely">Breaking a for-loop immaturely</h3>
 
-<p>You can also use <code class="highlighter-rouge">break</code> inside a for-loop to get out of it, even before the for-loop finishes the full number of iterations. This is specially useful when you want to ensure if a condition has happened, and if so, then terminate the for-loop. For example,</p>
+<p>You can also use <code class="language-plaintext highlighter-rouge">break</code> inside a for-loop to get out of it, even before the for-loop finishes the full number of iterations. This is specially useful when you want to ensure if a condition has happened, and if so, then terminate the for-loop. For example,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">integer</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span>
     <span class="nb">disp</span><span class="p">(</span><span class="n">integer</span><span class="p">)</span>
@@ -607,7 +607,7 @@ number of iterations: 5
     <span class="k">end</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1
  2
  3
  4
@@ -616,7 +616,7 @@ number of iterations: 5
 
 <h4 id="exercise">Exercise</h4>
 
-<p>suppose you want to find the largest prime number that is smaller than a given input value by the user. Write a function that does so, using for-loop, <code class="highlighter-rouge">break</code>, and MATLAB’s intrinsic function <code class="highlighter-rouge">isprime()</code>.</p>
+<p>suppose you want to find the largest prime number that is smaller than a given input value by the user. Write a function that does so, using for-loop, <code class="language-plaintext highlighter-rouge">break</code>, and MATLAB’s intrinsic function <code class="language-plaintext highlighter-rouge">isprime()</code>.</p>
 
 <p><strong>Answer</strong></p>
 
@@ -635,7 +635,7 @@ number of iterations: 5
 
 <h3 id="continue-statement-within-for-loops">Continue statement within for-loops</h3>
 
-<p>To skip the rest of the instructions in a loop and begin the next iteration, you can use a <code class="highlighter-rouge">continue</code> statement. For example, the following code prints only integers that are primes,</p>
+<p>To skip the rest of the instructions in a loop and begin the next iteration, you can use a <code class="language-plaintext highlighter-rouge">continue</code> statement. For example, the following code prints only integers that are primes,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for</span> <span class="n">integer</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">10</span>
     <span class="k">if</span> <span class="o">~</span><span class="nb">isprime</span><span class="p">(</span><span class="n">integer</span><span class="p">)</span>
@@ -644,7 +644,7 @@ number of iterations: 5
     <span class="nb">disp</span><span class="p">([</span><span class="s1">'prime detected! '</span><span class="p">,</span><span class="nb">num2str</span><span class="p">(</span><span class="n">integer</span><span class="p">)])</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>prime detected! 2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>prime detected! 2
 prime detected! 3
 prime detected! 5
 prime detected! 7
@@ -660,7 +660,7 @@ prime detected! 7
     <span class="nb">disp</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>double
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>double
     1
 double
     0
@@ -674,7 +674,7 @@ double
     -1
 </code></pre></div></div>
 
-<p>However, see what happens if we defined <code class="highlighter-rouge">a</code> as a matrix,</p>
+<p>However, see what happens if we defined <code class="language-plaintext highlighter-rouge">a</code> as a matrix,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">;</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">];</span>
 <span class="k">for</span> <span class="n">index</span> <span class="o">=</span> <span class="n">a</span>
@@ -682,7 +682,7 @@ double
     <span class="nb">disp</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>double
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>double
     1
     4
     7
@@ -704,7 +704,7 @@ double
     <span class="nb">disp</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cell
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cell
     [1]
     [4]
     [7]
@@ -718,7 +718,7 @@ cell
     [9]
 </code></pre></div></div>
 
-<p>Therefore, if you want to iterate over elements of a multidimensional matrix or array, you have to first reshape them using MATLAB’s built-in <code class="highlighter-rouge">reshape()</code> function to convert them to vector format, then iterating over them. For example,</p>
+<p>Therefore, if you want to iterate over elements of a multidimensional matrix or array, you have to first reshape them using MATLAB’s built-in <code class="language-plaintext highlighter-rouge">reshape()</code> function to convert them to vector format, then iterating over them. For example,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">;</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">;</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">};</span>
 <span class="n">a</span> <span class="o">=</span> <span class="nb">reshape</span><span class="p">(</span><span class="n">a</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">]);</span>
@@ -727,7 +727,7 @@ cell
     <span class="nb">disp</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cell
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cell
     [1]
 cell
     [4]
@@ -751,7 +751,7 @@ cell
 
 <ul>
   <li>
-    <p><strong>Avoid using $i$ and $j$ as index variables in for-loops.</strong> Note that <code class="highlighter-rouge">i</code> and <code class="highlighter-rouge">j</code> have special meanings in MATLAB, as described in previous notes. They are used to define complex numbers. Using these variable names as indices in MATLAB for-loops, would overwrite the default meaning of these variables.</p>
+    <p><strong>Avoid using $i$ and $j$ as index variables in for-loops.</strong> Note that <code class="language-plaintext highlighter-rouge">i</code> and <code class="language-plaintext highlighter-rouge">j</code> have special meanings in MATLAB, as described in previous notes. They are used to define complex numbers. Using these variable names as indices in MATLAB for-loops, would overwrite the default meaning of these variables.</p>
   </li>
   <li>
     <p><strong>Avoid assigning a value to the index variable within the loop statements.</strong> The for statement overrides any changes made to index within the loop.</p>
@@ -767,7 +767,7 @@ cell
 <span class="k">end</span>
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">statements</code> within the while-loop are executed as long as <code class="highlighter-rouge">expression</code> is true. For example,</p>
+<p>The <code class="language-plaintext highlighter-rouge">statements</code> within the while-loop are executed as long as <code class="language-plaintext highlighter-rouge">expression</code> is true. For example,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="nb">realmax</span><span class="p">();</span>
 <span class="k">while</span> <span class="n">x</span><span class="o">&gt;</span><span class="mi">0</span>
@@ -776,7 +776,7 @@ cell
 <span class="k">end</span>
 <span class="n">xmin</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xmin =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xmin =
 1.7977e+308
 x =
 709.7827
@@ -800,7 +800,7 @@ xmin =
     0.6322
 </code></pre></div></div>
 
-<p>Note that, <code class="highlighter-rouge">break</code> and <code class="highlighter-rouge">continue</code> can be used in while-loops in the same fashion as they are used in for-loops, described above. The condition is evaluated before the body is executed, so it is possible to get zero iterations. It’s often a good idea to limit the number of repetitions to avoid infinite loops (as could happen above if x is infinite). This can be done in a number of ways, but the most common is to use <code class="highlighter-rouge">break</code>. For example,</p>
+<p>Note that, <code class="language-plaintext highlighter-rouge">break</code> and <code class="language-plaintext highlighter-rouge">continue</code> can be used in while-loops in the same fashion as they are used in for-loops, described above. The condition is evaluated before the body is executed, so it is possible to get zero iterations. It’s often a good idea to limit the number of repetitions to avoid infinite loops (as could happen above if x is infinite). This can be done in a number of ways, but the most common is to use <code class="language-plaintext highlighter-rouge">break</code>. For example,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="k">while</span> <span class="nb">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span>
@@ -810,15 +810,15 @@ xmin =
 <span class="k">end</span>
 </code></pre></div></div>
 
-<p>A break immediately jumps execution to the first statement after the loop. It’s good practice to include some diagnostic output or other indication that an abnormal loop exit has occurred once the code reach the <code class="highlighter-rouge">break</code> statement.</p>
+<p>A break immediately jumps execution to the first statement after the loop. It’s good practice to include some diagnostic output or other indication that an abnormal loop exit has occurred once the code reach the <code class="language-plaintext highlighter-rouge">break</code> statement.</p>
 
 <h3 id="exercise-1">Exercise</h3>
 
-<p>Write function <code class="highlighter-rouge">getFac(n)</code> using while-loop, that calculates the factorial of an input number <code class="highlighter-rouge">n</code>. For example,</p>
+<p>Write function <code class="language-plaintext highlighter-rouge">getFac(n)</code> using while-loop, that calculates the factorial of an input number <code class="language-plaintext highlighter-rouge">n</code>. For example,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;</span> <span class="n">getFac</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4! = 24
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>4! = 24
 </code></pre></div></div>
 
 <p><strong>Answer</strong></p>
@@ -841,13 +841,13 @@ xmin =
     <p>If you inadvertently create an infinite loop (that is, a loop that never ends on its own), stop execution of the loop by pressing Ctrl+C.</p>
   </li>
   <li>
-    <p>If the conditional expression evaluates to a matrix, MATLAB evaluates the statements only if <strong>all</strong> elements in the matrix are true (nonzero). To execute statements if any element is true, wrap the expression in the <code class="highlighter-rouge">any()</code> function.</p>
+    <p>If the conditional expression evaluates to a matrix, MATLAB evaluates the statements only if <strong>all</strong> elements in the matrix are true (nonzero). To execute statements if any element is true, wrap the expression in the <code class="language-plaintext highlighter-rouge">any()</code> function.</p>
   </li>
   <li>
-    <p>To exit the loop, use a <code class="highlighter-rouge">break</code> statement as discussed above. To skip the rest of the instructions in the loop and begin the next iteration, use a <code class="highlighter-rouge">continue</code> statement.</p>
+    <p>To exit the loop, use a <code class="language-plaintext highlighter-rouge">break</code> statement as discussed above. To skip the rest of the instructions in the loop and begin the next iteration, use a <code class="language-plaintext highlighter-rouge">continue</code> statement.</p>
   </li>
   <li>
-    <p>When nesting a number of while statements, each while statement requires an <code class="highlighter-rouge">end</code> keyword.</p>
+    <p>When nesting a number of while statements, each while statement requires an <code class="language-plaintext highlighter-rouge">end</code> keyword.</p>
   </li>
 </ul>
 
@@ -946,8 +946,8 @@ xmin =
 </div>
 
         <div class="col-lg-12 footer">
-            &copy;2022 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: October 5, 2022 <br />
+            &copy;2025 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: December 25, 2025 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

@@ -551,21 +551,21 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <p>Experienced programmers who are concerned with producing compact and fast programs, try to avoid for-loops wherever possible in their MATLAB codes. There is a reason for this: for-loops and while-loops have significant overhead in interpreted languages such as MATLAB and Python.</p>
 
-<p>There is, of course, a remedy for this inefficiency. Since MATLAB is a matrix language, many of the matrix-level operations and functions are carried out internally using compiled C, Fortran, or assembly codes and are therefore executed at near-optimum efficiency. This is true of the arithmetic operators <code class="highlighter-rouge">*</code>, <code class="highlighter-rouge">+</code>,<code class="highlighter-rouge">-</code>,<code class="highlighter-rouge">\</code>, <code class="highlighter-rouge">/</code> and of relational and logical operators.</p>
+<p>There is, of course, a remedy for this inefficiency. Since MATLAB is a matrix language, many of the matrix-level operations and functions are carried out internally using compiled C, Fortran, or assembly codes and are therefore executed at near-optimum efficiency. This is true of the arithmetic operators <code class="language-plaintext highlighter-rouge">*</code>, <code class="language-plaintext highlighter-rouge">+</code>,<code class="language-plaintext highlighter-rouge">-</code>,<code class="language-plaintext highlighter-rouge">\</code>, <code class="language-plaintext highlighter-rouge">/</code> and of relational and logical operators.</p>
 
 <p>However, for-loops may be executed relatively slowly, depending on what is inside the loop, and MATLAB may or may not be able to optimize the loop. One of the most important tips for producing efficient M-files is to avoid for-loops in favor of vectorized constructs, that is, to convert for-loops into an equivalent vector or matrix operations. Vectorization has important benefits beyond simply increasing the speed of execution. It can lead to shorter and more readable MATLAB code. Furthermore, it expresses algorithms in terms of high-level constructs that are more appropriate for high-performance computing. For example, consider the process of summation of a random vector in MATLAB,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">n</span> <span class="o">=</span> <span class="mf">5e7</span><span class="p">;</span> <span class="n">x</span> <span class="o">=</span> <span class="nb">randn</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
-<span class="nb">tic</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="k">for</span> <span class="nb">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">x</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">;</span> <span class="k">end</span><span class="p">,</span> <span class="nb">toc</span>
+<span class="nb">tic</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">n</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">x</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">^</span><span class="mi">2</span><span class="p">;</span> <span class="k">end</span><span class="p">,</span> <span class="nb">toc</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Elapsed time is 0.581945 seconds.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Elapsed time is 0.581945 seconds.
 </code></pre></div></div>
 
 <p>Now doing the same thing, using array notation would yield,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tic</span><span class="p">,</span> <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">x</span><span class="o">.^</span><span class="mi">2</span><span class="p">);</span> <span class="nb">toc</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Elapsed time is 0.200450 seconds.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Elapsed time is 0.200450 seconds.
 </code></pre></div></div>
 
 <p>Amazing, isn’t it? You get almost 3x speedup in your MATLAB code if you use vectorized computation instead of for-loops. Later on, we will see that MATLAB has inherited these excellent vectorization techniques and syntax for matrix calculations from its high-performance ancestor, <a href="https://en.wikipedia.org/wiki/Fortran" target="_blank">Fortran</a>.</p>
@@ -574,10 +574,10 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <p>How do you vectorize the following code?</p>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="k">for</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">0</span><span class="p">:</span><span class="o">.</span><span class="mi">01</span><span class="p">:</span><span class="mi">10</span>
-    <span class="nb">i</span> <span class="o">=</span> <span class="nb">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">y</span><span class="p">(</span><span class="nb">i</span><span class="p">)</span> <span class="o">=</span> <span class="nb">sin</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">y</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">=</span> <span class="nb">sin</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
 <span class="k">end</span>
 </code></pre></div></div>
 
@@ -595,11 +595,11 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <span class="n">H</span> <span class="o">=</span> <span class="mf">0.04</span><span class="p">;</span>
 <span class="n">V</span> <span class="o">=</span> <span class="mi">1</span><span class="p">/</span><span class="mi">12</span><span class="o">*</span><span class="nb">pi</span><span class="o">*</span><span class="p">(</span><span class="n">D</span><span class="o">^</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">H</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>V =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>V =
    4.1888e-04
 </code></pre></div></div>
 
-<p>Now, suppose we collect information on 10,000 cones. The vectors <code class="highlighter-rouge">D</code> and <code class="highlighter-rouge">H</code> each contain 10,000 elements, and you want to calculate 10,000 volumes. In most programming languages (except Fortran and R which have similar vectorization capabilities to MATLAB), you need to set up a loop similar to this MATLAB code (here instead of 10000, I am using 7),</p>
+<p>Now, suppose we collect information on 10,000 cones. The vectors <code class="language-plaintext highlighter-rouge">D</code> and <code class="language-plaintext highlighter-rouge">H</code> each contain 10,000 elements, and you want to calculate 10,000 volumes. In most programming languages (except Fortran and R which have similar vectorization capabilities to MATLAB), you need to set up a loop similar to this MATLAB code (here instead of 10000, I am using 7),</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.2</span> <span class="mf">1.0</span> <span class="mf">1.5</span> <span class="mf">3.0</span> <span class="o">-</span><span class="mf">1.0</span> <span class="mf">4.2</span> <span class="mf">3.14</span><span class="p">];</span>
 <span class="n">H</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0400</span> <span class="mf">1.0000</span> <span class="mf">2.2500</span> <span class="mf">9.0000</span> <span class="mf">1.0000</span> <span class="mf">17.6400</span> <span class="mf">9.8596</span><span class="p">];</span>
@@ -608,7 +608,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <span class="k">end</span>
 <span class="n">V</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>V =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>V =
     0.0004    0.2618    1.3254   21.2058    0.2618   81.4640   25.4500
 </code></pre></div></div>
 
@@ -617,7 +617,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">V</span> <span class="o">=</span> <span class="mi">1</span><span class="p">/</span><span class="mi">12</span><span class="o">*</span><span class="nb">pi</span><span class="o">*</span><span class="p">(</span><span class="n">D</span><span class="o">.^</span><span class="mi">2</span><span class="p">)</span><span class="o">.*</span><span class="n">H</span><span class="p">;</span>  <span class="c1">% Vectorized Calculation</span>
 <span class="n">V</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>V =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>V =
     0.0004    0.2618    1.3254   21.2058    0.2618   81.4640   25.4500
 </code></pre></div></div>
 
@@ -625,30 +625,30 @@ the script runs before the sidebar code runs and the class never gets inserted.
 
 <h2 id="logical-array-operations">Logical array operations</h2>
 
-<p>MATLAB comparison operators also accept vector inputs and return vector outputs. For example, suppose while collecting data from 10,000 cones, you record several negative values for the diameter. You can determine which values in a vector are valid with the <code class="highlighter-rouge">&gt;=</code> operator,</p>
+<p>MATLAB comparison operators also accept vector inputs and return vector outputs. For example, suppose while collecting data from 10,000 cones, you record several negative values for the diameter. You can determine which values in a vector are valid with the <code class="language-plaintext highlighter-rouge">&gt;=</code> operator,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.2</span> <span class="mf">1.0</span> <span class="mf">1.5</span> <span class="mf">3.0</span> <span class="o">-</span><span class="mf">1.0</span> <span class="mf">4.2</span> <span class="mf">3.14</span><span class="p">];</span>
 <span class="n">D</span> <span class="o">&gt;=</span> <span class="mi">0</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      0     1     1     1     0     1     1
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">class</span><span class="p">(</span><span class="nb">ans</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
 logical
 </code></pre></div></div>
 
-<p>You can directly exploit the logical indexing power of MATLAB to select the valid cone volumes, <code class="highlighter-rouge">Vgood</code>, for which the corresponding elements of D are nonnegative,</p>
+<p>You can directly exploit the logical indexing power of MATLAB to select the valid cone volumes, <code class="language-plaintext highlighter-rouge">Vgood</code>, for which the corresponding elements of D are nonnegative,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">Vgood</span> <span class="o">=</span> <span class="n">V</span><span class="p">(</span><span class="n">D</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">% removing all data corresponding to negative diameters</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Vgood =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Vgood =
     0.2618    1.3254   21.2058   81.4640   25.4500
 </code></pre></div></div>
 
-<p>MATLAB allows you to perform a logical AND or OR on the elements of an entire vector with the functions all and any, respectively. You can throw a warning if all values of <code class="highlighter-rouge">D</code> are below zero,</p>
+<p>MATLAB allows you to perform a logical AND or OR on the elements of an entire vector with the functions all and any, respectively. You can throw a warning if all values of <code class="language-plaintext highlighter-rouge">D</code> are below zero,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="n">D</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="c1">% gives no warning because not all values are negative</span>
    <span class="nb">warning</span><span class="p">(</span><span class="s1">'All values of diameter are negative.'</span><span class="p">)</span>
@@ -661,37 +661,37 @@ logical
    <span class="nb">warning</span><span class="p">(</span><span class="s1">'Some values of diameter are negative.'</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Warning: Some values of diameter are negative. 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Warning: Some values of diameter are negative. 
 </code></pre></div></div>
 
-<p>MATLAB can also compare two vectors of the same size, allowing you to impose further restrictions. This code finds all the values where <code class="highlighter-rouge">V</code> is nonnegative and <code class="highlighter-rouge">D</code> is greater than <code class="highlighter-rouge">H</code>,</p>
+<p>MATLAB can also compare two vectors of the same size, allowing you to impose further restrictions. This code finds all the values where <code class="language-plaintext highlighter-rouge">V</code> is nonnegative and <code class="language-plaintext highlighter-rouge">D</code> is greater than <code class="language-plaintext highlighter-rouge">H</code>,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">D</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.2</span> <span class="mf">1.0</span> <span class="mf">1.5</span> <span class="mf">3.0</span> <span class="o">-</span><span class="mf">1.0</span> <span class="mf">4.2</span> <span class="mf">3.14</span><span class="p">];</span>
 <span class="n">H</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0400</span> <span class="mf">1.0000</span> <span class="mf">2.2500</span> <span class="mf">1.5000</span> <span class="mf">1.0000</span> <span class="mf">0.6400</span> <span class="mf">9.8596</span><span class="p">];</span>
 <span class="n">V</span><span class="p">((</span><span class="n">V</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">D</span> <span class="o">&gt;</span> <span class="n">H</span><span class="p">))</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
    21.2058   81.4640
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">V</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>V =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>V =
     0.0004    0.2618    1.3254   21.2058    0.2618   81.4640   25.4500
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">(</span><span class="n">V</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">D</span> <span class="o">&gt;</span> <span class="n">H</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
      0     0     0     1     0     1     0
 </code></pre></div></div>
 
-<p>The resulting vector is the same size as the inputs. To aid comparison, MATLAB contains special values to denote <strong>overflow</strong>, <strong>underflow</strong>, and <strong>undefined operators</strong>, such as <strong>inf</strong> and <strong>nan</strong>. Logical operators <a href="https://www.mathworks.com/help/matlab/ref/isinf.html" target="_blank">isinf</a> and <a href="https://www.mathworks.com/help/matlab/ref/isnan.html" target="_blank">isnan</a> exist to help perform logical tests for these special values. For example, it is often useful to exclude <code class="highlighter-rouge">NaN</code> values from computations,</p>
+<p>The resulting vector is the same size as the inputs. To aid comparison, MATLAB contains special values to denote <strong>overflow</strong>, <strong>underflow</strong>, and <strong>undefined operators</strong>, such as <strong>inf</strong> and <strong>nan</strong>. Logical operators <a href="https://www.mathworks.com/help/matlab/ref/isinf.html" target="_blank">isinf</a> and <a href="https://www.mathworks.com/help/matlab/ref/isnan.html" target="_blank">isnan</a> exist to help perform logical tests for these special values. For example, it is often useful to exclude <code class="language-plaintext highlighter-rouge">NaN</code> values from computations,</p>
 
-<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">-</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="n">NaN</span> <span class="mi">2</span> <span class="n">NaN</span> <span class="mi">11</span> <span class="mi">4</span> <span class="n">Inf</span><span class="p">];</span>
+<div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">-</span><span class="mi">1</span> <span class="mi">0</span> <span class="mi">3</span> <span class="nb">NaN</span> <span class="mi">2</span> <span class="nb">NaN</span> <span class="mi">11</span> <span class="mi">4</span> <span class="nb">Inf</span><span class="p">];</span>
 <span class="n">xvalid</span> <span class="o">=</span> <span class="n">x</span><span class="p">(</span><span class="o">~</span><span class="nb">isnan</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xvalid =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xvalid =
      2    -1     0     3     2    11     4   Inf
 </code></pre></div></div>
 
@@ -701,7 +701,7 @@ logical
 
 <p>Matrix operations act according to the rules of linear algebra. These operations are most useful in vectorization if you are working with multidimensional data. Suppose you want to evaluate a function, $F$, of two variables, $x$, and $y$,</p>
 
-<script type="math/tex; mode=display">F(x,y) = x*\exp(-x2 - y2) ~.</script>
+\[F(x,y) = x*\exp(-x2 - y2) ~.\]
 
 <p>To evaluate this function at every combination of points in the $x$ and $y$, you need to define a grid of values,</p>
 
@@ -711,7 +711,7 @@ logical
 <span class="n">F</span> <span class="o">=</span> <span class="n">X</span><span class="o">.*</span><span class="nb">exp</span><span class="p">(</span><span class="o">-</span><span class="n">X</span><span class="o">.^</span><span class="mi">2</span><span class="o">-</span><span class="n">Y</span><span class="o">.^</span><span class="mi">2</span><span class="p">);</span>
 </code></pre></div></div>
 
-<p>Without <code class="highlighter-rouge">meshgrid()</code>, you might need to write two for-loops to iterate through vector combinations. The function <code class="highlighter-rouge">ndgrid()</code> also creates number grids from vectors, but unlike <code class="highlighter-rouge">meshgrid()</code>, it can construct grids beyond three dimensions. <code class="highlighter-rouge">meshgrid()</code> can only construct 2-D and 3-D grids.</p>
+<p>Without <code class="language-plaintext highlighter-rouge">meshgrid()</code>, you might need to write two for-loops to iterate through vector combinations. The function <code class="language-plaintext highlighter-rouge">ndgrid()</code> also creates number grids from vectors, but unlike <code class="language-plaintext highlighter-rouge">meshgrid()</code>, it can construct grids beyond three dimensions. <code class="language-plaintext highlighter-rouge">meshgrid()</code> can only construct 2-D and 3-D grids.</p>
 
 <p>The following table contains a list of MATLAB functions that are commonly used in vectorized codes,</p>
 
@@ -778,56 +778,56 @@ logical
 
 <h2 id="measuring-the-performance-of-your-matlab-functions-and-scripts">Measuring the performance of your MATLAB functions and scripts</h2>
 
-<p>MATLAB has several built-in methods of timing how long it takes to run a MATLAB function or script. The <code class="highlighter-rouge">timeit()</code> function as well as <code class="highlighter-rouge">tic</code> and <code class="highlighter-rouge">toc</code>, are in particular very useful. Use the <code class="highlighter-rouge">timeit()</code> function for rigorous measurement of your function’s execution time. Use <code class="highlighter-rouge">tic</code> and <code class="highlighter-rouge">toc</code> to estimate time for smaller portions of code that are not complete functions.</p>
+<p>MATLAB has several built-in methods of timing how long it takes to run a MATLAB function or script. The <code class="language-plaintext highlighter-rouge">timeit()</code> function as well as <code class="language-plaintext highlighter-rouge">tic</code> and <code class="language-plaintext highlighter-rouge">toc</code>, are in particular very useful. Use the <code class="language-plaintext highlighter-rouge">timeit()</code> function for rigorous measurement of your function’s execution time. Use <code class="language-plaintext highlighter-rouge">tic</code> and <code class="language-plaintext highlighter-rouge">toc</code> to estimate time for smaller portions of code that are not complete functions.</p>
 
 <p>For additional details about the performance of your code, such as function call information and execution time of individual lines of code, MATLAB has more sophisticated tools such as <em>MATLAB® Profiler</em>.</p>
 
 <h3 id="timing-matlab-functions">Timing MATLAB functions</h3>
 
-<p>To measure the time required to run a function, whether built-in or your own, you can use the <code class="highlighter-rouge">timeit()</code> function. The <code class="highlighter-rouge">timeit()</code> function calls the user-specified function multiple times and returns the median of the time measurements. This function takes <strong>a handle to the function whose performance is to be measured</strong> and returns the typical execution time, in seconds.</p>
+<p>To measure the time required to run a function, whether built-in or your own, you can use the <code class="language-plaintext highlighter-rouge">timeit()</code> function. The <code class="language-plaintext highlighter-rouge">timeit()</code> function calls the user-specified function multiple times and returns the median of the time measurements. This function takes <strong>a handle to the function whose performance is to be measured</strong> and returns the typical execution time, in seconds.</p>
 
-<p>For example, suppose that you want to measure the performance of MATLAB’s built-in function, <code class="highlighter-rouge">isprime()</code> for a given input value to this function. You can compute the time to execute the function using <code class="highlighter-rouge">timeit()</code> like the following,</p>
+<p>For example, suppose that you want to measure the performance of MATLAB’s built-in function, <code class="language-plaintext highlighter-rouge">isprime()</code> for a given input value to this function. You can compute the time to execute the function using <code class="language-plaintext highlighter-rouge">timeit()</code> like the following,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">timeit</span><span class="p">(</span> <span class="o">@</span><span class="p">()</span><span class="nb">isprime</span><span class="p">(</span><span class="mi">10</span><span class="o">^</span><span class="mi">14</span><span class="p">)</span> <span class="p">)</span> <span class="c1">% pass the function as a handle to timeit()</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
     0.0787
 </code></pre></div></div>
 
-<p>Note that, this function <code class="highlighter-rouge">isprime()</code> will have different performance given different input numbers,</p>
+<p>Note that, this function <code class="language-plaintext highlighter-rouge">isprime()</code> will have different performance given different input numbers,</p>
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">timeit</span><span class="p">(</span> <span class="o">@</span><span class="p">()</span><span class="nb">isprime</span><span class="p">(</span><span class="mi">10</span><span class="o">^</span><span class="mi">4</span><span class="p">)</span> <span class="p">)</span> <span class="c1">% pass the function as a handle to timeit()</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ans =
    2.0402e-05
 </code></pre></div></div>
 
 <h3 id="time-portions-of-code">Time Portions of Code</h3>
 
-<p>To estimate how long a portion of your program takes to run or to compare the speed of different implementations of portions of your program, you can use MATLAB stopwatch timer functions: <code class="highlighter-rouge">tic</code> and <code class="highlighter-rouge">toc</code>. Invoking <code class="highlighter-rouge">tic</code> starts the timer, and the next <code class="highlighter-rouge">toc</code> reads the elapsed time.</p>
+<p>To estimate how long a portion of your program takes to run or to compare the speed of different implementations of portions of your program, you can use MATLAB stopwatch timer functions: <code class="language-plaintext highlighter-rouge">tic</code> and <code class="language-plaintext highlighter-rouge">toc</code>. Invoking <code class="language-plaintext highlighter-rouge">tic</code> starts the timer, and the next <code class="language-plaintext highlighter-rouge">toc</code> reads the elapsed time.</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tic</span>
    <span class="c1">% The program section to time. </span>
 <span class="nb">toc</span>
 </code></pre></div></div>
 
-<p>Sometimes programs run too fast for <code class="highlighter-rouge">tic</code> and <code class="highlighter-rouge">toc</code> to provide useful data. If your code is faster than <strong>1/10 second</strong>, consider timing it while running in a loop, and then average the result to find the time for a single run of the loop.</p>
+<p>Sometimes programs run too fast for <code class="language-plaintext highlighter-rouge">tic</code> and <code class="language-plaintext highlighter-rouge">toc</code> to provide useful data. If your code is faster than <strong>1/10 second</strong>, consider timing it while running in a loop, and then average the result to find the time for a single run of the loop.</p>
 
-<h4 id="the-cputime-function-vs-tictoc-and-timeit">The <code class="highlighter-rouge">cputime()</code> function vs. <code class="highlighter-rouge">tic/toc</code> and <code class="highlighter-rouge">timeit()</code></h4>
+<h4 id="the-cputime-function-vs-tictoc-and-timeit">The <code class="language-plaintext highlighter-rouge">cputime()</code> function vs. <code class="language-plaintext highlighter-rouge">tic/toc</code> and <code class="language-plaintext highlighter-rouge">timeit()</code></h4>
 
-<p>There is another MATLAB function that can do the timing of your scripts or your functions: The <code class="highlighter-rouge">cputime()</code> function measures the total CPU time and <strong>sums across all threads (cores) in the CPU</strong>. This measurement is different from the <strong>wall-clock time</strong> that <code class="highlighter-rouge">timeit()</code> or <code class="highlighter-rouge">tic/toc</code> return, and could be misleading. For example, the CPU time for the pause function is typically small, but the wall-clock time accounts for the actual time that MATLAB execution is paused. Therefore, the wall-clock time might be longer.</p>
+<p>There is another MATLAB function that can do the timing of your scripts or your functions: The <code class="language-plaintext highlighter-rouge">cputime()</code> function measures the total CPU time and <strong>sums across all threads (cores) in the CPU</strong>. This measurement is different from the <strong>wall-clock time</strong> that <code class="language-plaintext highlighter-rouge">timeit()</code> or <code class="language-plaintext highlighter-rouge">tic/toc</code> return, and could be misleading. For example, the CPU time for the pause function is typically small, but the wall-clock time accounts for the actual time that MATLAB execution is paused. Therefore, the wall-clock time might be longer.</p>
 
 <p>If your function uses four processing cores equally, the CPU time could be approximately four times higher than the wall-clock time.</p>
 
-<p>Frequently, your best choice to measure the performance of your code is <code class="highlighter-rouge">timeit()</code> or <code class="highlighter-rouge">tic</code> and <code class="highlighter-rouge">toc</code>. These functions return wall-clock time. Note that, unlike <code class="highlighter-rouge">tic</code> and <code class="highlighter-rouge">toc</code>, the <code class="highlighter-rouge">timeit()</code> function calls your code multiple times, and, therefore, considers the cost of first-time calls to your functions, which are typically more time-consuming than subsequent calls.</p>
+<p>Frequently, your best choice to measure the performance of your code is <code class="language-plaintext highlighter-rouge">timeit()</code> or <code class="language-plaintext highlighter-rouge">tic</code> and <code class="language-plaintext highlighter-rouge">toc</code>. These functions return wall-clock time. Note that, unlike <code class="language-plaintext highlighter-rouge">tic</code> and <code class="language-plaintext highlighter-rouge">toc</code>, the <code class="language-plaintext highlighter-rouge">timeit()</code> function calls your code multiple times, and, therefore, considers the cost of first-time calls to your functions, which are typically more time-consuming than subsequent calls.</p>
 
 <h3 id="some-tips-for-measuring-performance">Some tips for Measuring Performance</h3>
 
 <ul>
   <li>Always time a <strong>significant enough</strong> portion of code. Normally, the code that you are timing should <strong>take more than 1/10 second to run</strong>, otherwise, the timing may not be very accurate.</li>
   <li>Put the code you are trying to time into a function instead of timing it at the command line or inside a script.</li>
-  <li>Unless you are trying to measure <strong>first-time cost of running your code</strong>, run your code multiple times. Use the <code class="highlighter-rouge">timeit()</code> function for multiple calls timing of your function.</li>
-  <li>Avoid <code class="highlighter-rouge">clear all</code> when measuring the performance of your MATLAB scripts. This will add additional time to wipe MATLAB workspace from all current existing variable definitions, and therefore contaminate the timing measurements of the actual code in your MATLAB scripts.</li>
-  <li>When performing timing measurements, assign your output to a variable instead of letting it default to <code class="highlighter-rouge">ans()</code>.</li>
+  <li>Unless you are trying to measure <strong>first-time cost of running your code</strong>, run your code multiple times. Use the <code class="language-plaintext highlighter-rouge">timeit()</code> function for multiple calls timing of your function.</li>
+  <li>Avoid <code class="language-plaintext highlighter-rouge">clear all</code> when measuring the performance of your MATLAB scripts. This will add additional time to wipe MATLAB workspace from all current existing variable definitions, and therefore contaminate the timing measurements of the actual code in your MATLAB scripts.</li>
+  <li>When performing timing measurements, assign your output to a variable instead of letting it default to <code class="language-plaintext highlighter-rouge">ans()</code>.</li>
 </ul>
 
     
@@ -925,8 +925,8 @@ logical
 </div>
 
         <div class="col-lg-12 footer">
-            &copy;2022 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: October 5, 2022 <br />
+            &copy;2025 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: December 25, 2025 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

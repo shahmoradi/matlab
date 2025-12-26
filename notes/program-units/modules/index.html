@@ -556,54 +556,54 @@ time end up with multiple identical versions of the same function. When you want
 
 <h2 id="the-import-statement">The import statement</h2>
 
-<p>We have already used the <code class="highlighter-rouge">math</code> module on multiple occasions, using the <code class="highlighter-rouge">import</code> statement. Here is an example:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
-<span class="n">value</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<p>We have already used the <code class="language-plaintext highlighter-rouge">math</code> module on multiple occasions, using the <code class="language-plaintext highlighter-rouge">import</code> statement. Here is an example:</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
+<span class="n">value</span> <span class="o">=</span> <span class="n">math</span><span class="p">.</span><span class="nf">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nf">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>120
-</code></pre></div></div>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">math</span><span class="o">.</span><span class="n">pi</span>
-</code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3.141592653589793
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>120
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">math</span><span class="o">.</span><span class="n">e</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">math</span><span class="p">.</span><span class="n">pi</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.718281828459045
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>3.141592653589793
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">math</span><span class="p">.</span><span class="n">e</span>
+</code></pre></div></div>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2.718281828459045
 </code></pre></div></div>
 
 <p>In its simplest form, the import has the following syntax:</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">module1</span><span class="p">[,</span> <span class="n">module2</span><span class="p">[,</span><span class="o">...</span> <span class="n">moduleN</span><span class="p">]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">module1</span><span class="p">[,</span> <span class="n">module2</span><span class="p">[,...</span> <span class="n">moduleN</span><span class="p">]</span>
 </code></pre></div></div>
 
 <p>like,</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span><span class="p">,</span> <span class="n">cmath</span><span class="p">,</span> <span class="n">numpy</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span><span class="p">,</span> <span class="n">cmath</span><span class="p">,</span> <span class="n">numpy</span>
 </code></pre></div></div>
 
 <p>The standard approach for calling names and definitions (variables, functions, …) inside the module is using the module-name prefix, like the above examples. To call the module names without the prefix, use the following module import statement,</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">math</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="nf">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>120
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>120
 </code></pre></div></div>
 
 <p>To import only specific names, use the format like the following,</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">factorial</span><span class="p">,</span><span class="n">erf</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span><span class="n">e</span><span class="p">,</span><span class="n">factorial</span><span class="p">,</span><span class="n">erf</span>
 </code></pre></div></div>
 
-<p>This will import the four math modules names <code class="highlighter-rouge">pi, e, factorial, erf</code>. You could also change the name of the input module, or specific names from it, upon importing the module into your code, using <code class="highlighter-rouge">import as</code> statement,</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
-<span class="n">np</span><span class="o">.</span><span class="n">double</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<p>This will import the four math modules names <code class="language-plaintext highlighter-rouge">pi, e, factorial, erf</code>. You could also change the name of the input module, or specific names from it, upon importing the module into your code, using <code class="language-plaintext highlighter-rouge">import as</code> statement,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">np</span><span class="p">.</span><span class="nf">double</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5.0
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5.0
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">numpy</span> <span class="kn">import</span> <span class="n">double</span> <span class="k">as</span> <span class="n">dble</span>
-<span class="n">dble</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">numpy</span> <span class="kn">import</span> <span class="n">double</span> <span class="k">as</span> <span class="n">dble</span>
+<span class="nf">dble</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>13.0
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>13.0
 </code></pre></div></div>
 
 <div class="alert alert-info" role="alert"><i class="fa fa-info-circle"></i> <b>Note:</b> A module can contain executable statements as well as function definitions. These statements are intended to initialize the module. They are executed <b>only the first time the module name is encountered in an import statement</b>.</div>
@@ -612,11 +612,11 @@ time end up with multiple identical versions of the same function. When you want
 
 <h2 id="listing-all-names-in-an-imported-module">Listing all names in an imported module</h2>
 
-<p>To get a list of all available names in an imported module, use <code class="highlighter-rouge">dir()</code> function.</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">math</span>
-<span class="nb">dir</span><span class="p">(</span><span class="n">math</span><span class="p">)</span>
+<p>To get a list of all available names in an imported module, use <code class="language-plaintext highlighter-rouge">dir()</code> function.</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">math</span>
+<span class="nf">dir</span><span class="p">(</span><span class="n">math</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['__doc__',
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['__doc__',
  '__loader__',
  '__name__',
  '__package__',
@@ -676,7 +676,7 @@ time end up with multiple identical versions of the same function. When you want
 
 <h2 id="creating-modules">Creating modules</h2>
 
-<p>To make a Python module, simply collect all the functions that constitute the module in one single file with a given filename, for example, <code class="highlighter-rouge">mymodule.py</code>. This file will be automatically a module, with name <code class="highlighter-rouge">mymodule</code>, from which you can import functions and definitions in the standard way described above.</p>
+<p>To make a Python module, simply collect all the functions that constitute the module in one single file with a given filename, for example, <code class="language-plaintext highlighter-rouge">mymodule.py</code>. This file will be automatically a module, with name <code class="language-plaintext highlighter-rouge">mymodule</code>, from which you can import functions and definitions in the standard way described above.</p>
 
 <div class="bs-callout bs-callout-info">
 <b>Why and when do you need to create a module?</b><br /><br />
@@ -696,9 +696,9 @@ time end up with multiple identical versions of the same function. When you want
 
 <p>When you execute this code as a standalone Python script, it will ask you for an integer, to give you all integers that are smaller than the input number. Now suppose you wanted to import this script as a Python module into your code. If you do so, the Python interpreter would run all statements in this script and asks you to input an integer, before importing the rest of the functions in this script.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">find_primes</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">find_primes</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter an integer number:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter an integer number:
 n = 13
 
 Here is a list of all prime numbers smaller than 13:
@@ -710,29 +710,29 @@ Here is a list of all prime numbers smaller than 13:
 2
 </code></pre></div></div>
 
-<p>This may not be necessarily what we want to do. For example, we may only want to use the functions <code class="highlighter-rouge">get_primes</code> and <code class="highlighter-rouge">is_prime</code> in this script, without asking the user to input an integer and finding all smaller primes. The solution is to put the part of the code in the script that we don’t want to be executed as a module, that is,</p>
+<p>This may not be necessarily what we want to do. For example, we may only want to use the functions <code class="language-plaintext highlighter-rouge">get_primes</code> and <code class="language-plaintext highlighter-rouge">is_prime</code> in this script, without asking the user to input an integer and finding all smaller primes. The solution is to put the part of the code in the script that we don’t want to be executed as a module, that is,</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">'Enter an integer number: '</span><span class="p">)</span>
-<span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">'n = '</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s">'</span><span class="se">\n</span><span class="s"> Here is a list of all prime numbers smaller than {}:'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-<span class="n">get_primes</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">Enter an integer number: </span><span class="sh">'</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">(</span><span class="sh">'</span><span class="s">n = </span><span class="sh">'</span><span class="p">))</span>
+<span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="se">\n</span><span class="s"> Here is a list of all prime numbers smaller than {}:</span><span class="sh">'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="nf">get_primes</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>inside the following if-block,</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'Enter an integer number: '</span><span class="p">)</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s">'n = '</span><span class="p">))</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'Here is a list of all prime numbers smaller than {}:'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-    <span class="n">get_primes</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">Enter an integer number: </span><span class="sh">'</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="nf">input</span><span class="p">(</span><span class="sh">'</span><span class="s">n = </span><span class="sh">'</span><span class="p">))</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">Here is a list of all prime numbers smaller than {}:</span><span class="sh">'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+    <span class="nf">get_primes</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>When the code is run as a standalone script, the <code class="highlighter-rouge">__name__</code> property of the code is set to <code class="highlighter-rouge">__main__</code>. However, when the script is imported as a module inside another code, the <code class="highlighter-rouge">__name__</code> property is automatically set to the name of the module <code class="highlighter-rouge">find_primes</code>. Thus as a module, the above if-block will not be executed, but the rest of the code (the two functions) will be properly imported. The corrected script is named <code class="highlighter-rouge">mod_find_primes.py</code> and can be downloaded from <a href="mod_find_primes.py" target="_blank">here</a>.</p>
+<p>When the code is run as a standalone script, the <code class="language-plaintext highlighter-rouge">__name__</code> property of the code is set to <code class="language-plaintext highlighter-rouge">__main__</code>. However, when the script is imported as a module inside another code, the <code class="language-plaintext highlighter-rouge">__name__</code> property is automatically set to the name of the module <code class="language-plaintext highlighter-rouge">find_primes</code>. Thus as a module, the above if-block will not be executed, but the rest of the code (the two functions) will be properly imported. The corrected script is named <code class="language-plaintext highlighter-rouge">mod_find_primes.py</code> and can be downloaded from <a href="mod_find_primes.py" target="_blank">here</a>.</p>
 
 <pre><code class="language-Python">import mod_find_primes
 mod_find_primes.__name__
 </code></pre>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'mod_find_primes'
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'mod_find_primes'
 </code></pre></div></div>
 
 <p>You could also import specific names or functions from your module, for example,</p>
@@ -748,25 +748,25 @@ mod_find_primes.__name__
 
 <h3 id="command-line-arguments">Command line arguments</h3>
 
-<p>Test blocks are especially useful when your module can be also run as a standalone Python script that takes in <strong>command-line arguments</strong>. <a href="cmd_find_primes.py" target="_blank">Here</a> is a modified version of the <code class="highlighter-rouge">mod_find_primes</code> module now named <code class="highlighter-rouge">cmd_find_primes</code> that instead of using <code class="highlighter-rouge">input()</code> function, reads the integer number from the Bash command line. To do so, you need to modify the last part of the original module to the following, using Python’s standard <code class="highlighter-rouge">sys</code> module,</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">"__main__"</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">sys</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span> <span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span> <span class="c"># check the number of arguments to be exactly 2.</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">'''
+<p>Test blocks are especially useful when your module can be also run as a standalone Python script that takes in <strong>command-line arguments</strong>. <a href="cmd_find_primes.py" target="_blank">Here</a> is a modified version of the <code class="language-plaintext highlighter-rouge">mod_find_primes</code> module now named <code class="language-plaintext highlighter-rouge">cmd_find_primes</code> that instead of using <code class="language-plaintext highlighter-rouge">input()</code> function, reads the integer number from the Bash command line. To do so, you need to modify the last part of the original module to the following, using Python’s standard <code class="language-plaintext highlighter-rouge">sys</code> module,</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="sh">"</span><span class="s">__main__</span><span class="sh">"</span><span class="p">:</span>
+    <span class="kn">import</span> <span class="n">sys</span>
+    <span class="k">if</span> <span class="nf">len</span><span class="p">(</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span> <span class="p">)</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span> <span class="c1"># check the number of arguments to be exactly 2.
+</span>        <span class="nf">print</span><span class="p">(</span><span class="sh">'''</span><span class="s">
     Error: Exactly two arguments must be given on the command line.
-    Usage:'''</span><span class="p">)</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">"     "</span><span class="p">,</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s">"&lt;a positive integer number&gt;"</span><span class="p">,</span> <span class="s">'</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="nb">exit</span><span class="p">(</span><span class="s">'     Program stopped.</span><span class="se">\n</span><span class="s">'</span><span class="p">)</span>
+    Usage:</span><span class="sh">'''</span><span class="p">)</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">"</span><span class="s">     </span><span class="sh">"</span><span class="p">,</span> <span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="sh">"</span><span class="s">&lt;a positive integer number&gt;</span><span class="sh">"</span><span class="p">,</span> <span class="sh">'</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
+        <span class="n">sys</span><span class="p">.</span><span class="nf">exit</span><span class="p">(</span><span class="sh">'</span><span class="s">     Program stopped.</span><span class="se">\n</span><span class="sh">'</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
-        <span class="k">print</span><span class="p">(</span><span class="s">'Here is a list of all prime numbers smaller than {}:'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-        <span class="n">get_primes</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nf">int</span><span class="p">(</span><span class="n">sys</span><span class="p">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">Here is a list of all prime numbers smaller than {}:</span><span class="sh">'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+        <span class="nf">get_primes</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div></div>
 
 <p>Now if you run this code, from the Bash command line, or inside IPython, like the following,</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">run</span> <span class="n">cmd_find_primes</span><span class="o">.</span><span class="n">py</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">run</span> <span class="n">cmd_find_primes</span><span class="p">.</span><span class="n">py</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: Exactly two arguments must be given on the command line.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: Exactly two arguments must be given on the command line.
 Usage:
   cmd_find_primes.py &lt;a positive integer number&gt;
 </code></pre></div></div>
@@ -776,9 +776,9 @@ Usage:
 <p>SystemExit:      Program stopped.</p>
 
 <p>The code will expect you to enter an integer right after the name of the script,</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">run</span> <span class="n">cmd_find_primes</span><span class="o">.</span><span class="n">py</span> <span class="mi">13</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">run</span> <span class="n">cmd_find_primes</span><span class="p">.</span><span class="n">py</span> <span class="mi">13</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Here is a list of all prime numbers smaller than 13:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Here is a list of all prime numbers smaller than 13:
 13
 11
 7
@@ -787,7 +787,7 @@ Usage:
 2
 </code></pre></div></div>
 
-<p>In general, I recommend you to use the <code class="highlighter-rouge">sys</code> module for input arguments instead of Python’s <code class="highlighter-rouge">input()</code> function.</p>
+<p>In general, I recommend you to use the <code class="language-plaintext highlighter-rouge">sys</code> module for input arguments instead of Python’s <code class="language-plaintext highlighter-rouge">input()</code> function.</p>
 
 <div class="alert alert-success" role="alert"><i class="fa fa-check-square-o"></i> <b>Tip:</b> 
     <b>Modules and main functions</b><br /><br />
@@ -804,9 +804,9 @@ Usage:
 
 <p>To achieve the second task, we have to write functions that verify the implementation in a module. The general advice is to write test functions that,</p>
 <ol>
-  <li>have names starting with <code class="highlighter-rouge">test_</code>,</li>
-  <li>express the success or failure of a test through a boolean variable, say <code class="highlighter-rouge">success</code>,</li>
-  <li>run <code class="highlighter-rouge">assert success, msg</code> to raise an <code class="highlighter-rouge">AssertionError</code> with an optional message <code class="highlighter-rouge">msg</code> in case the test fails.</li>
+  <li>have names starting with <code class="language-plaintext highlighter-rouge">test_</code>,</li>
+  <li>express the success or failure of a test through a boolean variable, say <code class="language-plaintext highlighter-rouge">success</code>,</li>
+  <li>run <code class="language-plaintext highlighter-rouge">assert success, msg</code> to raise an <code class="language-plaintext highlighter-rouge">AssertionError</code> with an optional message <code class="language-plaintext highlighter-rouge">msg</code> in case the test fails.</li>
 </ol>
 
 <p>We talk about this later on in the notes.</p>
@@ -818,10 +818,10 @@ Usage:
 <h3 id="scope-of-definitions-in-your-module">Scope of definitions in your module</h3>
 
 <p>Once you have created your module, you can import it just like any other module into our program, for example,</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">cmd_find_primes</span>
-<span class="nb">dir</span><span class="p">(</span><span class="n">cmd_find_primes</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">cmd_find_primes</span>
+<span class="nf">dir</span><span class="p">(</span><span class="n">cmd_find_primes</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['__builtins__',
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['__builtins__',
  '__cached__',
  '__doc__',
  '__file__',
@@ -834,19 +834,19 @@ Usage:
 </code></pre></div></div>
 
 <p>However, more often than not, you may want to define variables that are to be used only within the module itself and not be accessed by the user. The convention is to start the names of these variables by an underscore. For example,</p>
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_topic</span> <span class="o">=</span> <span class="s">"Python programming"</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">_topic</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Python programming</span><span class="sh">"</span>
 </code></pre></div></div>
 
-<p>This, however, does not prevent the import of the variable <code class="highlighter-rouge">_topic</code> into your code from your the <a href="mod_cmd_find_primes_del.py" target="_blank">module</a> containing it. One solution is to delete the variables to which we do not want the user to have access, at the end of the module,</p>
+<p>This, however, does not prevent the import of the variable <code class="language-plaintext highlighter-rouge">_topic</code> into your code from your the <a href="mod_cmd_find_primes_del.py" target="_blank">module</a> containing it. One solution is to delete the variables to which we do not want the user to have access, at the end of the module,</p>
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">del</span> <span class="n">_topic</span>
 </code></pre></div></div>
 
 <p>such that the <a href="" target="_blank">module</a> containing the above statement will give,</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">mod_cmd_find_primes_del</span>
-<span class="nb">dir</span><span class="p">(</span> <span class="n">mod_cmd_find_primes_del</span> <span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">mod_cmd_find_primes_del</span>
+<span class="nf">dir</span><span class="p">(</span> <span class="n">mod_cmd_find_primes_del</span> <span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['__builtins__',
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['__builtins__',
  '__cached__',
  '__doc__',
  '__file__',
@@ -860,10 +860,10 @@ Usage:
 
 <p>However, note that if you import all definitions in <a href="mod_cmd_find_primes_all.py" target="_blank">your module</a> as standalone definitions like the following,</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">mod_cmd_find_primes_all</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="nb">dir</span><span class="p">()</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">mod_cmd_find_primes_all</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="nf">dir</span><span class="p">()</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['In',
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['In',
  'Out',
  '_',
  '_3',
@@ -895,22 +895,22 @@ Usage:
  'quit']
 </code></pre></div></div>
 
-<p>you see that the variable <code class="highlighter-rouge">_topic</code> is not imported. In general, to avoid confusion, it is best to define an <code class="highlighter-rouge">__all__</code> variable in your module, which contains a list of all variable and function names that are to be imported as standalone definitions using <code class="highlighter-rouge">from mymodule import *</code>. For example, add the following to the above module,</p>
+<p>you see that the variable <code class="language-plaintext highlighter-rouge">_topic</code> is not imported. In general, to avoid confusion, it is best to define an <code class="language-plaintext highlighter-rouge">__all__</code> variable in your module, which contains a list of all variable and function names that are to be imported as standalone definitions using <code class="language-plaintext highlighter-rouge">from mymodule import *</code>. For example, add the following to the above module,</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">'get_primes'</span><span class="p">]</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="sh">'</span><span class="s">get_primes</span><span class="sh">'</span><span class="p">]</span>
 </code></pre></div></div>
 
-<p>Upon importing this module, now only the function <code class="highlighter-rouge">get_prime</code> will be imported and not <code class="highlighter-rouge">_topic</code> or <code class="highlighter-rouge">is_prime</code>.</p>
+<p>Upon importing this module, now only the function <code class="language-plaintext highlighter-rouge">get_prime</code> will be imported and not <code class="language-plaintext highlighter-rouge">_topic</code> or <code class="language-plaintext highlighter-rouge">is_prime</code>.</p>
 
 <h3 id="the-path-to-your-modules">The path to your modules</h3>
 
 <p>When you create a module, if it is in the current directory of your code, then it will be automatically found by the Python interpreter. This is, however, not generally the case if your module lives in another directory than the current working directory of Python interpreter. To add the module’s directory to the path of your Python interpreter, use the following,</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">myModuleFolder</span> <span class="o">=</span> <span class="err">’</span><span class="n">the</span> <span class="n">path</span> <span class="n">to</span> <span class="n">your</span> <span class="n">module</span><span class="err">’</span>
-<span class="kn">import</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+<span class="kn">import</span> <span class="n">sys</span>
+<span class="n">sys</span><span class="p">.</span><span class="n">path</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['',
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['',
  'C:\\Program Files\\Anaconda3\\Scripts',
  'C:\\Program Files\\Anaconda3\\lib\\site-packages\\lmfit-0.9.5_44_gb2041c3-py3.5.egg',
  'C:\\Program Files\\Anaconda3\\python35.zip',
@@ -927,10 +927,10 @@ Usage:
  'C:\\Users\\Amir\\.ipython']
 </code></pre></div></div>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">myModuleFolder</span><span class="p">)</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">sys</span><span class="p">.</span><span class="n">path</span><span class="p">.</span><span class="nf">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">myModuleFolder</span><span class="p">)</span>
+<span class="n">sys</span><span class="p">.</span><span class="n">path</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[’the path to your module’,
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[’the path to your module’,
  '',
  'C:\\Program Files\\Anaconda3\\Scripts',
  'C:\\Program Files\\Anaconda3\\lib\\site-packages\\lmfit-0.9.5_44_gb2041c3-py3.5.egg',
@@ -948,48 +948,48 @@ Usage:
  'C:\\Users\\Amir\\.ipython']
 </code></pre></div></div>
 
-<p>In the above, we added the path to our module to the list of all paths the Python interpreter will search, to find the module requested to be imported (Note that <code class="highlighter-rouge">'the path to your module'</code> is not a real system path, this was just an example).</p>
+<p>In the above, we added the path to our module to the list of all paths the Python interpreter will search, to find the module requested to be imported (Note that <code class="language-plaintext highlighter-rouge">'the path to your module'</code> is not a real system path, this was just an example).</p>
 
 <h2 id="some-useful-python-modules">Some useful Python modules</h2>
 
 <p>One of the greatest strengths of Python as a scientific programming language is that, for almost everything that you could imagine and want to write code, someone has already written it, and so there is <em>no reason to reinvent the wheel if someone has already done it for you</em>. Throughout your career, you will get to know many of the most important modules for your domain of science. Here I will introduce only a very few general-purpose modules that have some interesting and rather useful functions in them.</p>
 
-<h3 id="the-collections-module">The <code class="highlighter-rouge">collections</code> module</h3>
+<h3 id="the-collections-module">The <code class="language-plaintext highlighter-rouge">collections</code> module</h3>
 
 <p>This module contains some non-standard Python data types that can be very handy at times.</p>
 
 <h4 id="the-counter-data-type">The <strong>Counter</strong> data type</h4>
 
-<p>The <code class="highlighter-rouge">Counter</code> function from module <code class="highlighter-rouge">collections</code> takes in a list and creates a dictionary, whose keys are unique elements in the input list and the values of the keys, are the number of times each key appears in the list. For example,</p>
+<p>The <code class="language-plaintext highlighter-rouge">Counter</code> function from module <code class="language-plaintext highlighter-rouge">collections</code> takes in a list and creates a dictionary, whose keys are unique elements in the input list and the values of the keys, are the number of times each key appears in the list. For example,</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
 <span class="n">mylist</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">45</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">34</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="nc">Counter</span><span class="p">(</span><span class="n">mylist</span><span class="p">)</span>
 <span class="n">c</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Counter({0: 2, 1: 3, 2: 1, 3: 3, 4: 3, 6: 1, 7: 1, 8: 1, 9: 1, 34: 5, 45: 1})
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Counter({0: 2, 1: 3, 2: 1, 3: 3, 4: 3, 6: 1, 7: 1, 8: 1, 9: 1, 34: 5, 45: 1})
 </code></pre></div></div>
 
 <p>There are basically three methods for generating a Counter dictionary,</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c1</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">([</span><span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'c'</span><span class="p">,</span> <span class="s">'a'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">,</span> <span class="s">'b'</span><span class="p">])</span> <span class="c"># input a list directly into Counter</span>
-<span class="n">c2</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">({</span><span class="s">'a'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="s">'b'</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="s">'c'</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span> <span class="c"># Give it the Counter dictionary</span>
-<span class="n">c3</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c"># or simply give it the counts</span>
-<span class="n">c1</span> <span class="o">==</span> <span class="n">c2</span> <span class="o">==</span> <span class="n">c3</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c1</span> <span class="o">=</span> <span class="nc">Counter</span><span class="p">([</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">c</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">,</span> <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">])</span> <span class="c1"># input a list directly into Counter
+</span><span class="n">c2</span> <span class="o">=</span> <span class="nc">Counter</span><span class="p">({</span><span class="sh">'</span><span class="s">a</span><span class="sh">'</span><span class="p">:</span><span class="mi">2</span><span class="p">,</span> <span class="sh">'</span><span class="s">b</span><span class="sh">'</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="sh">'</span><span class="s">c</span><span class="sh">'</span><span class="p">:</span><span class="mi">1</span><span class="p">})</span> <span class="c1"># Give it the Counter dictionary
+</span><span class="n">c3</span> <span class="o">=</span> <span class="nc">Counter</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># or simply give it the counts
+</span><span class="n">c1</span> <span class="o">==</span> <span class="n">c2</span> <span class="o">==</span> <span class="n">c3</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>True
 </code></pre></div></div>
 
 <h5 id="what-is-counter-useful-for">What is Counter useful for?</h5>
 
 <p>Suppose you have a long list of letters, and for some reason, you need to count the number of times each letter appears in your string. You can achieve your goal as in the following example,</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="s">'amirshahmoradijakelucerotravismike'</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'The letter {} appears only {} times in the string'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">c</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">s</span> <span class="o">=</span> <span class="sh">'</span><span class="s">amirshahmoradijakelucerotravismike</span><span class="sh">'</span>
+<span class="n">c</span> <span class="o">=</span> <span class="nc">Counter</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">c</span><span class="p">.</span><span class="nf">keys</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">The letter {} appears only {} times in the string</span><span class="sh">'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="n">c</span><span class="p">[</span><span class="n">key</span><span class="p">]))</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The letter v appears only 1 times in the string
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The letter v appears only 1 times in the string
 The letter a appears only 5 times in the string
 The letter u appears only 1 times in the string
 The letter l appears only 1 times in the string
@@ -1009,13 +1009,13 @@ The letter e appears only 3 times in the string   ​
 
 <p>Now suppose you wanted to count the number of times different words appear in a given text,</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
-<span class="n">text</span> <span class="o">=</span> <span class="s">"Data science is a multi-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from structured and unstructured data."</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">Counter</span><span class="p">(</span><span class="n">text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
-<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">c</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="s">'The word "{}" appears only {} times in the text'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="n">c</span><span class="p">[</span><span class="n">word</span><span class="p">]))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">Counter</span>
+<span class="n">text</span> <span class="o">=</span> <span class="sh">"</span><span class="s">Data science is a multi-disciplinary field that uses scientific methods, processes, algorithms and systems to extract knowledge and insights from structured and unstructured data.</span><span class="sh">"</span>
+<span class="n">c</span> <span class="o">=</span> <span class="nc">Counter</span><span class="p">(</span><span class="n">text</span><span class="p">.</span><span class="nf">split</span><span class="p">())</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">c</span><span class="p">.</span><span class="nf">keys</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">The word </span><span class="sh">"</span><span class="s">{}</span><span class="sh">"</span><span class="s"> appears only {} times in the text</span><span class="sh">'</span><span class="p">.</span><span class="nf">format</span><span class="p">(</span><span class="n">word</span><span class="p">,</span><span class="n">c</span><span class="p">[</span><span class="n">word</span><span class="p">]))</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The word "Data" appears only 1 times in the text
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The word "Data" appears only 1 times in the text
 The word "science" appears only 1 times in the text
 The word "is" appears only 1 times in the text
 The word "a" appears only 1 times in the text
@@ -1039,16 +1039,16 @@ The word "unstructured" appears only 1 times in the text
 The word "data." appears only 1 times in the text
 </code></pre></div></div>
 
-<p>Now, you can also apply all different methods that exist for Counter data types on the variable <code class="highlighter-rouge">c</code> in the above case. For example, you could ask for the 3 most common words in the text,</p>
+<p>Now, you can also apply all different methods that exist for Counter data types on the variable <code class="language-plaintext highlighter-rouge">c</code> in the above case. For example, you could ask for the 3 most common words in the text,</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="o">.</span><span class="n">most_common</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">c</span><span class="p">.</span><span class="nf">most_common</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[('Engineering', 3), ('the', 2), ('is', 2)]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[('Engineering', 3), ('the', 2), ('is', 2)]
 </code></pre></div></div>
 
 <h4 id="the-ordereddict-data-type">The <strong>OrderedDict</strong> data type</h4>
 
-<p>This is also a subclass of dictionary data type, which provides all the methods provided by <code class="highlighter-rouge">dict</code>, but which also retains the order by which elements are added to the dictionary. Consider the following ordinary dictionary,</p>
+<p>This is also a subclass of dictionary data type, which provides all the methods provided by <code class="language-plaintext highlighter-rouge">dict</code>, but which also retains the order by which elements are added to the dictionary. Consider the following ordinary dictionary,</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
 </code></pre></div></div>
@@ -1056,88 +1056,88 @@ The word "data." appears only 1 times in the text
 <p>A normal dictionary does not conserve the order by which elements were added to the dictionary,</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span><span class="mi">6</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="n">d</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1 1
 3 3
 5 5
 6 6
 </code></pre></div></div>
 
-<p>To save the order of the elements, you can use <code class="highlighter-rouge">OrderedDict</code>,</p>
+<p>To save the order of the elements, you can use <code class="language-plaintext highlighter-rouge">OrderedDict</code>,</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span> <span class="k">as</span> <span class="n">od</span>
-<span class="n">d</span> <span class="o">=</span> <span class="n">od</span><span class="p">([(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)])</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="n">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span> <span class="k">as</span> <span class="n">od</span>
+<span class="n">d</span> <span class="o">=</span> <span class="nf">od</span><span class="p">([(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">),(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">),(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">),(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)])</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span> <span class="ow">in</span> <span class="n">d</span><span class="p">.</span><span class="nf">items</span><span class="p">():</span>
+    <span class="nf">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 5
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>5 5
 3 3
 6 6
 1 1
 </code></pre></div></div>
 
-<p>The only difference is that <code class="highlighter-rouge">OrderedDict</code> preserves the by which the keys are inserted to the dictionary. A regular dict doesn’t track the insertion order and <strong>iterating over an ordinary dictionary outputs the dictionary items in an arbitrary order</strong>. By contrast, <code class="highlighter-rouge">OrderedDict</code> keeps the order the items are inserted in the dictionary for the entire lifetime of the dictionary.</p>
+<p>The only difference is that <code class="language-plaintext highlighter-rouge">OrderedDict</code> preserves the by which the keys are inserted to the dictionary. A regular dict doesn’t track the insertion order and <strong>iterating over an ordinary dictionary outputs the dictionary items in an arbitrary order</strong>. By contrast, <code class="language-plaintext highlighter-rouge">OrderedDict</code> keeps the order the items are inserted in the dictionary for the entire lifetime of the dictionary.</p>
 
 <div class="alert alert-warning" role="alert"><i class="fa fa-warning"></i> <b>Important:</b> Keep in mind that two ordered dictionaries with the same contents may not necessarily be equal since the order of their content also matters.</div>
 
-<h3 id="the-timeit-module">The <code class="highlighter-rouge">timeit</code> module</h3>
+<h3 id="the-timeit-module">The <code class="language-plaintext highlighter-rouge">timeit</code> module</h3>
 
 <p>This is a module that provides some useful functions for timing the performance and speed of pieces of your Python code.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">timeit</span> <span class="k">as</span> <span class="n">tt</span>
-<span class="n">tt</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span> <span class="s">"-"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span> <span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">10000</span> <span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">timeit</span> <span class="k">as</span> <span class="n">tt</span>
+<span class="n">tt</span><span class="p">.</span><span class="nf">timeit</span><span class="p">(</span> <span class="sh">"</span><span class="s">-</span><span class="sh">"</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span> <span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">10000</span> <span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.03779717059364884
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.03779717059364884
 </code></pre></div></div>
 
-<p>The first input to <code class="highlighter-rouge">timeit</code> function above is the operation which we would like to time, and the second input, tell the function, how many times repeat the task (If the operation takes a tiny amount, you would want to repeat it many many times, in order to get a sensible timing output). Here is the same operation as above, but now using the <a href="http://book.pythontips.com/en/latest/map_filter.html#map" target="_blank">map</a> function,</p>
+<p>The first input to <code class="language-plaintext highlighter-rouge">timeit</code> function above is the operation which we would like to time, and the second input, tell the function, how many times repeat the task (If the operation takes a tiny amount, you would want to repeat it many many times, in order to get a sensible timing output). Here is the same operation as above, but now using the <a href="http://book.pythontips.com/en/latest/map_filter.html#map" target="_blank">map</a> function,</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tt</span><span class="o">.</span><span class="n">timeit</span><span class="p">(</span> <span class="s">"-"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)))</span> <span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">10000</span> <span class="p">)</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">tt</span><span class="p">.</span><span class="nf">timeit</span><span class="p">(</span> <span class="sh">"</span><span class="s">-</span><span class="sh">"</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span> <span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="nf">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">)))</span> <span class="p">,</span> <span class="n">number</span><span class="o">=</span><span class="mi">10000</span> <span class="p">)</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.384857713242468  
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>0.384857713242468  
 </code></pre></div></div>
 
 <p>In IPython or Jupyter, you can do the timing operation in a smarter way using IPython magic function <a href="https://ipython.org/ipython-doc/dev/interactive/magics.html#magic-timeit" target="_blank">%timeit</a>,</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">timeit</span> <span class="s">"-"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">timeit</span> <span class="sh">"</span><span class="s">-</span><span class="sh">"</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span><span class="nf">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">))</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10000 loops, best of 3: 36.6 µs per loop
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10000 loops, best of 3: 36.6 µs per loop
 </code></pre></div></div>
 
 <p>The IPython’s magic function automatically figures how many times it should run the operation to get a sensible timing of the operation.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">timeit</span> <span class="s">"-"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="nb">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)))</span>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">%</span><span class="n">timeit</span> <span class="sh">"</span><span class="s">-</span><span class="sh">"</span><span class="p">.</span><span class="nf">join</span><span class="p">(</span> <span class="nf">map</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="nf">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)))</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10000 loops, best of 3: 21 µs per loop
-</code></pre></div></div>
-
-<p>In general, as you noticed in the above example, the function <code class="highlighter-rouge">map</code> performs much better and faster than Python’s for-loop.</p>
-
-<h3 id="the-time-module">The <code class="highlighter-rouge">time</code> module</h3>
-
-<p>More generally, if you want to measure the CPU time spent on a specific part of your code, you can use the <code class="highlighter-rouge">clock()</code> method from <code class="highlighter-rouge">time</code> module,</p>
-
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">time</span>
-<span class="c"># do some work</span>
-<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>   <span class="c"># get the initial CPU time</span>
-<span class="c"># do some further work which you want to time</span>
-<span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>   <span class="c"># get the final CPU time</span>
-<span class="n">cpu_time</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span>  <span class="c"># This is the time spent on the task being timed.</span>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>10000 loops, best of 3: 21 µs per loop
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">time.clock()</code> function returns the CPU time spent in the program since its start. If the interest is in the total time, also including reading and writing files, <code class="highlighter-rouge">time.time()</code> is the appropriate function to call. Now suppose you had a list of functions that performed the same task but using different methods, and you wanted to time their performance. Since in Python, functions are ordinary objects, making a list of functions is no more special than making a list of strings or numbers. You can, therefore, create a list of function names and call them one by one, inside a loop, and time each one respectively.</p>
+<p>In general, as you noticed in the above example, the function <code class="language-plaintext highlighter-rouge">map</code> performs much better and faster than Python’s for-loop.</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">time</span>
+<h3 id="the-time-module">The <code class="language-plaintext highlighter-rouge">time</code> module</h3>
+
+<p>More generally, if you want to measure the CPU time spent on a specific part of your code, you can use the <code class="language-plaintext highlighter-rouge">clock()</code> method from <code class="language-plaintext highlighter-rouge">time</code> module,</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">time</span>
+<span class="c1"># do some work
+</span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">clock</span><span class="p">()</span>   <span class="c1"># get the initial CPU time
+# do some further work which you want to time
+</span><span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">clock</span><span class="p">()</span>   <span class="c1"># get the final CPU time
+</span><span class="n">cpu_time</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span>  <span class="c1"># This is the time spent on the task being timed.
+</span></code></pre></div></div>
+
+<p>The <code class="language-plaintext highlighter-rouge">time.clock()</code> function returns the CPU time spent in the program since its start. If the interest is in the total time, also including reading and writing files, <code class="language-plaintext highlighter-rouge">time.time()</code> is the appropriate function to call. Now suppose you had a list of functions that performed the same task but using different methods, and you wanted to time their performance. Since in Python, functions are ordinary objects, making a list of functions is no more special than making a list of strings or numbers. You can, therefore, create a list of function names and call them one by one, inside a loop, and time each one respectively.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">time</span>
 <span class="n">functions</span> <span class="o">=</span> <span class="p">[</span><span class="n">func1</span><span class="p">,</span> <span class="n">func2</span><span class="p">,</span> <span class="n">func3</span><span class="p">,</span> <span class="n">func4</span><span class="p">,</span><span class="n">func5</span><span class="p">,</span> <span class="n">func6</span><span class="p">,</span> <span class="n">func7</span><span class="p">,</span> <span class="n">func8</span><span class="p">,</span><span class="n">func9</span><span class="p">,</span> <span class="n">func10</span><span class="p">]</span>
-<span class="n">timings</span> <span class="o">=</span> <span class="p">[]</span> <span class="c"># timings[i] holds CPU time for functions[i]</span>
-<span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">:</span>
-    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
-    <span class="n">function</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">input</span> <span class="n">variables</span><span class="o">&gt;</span><span class="p">)</span>
-    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">clock</span><span class="p">()</span>
+<span class="n">timings</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># timings[i] holds CPU time for functions[i]
+</span><span class="k">for</span> <span class="n">function</span> <span class="ow">in</span> <span class="n">functions</span><span class="p">:</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">clock</span><span class="p">()</span>
+    <span class="nf">function</span><span class="p">(</span><span class="o">&lt;</span><span class="nb">input</span> <span class="n">variables</span><span class="o">&gt;</span><span class="p">)</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">.</span><span class="nf">clock</span><span class="p">()</span>
     <span class="n">cpu_time</span> <span class="o">=</span> <span class="n">t1</span> <span class="o">-</span> <span class="n">t0</span>
-    <span class="n">timings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cpu_time</span><span class="p">)</span>
+    <span class="n">timings</span><span class="p">.</span><span class="nf">append</span><span class="p">(</span><span class="n">cpu_time</span><span class="p">)</span>
 </code></pre></div></div>
 
     
@@ -1235,8 +1235,8 @@ The word "data." appears only 1 times in the text
 </div>
 
         <div class="col-lg-12 footer">
-            &copy;2022 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: October 5, 2022 <br />
+            &copy;2025 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: December 25, 2025 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             

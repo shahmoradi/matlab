@@ -579,7 +579,7 @@ the script runs before the sidebar code runs and the class never gets inserted.
     <span class="nb">disp</span><span class="p">([</span><span class="s1">'Please enter a real number!'</span><span class="p">]);</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter a number:13
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter a number:13
 Square root = 3.6056
 
 Enter a number:-11
@@ -593,7 +593,7 @@ Square root = 0.70711+0.70711i
 
 <h3 id="exercise">Exercise</h3>
 
-<p><strong>1. </strong> Write a MATLAB script that takes two predefined matrices <code class="highlighter-rouge">A</code> and <code class="highlighter-rouge">B</code> as input and determines whether they have equal size. If so, then it concatenates the two matrices in a column-wise manner.</p>
+<p><strong>1. </strong> Write a MATLAB script that takes two predefined matrices <code class="language-plaintext highlighter-rouge">A</code> and <code class="language-plaintext highlighter-rouge">B</code> as input and determines whether they have equal size. If so, then it concatenates the two matrices in a column-wise manner.</p>
 
 <p><strong>answer</strong></p>
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="nb">isequal</span><span class="p">(</span><span class="nb">size</span><span class="p">(</span><span class="n">A</span><span class="p">),</span><span class="nb">size</span><span class="p">(</span><span class="n">B</span><span class="p">))</span>
@@ -616,14 +616,13 @@ Square root = 0.70711+0.70711i
 
 <p><strong>3. </strong> Write a script that takes an input predefined number $x$ and calculates the following function,</p>
 
-<script type="math/tex; mode=display">% <![CDATA[
-\begin{equation*}
+\[\begin{equation*}
 y =
 \begin{cases}
-    x   & -1\leq x \leq 1 \\
-    x^2 & \text{otherwise} \\
+    x   &amp; -1\leq x \leq 1 \\
+    x^2 &amp; \text{otherwise} \\
 \end{cases}
-\end{equation*} %]]></script>
+\end{equation*}\]
 
 <p><strong>answer</strong></p>
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'input the value of x: '</span><span class="p">)</span>
@@ -660,13 +659,13 @@ y =
 <span class="k">end</span>
 <span class="nb">disp</span><span class="p">([</span><span class="s1">'The corresponding weekday is '</span><span class="p">,</span><span class="n">day_name</span><span class="p">,</span><span class="s1">'.'</span><span class="p">])</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter a day number:4
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter a day number:4
 The corresponding weekday is Thursday.
 </code></pre></div></div>
 
-<p>MATLAB will compare the switch expression (in this case, <code class="highlighter-rouge">day</code>) with each case expression in turn (the numbers 1–7). When a comparison evaluates to <code class="highlighter-rouge">true</code>, MATLAB executes the corresponding statements and then exits the switch statement, i.e. control flow passes to after the <code class="highlighter-rouge">end</code> statement. The <code class="highlighter-rouge">otherwise</code> block is optional and executes only when no comparison evaluates to    <code class="highlighter-rouge">true</code>. Note that the <code class="highlighter-rouge">switch</code> statement is used only for equality tests – we cannot use it for other types of comparison (e.g. <code class="highlighter-rouge">&gt;</code>, <code class="highlighter-rouge">&lt;</code>, etc.).</p>
+<p>MATLAB will compare the switch expression (in this case, <code class="language-plaintext highlighter-rouge">day</code>) with each case expression in turn (the numbers 1–7). When a comparison evaluates to <code class="language-plaintext highlighter-rouge">true</code>, MATLAB executes the corresponding statements and then exits the switch statement, i.e. control flow passes to after the <code class="language-plaintext highlighter-rouge">end</code> statement. The <code class="language-plaintext highlighter-rouge">otherwise</code> block is optional and executes only when no comparison evaluates to    <code class="language-plaintext highlighter-rouge">true</code>. Note that the <code class="language-plaintext highlighter-rouge">switch</code> statement is used only for equality tests – we cannot use it for other types of comparison (e.g. <code class="language-plaintext highlighter-rouge">&gt;</code>, <code class="language-plaintext highlighter-rouge">&lt;</code>, etc.).</p>
 
-<p>A <code class="highlighter-rouge">switch</code> statement may also take a cell array as one of its cases,</p>
+<p>A <code class="language-plaintext highlighter-rouge">switch</code> statement may also take a cell array as one of its cases,</p>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">day</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Enter a day number:'</span><span class="p">);</span>
 <span class="k">switch</span> <span class="nb">day</span>
@@ -679,7 +678,7 @@ The corresponding weekday is Thursday.
 <span class="k">end</span>
 <span class="nb">disp</span><span class="p">([</span><span class="s1">'The input day number corresponds to '</span><span class="p">,</span><span class="n">day_name</span><span class="p">,</span><span class="s1">'.'</span><span class="p">])</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter a day number:6
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Enter a day number:6
 The input day number corresponds to Weekend.
 </code></pre></div></div>
 
@@ -691,14 +690,14 @@ The input day number corresponds to Weekend.
     <span class="nb">disp</span><span class="p">(</span><span class="s1">'The condition in this if statement is automatically converted from float to boolean'</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The condition in this if statement is automatically converted from float to boolean
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The condition in this if statement is automatically converted from float to boolean
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="o">~</span><span class="mf">0.0</span>
     <span class="nb">disp</span><span class="p">(</span><span class="s1">'A float value of zero is converted to false'</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A float value of zero is converted to false
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A float value of zero is converted to false
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="mf">0.0</span>
@@ -710,14 +709,14 @@ The input day number corresponds to Weekend.
     <span class="nb">disp</span><span class="p">(</span><span class="s1">'Any non-zero float value of any precision is converted to true'</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Any non-zero float value of any precision is converted to true
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Any non-zero float value of any precision is converted to true
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="mf">1.e-323</span>
     <span class="nb">disp</span><span class="p">(</span><span class="s1">'Any non-zero float value of any precision is converted to true'</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Any non-zero float value of any precision is converted to true
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Any non-zero float value of any precision is converted to true
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="mf">1.e-324</span> <span class="c1">% make sure you don't go beyond computer precision</span>
@@ -729,14 +728,14 @@ The input day number corresponds to Weekend.
     <span class="nb">disp</span><span class="p">(</span><span class="s1">'Any non-zero float value smaller than the computer precision will be set to 0'</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Any non-zero float value smaller than the computer precision will be set to 0
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Any non-zero float value smaller than the computer precision will be set to 0
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="mi">12</span>
     <span class="nb">disp</span><span class="p">(</span><span class="s1">'The same rules also hold for integers.'</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The same rules also hold for integers.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The same rules also hold for integers.
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="s1">''</span>
@@ -749,7 +748,7 @@ The input day number corresponds to Weekend.
     <span class="nb">disp</span><span class="p">(</span><span class="s1">'An empty string is always converted to boolean false, because it is considered an empty logical vector.'</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An empty string is always converted to boolean false, because it is considered an empty logical vector.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An empty string is always converted to boolean false, because it is considered an empty logical vector.
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">[]</span>
@@ -757,7 +756,7 @@ The input day number corresponds to Weekend.
     <span class="nb">disp</span><span class="p">(</span><span class="s1">'An empty vector is always converted to boolean false, because it is considered an empty logical vector.'</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An empty vector is always converted to boolean false, because it is considered an empty logical vector.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An empty vector is always converted to boolean false, because it is considered an empty logical vector.
 </code></pre></div></div>
 
 <p>But note that conversion from cell to logical is not possible in MATLAB:</p>
@@ -766,26 +765,26 @@ The input day number corresponds to Weekend.
     <span class="nb">disp</span><span class="p">(</span><span class="s1">'An empty cell cannot be converted to boolean value, because MATLAB wants it that way!'</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Conversion to logical from cell is not possible. 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Conversion to logical from cell is not possible. 
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="p">[</span><span class="s1">'amir'</span><span class="p">]</span>
     <span class="nb">disp</span><span class="p">(</span><span class="s1">'A non-empty vector is converted to boolean true.'</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A non-empty vector is converted to boolean true.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A non-empty vector is converted to boolean true.
 </code></pre></div></div>
 
 <div class="language-matlab highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">if</span> <span class="s1">' '</span>
     <span class="nb">disp</span><span class="p">(</span><span class="s1">'A non-empty string is converted to boolean true.'</span><span class="p">)</span>
 <span class="k">end</span>
 </code></pre></div></div>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A non-empty string is converted to boolean true.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A non-empty string is converted to boolean true.
 </code></pre></div></div>
 
 <h2 id="matlabs-built-in-logical-functions">MATLAB’s built-in logical functions</h2>
 
-<p>MATLAB has a wide range of functions whose names begins with <code class="highlighter-rouge">is</code>, and their output is a logical value type, which can be used in if-blocks. These functions are extremely useful in MATLAB coding, and you will encounter them frequently in your computational life. Here is a rather comprehensive list of them,</p>
+<p>MATLAB has a wide range of functions whose names begins with <code class="language-plaintext highlighter-rouge">is</code>, and their output is a logical value type, which can be used in if-blocks. These functions are extremely useful in MATLAB coding, and you will encounter them frequently in your computational life. Here is a rather comprehensive list of them,</p>
 
 <table class="center">
     <caption class="title" style="padding-bottom:10px;text-align:center;">
@@ -958,8 +957,8 @@ The input day number corresponds to Weekend.
 </div>
 
         <div class="col-lg-12 footer">
-            &copy;2022 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: October 5, 2022 <br />
+            &copy;2025 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
+            Site last generated: December 25, 2025 <br />
             
                 <span>Page last updated:</span>July 9, 2019<br/>
             
