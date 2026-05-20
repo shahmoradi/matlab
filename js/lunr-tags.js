@@ -742,7 +742,7 @@ $(document).ready(function() {
 
         <div class="col-lg-12 footer">
             &copy;2026 <a href="https://www.cdslab.org" target="_blank">Computational Data Science Lab</a><br />
-            Site last generated: April 23, 2026 <br />
+            Site last generated: May 20, 2026 <br />
             
         <p>
             <a href="https://www.cdslab.org" target="_blank"><img class="footerlogo" src="/matlab/images/logo.png" }}" alt="cdslab.org" /></a>
